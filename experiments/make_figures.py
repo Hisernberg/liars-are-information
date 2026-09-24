@@ -310,7 +310,7 @@ def fig_swarm(sw: pd.DataFrame) -> None:
     s = summary(comp, ["composition", "f"])
     methods = ["self", "majority", "aip_gated", "race_noclone", "race"]
     comps = ["frozen", "frozen+weak", "weak", "hom_qwen38_27b", "hom_llama32_3b"]
-    fig, axes = plt.subplots(1, 2, figsize=(11, 3.6), gridspec_kw=dict(width_ratios=[1.6, 1]))
+    fig, axes = plt.subplots(1, 2, figsize=(11.5, 4.4), gridspec_kw=dict(width_ratios=[1.6, 1]))
     ax = axes[0]
     width = 0.15
     tbl = s.xs(0.5, level="f").reindex(comps)
@@ -322,7 +322,7 @@ def fig_swarm(sw: pd.DataFrame) -> None:
     ax.set_ylim(0, 100)
     ax.set_ylabel("Accuracy at f = 0.5 (%)")
     ax.set_title("Composition and replication (coherent liars)", loc="left")
-    ax.legend(fontsize=7, ncol=2, loc="lower left")
+    ax.legend(fontsize=7, ncol=5, loc="upper center", bbox_to_anchor=(0.5, -0.12))
     ax.grid(axis="x", visible=False)
     ax = axes[1]
     size = sw[sw.composition == "frozen"]
@@ -339,7 +339,7 @@ def fig_swarm(sw: pd.DataFrame) -> None:
     ax.set_xlabel("Swarm size N")
     ax.set_ylabel("Accuracy (%)")
     ax.set_title("Swarm size (f ∈ {.3,.5,.7} pooled)", loc="left")
-    ax.legend(fontsize=6.5, loc="lower left")
+    ax.legend(fontsize=6.5, ncol=2, loc="upper center", bbox_to_anchor=(0.5, -0.18))
     fig.tight_layout()
     viz.save(fig, FIG / "fig7_swarm")
     write_table(pct(summary(sw, ["composition", "n_agents", "attack", "f"])[methods + ["oracle_channel"]]).rename(columns=viz.LABEL),

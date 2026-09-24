@@ -185,11 +185,17 @@ def swarm_numbers(sw: pd.DataFrame) -> None:
             put(f"swarm{ct}Noclone", pct(row["race_noclone"]))
             put(f"swarm{ct}Aip", pct(row["aip_gated"]))
             put(f"swarm{ct}Self", pct(row["self"]))
-    size = summary(sw[sw.composition == "frozen"], ["n_agents"])
-    for n in (5, 10, 20, 40):
-        if n in size.index:
-            put(f"sizeRace{n}", pct(size.loc[n, "race"]))
-            put(f"sizeAip{n}", pct(size.loc[n, "aip_gated"]))
+    size = summary(sw[sw.composition == "frozen"], ["attack", "n_agents"])
+    for atk, at in (("coherent", "Coh"), ("gate_aware", "Gate")):
+        for n in (5, 40):
+            if (atk, n) in size.index:
+                put(f"size{at}Race{n}", pct(size.loc[(atk, n), "race"]))
+                put(f"size{at}Aip{n}", pct(size.loc[(atk, n), "aip_gated"]))
+    weak = summary(sw[(sw.n_agents == 10) & (sw.composition == "weak")], ["f"])
+    if 0.5 in weak.index:
+        put("swarmWeakRosterRace", pct(weak.loc[0.5, "race"]))
+        put("swarmWeakRosterNoclone", pct(weak.loc[0.5, "race_noclone"]))
+        put("swarmWeakRosterOracle", pct(weak.loc[0.5, "oracle_channel"]))
 
 
 def online_numbers() -> None:
