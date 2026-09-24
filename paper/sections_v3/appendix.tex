@@ -40,4 +40,6 @@ Online forgetting (E6) & $\gamma=0.97$, refit every 8 tasks\\
 \end{center}
 
 \section{Reproducibility}\label{app:repro}
-All code, data, results, figures, videos and this manuscript are in the accompanying repository and Hugging Face release. \texttt{experiments/run\_all.sh} runs E1--E6 on a 4-core CPU without a GPU. \texttt{experiments/live\_swarm.py} regenerates E8. \texttt{experiments/make\_figures.py} and \texttt{make\_numbers.py} regenerate every figure, table and number in the text: the numbers in this paper are macros written by that script. Each study directory holds a \texttt{run\_manifest.json} with the input and code hashes, wall time and peak memory. The repository's test suite covers RACE's identification, invariance, clone-grouping and causality properties.
+\begin{sloppypar}
+All code, data, results, figures, videos and this manuscript are in the accompanying repository and Hugging Face release. \texttt{experiments/\allowbreak run\_all.sh} runs E1--E6 on a 4-core CPU without a GPU. \texttt{experiments/\allowbreak live\_swarm.py} regenerates E8. \texttt{experiments/\allowbreak make\_figures.py} and \texttt{make\_numbers.py} regenerate every figure, table and number in the text: the numbers in this paper are macros written by that script. Each study directory holds a \texttt{run\_manifest.json} with the input and code hashes, wall time and peak memory. The repository's test suite covers RACE's identification, invariance, clone-grouping and causality properties.
+\end{sloppypar}

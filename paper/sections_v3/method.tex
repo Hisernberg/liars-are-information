@@ -13,6 +13,12 @@ s_t(c)=\sum_j w_{tj}\,\mathbf 1[R_{tj}=c]\,\lambda_{tj},\qquad
 \end{equation}
 A report with $a_j>1/K_t$ is evidence \emph{for} the reported answer (TRUST). A report with $a_j<1/K_t$ is evidence \emph{against} it, spread over the alternatives (INVERT). $a_j=1/K_t$ contributes nothing (DISCARD). \aip's gate is a three-level quantisation of \cref{eq:score}. Unlike \aip, \race\ decides the sign from $a_j$, not from how coherent a channel is (\cref{prop:quantisation}).
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/fig11_concept.pdf}
+\caption{Left: \race's weight $\lambda(a)$ is signed and continuous; \aip's gate (schematic) quantises it into three levels. Right: the gate-aware attacker never states the truth ($a=0$, so $\lambda=-\infty$) at every coordination level $p$, while its pair coherence $q(p)$ sweeps from chance to 1 and crosses \aip's published ceiling. Coherence is under the attacker's control; dependence on the truth is not.}\label{fig:concept}
+\end{figure}
+
 \subsection{Anchored EM}
 The parameters are fitted by EM~\citep{dempster1977} on the receiver's own unlabelled history. Label-free latent-class models are identified only up to a relabelling of the latent truth (\cref{prop:switching}). When a coherent bloc holds a plurality, the likelihood prefers the relabelling in which the liars are the experts. \race\ removes the ambiguity with the receiver's self-knowledge, in three ways:
 \begin{enumerate}

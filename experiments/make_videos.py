@@ -32,7 +32,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 from matplotlib import animation  # noqa: E402
-from matplotlib.patches import Circle, FancyBboxPatch  # noqa: E402
+from matplotlib.patches import Circle, FancyBboxPatch, Patch  # noqa: E402
 
 from aip.aggregation.aip import AIPAggregator, InversionThresholds  # noqa: E402
 from aip.aggregation.base import ParityConfig  # noqa: E402
@@ -169,12 +169,12 @@ def render_swarm(name: str, spec: dict, n_steps: int, fps: float, out_dir: Path)
                       color=viz.RED if p in sim["byzantine"] else viz.INK_2, fontweight="bold" if p in sim["byzantine"] else None,
                       bbox=dict(boxstyle="round,pad=0.12", fc=viz.SURFACE, ec="none", alpha=0.9))
             if fr["decisions"]:
-                ax_g.text(x * 0.55, y * 0.55, f"â={a:.2f}", ha="center", va="center", fontsize=7.5, color=viz.INK_2,
+                ax_g.text(x * 0.68, y * 0.68, f"â={a:.2f}", ha="center", va="center", fontsize=7.5, color=viz.INK_2,
                           bbox=dict(boxstyle="round,pad=0.15", fc=viz.SURFACE, ec="none", alpha=0.8), zorder=2)
         ax_g.add_patch(Circle((0, 0), 0.19, facecolor=viz.BLUE, edgecolor=viz.SURFACE, lw=3, zorder=3))
         ax_g.text(0, 0.02, fr["answers"][receiver] or "–", ha="center", va="center", color="white", fontsize=18,
                   fontweight="bold", zorder=4)
-        ax_g.text(0, -0.25, f"receiver: {sim['models'][receiver].replace('_', '-')}", ha="center", va="top", fontsize=9,
+        ax_g.text(0, -0.23, f"receiver: {sim['models'][receiver].replace('_', '-')}", ha="center", va="top", fontsize=9,
                   color=viz.INK, fontweight="bold", zorder=6,
                   bbox=dict(boxstyle="round,pad=0.25", fc="white", ec=viz.GRID, alpha=0.95))
         legend = [("TRUST", viz.BLUE), ("DISCARD", "#a9a8a3"), ("INVERT", viz.RED)]
@@ -213,9 +213,11 @@ def render_swarm(name: str, spec: dict, n_steps: int, fps: float, out_dir: Path)
             if l == fr["gold"]:
                 ax_p.get_xticklabels()[n].set_color(viz.GREEN)
                 ax_p.get_xticklabels()[n].set_fontweight("bold")
-        ax_p.set_ylim(0, 105)
+        ax_p.set_ylim(0, 128)
+        ax_p.set_yticks([0, 25, 50, 75, 100])
         ax_p.set_ylabel("%")
-        ax_p.legend(loc="upper right", ncol=2, fontsize=8)
+        ax_p.legend(handles=[Patch(facecolor=viz.AQUA, label="share of raw votes"),
+                             Patch(facecolor=viz.BLUE, label="RACE posterior")], loc="upper right", ncol=2, fontsize=8)
         verdict = "  ".join(
             f"{viz.LABEL[m].replace(' (ours)', '')}: {fr['preds'][m] or '–'}{'✓' if score(sim['benchmark'], fr['preds'][m], fr['gold']) else '✗'}"
             for m in ("race", "aip_gated", "majority"))
@@ -227,12 +229,14 @@ def render_swarm(name: str, spec: dict, n_steps: int, fps: float, out_dir: Path)
             curve = fr["curve"][m]
             viz.line(ax_c, np.arange(1, len(curve) + 1), 100 * np.array(curve), m, marker="")
             ends.append([100 * curve[-1], 100 * curve[-1], m])
-        ends.sort(key=lambda e: e[0])
-        for n in range(1, len(ends)):  # keep end labels >= 7 points apart
-            ends[n][1] = max(ends[n][1], ends[n - 1][1] + 7)
+        ends.sort(key=lambda e: -e[0])
+        ends[0][1] = min(ends[0][1], 100)
+        for n in range(1, len(ends)):  # keep end labels >= 7 points apart, pushing downwards
+            ends[n][1] = min(ends[n][1], ends[n - 1][1] - 7)
         for value, ypos, m in ends:
             ax_c.annotate(f"{value:.0f}%", (len(fr["curve"][m]), value), xytext=(len(fr["curve"][m]) + 2, ypos),
-                          textcoords="data", fontsize=8.5, color=viz.INK, va="center")
+                          textcoords="data", fontsize=8.5, va="center", fontweight="bold",
+                          color=viz.METHOD_STYLE.get(m, {}).get("color", viz.INK) if m != "self" else viz.INK_2)
         ax_c.set_xlim(1, len(frames) + 8)
         ax_c.set_ylim(-3, 103)
         ax_c.set_xlabel("tasks seen")

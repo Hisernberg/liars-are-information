@@ -370,9 +370,17 @@ def fig_online() -> None:
         for m, (style, kw) in show.items():
             if m in piv:
                 viz.line(ax, piv.index, pct(piv[m].rolling(16, min_periods=4).mean()), style, **kw)
-        ax.set_title(sc.replace("_", " "), loc="left")
+        titles = {"sleeper": "Sleeper: honest until task 100", "coherent_to_independent": "Coherent → independent at 120",
+                  "independent_to_coherent": "Independent → coherent at 120",
+                  "toggle40": "Coherent ↔ silent (shaded), every 40"}
+        ax.set_title(titles[sc], loc="left")
         ax.set_xlabel("Task position (chronological)")
-        ax.axvline(100 if sc == "sleeper" else 120, color=viz.GRID, lw=1.0)
+        switches = [100] if sc == "sleeper" else [80, 120, 160] if sc == "toggle40" else [120]
+        for x in switches:
+            ax.axvline(x, color=viz.INK_2, lw=0.8, ls="--", zorder=0)
+        if sc == "toggle40":  # shaded: the bloc is silent (uninformative)
+            ax.axvspan(40, 80, color=viz.GRID, alpha=0.6, lw=0, zorder=0)
+            ax.axvspan(120, 160, color=viz.GRID, alpha=0.6, lw=0, zorder=0)
         ax.set_ylim(-3, 103)
     axes[0].set_ylabel("Accuracy, 16-task rolling mean (%)")
     handles, labels = axes[0].get_legend_handles_labels()
@@ -409,7 +417,7 @@ def fig_concept() -> None:
     ax.axhline(0.677, color=viz.ORANGE, lw=0.8, alpha=0.6)
     ax.text(0.02, 0.69, "AIP's published MC ceiling 0.677", fontsize=7, color=viz.INK_2)
     ax.axhline(1 / 3, color=viz.MUTED, lw=0.8)
-    ax.text(0.02, 0.345, "chance coherence 1/(C−1)", fontsize=7, color=viz.INK_2)
+    ax.text(0.98, 0.3, "chance coherence 1/(K−1)", fontsize=7, color=viz.INK_2, ha="right", va="top")
     ax.set_xlabel("Gate-aware attacker's coordination p")
     ax.set_ylim(-0.05, 1.05)
     ax.set_title("Coherence is tunable; truth-dependence is not", loc="left")
@@ -504,13 +512,13 @@ def fig_budget(ext: pd.DataFrame) -> None:
         cells = []
         for f in (0.3, 0.5, 0.7):
             r = rel.loc[(atk, prm, f)]
-            cells += [f"{r.oracle_channel:+.1f}", f"{r.race:+.1f}"]
+            cells += [f"${r.oracle_channel:+.1f}$", f"${r.race:+.1f}$"]
         tex_label = re.sub(r"(q|e|θ) = ([0-9.]+)", lambda mt: f"${mt.group(1)}={mt.group(2)}$", lab).replace("θ", r"\theta")
         lines.append(tex_label + " & " + " & ".join(cells) + r"\\")
     lines += [r"\bottomrule", r"\end{tabular}"]
     (TAB / "budget_compact.tex").write_text("\n".join(lines) + "\n")
     fs = [0.3, 0.5, 0.7]
-    fig, axes = plt.subplots(1, 3, figsize=(11, 5.4), sharey=True)
+    fig, axes = plt.subplots(1, 3, figsize=(9.2, 5.6), sharey=True)
     ys = np.arange(len(EXT_ROWS))[::-1]
     lim = (-16, 9)
     for ax, f in zip(axes, fs, strict=True):
@@ -527,8 +535,8 @@ def fig_budget(ext: pd.DataFrame) -> None:
                 ax.annotate(f"{r.race:.0f}", (lim[0], y), xytext=(3, 0), textcoords="offset points", fontsize=7,
                             va="center", color=viz.INK_2)
         ax.set_xlim(*lim)
-        ax.set_title(f"f = {f:g}  ({round(10 * f)} of 10 agents lie)", loc="left")
-        ax.set_xlabel("accuracy minus the liar-removal oracle (pp)")
+        ax.set_title(f"f = {f:g}  ({round(10 * f)} of 10 lie)", loc="left")
+        ax.set_xlabel("minus liar-removal oracle (pp)")
         ax.grid(axis="y", visible=False)
     axes[0].set_yticks(ys, [lab for *_, lab in EXT_ROWS])
     axes[0].set_ylim(-0.7, len(EXT_ROWS) - 0.3)
@@ -539,7 +547,7 @@ def fig_budget(ext: pd.DataFrame) -> None:
                plt.Line2D([], [], marker="*", ls="", color=viz.VIOLET, markersize=9,
                           label="Known-channel oracle: information the liars carry")]
     fig.legend(handles=handles, loc="lower center", ncol=3, bbox_to_anchor=(0.5, -0.01))
-    fig.suptitle("What the liars are worth: accuracy relative to an oracle that knows who lies and removes them",
+    fig.suptitle("What the liars are worth: accuracy relative to an oracle that removes every liar",
                  x=0.01, ha="left", fontsize=11, fontweight="bold")
     fig.tight_layout(rect=(0, 0.05, 1, 0.95))
     viz.save(fig, FIG / "fig12_information_budget")

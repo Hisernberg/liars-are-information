@@ -262,8 +262,20 @@ def online_numbers() -> None:
                   ("self", "Self"), ("majority", "Maj")):
         if m in late:
             put(f"onSleeper{mt}", pct(late[m]))
+    late7 = on[(on.schedule == "sleeper") & (on.pos >= 140) & (on.f == 0.7)].groupby("method").correct.mean()
+    for m, mt in (("race_fixed", "Fixed"), ("race_decay0.97", "Decay"), ("race_window64", "Win"),
+                  ("aip_gated_window64", "AipWin"), ("self", "Self"), ("majority", "Maj")):
+        if m in late7:
+            put(f"onSleeperSeven{mt}", pct(late7[m]))
+    for sch, st in (("coherent_to_independent", "CohInd"), ("independent_to_coherent", "IndCoh"), ("toggle40", "Toggle")):
+        sub = on[(on.schedule == sch) & (on.pos >= 120)].groupby("method").correct.mean()
+        for m, mt in (("race_decay0.97", "Decay"), ("race_cumulative", "Cum"), ("aip_gated_window64", "AipWin"),
+                      ("majority", "Maj"), ("self", "Self")):
+            if m in sub:
+                put(f"on{st}{mt}", pct(sub[m]))
     stat = on[on.schedule == "stationary_coherent"].groupby("method").correct.mean()
-    for m, mt in (("race_fixed", "Fixed"), ("race_decay0.97", "Decay"), ("race_cumulative", "Cum")):
+    for m, mt in (("race_fixed", "Fixed"), ("race_decay0.97", "Decay"), ("race_cumulative", "Cum"),
+                  ("race_window64", "Win")):
         if m in stat:
             put(f"onStat{mt}", pct(stat[m]))
 
@@ -302,7 +314,7 @@ def live_numbers() -> None:
 def world_counts() -> None:
     put("nLiveTasks", "240")
     total = 0
-    for st in ("main", "zoo", "llm", "history", "swarm"):
+    for st in ("main", "zoo", "llm", "history", "swarm", "ext"):
         p = RES / st / "run_manifest.json"
         if p.exists():
             total += json.loads(p.read_text())["worlds"]

@@ -72,5 +72,7 @@ def line(ax, x, y, method: str, **overrides):
 
 def save(fig, path_stem) -> None:
     for ext in ("png", "pdf"):
-        fig.savefig(f"{path_stem}.{ext}", dpi=200, bbox_inches="tight")
+        # No timestamps, so regenerating an unchanged figure leaves git clean.
+        meta = {"CreationDate": None} if ext == "pdf" else {"Software": None}
+        fig.savefig(f"{path_stem}.{ext}", dpi=200, bbox_inches="tight", metadata=meta)
     plt.close(fig)

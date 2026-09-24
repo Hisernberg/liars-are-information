@@ -176,7 +176,7 @@ RACE **levels the swarm**. The spread between the weakest and strongest honest a
 | **E3** LLM deceivers ✳ | 480 | 4 prompts × 2 attacker LLMs × f | Does it hold against real LLM lies? (confirmation set) |
 | **E4** swarm composition & size | 396 | replicas, weak rosters, N = 5 … 40 | Replicated and larger swarms |
 | **E5** history length | 360 | 5 … 80 unlabeled questions | How fast do the agents learn? |
-| **E6** online | streams | sleepers, regime switches, forgetting | Attackers that change behaviour |
+| **E6** online | 120 streams × 200 questions | sleepers, regime switches, forgetting | Attackers that change behaviour |
 | **E7** channel diagnostics | 27,216 pairs | — | Are the learned trust estimates right? |
 | **E8** live swarm | 6 live models | honest / saboteur / debate roles | Fresh inference, new models, interaction effects |
 | **E9** information budget | 972 | 18 attack settings × f, two oracles, RACE-D | What are the liars worth? |
@@ -218,6 +218,12 @@ Zero on this plot is an oracle that knows who lies, removes them, and decodes th
 * **A negative budget flags a model violation.** Echo, camouflage and the sleeper have negative budgets, and they are exactly RACE's failure modes (§6).
 * **A negative result, reported.** RACE-D fits the channels only on questions with disagreement. It helps against camouflage at f = 0.7 (+4.9 points) but loses elsewhere: 14 wins and 31 losses over 324 cells. The frozen RACE stays the method.
 
+### Attackers that change behaviour (E6)
+
+<p align="center"><img src="figures/fig8_online.png" width="900" alt="Online accuracy over 200 questions under four non-stationary attacker schedules"></p>
+
+Predict-then-commit streams of 200 questions (4 benchmarks × 3 values of f × 5 schedules × 2 seeds). A **sleeper** answers honestly for 100 questions and then lies coherently. Over the last 60 questions, a RACE fit frozen at warm-up scores 42.9%. With exponential forgetting (γ = 0.97), RACE recovers to **88.3%**, above the receiver alone (79.8%), a windowed AIP (69.4%) and majority vote (43.6%). At f = 0.7 the frozen fit and majority both score 0.0%, while forgetting scores **86.4%**. On a stationary schedule forgetting costs nothing (88.9% vs 88.6% cumulative), so `TrustLayer(forgetting=0.97)` is a safe default.
+
 ---
 
 ## 6. Where RACE fails
@@ -225,7 +231,7 @@ Zero on this plot is an oracle that knows who lies, removes them, and decodes th
 | Attack / condition | What happens | Why |
 |---|---|---|
 | **Camouflage**: truthful until the honest vote is contested, then backs the strongest wrong answer | 80.2% vs 86.4% for the receiver alone at f = 0.7 | Its lies depend on the honest votes, not only on the truth, which breaks conditional independence |
-| **Sleeper**: honest during history, then lies | Every static method collapses at f ≥ 0.5, including the oracle | Breaks stationarity. Online forgetting (E6) is the remedy we study |
+| **Sleeper**: honest during history, then lies | Every *static* fit collapses at f ≥ 0.5, including the oracle | Breaks stationarity. With online forgetting (E6), RACE recovers to 88.3% within about 40 questions |
 | **Weak receiver** (≤ 50% accurate on open answers) | 24% of such receivers end > 5 points worse than alone | Provably unidentifiable (Prop. 2): a near-chance anchor cannot anchor |
 | **MATH-500, f ≤ 0.3** | Trails AIP and majority by up to 10 points | The weak-anchor case above |
 | **Strongest agents** (≥ 93% alone) | −0.3 to −1.5 points on average | Pooling with a mostly weaker crowd; worst under camouflage |
