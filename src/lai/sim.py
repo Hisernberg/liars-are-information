@@ -247,6 +247,28 @@ def oracle_channel(built: BuiltWorld, receiver: int) -> RACEAggregator:
     return agg
 
 
+class HonestOnly(Aggregator):
+    """Wraps a decoder so it only ever sees the honest agents' reports.
+
+    With the known-channel decoder inside, the accuracy gap between
+    ``oracle_channel`` and ``oracle_channel_honest`` is the information the
+    liars' reports carry about the truth (Theorem 1: never negative for a
+    known-channel receiver; zero when the lies are independent of the truth
+    given the honest reports).
+    """
+
+    is_oracle = True
+
+    def __init__(self, inner: Aggregator, honest: Iterable[int], name: str):
+        self.inner = inner
+        self.honest = set(honest)
+        self.name = name
+
+    def aggregate(self, observations, self_id):
+        kept = tuple(b for b in observations if b.agent_id in self.honest)
+        return self.inner.aggregate(kept, self_id)
+
+
 # ---------------------------------------------------------------- methods
 
 CORE_METHODS = (
@@ -289,10 +311,12 @@ def method_factories(built: BuiltWorld, methods: Iterable[str]) -> dict[str, Cal
         "race_noclone": lambda r: RACEAggregator(labels, clone_aware=False),
         "race_rawclone": lambda r: RACEAggregator(labels, clone_mode="raw"),
         "race_ms": lambda r: RACEAggregator(labels, multistart=True),
+        "race_d": lambda r: RACEAggregator(labels, condition="disagreement"),
         "race": lambda r: RACEAggregator(labels),
         "race_capself": lambda r: RACEAggregator(labels, cap="self"),
         "oracle_honest_majority": lambda r: OracleHonestMajority(built.honest),
         "oracle_channel": lambda r: oracle_channel(built, r),
+        "oracle_channel_honest": lambda r: HonestOnly(oracle_channel(built, r), built.honest, "oracle_channel_honest"),
     }
     if labels:
         table["ds_full"] = lambda r: DawidSkeneFullAggregator(labels, max_iter=60)
@@ -311,7 +335,7 @@ def evaluate_world(world: World, methods: Iterable[str] = CORE_METHODS, keep_dia
         scores = {p: {t: [] for t in built.splits[p]} for p in parts}
         for receiver in built.honest:
             agg = make(receiver)
-            if agg is not None and agg.needs_fit and method != "oracle_channel":
+            if agg is not None and agg.needs_fit and not method.startswith("oracle_channel"):
                 agg.fit([(built.defense[t][receiver],) for t in built.splits["history"]])
             if keep_diagnostics and agg is not None and method in ("aip_gated", "aip_soft", "race", "race_noclone", "ds_onecoin"):
                 diag.append(_channel_summary(method, agg, receiver, built))

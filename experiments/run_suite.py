@@ -91,7 +91,18 @@ def study_history() -> list[World]:
     ]
 
 
-STUDIES = {"main": study_main, "zoo": study_zoo, "llm": study_llm, "swarm": study_swarm, "history": study_history}
+def study_ext() -> list[World]:
+    """Extensions: information budget (two known-channel oracles) and RACE-D."""
+    zoo = [World(b, f, a, prm, 1.0, s, study="ext")
+           for b, f, (a, prm), s in itertools.product(BENCHMARKS, (0.3, 0.5, 0.7), ZOO, SEEDS3)]
+    llm = [World(b, f, f"llm:{a}", 1.0, 1.0, s, study="ext")
+           for b, f, a, s in itertools.product(BENCHMARKS, (0.3, 0.5, 0.7), ATTACK_PROMPTS, SEEDS3)]
+    return zoo + llm
+
+
+STUDIES = {"main": study_main, "zoo": study_zoo, "llm": study_llm, "swarm": study_swarm, "history": study_history,
+           "ext": study_ext}
+EXT_METHODS = ("self", "majority", "aip_gated", "race", "race_d", "oracle_channel", "oracle_channel_honest")
 # The expensive AIP variants are kept wherever they are the comparison of record.
 LIGHT = tuple(m for m in CORE_METHODS if m not in ("aip_naive", "sac", "confidence"))
 
@@ -106,7 +117,7 @@ def main() -> None:
     worlds = STUDIES[args.study]()
     if args.limit:
         worlds = worlds[: args.limit]
-    methods = CORE_METHODS if args.study in ("main", "llm") else LIGHT
+    methods = CORE_METHODS if args.study in ("main", "llm") else EXT_METHODS if args.study == "ext" else LIGHT
     out = args.out or ROOT / "results" / args.study
     started = time.monotonic()
     frame, _, _ = run_worlds(worlds, methods, out, processes=args.processes)

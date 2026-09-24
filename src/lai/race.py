@@ -302,6 +302,7 @@ class RACEAggregator(Aggregator):
         eps: float = 1e-3,
         decision_band: float = 0.25,
         multistart: bool = False,
+        condition: str = "all",
         name: str | None = None,
     ) -> None:
         if model not in ("onecoin", "full"):
@@ -336,6 +337,13 @@ class RACEAggregator(Aggregator):
         # labelling, which is why the anchor acts as initialisation + constraint
         # rather than through a likelihood comparison. See docs/RACE_NOTES.md.
         self.multistart = bool(multistart) and self.anchored
+        # Extension (RACE-D): estimate channels only on history questions where
+        # the heard answers disagree. Trust earned on unanimous questions is free
+        # -- agreeing with everyone reveals nothing -- and is exactly what a
+        # camouflage attacker banks before lying on contested questions.
+        if condition not in ("all", "disagreement"):
+            raise ValueError(f"unknown condition {condition!r}")
+        self.condition = condition
         if name is None:
             name = "race" if self.anchored else "ds_onecoin"
             if self.model == "full":
@@ -348,6 +356,8 @@ class RACEAggregator(Aggregator):
                 name += f"_cap{self.cap}"
             if self.multistart:
                 name += "_ms"
+            if self.condition == "disagreement":
+                name += "_d"
         self.name = name
         self.fits: dict[int, ReceiverFit] = {}
         self.diagnostics = RACEDiagnostics()
@@ -395,6 +405,10 @@ class RACEAggregator(Aggregator):
         reports, n_cand = self._encode(rows, agents)
         own = agents.index(receiver)
         tw = np.ones(len(rows)) if task_weights is None else np.asarray(task_weights, dtype=float)
+        if self.condition == "disagreement" and len(rows):
+            informative = np.array([len({a for a in row.values() if a is not None}) > 1 for row in rows])
+            if informative.sum() >= 5:  # otherwise fall back to every question
+                tw = tw * informative
         singletons = np.arange(len(agents))
         if self.clone_aware and len(rows) and self.clone_mode == "raw":
             groups = complete_link_groups(reports, self.clone_threshold, self.clone_min_support)
