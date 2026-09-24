@@ -1,0 +1,232 @@
+\section{Evaluation Under a Symbolic Adversary}
+\label{sec:evaluation}
+
+\subsection{Setup}
+
+The frozen roster is $\numModels$ open-weight models spanning $\numParamsMinB$B
+to $\numParamsMaxB$B from seven lineages, plus a separately reported
+$\numModelsWeakArm$-model weak-tier arm never pooled with it. Of
+$\numBenchmarks$ benchmarks, $\numHeadlineBenchmarks$ are headline-eligible after
+excluding cells whose honest accuracy leaves no headroom; each carries
+$\numTasksMin$--$\numTasksMax$ frozen tasks and $\numBootstrapResamples$
+bootstrap resamples. Accuracy spans $\numModelAccMin$--$\numModelAccMax$, so no
+cell is at ceiling or floor.
+
+This section reports the symbolic adversary---a bloc that emits a designated
+wrong answer with a specified coherence; the prompt-injected adversaries follow
+below, and the two regimes disagree in ways that matter.
+
+\subsection{The headline, and where it does not hold}
+
+Against the symbolic coherent adversary AIP-gated holds
+$\numGsmkAipMin$--$\numGsmkAipMax$ on GSM8K across the whole Byzantine range, a
+spread of $\numGsmkAipSpread$, and $\numMmluAipMin$--$\numMmluAipMax$ on MMLU, a
+spread of $\numMmluAipSpread$. Both spreads are below their cells' measurement
+floors, so what the data supports is that no change was detected---not that
+accuracy is provably constant. Every deployable discard baseline reads
+$\numDiscardCollapseFseven$ at $f=0.7$ in the same configuration
+(Figure~\ref{fig:money}).
+
+\textbf{Refuted: accuracy is not flat in $f$ in general.} On MATH-500 the same
+mechanism spans $\numMathfiveAipMin$--$\numMathfiveAipMax$, a spread of
+$\numMathfiveAipSpread$, falling to $\numMathfiveAipFseven$ at $f=0.7$ from
+$\numMathfiveAipFzero$ at $f=0$. Under real-LLM adversaries the fall is present
+on four of six benchmarks: $\numHoneFallBoolq$ on BoolQ, $\numHoneFallMedqa$ on
+MedQA, $\numHoneFallMmlu$ on MMLU and $\numHoneFallArc$ on ARC, all at least
+three times the floor. Only GSM8K ($\numHoneFallGsmk$) and MATH-500
+($\numHoneFallMathfive$) are undetectable. The claim this project set out to make
+was invariance in $f$; the claim the data supports is invariance on two
+benchmarks under one adversary, and a large, ordered degradation elsewhere.
+\textbf{[H1]}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{money_figure.pdf}
+\caption{Swarm accuracy against Byzantine fraction. AIP-gated degrades where
+discard-based baselines collapse; the benchmarks on which it does \emph{not}
+degrade are the exception and are named in the text. \textbf{[H1, H2''']}}
+\label{fig:money}
+\end{figure}
+
+\subsection{The discard family: three separate statements}
+
+``Every discard baseline reaches zero'' is true only under conditions that must be
+stated, and false under two of them. \textbf{(i) Symbolic adversary, deployable
+methods}: true, and exactly --- $\numDiscardCollapseFseven$ on all
+$\numBenchmarks$ benchmarks at $f=0.7$. \textbf{(ii) Oracle methods, either
+regime}: \emph{false} --- Krum, handed the true Byzantine count, holds
+$\numDiscardOracleBoolqFseven$ on BoolQ and $\numDiscardOracleMedqaFseven$ on
+MedQA, and multi-Krum beats AIP under the real-LLM adversary on both.
+\textbf{(iii) Real-LLM adversary}: \emph{false} --- nothing reaches zero,
+deployable discard spans $\numRealDiscardMinFseven$ to
+$\numRealDiscardMaxFseven$, and AIP separates on four of six
+($\numRealSepGsmkFseven$ GSM8K, $\numRealSepMathfiveFseven$ MATH-500,
+$\numRealSepArcFseven$ ARC, $\numRealSepMmluFseven$ MMLU), is undetectable on
+MedQA ($\numRealSepMedqaFseven$), and \textbf{loses to plain majority vote on
+BoolQ by $\numRealSepBoolqFseven$}. \textbf{[H2', H2'', H2''']}
+
+BoolQ is the informative failure: with $C=2$ every wrong answer is the same wrong
+answer, so adversarial coherence is unity by construction and carries no
+information. The gate fires on a channel whose sign it cannot use, and majority
+vote does better by ignoring it --- the coordinatability argument arriving as a
+measured cost.
+
+\subsection{The invertibility spectrum}
+
+Inversion gain tracks measured channel coherence, the mechanism's central
+prediction: negation reaches $\hat q = \numGsmkNegationQ$ and gains
+$\numGsmkNegationGain$, hallucination reaches $\numGsmkHallucinationQ$ and gains
+$\numGsmkHallucinationGain$. \textbf{Honest negative result}: semantic
+hallucination is fluent and highly effective as an attack and AIP can do nothing
+about it --- with no coherent channel there is no sign to recover and the
+mechanism degrades to discard level. An adversary that simply refuses to
+coordinate is a complete defence against inversion, at the cost of being a weaker
+attack. \textbf{[I2]}
+
+
+\subsection{Why the gate is necessary}
+
+Ablating inversion --- replacing the three-way decision with trust-or-discard ---
+isolates what it contributes: at $f=0.7$ the gain is $\numInversionGainFseven$,
+at $f=0$ the cost is $\numInversionCostFzero$, far below the floor. Inversion is
+close to free when idle and large when engaged, which is the asymmetry the
+mechanism is built for. \textbf{[I1, I2]} The gate keeps the first half true:
+across every configuration tested it inverts at most $\numHonestInvertedMax$\% of
+honest channels while inverting $\numAdversaryInvertedMean$\% of adversarial
+channels at $f \geq 0.5$. \textbf{[G1]}
+
+
+\subsection{Two results that did not go our way}
+
+\textbf{The gain is not independent of honest competence.} We predicted inversion
+gain is a property of the adversarial channel, and that a weaker swarm would gain
+\emph{more}, having more honest error to correct. On a matched benchmark set the
+weak-tier arm reads $\numInversionGainWeak$ against the roster's
+$\numInversionGainFseven$, a difference of $\numInversionGainCompetenceDiff$ ---
+above the floor, lower on all three benchmarks individually, and opposite to the
+prediction. The comparison that originally supported the claim pooled the weak
+arm's six benchmarks ($\numInversionGainWeakAllBenches$) against the roster's
+three; correcting it reverses the conclusion. \textbf{[I3]}
+
+\textbf{Whether the gain scales with swarm size is undetectable.} At
+$N=\numAgents$, $20$ and $50$ the gain reads $\numInversionGainNTen$,
+$\numInversionGainNTwenty$ and $\numInversionGainNFifty$ --- a range of
+$\numInversionGainNRange$ against a $\numFloorWorst$ floor. \emph{Neither} growth
+nor invariance in $N$ is supported; the experiment was underpowered to separate
+them, and we report it as underpowered rather than as evidence for the flat
+reading its point estimates suggest. \textbf{[N1]}
+
+\subsection{Real-LLM adversaries}
+
+The symbolic adversary above is a control: its coherence is set, not measured.
+Prompt-injected models are why the discard family does not collapse to zero and
+why AIP loses on BoolQ.
+
+\textbf{Non-stationary.} A burst adversary alternates coherent and noisy epochs.
+Pooled history averages the two into a channel clearing neither threshold and the
+pooled gate falls to $\numBurstStatic$ on GSM8K; sliding-window statistics recover
+$\numBurstWindowTwenty$ at $W=20$, a gain of $\numBurstRecoveredTwenty$, more than
+seven times the floor. On a stationary control attack
+windowing changes accuracy by at most $\numBurstRecoveredFive$ --- below floor, so
+\emph{undetectable} rather than zero cost. \textbf{[B1]}
+
+\textbf{Sleepers. Refuted, and in the opposite direction.} We predicted a sleeper
+would defeat reputation decay while AIP's windowed statistics reclassified it.
+Reputation decay degrades \emph{least} of the memory-carrying defenders
+($\numSleeperDropReputation$) and AIP-gated \emph{most} ($\numSleeperDropAip$,
+windowed $\numSleeperDropAipWindowed$). The spread, $\numSleeperDropSpread$,
+barely clears the $\numFloorWorst$ floor --- marginal, and reported as marginal
+--- but its direction is unambiguous. A defence estimating a channel's sign per
+question is more disturbed by a regime change than one averaging a scalar over
+rounds. \textbf{[E1]}
+
+\textbf{Sybil blocs.} At the largest bloc tested, $s=\numSybilSizeMax$ --- a
+plurality of the swarm --- windowed AIP holds $\numSybilCoherentAip$ against a
+coherent bloc where the best non-AIP defender reads $\numSybilCoherentBaselines$,
+a separation of more than four times the floor (Figure~\ref{fig:sybil}).
+\textbf{[E2a]} \emph{But the mechanism we proposed is refuted}: we predicted the
+robustness comes from bloc coherence being amplified into a stronger inversion
+signal, which predicts a gap between a coherent bloc and one whose members
+disagree. There is none --- $\numSybilCoherentAip$ against
+$\numSybilDisagreeingAip$, far below floor. The robustness is real; the
+explanation is not. What the data is consistent with is simpler:
+receiver-anchored statistics do not care how many identities a bloc presents,
+because they are not counting. \textbf{[E2b]}
+
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{sybil_accuracy.pdf}
+\caption{Accuracy against Sybil bloc size, coherent and disagreeing blocs at a
+shared scale. The two panels are the test of the amplification explanation, and
+they do not separate. \textbf{[E2a, E2b]}}
+\label{fig:sybil}
+\end{figure}
+
+\subsection{What the defence costs}
+
+A defence that has to be argued for on robustness grounds should also be priced.
+Two costs, kept separate because they differ by three orders of magnitude.
+
+\emph{Aggregation} cost is measured by timing each rule over the cached
+broadcasts, in microseconds per receiver-decision --- one aggregation per
+question per agent, which is what a deployed agent pays. It is not recoverable
+from our phase logs, which record one timestamp per benchmark-composition block
+covering all fourteen rules at once, so it was measured directly rather than
+apportioned from a block average. \emph{Inference} cost is read from the cache
+and is identical for every rule: all of them consume the same broadcasts.
+
+\begin{table}[t]
+\centering
+\caption{Cost of defence at $f=0.5$, microseconds per receiver-decision, mean
+over the headline benchmarks. The gate is nearly free: AIP-gated costs
+$\numCostGateOverhead$\,\textmu s over its own inversion-free ablation, or
+$\numCostGateOverheadPct$\%. Nothing here is the bottleneck --- one completion
+averages $\numCompletionTokensMean$ tokens, which at a generous 100 tokens/s is
+about $\numCostInferenceRatio\times$ the slowest rule in the table.}
+\label{tab:cost}
+\small
+\begin{tabular}{@{}lr@{}}
+\toprule
+Rule & \textmu s / decision \\
+\midrule
+majority vote            & $\numCostMajority$ \\
+Krum \emph{(oracle)}     & $\numCostKrum$ \\
+trimmed mean \emph{(oracle)} & $\numCostTrimmedMean$ \\
+coordinate median        & $\numCostCoordMedian$ \\
+AIP, inversion ablated   & $\numCostAipTrustOnly$ \\
+\textbf{AIP-gated}       & $\mathbf{\numCostAipGated}$ \\
+Multi-Krum \emph{(oracle)} & $\numCostMultiKrum$ \\
+geometric median         & $\numCostGeometricMedian$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The ordering is the useful part. AIP-gated is more expensive than majority vote
+by a factor of about twenty-five and cheaper than the geometric median by a
+factor of eight, and the \emph{gate itself} --- the binomial test, the ceiling
+comparison and the signed reweighting --- accounts for
+$\numCostGateOverheadPct$\% of its cost. Almost all of what AIP spends is spent
+on maintaining channel statistics, which the inversion-free ablation also pays.
+Whatever the case against threshold-gated inversion is, it is not compute.
+\textbf{[E3]}
+
+\subsection{Methodological controls}
+
+\textbf{Normalization parity.} The unweighted and discard family is exactly
+parity-invariant (maximum $\numParityUnweightedMax$ across every cell), the
+sanity check that the audit instrument is not manufacturing its own effect; every
+weighted method responds, so self-vote share is a real confound. \textbf{[M2a]}
+\emph{Refuted}: AIP does exploit it at the tie. Away from $f=0.5$ the effect is
+undetectable (largest $\numParityAipOffTieMax$); at $f=0.5$ it averages
+$\numParityAipTieMean$ and reaches $\numParityAipTieMax$, so with the swarm split
+evenly the normalisation of the adversary's own vote decides the outcome. Every
+number we state at the tie, the evasion anchor included, is measured in the
+matched-parity condition. The pooled average $\numParityAipGated$ hides this and
+should not be quoted alone. \textbf{[M2b]}
+
+\textbf{Minimax regret} over unknown $f$, deployable methods only: AIP-gated is
+best on GSM8K ($\numRegretGsmkAip$ against $\numRegretGsmkNext$) and MMLU
+($\numRegretMmluAip$ against $\numRegretMmluNext$), and \emph{not} on MATH-500
+($\numRegretMathfiveAip$ against $\numRegretMathfiveNext$). \textbf{[M1]}
+

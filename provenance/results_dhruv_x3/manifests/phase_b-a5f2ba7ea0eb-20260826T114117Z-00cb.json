@@ -1,0 +1,64 @@
+{
+  "run_id": "phase_b-a5f2ba7ea0eb-20260826T114117Z-00cb",
+  "phase": "phase_b",
+  "config_hash": "a5f2ba7ea0eb",
+  "config": {
+    "cache": "data/cache",
+    "cache_t07": "data/cache_t07",
+    "resamples": 2000,
+    "models": [
+      "llama32_3b",
+      "ministral_8b",
+      "olmo2_7b",
+      "phi4_mini_reasoning"
+    ]
+  },
+  "seeds": {
+    "bootstrap": 20250825
+  },
+  "git_commit": "a61b55d19f28adbc28dae75fc05dbf041a196d23-dirty",
+  "started_at": "2026-08-26T11:41:17.418892+00:00",
+  "finished_at": "2026-08-26T11:41:17.491441+00:00",
+  "status": "ok",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-186-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu0",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA L4",
+      "memory_total_mib": 23034,
+      "driver": "550.127.08"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.2.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "4.57.6",
+    "vllm": "0.17.0"
+  },
+  "notes": {
+    "inference_run": false,
+    "caches_read_only": true,
+    "nan_policy": [
+      "phi4_mini_reasoning x mmlu: 30/100 self-reported confidences are NaN (the model reasons about the question and never commits to an integer). Phase B does not use self-reports, so no rows are affected. Missing-data handling is a Phase C decision.",
+      "llama32_3b x mmlu: 1/100 answer extraction failed (generation hit the token cap mid-reevaluation). It is scored incorrect, kept in the analysis, and counts as disagreement with every other agent.",
+      "phi is NaN when either error vector is constant; such pairs are reported as undefined rather than as zero correlation."
+    ],
+    "known_nonreproducing_task_ids": [
+      "gsm8k-test-00025",
+      "gsm8k-test-00031",
+      "math500-test/intermediate_algebra/607.json",
+      "math500-test/prealgebra/1139.json",
+      "math500-test/prealgebra/1353.json",
+      "mmlu-test-00389",
+      "mmlu-test-00591"
+    ],
+    "known_nonreproducing_policy": "retained in the analysis and flagged per pair, never dropped",
+    "n_pairs": 22
+  }
+}

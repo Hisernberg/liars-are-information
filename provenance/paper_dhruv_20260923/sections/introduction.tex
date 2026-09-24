@@ -1,0 +1,99 @@
+\section{Introduction}
+\label{sec:introduction}
+
+A decentralized swarm of language-model agents answers a question by
+broadcasting individual answers and locally aggregating what it hears. When a
+fraction $f$ of the agents is Byzantine, the aggregation rule decides whether the
+swarm survives, and essentially every rule in the literature survives by
+\emph{discarding}: Krum selects the contribution closest to its
+neighbours~\cite{blanchard2017krum}, coordinate-wise median and trimmed mean
+suppress outlying coordinates~\cite{yin2018trimmed}, confidence weighting
+down-weights low-confidence peers, filter-and-refine schemes drop contributors
+whose history looks unreliable. The shared premise is that adversarial input is
+contamination, and it yields the familiar ceiling: once adversaries hold the
+plurality, a rule that treats consensus as evidence follows them.
+
+\subsection{Why a swarm needs an adversary to be worth pooling}
+
+Before defending a swarm it is worth asking what pooling honest agents buys, and
+the answer we measure is: very little. Correlated error already caps evaluation
+panels~\cite{judgecorr,panelcorr,hivemind}; we confirm that ceiling in an
+adversarial swarm and extend it to the case a deployment actually builds,
+replicating one model, where error correlation is $\numWithinModelPhi$ against
+$\numCrossModelPhi$ across families. Over every three-model subset of our roster
+no composition beats its own strongest single member by a detectable margin, and
+maximising effective swarm size correlates with swarm accuracy at
+$\numCompAccVsNeff$ --- the wrong sign.
+
+\textbf{An LLM swarm's ceiling on honest error is correlation, not competence.}
+The consequence is sharp: the only structure in the broadcast set that honest
+agents do not already share is \emph{adversarial} coherence. A disciplined liar
+is the one genuinely informative contributor a swarm has.
+
+\subsection{Liars are information}
+
+An adversary that lies \emph{coherently} --- reporting the same wrong answer as
+its collaborators, task after task --- is not injecting noise. It is operating a
+channel whose sign is recoverable: if a bloc reliably says $X$ when the truth is
+not $X$, then ``this bloc says $X$'' is evidence \emph{against} $X$. Discarding
+it throws that away; inverting it converts the adversary into a contributor.
+
+Measuring coherence requires no labels: with $e_i$ an agent's error rate and
+$q_{ij}$ the probability that two agents who are both wrong are wrong \emph{in
+the same way}, agreement obeys $m_{ij} = (1-e_i)(1-e_j) + e_i e_j q_{ij}$, of
+which the binary case used in prior work is the instance $q_{ij}\equiv1$. The
+coincidence term is the inversion signal, not a nuisance parameter.
+
+The obstacle is that honest agents are not idiosyncratic either --- pooled
+across the powered four-way multiple-choice pairs, two honest agents that are both
+wrong pick the \emph{same} wrong answer $\numHonestQMc$ of the time, against a
+$\numMmluChanceQ$ chance level --- so a rule triggered by coherence alone inverts
+honest agents precisely on the questions they find hardest. Our gate therefore
+fires only when a channel's coherence exceeds a calibrated honest ceiling
+\emph{and} it agrees with the receiver less than the attenuation law permits.
+Both tests are anchored on the receiver's own answer, which is what keeps them
+meaningful past $f=0.5$.
+
+\subsection{The paper's turn}
+
+The mechanism works, and then it is defeated. An adversary that knows the gate
+exists does not have to beat the threshold --- it can stay under it. We construct
+one, show it reduces AIP to $\numEvasionAccMedqa$ at the exact tie, and prove
+that no rule computed from per-question coherence separates it from honest
+independent disagreement, because at its optimum it is \emph{less} coherent than
+honest agents are. Of the pre-registered mitigations, soft gating partly works
+and threshold randomisation does nothing measurable.
+
+\subsection{Contributions}
+
+\begin{itemize}
+\item \textbf{Mechanism.} A local three-way channel decision (invert / trust /
+      discard) on a calibrated honest-coincidence threshold, with a windowed
+      variant for non-stationary adversaries.
+\item \textbf{Theory.} A multiclass attenuation law with its identifiability
+      conditions; \emph{coordinatability}; and Proposition~1, a total-variation
+      limit showing a residual attack at or below chance coherence is invisible
+      to \emph{every} rule measurable with respect to per-question coherence.
+\item \textbf{Design laws: confirming and extending the correlation ceiling.}
+      The ceiling is established for evaluation
+      panels~\cite{judgecorr,panelcorr,hivemind}; we confirm it under adversarial
+      conditions and extend it three ways --- to replicated models, from an
+      observation to a law estimable blind at run time, and from a measurement
+      caveat to the premise of a defence.
+\item \textbf{Protocol.} Of the two confidence surfaces an agent can broadcast,
+      the logprob-derived one discriminates better (AUC $\numAucLogprob$ against
+      $\numAucSelfReport$) and cannot be authored by the sender, whose falsified
+      self-report drops to $\numAucSelfReportFalsified$, below chance. This is
+      the one recommendation here the gate-aware adversary does not reach.
+\item \textbf{Evaluation, including what failed.} $\numAttackClasses$ attack
+      classes, a pre-registered mitigation study with criteria committed before
+      the runs, and a cost table showing the gate is
+      $\numCostGateOverheadPct$\% of the aggregation cost it belongs to. Ten
+      claims this study set out to confirm were refuted by its own data and are
+      reported at the same length as the confirmations.
+\end{itemize}
+
+Every effect is compared against a resampling floor: $\numFloorGsmk$ on GSM8K,
+$\numFloorWorst$ on the $\numTasksMin$-task benchmarks. An effect below its
+cell's floor is \textbf{undetectable at this scale}, never ``small'' or ``no
+effect''.

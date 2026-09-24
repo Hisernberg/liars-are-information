@@ -1,0 +1,14 @@
+{
+  "benchmark": "math500",
+  "model": "ministral3_14b",
+  "n_rows": 200,
+  "n_tasks": 200,
+  "updated_at": "2026-09-20T15:35:10.113525+00:00",
+  "attack": "rushing",
+  "hf_id": "mistralai/Ministral-3-14B-Instruct-2512-BF16",
+  "prompt_template_hash": "44b7019693c2",
+  "run_id": "x3_repair_adversarial-3df8f36a6704-20260920T150842Z-63f2",
+  "x3_truncated_rows": 93,
+  "x3_context_stale_rows": 62,
+  "x3_budget": 3072
+}

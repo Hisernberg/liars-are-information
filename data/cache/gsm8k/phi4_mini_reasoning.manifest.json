@@ -1,0 +1,20 @@
+{
+  "benchmark": "gsm8k",
+  "model": "phi4_mini_reasoning",
+  "n_rows": 500,
+  "n_tasks": 500,
+  "updated_at": "2026-09-20T11:54:48.069370+00:00",
+  "prompt_template_hash": "f9b756633e80",
+  "hf_id": "microsoft/Phi-4-mini-reasoning",
+  "dtype": "bfloat16",
+  "max_model_len": 4096,
+  "seed": 0,
+  "registry_hash": "9855995a45f5",
+  "batch_invariant": true,
+  "sample_index": 0,
+  "temperature": 0.0,
+  "run_id": "x3_repair-8d42a6772be1-20260920T115153Z-4266",
+  "x3_repaired_rows": 73,
+  "x3_budget": 3072,
+  "x3_control_drift": 0
+}

@@ -1,0 +1,308 @@
+% GENERATED FILE — do not edit by hand.
+% Produced by scripts/make_numbers.py from the result parquets.
+% Every number in the manuscript must be one of these macros; a bare
+% decimal anywhere else is a build failure (tests/test_paper.py).
+% generated: 2026-09-23T13:16:36.879410+00:00
+% git: a366ae13334aa8c046c5c4d5cdf35e56fcee4b7d-dirty
+
+% ---- (context) ---------------------------------------------------
+\newcommand{\numPobsFullGsmkFsix}{0.980}  % p_obs limitation
+\newcommand{\numPobsHalfGsmkFsix}{0.917}  % p_obs limitation
+\newcommand{\numModelAccMin}{0.340}  % accuracy landscape
+\newcommand{\numModelAccMax}{0.930}  % accuracy landscape
+\newcommand{\numFloorWorst}{0.099}  % minimum detectable effect, worst benchmark
+\newcommand{\numFloorGsmk}{0.066}  % minimum detectable effect
+\newcommand{\numFloorMathfive}{0.099}  % minimum detectable effect
+\newcommand{\numFloorMmlu}{0.099}  % minimum detectable effect
+\newcommand{\numFloorMedqa}{0.099}  % minimum detectable effect
+\newcommand{\numFloorBoolq}{0.099}  % minimum detectable effect
+\newcommand{\numFloorArc}{0.099}  % minimum detectable effect
+\newcommand{\numCacheRows}{13500}  % generations in the honest cache
+\newcommand{\numTruncPinnedBefore}{1036}  % X3: generations at the cap before repair
+\newcommand{\numManufacturedBefore}{944}  % X3: truncated rows carrying an uncommitted answer
+\newcommand{\numManufacturedAfter}{356}  % X3: the same count after repair
+\newcommand{\numManufacturedRateBefore}{0.070}  % X3: manufactured fraction of the cache before repair
+\newcommand{\numManufacturedMathfive}{0.351}  % X3: MATH-500 was the worst-hit benchmark
+\newcommand{\numBudgetTokens}{3072}  % X3: the repaired per-model completion budget
+\newcommand{\numAgents}{10}  % read from sweep.parquet
+\newcommand{\numTasksMin}{200}  % frozen task lists
+\newcommand{\numTasksMax}{500}  % frozen task lists
+\newcommand{\numBenchmarks}{6}  % frozen task lists
+\newcommand{\numHeadlineBenchmarks}{3}  % configs/decision_rules.yaml
+\newcommand{\numModels}{7}  % frozen roster (configs/models.yaml arm: frozen)
+\newcommand{\numModelsWeakArm}{2}  % weak-tier arm, reported separately and never pooled
+\newcommand{\numModelsAll}{9}  % every enabled model that generated cache
+\newcommand{\numParamsMinB}{3}  % smallest model in the frozen roster, billions of parameters
+\newcommand{\numParamsMaxB}{32}  % largest model in the frozen roster, billions of parameters
+\newcommand{\numAttackClasses}{7}  % attack registry
+\newcommand{\numBootstrapResamples}{500}  % sweep config
+\newcommand{\numPobsQuarter}{0.25}  % p_obs grid level
+\newcommand{\numPobsTenth}{0.10}  % p_obs grid level
+
+% ---- B1 ----------------------------------------------------------
+\newcommand{\numBurstStatic}{0.766}
+\newcommand{\numBurstWindowFive}{0.966}
+\newcommand{\numBurstRecoveredFive}{+0.200}
+\newcommand{\numBurstWindowTen}{0.970}
+\newcommand{\numBurstRecoveredTen}{+0.205}
+\newcommand{\numBurstWindowTwenty}{0.975}
+\newcommand{\numBurstRecoveredTwenty}{+0.210}
+
+% ---- C1 ----------------------------------------------------------
+\newcommand{\numWithinModelPhi}{0.665}
+\newcommand{\numCrossModelPhi}{0.432}
+\newcommand{\numPhiRatio}{1.54}
+
+% ---- C2 ----------------------------------------------------------
+\newcommand{\numNeffHomMin}{1.14}  % measured within-model basis only (gsm8k)
+\newcommand{\numNeffHomMax}{1.87}  % measured within-model basis only (gsm8k)
+\newcommand{\numNeffHomMean}{1.47}  % measured within-model basis only (gsm8k)
+\newcommand{\numNeffHetMax}{2.49}  % measured within-model basis only (gsm8k)
+\newcommand{\numNeffUpperBoundMax}{6.22}  % cross-model basis: an UPPER BOUND, not comparable with the measured numbers above
+
+% ---- C3 ----------------------------------------------------------
+\newcommand{\numHonestQMc}{0.547}  % pooled over powered 4-way MC pairs (n_both_wrong >= 30)
+\newcommand{\numHonestQMcPairs}{19}  % powered pairs behind numHonestQMc
+\newcommand{\numHonestQMcItems}{847}  % jointly-wrong items behind numHonestQMc
+\newcommand{\numHonestQMathfive}{0.027}  % 20/21 pairs powered
+\newcommand{\numMmluChanceQ}{0.333}
+
+% ---- C4 ----------------------------------------------------------
+\newcommand{\numMaeGsmkBinary}{0.026}
+\newcommand{\numMaeGsmkMc}{0.018}
+\newcommand{\numMaeMathfiveBinary}{0.081}
+\newcommand{\numMaeMathfiveMc}{0.032}
+\newcommand{\numMaeMmluBinary}{0.079}
+\newcommand{\numMaeMmluMc}{0.061}
+\newcommand{\numMaeMedqaBinary}{0.041}
+\newcommand{\numMaeMedqaMc}{0.030}
+\newcommand{\numMaeBoolqBinary}{0.101}
+\newcommand{\numMaeBoolqMc}{0.079}
+\newcommand{\numMaeArcBinary}{0.027}
+\newcommand{\numMaeArcMc}{0.017}
+
+% ---- D1 ----------------------------------------------------------
+\newcommand{\numBanditAipValueCoherent}{0.134}
+\newcommand{\numBanditAipValueNoise}{0.133}
+\newcommand{\numBanditAipAccuracy}{0.866}
+\newcommand{\numBanditSacValueCoherent}{0.991}
+\newcommand{\numBanditSacValueNoise}{0.300}
+\newcommand{\numBanditSacAccuracy}{0.043}
+\newcommand{\numMitigHardMean}{0.457}
+\newcommand{\numMitigHardBandMean}{0.463}
+\newcommand{\numMitigHardBandWorst}{0.082}
+\newcommand{\numMitigSoftMean}{0.557}
+\newcommand{\numMitigSoftBandMean}{0.623}
+\newcommand{\numMitigSoftBandWorst}{0.200}
+\newcommand{\numMitigRandMean}{0.444}
+\newcommand{\numMitigRandBandMean}{0.474}
+\newcommand{\numMitigRandBandWorst}{0.082}
+\newcommand{\numMitigBothMean}{0.566}
+\newcommand{\numMitigBothBandMean}{0.638}
+\newcommand{\numMitigBothBandWorst}{0.278}
+
+% ---- D2 ----------------------------------------------------------
+\newcommand{\numMitigSoftDelta}{+0.101}
+\newcommand{\numMitigSoftBandDelta}{+0.160}
+\newcommand{\numMitigRandDelta}{-0.013}
+\newcommand{\numMitigRandBandDelta}{+0.010}
+\newcommand{\numMitigBothDelta}{+0.109}
+\newcommand{\numMitigBothBandDelta}{+0.174}
+
+% ---- D3 ----------------------------------------------------------
+\newcommand{\numEvasionQMathfive}{0.160}
+\newcommand{\numEvasionQMmlu}{0.280}
+\newcommand{\numEvasionQMedqa}{0.280}
+\newcommand{\numEvasionQDistinct}{3}  % distinct realised q in [0.15, 0.40] on C=4 -- the anchor's resolution
+\newcommand{\numEvasionBandLo}{0.15}
+\newcommand{\numEvasionBandHi}{0.40}
+\newcommand{\numEvasionQFloorMc}{0.253}  % lowest q this parameterisation can reach on C=4
+\newcommand{\numEvasionChance}{0.333}  % 1/(C-1), the coherence of independent wrong answers
+
+% ---- E1 ----------------------------------------------------------
+\newcommand{\numSleeperDropReputation}{0.031}
+\newcommand{\numSleeperDropAip}{0.136}
+\newcommand{\numSleeperDropAipWindowed}{0.121}
+\newcommand{\numSleeperDropMajority}{-0.004}
+\newcommand{\numSleeperDropSpread}{0.105}  % AIP degrades MORE than reputation decay; E1 as designed is refuted, and the spread is marginal against the floor
+
+% ---- E2a ---------------------------------------------------------
+\newcommand{\numSybilCoherentAip}{0.756}
+\newcommand{\numSybilCoherentBaselines}{0.267}  % best non-AIP defender (confidence_weighted) at the largest bloc, averaged over benchmarks
+\newcommand{\numSybilDisagreeingAip}{0.748}
+\newcommand{\numSybilDisagreeingBaselines}{0.283}  % best non-AIP defender (majority) at the largest bloc, averaged over benchmarks
+\newcommand{\numSybilSizeMax}{8}
+
+% ---- E3 ----------------------------------------------------------
+\newcommand{\numCostAipGated}{77.1}  % microseconds per receiver-decision, mean over headline benchmarks
+\newcommand{\numCostAipTrustOnly}{74.4}  % microseconds per receiver-decision, mean over headline benchmarks
+\newcommand{\numCostKrum}{21.2}  % microseconds per receiver-decision, mean over headline benchmarks
+\newcommand{\numCostMultiKrum}{87.3}  % microseconds per receiver-decision, mean over headline benchmarks
+\newcommand{\numCostTrimmedMean}{61.8}  % microseconds per receiver-decision, mean over headline benchmarks
+\newcommand{\numCostMajority}{3.2}  % microseconds per receiver-decision, mean over headline benchmarks
+\newcommand{\numCostGeometricMedian}{733.1}  % microseconds per receiver-decision, mean over headline benchmarks
+\newcommand{\numCostCoordMedian}{83.8}  % microseconds per receiver-decision, mean over headline benchmarks
+\newcommand{\numCostGateOverhead}{+2.7}  % what the inversion machinery adds over the trust-only ablation
+\newcommand{\numCostGateOverheadPct}{3.6}
+\newcommand{\numCostSlowest}{961}  % slowest aggregation rule measured
+\newcommand{\numCompletionTokensMean}{634}  % mean completion length, from the cache
+\newcommand{\numCostInferenceRatio}{6598}  % generation is this many times the slowest aggregation cost, at a generous 100 tokens/s
+
+% ---- F1 ----------------------------------------------------------
+\newcommand{\numFalsifiedGsmkAip}{-0.001}
+\newcommand{\numFalsifiedGsmkSelfreport}{-0.000}
+\newcommand{\numFalsifiedMmluAip}{+0.000}
+\newcommand{\numFalsifiedMmluSelfreport}{-0.163}
+
+% ---- G1 ----------------------------------------------------------
+\newcommand{\numHonestInvertedMax}{0.0}
+\newcommand{\numAdversaryInvertedMean}{80.6}
+\newcommand{\numEvasionAnchorF}{0.5}  % every evasion number is read off this f and no other
+\newcommand{\numEvasionAccMathfive}{0.366}
+\newcommand{\numEvasionCoherentMathfive}{0.000}
+\newcommand{\numEvasionGainMathfive}{-0.366}
+\newcommand{\numEvasionAccMmlu}{0.374}
+\newcommand{\numEvasionCoherentMmlu}{0.903}
+\newcommand{\numEvasionGainMmlu}{+0.529}
+\newcommand{\numEvasionAccMedqa}{0.082}
+\newcommand{\numEvasionCoherentMedqa}{0.878}
+\newcommand{\numEvasionGainMedqa}{+0.796}
+
+% ---- G2 ----------------------------------------------------------
+\newcommand{\numMmluNegQhat}{0.325}
+\newcommand{\numMmluHonestFloor}{0.535}
+\newcommand{\numGsmkNegQhat}{0.674}
+\newcommand{\numGsmkHonestFloor}{0.597}
+
+% ---- G2' ---------------------------------------------------------
+\newcommand{\numQhatBinaryMean}{0.559}
+\newcommand{\numQhatMcMean}{0.285}
+\newcommand{\numQhatOpenTextMean}{0.104}
+\newcommand{\numQhatOpenNumericMean}{0.250}
+
+% ---- H1 ----------------------------------------------------------
+\newcommand{\numHoneFallGsmk}{-0.014}  % aip_gated at f=0.7 minus f=0, real-LLM coherent adversary
+\newcommand{\numHoneFallMathfive}{-0.086}  % aip_gated at f=0.7 minus f=0, real-LLM coherent adversary
+\newcommand{\numHoneFallMmlu}{-0.338}  % aip_gated at f=0.7 minus f=0, real-LLM coherent adversary
+\newcommand{\numHoneFallMedqa}{-0.406}  % aip_gated at f=0.7 minus f=0, real-LLM coherent adversary
+\newcommand{\numHoneFallBoolq}{-0.606}  % aip_gated at f=0.7 minus f=0, real-LLM coherent adversary
+\newcommand{\numHoneFallArc}{-0.307}  % aip_gated at f=0.7 minus f=0, real-LLM coherent adversary
+
+% ---- H1-gsm8k ----------------------------------------------------
+\newcommand{\numGsmkAipMin}{0.976}
+\newcommand{\numGsmkAipMax}{0.984}
+\newcommand{\numGsmkAipSpread}{0.008}
+\newcommand{\numGsmkAipFseven}{0.976}
+\newcommand{\numGsmkAipFzero}{0.976}
+
+% ---- H1-math500 --------------------------------------------------
+\newcommand{\numMathfiveAipMin}{0.000}
+\newcommand{\numMathfiveAipMax}{0.477}
+\newcommand{\numMathfiveAipSpread}{0.477}
+\newcommand{\numMathfiveAipFseven}{0.000}
+\newcommand{\numMathfiveAipFzero}{0.477}
+
+% ---- H1-mmlu -----------------------------------------------------
+\newcommand{\numMmluAipMin}{0.877}
+\newcommand{\numMmluAipMax}{0.920}
+\newcommand{\numMmluAipSpread}{0.043}
+\newcommand{\numMmluAipFseven}{0.902}
+\newcommand{\numMmluAipFzero}{0.888}
+
+% ---- H2' ---------------------------------------------------------
+\newcommand{\numDiscardCollapseFseven}{0.000}
+
+% ---- H2'' --------------------------------------------------------
+\newcommand{\numDiscardOracleBoolqFseven}{0.815}
+\newcommand{\numDiscardOracleMedqaFseven}{0.745}
+
+% ---- H2''' -------------------------------------------------------
+\newcommand{\numRealDiscardMinFseven}{0.002}
+\newcommand{\numRealDiscardMaxFseven}{0.600}
+\newcommand{\numRealSepGsmkFseven}{+0.857}
+\newcommand{\numRealSepMathfiveFseven}{+0.528}
+\newcommand{\numRealSepMmluFseven}{+0.200}
+\newcommand{\numRealSepMedqaFseven}{+0.020}
+\newcommand{\numRealSepBoolqFseven}{-0.295}
+\newcommand{\numRealSepArcFseven}{+0.273}
+
+% ---- I1 ----------------------------------------------------------
+\newcommand{\numGsmkNegationQ}{0.674}
+\newcommand{\numGsmkNegationGain}{+0.044}
+\newcommand{\numAttackQAlwaysWrong}{0.102}  % measured channel coherence on GSM8K
+\newcommand{\numAttackErrAlwaysWrong}{0.682}  % measured channel error rate on GSM8K
+\newcommand{\numAttackQNegation}{0.674}  % measured channel coherence on GSM8K
+\newcommand{\numAttackErrNegation}{0.996}  % measured channel error rate on GSM8K
+\newcommand{\numAttackQHallucination}{0.066}  % measured channel coherence on GSM8K
+\newcommand{\numAttackErrHallucination}{0.980}  % measured channel error rate on GSM8K
+\newcommand{\numAttackQRushing}{0.156}  % measured channel coherence on GSM8K
+\newcommand{\numAttackErrRushing}{0.974}  % measured channel error rate on GSM8K
+\newcommand{\numAttackQFalsified}{0.674}  % measured channel coherence on GSM8K
+\newcommand{\numAttackErrFalsified}{0.996}  % measured channel error rate on GSM8K
+\newcommand{\numAttackQBurst}{0.674}  % measured channel coherence on GSM8K
+\newcommand{\numAttackErrBurst}{0.996}  % measured channel error rate on GSM8K
+\newcommand{\numInversionGainFseven}{0.645}
+
+% ---- I2 ----------------------------------------------------------
+\newcommand{\numGsmkHallucinationQ}{0.066}
+\newcommand{\numGsmkHallucinationGain}{+0.032}
+\newcommand{\numInversionCostFzero}{0.001}
+
+% ---- I3 ----------------------------------------------------------
+\newcommand{\numInversionGainWeak}{0.470}  % matched benchmark set: math500, medqa, mmlu
+\newcommand{\numInversionGainCompetenceDiff}{+0.175}  % strong roster minus weak arm, matched benchmarks
+\newcommand{\numInversionGainWeakAllBenches}{0.547}  % weak arm over ALL six of its benchmarks -- NOT comparable with the strong roster's three
+
+% ---- M1 ----------------------------------------------------------
+\newcommand{\numRegretGsmkAip}{0.004}
+\newcommand{\numRegretGsmkNext}{0.963}
+\newcommand{\numRegretMmluAip}{0.038}
+\newcommand{\numRegretMmluNext}{0.902}
+\newcommand{\numRegretMathfiveAip}{0.523}
+\newcommand{\numRegretMathfiveNext}{0.438}
+
+% ---- M2a ---------------------------------------------------------
+\newcommand{\numParityUnweightedMax}{0.0000}
+
+% ---- M2b ---------------------------------------------------------
+\newcommand{\numParityAipGated}{0.0283}  % mean |effect| over all f; inert away from the tie, large at f=0.5
+\newcommand{\numParityAipTieMax}{0.840}
+\newcommand{\numParityAipTieMean}{0.212}
+\newcommand{\numParityAipOffTieMax}{0.135}
+
+% ---- N1 ----------------------------------------------------------
+\newcommand{\numInversionGainNTen}{0.643}
+\newcommand{\numInversionGainNTwenty}{0.637}
+\newcommand{\numInversionGainNFifty}{0.655}
+\newcommand{\numInversionGainNRange}{0.018}  % range across N = 10/20/50; compare with the floor before calling it flat OR growing
+
+% ---- P1 ----------------------------------------------------------
+\newcommand{\numAucLogprob}{0.704}
+\newcommand{\numAucSelfReport}{0.628}
+\newcommand{\numAucSelfReportFalsified}{0.372}  % the falsification attack drives this below chance
+\newcommand{\numAucGap}{+0.076}
+\newcommand{\numAucCellsPowered}{19}
+\newcommand{\numAucCellsTotal}{42}  % frozen-roster cells; the rest are underpowered under R2
+\newcommand{\numAucBelowChanceCells}{18}
+\newcommand{\numSelfReportMissingMax}{0.330}  % R3: the self-report is sometimes simply absent
+
+% ---- S1 ----------------------------------------------------------
+\newcommand{\numCompNeffBest}{2.45}
+\newcommand{\numCompNeffWorst}{1.38}
+\newcommand{\numCompRangeGsmk}{0.021}  % swarm-accuracy range across 3-model subsets
+\newcommand{\numCompBestGainGsmk}{+0.013}  % best subset's gain over its own best single model
+\newcommand{\numCompRangeMathfive}{0.170}  % swarm-accuracy range across 3-model subsets
+\newcommand{\numCompBestGainMathfive}{-0.140}  % best subset's gain over its own best single model
+\newcommand{\numCompRangeMmlu}{0.103}  % swarm-accuracy range across 3-model subsets
+\newcommand{\numCompBestGainMmlu}{+0.007}  % best subset's gain over its own best single model
+\newcommand{\numCompRangeMedqa}{0.285}  % swarm-accuracy range across 3-model subsets
+\newcommand{\numCompBestGainMedqa}{+0.018}  % best subset's gain over its own best single model
+\newcommand{\numCompRangeBoolq}{0.045}  % swarm-accuracy range across 3-model subsets
+\newcommand{\numCompBestGainBoolq}{+0.015}  % best subset's gain over its own best single model
+\newcommand{\numCompRangeArc}{0.043}  % swarm-accuracy range across 3-model subsets
+\newcommand{\numCompBestGainArc}{+0.010}  % best subset's gain over its own best single model
+\newcommand{\numCompSubsetsThree}{35}  % 3-model subsets of the frozen roster
+\newcommand{\numCompSubsetsFive}{21}  % 5-model subsets of the frozen roster
+\newcommand{\numCompNeffVsAccMean}{-0.934}  % Spearman: N_eff against mean roster accuracy
+\newcommand{\numCompAccVsNeff}{-0.506}  % Spearman: swarm accuracy against N_eff
+\newcommand{\numCompAccVsAccMean}{+0.658}

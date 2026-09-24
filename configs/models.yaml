@@ -1,0 +1,450 @@
+# Model registry for AIP.
+#
+# HARDWARE. Single NVIDIA H100 NVL, 95830 MiB board / 93.10 GiB usable
+# (torch.cuda.mem_get_info). This SUPERSEDES the L4 (22.49 GiB) regime; under
+# RULE 1 every L4-era result is void and no number from it may be mixed with a
+# number measured here.
+#
+# RESIDENCY IS SEQUENTIAL AND THERE IS NO OTHER MODE. One model is resident at a
+# time (load, generate, del + torch.cuda.empty_cache(), next); co-resident mode
+# was removed from the code, not merely defaulted off, so that no config can
+# assume models share the device. Under sequential residency
+# `gpu_memory_utilization` means "fraction of the device this model may use while
+# it is the resident model", so the <= 0.90 budget is per model, not a sum. Every
+# entry now sits at that ceiling: the values were originally sized to each
+# model's footprint back when co-residency was still conceivable, and since only
+# one model is ever resident, a lower number only shrinks the KV cache and the
+# achievable batch size. Raised 2026-09-20 for the MX pipeline runs, which are
+# generation-bound. This changes throughput, not outputs -- batch composition
+# cannot move a logprob while VLLM_BATCH_INVARIANT is on, which is exactly the
+# property Phase 0 verified. The
+# larger card does not change this: design principle 1 caches all inference to
+# disk in Phase A and every later phase reads that cache, so co-residency would
+# buy wall-clock only, at the cost of a mode the config can get wrong.
+#
+# bf16 ONLY. No quantised checkpoints anywhere in the study: quantisation shifts
+# the token logprob distribution, which is both the confidence surface the
+# attacks target and the error-correlation structure Phase 2 measures.
+#
+# SAMPLING IS EXPLICIT, NEVER INHERITED. Every entry states temperature, top_p
+# and top_k. FIVE of the seven checkpoints ship a `generation_config.json` that
+# would otherwise truncate the sampling distribution:
+#     gemma4_31b        temperature 1.0, top_p 0.95, top_k 64
+#     qwen38_27b        temperature 1.0, top_p 0.95, top_k 20
+#     granite42_30b     temperature 1.0, top_p 0.95
+#     olmo3_32b_think   temperature 0.6, top_p 0.95
+#     llama32_3b        temperature 0.6, top_p 0.90
+# (ministral3_14b and phi4_mini_reasoning ship no sampling overrides.)
+# At temperature 0 vLLM decodes greedily and both nucleus parameters are inert.
+# They bind on the temperature-0.7 GSM8K second pass, which is precisely the run
+# that feeds the within-model correlation estimate -- a silently inherited
+# top_k=64 there would truncate the resample and bias phi.
+#
+# THINKING MODES. Four entries are reasoning-capable. `encode_messages` passes
+# `enable_thinking=False`, and every roster template accepts the kwarg, so the
+# hybrid models emit a closed empty thought block and spend their budget on the
+# answer. Verified by rendering each template:
+#     qwen38_27b        "<think>\n\n</think>"        suppressed
+#     granite42_30b     "<think></think>"           suppressed
+#     gemma4_31b        "<|channel>thought<channel|>" suppressed
+#     olmo3_32b_think   "<think>" LEFT OPEN          NOT suppressible
+# Olmo-3-*-Think is a dedicated reasoning checkpoint: thinking is the model, not
+# a mode. phi4_mini_reasoning renders no thought block but reasons in its
+# completion. Since the X3 amendment every entry answers at 3072, so the
+# answer budget no longer splits by thinking mode; only the SELF-REPORT budget
+# still does (512 for the reasoning entries, 16 for the rest). Qwen3.8's
+# template defaults to reasoning_effort
+# 'xhigh' when thinking is left on; it must not be.
+#
+# `arch` mirrors each checkpoint's config.json and exists so the KV cache can be
+# sized before anything is downloaded. scripts/preflight.py re-fetches these
+# values from the Hub and fails if they disagree with what is recorded here.
+#
+# KV ARITHMETIC ON HYBRID-ATTENTION MODELS. `kv_bytes_per_token` charges every
+# layer at full-attention cost. Three entries are hybrid and therefore cost
+# strictly LESS than recorded, so the fit check is conservative, never optimistic:
+#     qwen38_27b        16 of 64 layers full attention, 48 linear (constant state)
+#     gemma4_31b        10 of 60 layers full attention, 50 sliding (window 1024)
+#     olmo3_32b_think   16 of 64 layers full attention, 48 sliding (window 4096)
+# Olmo-3's sliding window equals max_model_len, so for that entry the uniform
+# figure is exact rather than merely conservative. Every model clears the slack
+# floor by >= 28 GiB under the conservative figure, so nothing in this study
+# depends on refining it; if max_model_len is ever raised, revisit this note.
+
+# X3 GENERATION BUDGET AMENDMENT, 2026-09-20. Every `generation.max_tokens`
+# below is 3072. It was previously 640 for the non-reasoning entries
+# (gemma4_31b, granite42_30b, ministral3_14b, llama32_3b, ministral_8b,
+# olmo2_7b) and 2048 for the reasoning entries (qwen38_27b, olmo3_32b_think,
+# phi4_mini_reasoning). Those values truncated 1,036 of 13,500 cached
+# generations, and 944 of them carried an answer the extractor manufactured out
+# of reasoning that never reached a conclusion -- 35.1% of MATH-500. See
+# results/truncation_audit_main_cache.md and the X3 entry in results/claims.md.
+#
+# 3072 is derived from context headroom, not from the observed length
+# distribution. The finisher distribution is censored exactly where it matters:
+# in a cell that truncated 68% of the time, the finishers' p99 sits just under
+# the old cap and says nothing about where the real tail ends. What is not
+# circular is the context window. The longest prompt in the study is 826 tokens
+# (BoolQ); allowing 1.15x for the chat templates not directly measured and 64
+# tokens of safety leaves 3072 inside max_model_len 4096 for every benchmark.
+# As a check rather than a derivation, 3072 is at least 1.5x the largest
+# finisher p99 in every benchmark (the worst is MATH-500 at 2025).
+#
+# A larger cap is close to free: at temperature 0 a model that stops early costs
+# exactly what it cost before, so the budget is spent only by the generations
+# that were being cut off.
+
+# ROSTER FROZEN 2026-09-02. Seven models, seven labs, five tiers. No additions,
+# swaps, or opportunistic upgrades from here regardless of what releases: the
+# cache, the correlation structure, and every claim downstream are properties of
+# THIS population, and changing it silently would invalidate all of them. A
+# roster change after this point requires re-running Phase 1 from scratch.
+#
+#   tier            model                 lab
+#   strong          gemma4_31b            Google
+#   strong          granite42_30b         IBM
+#   strong          qwen38_27b            Alibaba
+#   reasoning       phi4_mini_reasoning   Microsoft
+#   reasoning       olmo3_32b_think       AI2 (also the open-data slot)
+#   mid             ministral3_14b        Mistral
+#   weak/fast       llama32_3b            Meta lineage (PRIMARY ADVERSARY, Phase 4)
+#
+# Each entry carries its `tier` explicitly below so the roles are data rather
+# than prose, and so an analysis can group by tier without re-deriving it.
+
+residency: sequential
+max_total_utilization: 0.90
+min_slack_gib: 4.0
+
+models:
+
+  # ---- strong tier ------------------------------------------------------
+
+  qwen38_27b:
+    hf_id: Qwen/Qwen3.8-27B
+    tier: strong
+    arm: frozen
+    role: reasoning_generalist
+    dtype: bfloat16
+    gpu_memory_utilization: 0.90
+    max_model_len: 4096
+    params_b: 27.781427952
+    arch: { n_layers: 64, n_kv_heads: 4, head_dim: 256 }
+    limit_mm_per_prompt: { image: 0, video: 0 }
+    gated: false
+    enabled: true
+    generation:
+      temperature: 0.0
+      top_p: 1.0
+      top_k: -1
+      max_tokens: 3072
+      logprobs: 0
+      confidence_max_tokens: 512
+    notes: >-
+      Strong tier, Alibaba. 51.75 GiB of bf16 weights + 1.00 GiB KV at 4096 =
+      52.75 GiB, slack 40.35 GiB; utilization 0.70 leaves the resident model
+      65.2 GiB, comfortably above need. Hybrid attention: `layer_types` is 48
+      linear_attention and 16 full_attention at full_attention_interval 4, so
+      the recorded KV figure overcharges by roughly 4x (see header). Multimodal
+      checkpoint (Qwen3_5ForConditionalGeneration, vision_config present,
+      language_model_only false); this study sends text-only prompts, and the
+      vision tower's weights are already inside the params_b total.
+
+  gemma4_31b:
+    hf_id: google/gemma-4-31B-it
+    tier: strong
+    arm: frozen
+    role: instruct_generalist_strong
+    dtype: bfloat16
+    gpu_memory_utilization: 0.90
+    max_model_len: 4096
+    params_b: 31.273088876
+    arch: { n_layers: 60, n_kv_heads: 16, head_dim: 256 }
+    limit_mm_per_prompt: { image: 0, audio: 0 }
+    # From this checkpoint's own per_layer_config: the 10 full-attention
+    # layers are (head_dim 512, 4 KV heads); the 50 sliding layers keep the
+    # config's own (256, 16). See ModelEntry.hf_text_config_overrides.
+    hf_text_config_overrides: { global_head_dim: 512, num_global_key_value_heads: 4 }
+    gated: false
+    enabled: true
+    generation:
+      temperature: 0.0
+      top_p: 1.0
+      top_k: -1
+      max_tokens: 3072
+      logprobs: 0
+      confidence_max_tokens: 16
+    notes: >-
+      Strong tier, Google. THE `-it` CHECKPOINT, deliberately: plain
+      `google/gemma-4-31B` is the BASE model and ships no chat template at all --
+      not in tokenizer_config, not in processor_config, and there is no
+      chat_template.jinja in the repo. It cannot be prompted in the instruction
+      form every benchmark here uses. Apache-2.0 and UNGATED, verified by an
+      unauthenticated API read; no licence acceptance and no HF_TOKEN needed,
+      contrary to the usual Gemma release pattern. 58.25 GiB weights + 3.75 GiB
+      KV = 62.00 GiB, slack 31.10 GiB. Unlike the base checkpoint (whose 32.68B
+      total carried a non-bf16 remainder), the `-it` repo is 31.273B and wholly
+      BF16. Hybrid attention: 50 of 60 layers sliding at window 1024, 10 full.
+      Multimodal (vision + audio); text-only prompts here. Its chat template is
+      channel-structured (`<|channel>thought`), which is unlike every other entry
+      -- the dry-run extraction gate is the check that this parses.
+      ARCH BLOCK IS THE GLOBAL VIEW, AND DELIBERATELY SO. This checkpoint is
+      genuinely heterogeneous: `per_layer_config` gives 50 sliding layers at
+      (head_dim 256, 16 KV heads) and 10 full-attention layers at (head_dim 512,
+      4 KV heads). True KV is therefore 880 KiB/token (3.44 GiB at 4096), while
+      the recorded 60x16x256 gives 960 KiB/token (3.75 GiB) -- an OVERestimate,
+      so the fit check stays conservative. The global values are kept here
+      because they are what preflight can re-fetch and compare against; the real
+      per-layer geometry is recorded in this note instead. Note that both sides
+      of preflight's `arch match` are global values for this entry, so that
+      check confirms agreement with config.json, not with the per-layer truth.
+
+  olmo3_32b_think:
+    hf_id: allenai/Olmo-3-32B-Think
+    tier: reasoning
+    arm: frozen
+    role: open_data_reasoner
+    dtype: bfloat16
+    gpu_memory_utilization: 0.90
+    max_model_len: 4096
+    params_b: 32.233522176
+    arch: { n_layers: 64, n_kv_heads: 8, head_dim: 128 }
+    # transformers 5.16.1 moved rope config into a per-attention-type
+    # `rope_parameters` map, so `config.rope_theta` -- which vLLM 0.19.1's
+    # olmo2.py reads directly -- is absent and the engine dies on KeyError.
+    # Both attention types declare the same theta, 500000, so there is one value
+    # to restore and no ambiguity about which.
+    #
+    # rope_scaling is nulled deliberately. The full-attention layers declare YaRN
+    # with original_max_position_embeddings 8192; this study runs at
+    # max_model_len 4096, BELOW that window, so the extension is inactive and
+    # plain RoPE at theta 500000 is exactly what those layers should use. If
+    # max_model_len is ever raised above 8192 this must be revisited, because
+    # then the scaling would genuinely apply.
+    hf_text_config_overrides: { rope_theta: 500000, rope_scaling: null }
+    gated: false
+    enabled: true
+    generation:
+      temperature: 0.0
+      top_p: 1.0
+      top_k: -1
+      max_tokens: 3072
+      logprobs: 0
+      confidence_max_tokens: 512
+    notes: >-
+      Reproducibility tier, AI2. REPLACES olmo2_7b: fully open pretraining data
+      and weights, and a lineage independent of Qwen, Gemma, Phi, Llama and
+      Mistral, which is what the cross-family decorrelation analysis is built to
+      exploit. 60.04 GiB weights + 1.00 GiB KV = 61.04 GiB, slack 32.06 GiB.
+      config.json carries no `head_dim`; 128 is the derived hidden_size /
+      num_attention_heads = 5120 / 40, which is what preflight also computes.
+      A *Think* checkpoint: it emits a reasoning block before the answer, so it
+      gets the reasoning tier's 512-token self-report budget rather than the 16 a
+      non-reasoning model needs. Its answer budget is the X3-amended 3072, which
+      every entry now shares.
+
+  granite42_30b:
+    hf_id: ibm-granite/granite-4.2-30b
+    tier: strong
+    arm: frozen
+    role: instruct_generalist_strong
+    dtype: bfloat16
+    gpu_memory_utilization: 0.90
+    max_model_len: 4096
+    params_b: 29.276770304
+    arch: { n_layers: 64, n_kv_heads: 8, head_dim: 128 }
+    gated: false
+    enabled: true
+    generation:
+      temperature: 0.0
+      top_p: 1.0
+      top_k: -1
+      max_tokens: 3072
+      logprobs: 0
+      confidence_max_tokens: 16
+    notes: >-
+      Strong tier, IBM -- the seventh lab, and the one the L4 registry only ever
+      listed as a candidate. 54.53 GiB weights + 1.00 GiB KV = 55.53 GiB, slack
+      37.57 GiB. GraniteForCausalLM, text-only, wholly BF16 in the main repo; the
+      fp8 / mxfp4 / nvfp4 siblings are excluded by the bf16-only rule.
+      config.json carries no `head_dim`; 128 is the derived hidden_size /
+      num_attention_heads = 4096 / 32, which is what preflight also computes.
+      Hybrid-reasoning: its template emits a closed empty `<think></think>` under
+      enable_thinking=False, so it takes the non-reasoning tier's 16-token
+      self-report budget. Its answer budget is the X3-amended 3072.
+
+  # ---- mid tier ---------------------------------------------------------
+
+  ministral3_14b:
+    hf_id: mistralai/Ministral-3-14B-Instruct-2512-BF16
+    tier: mid
+    arm: frozen
+    role: instruct_generalist
+    dtype: bfloat16
+    gpu_memory_utilization: 0.90
+    max_model_len: 4096
+    params_b: 13.945031680
+    arch: { n_layers: 40, n_kv_heads: 8, head_dim: 128 }
+    limit_mm_per_prompt: { image: 0 }
+    gated: false
+    enabled: true
+    generation:
+      temperature: 0.0
+      top_p: 1.0
+      top_k: -1
+      max_tokens: 3072
+      logprobs: 0
+    notes: >-
+      Mid tier, Mistral. REPLACES ministral_8b. The `-BF16` repo, and that suffix
+      is load-bearing: the headline `mistralai/Ministral-3-14B-Instruct-2512` is
+      an FP8 checkpoint (Hub safetensors reports BF16 1.78B + F8_E4M3 12.16B) and
+      is excluded outright by the bf16-only rule, since quantisation shifts the
+      token logprob distribution that is both the confidence surface and the
+      error-correlation structure. This repo is 13.945B wholly BF16. 25.97 GiB
+      weights + 0.62 GiB KV = 26.60 GiB, slack 66.50 GiB. Multimodal
+      (Mistral3ForConditionalGeneration, vision tower); text-only prompts here.
+      Ships no sampling overrides. Secondary adversarial generator in Phase 4.
+      vLLM uses MistralCommonTokenizer for this family, which is why
+      `encode_messages` tokenizes the template directly rather than rendering to
+      a string -- a rendered `<s>` becomes literal text and the model emits an
+      immediate EOS.
+
+  phi4_mini_reasoning:
+    hf_id: microsoft/Phi-4-mini-reasoning
+    tier: reasoning
+    arm: frozen
+    role: compact_reasoner
+    dtype: bfloat16
+    gpu_memory_utilization: 0.90
+    max_model_len: 4096
+    params_b: 3.83602176
+    arch: { n_layers: 32, n_kv_heads: 8, head_dim: 128 }
+    gated: false
+    enabled: true
+    generation:
+      temperature: 0.0
+      top_p: 1.0
+      top_k: -1
+      max_tokens: 3072
+      confidence_max_tokens: 512
+      logprobs: 0
+    notes: >-
+      Reasoning tier, Microsoft. Retained from the L4 registry. Budgets are not
+      cosmetic for this entry: a single global cap truncated it mid-thought and
+      cost 3/5 of its GSM8K answers in the first L4 dry run, and its 2048 budget
+      went on to truncate 18.5% of its cached generations on this regime, the
+      worst rate in the roster -- which is what X3 raised to 3072. Its
+      self-report budget stays at the reasoning tier's 512.
+      Ships no sampling overrides in generation_config.json.
+
+  # ---- weak / fast tier -------------------------------------------------
+
+  llama32_3b:
+    hf_id: unsloth/Llama-3.2-3B-Instruct
+    tier: weak_fast
+    arm: frozen
+    role: compact_instruct
+    dtype: bfloat16
+    gpu_memory_utilization: 0.90
+    max_model_len: 4096
+    params_b: 3.212749824
+    arch: { n_layers: 28, n_kv_heads: 8, head_dim: 128 }
+    gated: false
+    enabled: true
+    generation:
+      temperature: 0.0
+      top_p: 1.0
+      top_k: -1
+      max_tokens: 3072
+      logprobs: 0
+    notes: >-
+      Weak/fast tier, Meta lineage via the ungated `unsloth` mirror: the official
+      meta-llama repo returns HTTP 403 for the supplied token (valid token, but
+      the account is not on Meta's authorized list). Weights are identical.
+      PRIMARY adversarial generator in Phase 4 -- on the L4 regime it complied
+      with the always_wrong injection 100% of the time where Ministral complied
+      only 29%, and that compliance is why it holds the adversary slot.
+
+  # ---- weak-tier arm (NOT the frozen roster) ----------------------------
+  #
+  # ministral_8b and olmo2_7b were retired when the roster moved to Ministral 3
+  # 14B and OLMo 3 32B. They are re-enabled here for ONE purpose: a weak-swarm
+  # comparison arm, alongside llama32_3b and phi4_mini_reasoning.
+  #
+  # The question they answer is not "are small models good" but whether the
+  # inversion gain DEPENDS ON THE COMPETENCE OF THE HONEST MAJORITY. Phase 3's
+  # ablation shows inversion contributing ~0.27 at f=0.7 on the strong roster; a
+  # weaker swarm has more honest errors for inversion to correct, so the gain
+  # should be LARGER. If it is not, the mechanism story is wrong, and that is
+  # worth more than a confirmation.
+  #
+  # THE FROZEN ROSTER IS UNCHANGED. Headline results stay on the seven models
+  # frozen 2026-09-02; this arm is reported separately and never pooled with
+  # them. Ten of forty-two strong-roster cells are at or above 0.93 accuracy, so
+  # the weak arm also escapes a ceiling the headline set cannot.
+
+  ministral_8b:
+    hf_id: mistralai/Ministral-8B-Instruct-2410
+    tier: weak_fast
+    arm: weak_tier
+    role: instruct_generalist
+    dtype: bfloat16
+    gpu_memory_utilization: 0.90
+    max_model_len: 4096
+    params_b: 8.019808256
+    arch: { n_layers: 36, n_kv_heads: 8, head_dim: 128 }
+    gated: false
+    enabled: true
+    generation:
+      temperature: 0.0
+      top_p: 1.0
+      top_k: -1
+      max_tokens: 3072
+      logprobs: 0
+    notes: >-
+      SUPERSEDED by ministral3_14b (Ministral 3, December 2512 release) at the
+      scale the H100 allows. Fits easily here; kept disabled and on record only
+      so the roster change is legible.
+
+  olmo2_7b:
+    hf_id: allenai/OLMo-2-1124-7B-Instruct
+    tier: weak_fast
+    arm: weak_tier
+    role: open_data_instruct
+    dtype: bfloat16
+    gpu_memory_utilization: 0.90
+    max_model_len: 4096
+    params_b: 7.300751360
+    arch: { n_layers: 32, n_kv_heads: 32, head_dim: 128 }
+    gated: false
+    enabled: true
+    generation:
+      temperature: 0.0
+      top_p: 1.0
+      top_k: -1
+      max_tokens: 3072
+      logprobs: 0
+      confidence_max_tokens: 16
+    notes: >-
+      SUPERSEDED by olmo3_32b_think, which holds the same open-data
+      reproducibility slot at the scale the H100 now allows. Fits easily here
+      (13.60 GiB weights, full multi-head attention so 512 KiB/token of KV);
+      kept disabled and on record only so the roster change is legible.
+
+  # ---- disabled: gated, token not authorized ----------------------------
+
+  llama32_3b_official:
+    hf_id: meta-llama/Llama-3.2-3B-Instruct
+    role: compact_instruct
+    arm: retired
+    dtype: bfloat16
+    gpu_memory_utilization: 0.90
+    max_model_len: 4096
+    params_b: 3.212749824
+    arch: { n_layers: 28, n_kv_heads: 8, head_dim: 128 }
+    gated: true
+    enabled: false
+    notes: >-
+      Fits easily; blocked only on gated-repo authorization (HTTP 401 for the
+      supplied token as of 2026-09-02). Accept the licence on the model page,
+      then enable this entry and disable llama32_3b.

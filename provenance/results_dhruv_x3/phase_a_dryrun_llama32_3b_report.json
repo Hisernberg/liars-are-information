@@ -1,0 +1,26 @@
+{
+  "cells": [
+    {
+      "model": "llama32_3b",
+      "benchmark": "gsm8k",
+      "n": 5,
+      "accuracy": 1.0,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.9505021387926677,
+        null
+      ],
+      "self_report_failures": [],
+      "determinism_ok": true,
+      "generate_seconds": 2.976226362050511,
+      "confidence_seconds": 0.048579598020296544,
+      "tasks_per_second": 1.6529985942909724,
+      "error": null
+    }
+  ],
+  "load_times": {
+    "llama32_3b": 36.13713116501458
+  }
+}

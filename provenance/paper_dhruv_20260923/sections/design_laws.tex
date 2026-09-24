@@ -1,0 +1,217 @@
+\section{Swarm-Level Design Laws}
+\label{sec:designlaws}
+
+Three properties of an honest swarm have to be measured before any defence is
+evaluated, because all three appear inside the mechanism as constants and all
+three constrain what a swarm can do at all. Each turns out to be a design law
+with a counter-intuitive edge: correlated failure is the default rather than the
+exception, decorrelation does not buy accuracy, and what an adversary can
+coordinate on is a property of the answer space rather than of the adversary.
+The first of the three is established prior art in the evaluation-panel
+setting~\cite{judgecorr,panelcorr,hivemind}; we confirm it in an adversarial
+swarm and extend it, and we are explicit below about which parts are which.
+
+Read together they make one claim: \emph{an LLM swarm's ceiling on honest error
+is correlation, not competence}, which leaves adversarial coherence as the only
+structure a swarm can exploit that its honest members do not already share.
+
+\subsection{Law 1: correlated failure is the default}
+
+\textbf{This law is not ours to claim}~\cite{judgecorr,panelcorr,hivemind}
+(\S\ref{sec:related}). What follows confirms the ceiling in an adversarial swarm
+rather than an evaluation panel, and extends it in two ways the adversarial
+setting forces.
+
+\emph{The extension that matters for deployment} is which pair is compared. A
+panel is assembled from distinct models; a deployed swarm is more likely built by
+replicating one, and replication is the more correlated case: error correlation
+between two agents running the \emph{same} model at different sampling
+temperatures is $\numWithinModelPhi$ against $\numCrossModelPhi$ between
+different models, a factor of $\numPhiRatio$. The full pairwise matrix is in the
+artifact. Replicating a model does not replicate an independent opinion, and it
+is worse than mixing by more than half again. \textbf{[C1]}
+
+\emph{The extension that matters for a defence} is that the quantity becomes
+predictive. The multiclass attenuation law (Section~\ref{sec:theory}) is exact at
+$C=2$ and validated against that exactness, so the correlation structure is
+estimated blind at run time without labels --- which is what lets it serve as the
+constant an inversion gate fires against.
+
+In agent counts: a homogeneous swarm of $\numAgents$ agents is worth
+$\numNeffHomMin$--$\numNeffHomMax$ independent agents, mean $\numNeffHomMean$;
+the best two-model mixture reaches $\numNeffHetMax$. A ten-agent homogeneous
+swarm is closer to one epistemic agent than to ten --- the swarm analogue of nine
+judges being worth two votes. \textbf{[C2]}
+
+\textbf{A basis restriction.} Only GSM8K carries a measured within-model
+correlation, since only there did we sample the same model twice; elsewhere the
+mixed-swarm figures use cross-model correlation alone and are \emph{upper bounds}
+on $N_{\mathrm{eff}}$. The largest, $\numNeffUpperBoundMax$, comes from a
+different estimator on an excluded benchmark and is not comparable.
+
+\subsection{Law 2: decorrelation does not buy accuracy}
+
+The obvious reading of Law 1 is that a practitioner should maximise
+$N_{\mathrm{eff}}$. We tested that directly and it is wrong.
+
+For every $\numCompSubsetsThree$ three-model and $\numCompSubsetsFive$
+five-model subset we build a $\numAgents$-agent swarm split as evenly as
+possible, average $\rho$ over the real pair census, and compute both
+$N_{\mathrm{eff}}$ and plurality accuracy over the cached answers
+(Table~\ref{tab:composition}). Every distinct assignment of a surplus agent is
+enumerated and averaged, since the heavier model wins any three-way disagreement
+by weight alone.
+
+$N_{\mathrm{eff}}$ turns out to be close to a restatement of roster weakness ---
+Spearman $\numCompNeffVsAccMean$ against mean roster accuracy, with every
+diversity-flavoured predictor losing its association once the mean is partialled
+out --- and, more usefully, \textbf{it is negatively associated with swarm
+accuracy}: $\numCompAccVsNeff$ at $k=3$, against $\numCompAccVsAccMean$ for mean
+accuracy. Maximising effective swarm size selects \emph{against} what a
+practitioner wants. What survives partialling is accuracy \emph{spread}, partial
+Spearman about $+0.7$: among rosters of equal average strength, prefer unequal
+members --- a second-order effect on top of ``use accurate models''.
+
+\textbf{Family diversity cannot be assessed here}: all $\numModels$ models come
+from $\numModels$ labs, so every $k$-subset contains exactly $k$ lineages and the
+predictor is constant by construction --- a limitation of the roster, not
+evidence that lineage is irrelevant.
+
+\begin{table}[t]
+\centering
+\caption{Composition guidance. Swarm accuracy range across all three-model
+subsets, against the benchmark's measurement floor, and the best subset's gain
+over its own strongest single member. Composition only moves the outcome where
+the benchmark leaves headroom --- and no composition beats its best single model
+by a detectable margin anywhere.}
+\label{tab:composition}
+\small
+\begin{tabular}{@{}lrrl@{}}
+\toprule
+Benchmark & range & floor & best gain over best single \\
+\midrule
+MATH-500 & $\numCompRangeMathfive$ & $\numFloorMathfive$ & $\numCompBestGainMathfive$ \\
+MedQA    & $\numCompRangeMedqa$    & $\numFloorMedqa$    & $\numCompBestGainMedqa$ \\
+MMLU     & $\numCompRangeMmlu$     & $\numFloorMmlu$     & $\numCompBestGainMmlu$ \\
+BoolQ    & $\numCompRangeBoolq$    & $\numFloorBoolq$    & $\numCompBestGainBoolq$ \\
+ARC      & $\numCompRangeArc$      & $\numFloorArc$      & $\numCompBestGainArc$ \\
+GSM8K    & $\numCompRangeGsmk$     & $\numFloorGsmk$     & $\numCompBestGainGsmk$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Composition choice clears the floor on the three benchmarks with headroom and not
+on the three saturated ones; but on \emph{no} benchmark does the best composition
+beat its own strongest single member detectably (largest
+$\numCompBestGainMedqa$), and on MATH-500 every three-model composition is
+\emph{worse} than its best member by at least $\numCompBestGainMathfive$.
+
+This is the negative result we would keep if we could keep only one. With Law 1
+and the honest attractors it says an LLM swarm's ceiling on honest error is
+\textbf{correlation, not competence}: the agents fail together, into the same
+wrong answers, and adding more does not help because what is added is not
+independent. We searched every three- and five-model subset of the roster for an
+exception and found none.
+
+The consequence is direct: if honest pooling is capped, the only channel through
+which a swarm exceeds its best member is the structure honest agents do
+\emph{not} share --- adversarial coherence. That is what threshold-gated
+inversion spends, which is why the positive result here is about robustness
+rather than accuracy, and why an adversary that declines to be coherent defeats
+the mechanism by giving it nothing to spend. \textbf{[S1]}
+
+\subsection{Law 3: coordinatability is a property of the answer space}
+
+An adversary is exploitable only if it can be \emph{coherent}, which requires a
+lie rule its members compute identically from the question alone.
+
+We expected coordinatability to collapse on closed label spaces, reasoning that
+four-way multiple choice offers no shared rule for choosing \emph{which} wrong
+option to name. \textbf{The measurement runs the other way}: mean adversarial
+coherence is \emph{highest} on the most closed space --- $\numQhatBinaryMean$
+binary, $\numQhatMcMean$ four-way multiple choice, against
+$\numQhatOpenTextMean$ open text. A smaller answer space makes accidental
+agreement easier, not harder.
+
+What does collapse is the quantity a gate needs: the adversary's \emph{margin
+over honest agreement}. On four-way multiple choice the negation attack reaches
+$\hat q = \numMmluNegQhat$ against an honest receiver-conditioned floor of
+$\numMmluHonestFloor$, and no attack's interval clears that floor. On
+open-numeric answers the same attack reaches $\numGsmkNegQhat$ against a floor of
+$\numGsmkHonestFloor$ and does clear it. On a closed space there is no coherent
+channel \emph{relative to honest behaviour} for a gate to license inversion on.
+\textbf{[G2']}
+
+That floor is the gate's \emph{configured} constant rather than a measurement
+taken for the comparison, so it matters that the ordering survives either: the
+independently measured pooled value $\numHonestQMc$ exceeds it, which widens the
+margin the adversary fails to clear.
+
+\subsection{The constant the gate is calibrated on}
+
+The calibration constant is the rate at which two honest agents, both wrong, are
+wrong the \emph{same} way. Pooled across the powered four-way multiple-choice
+pairs it is $\numHonestQMc$ against a chance level of $\numMmluChanceQ$; on
+MATH-500, where the answer space is effectively open, it is
+$\numHonestQMathfive$. Honest agents on a closed space are close to twice as
+likely to collide on a wrong answer as chance predicts, and that is the entire
+reason a coherence-triggered inversion rule needs a gate at all. \textbf{[C3]}
+
+\textbf{Power, and why the estimate is pooled.} These are per-pair estimates
+conditioned on both agents being wrong, so the sample size is jointly-wrong
+items, not tasks. MATH-500 has all twenty-one pairs above the $n \geq 30$
+threshold; the multiple-choice benchmarks have almost none individually (MedQA
+eight, MMLU one, ARC none), so the constant is pooled over the
+$\numHonestQMcPairs$ powered pairs across them, $\numHonestQMcItems$
+jointly-wrong items. An earlier version quoted the MMLU all-pairs mean, which
+rests on a single powered pair; it is withdrawn. Figure~\ref{fig:evasion} draws
+underpowered pairs separately for the same reason.
+
+\subsection{Law 4: the broadcast contract decides what a receiver can believe}
+\label{sec:protocol}
+
+What an agent is obliged to broadcast is a security decision, not an interface
+detail. Every confidence-weighted defence in the literature reads a number the
+sender supplies; each broadcast here carries two, the mean token logprob over the
+answer span and a number the model was asked to state. A prompt-injected agent
+can assert any self-report but cannot easily inflate the logprob of a span it did
+not generate.
+
+As a predictor of its own correctness the logprob surface reaches ROC AUC
+$\numAucLogprob$ and the self-report $\numAucSelfReport$, a gap of $\numAucGap$,
+over the $\numAucCellsPowered$ of $\numAucCellsTotal$ frozen-roster cells clearing
+the power floor (R2: at least thirty wrong answers). The weak-tier arm, reported
+separately, shows the same ordering.
+
+The gap is not the argument --- it is real but modest. The argument is what
+happens under attack. The \texttt{falsified\_confidence} attack inverts the
+self-report and leaves answer and logprob byte-identical, so anything it changes
+is attributable to that channel. It drives self-report discrimination from
+$\numAucSelfReport$ to $\numAucSelfReportFalsified$ --- \emph{below chance}, on
+$\numAucBelowChanceCells$ of $\numAucCellsPowered$ cells. A receiver weighting on
+that surface is not merely uninformed, it is anti-informed. The logprob surface is
+unmoved exactly: AIP's accuracy under this attack differs from its control by
+$\numFalsifiedGsmkAip$ on GSM8K and $\numFalsifiedMmluAip$ on MMLU --- an
+implementation identity rather than an estimate below the floor, since the gate
+never reads the self-report. \textbf{[F1, P1]}
+
+A third failure mode needs no adversary: reasoning models frequently emit no
+parseable number on multiple choice, and the self-report is missing on up to
+$\numSelfReportMissingMax$ of rows in the worst powered cell. We report that
+rather than prompting until compliance improves, because the non-compliance is
+the finding --- a field a well-behaved agent may omit and a misbehaving one may
+fabricate is a weaker commitment than one derived from tokens already emitted.
+\textbf{Broadcast both surfaces and weight on the logprob}: the one
+recommendation here that the gate-aware adversary does not reach, because it
+rests on no coherence statistic.
+
+\subsection{Blind estimator validation}
+
+The multiclass law beats the binary law wherever the answer space is not binary
+(MATH-500 $\numMaeMathfiveBinary \to \numMaeMathfiveMc$ mean absolute error,
+GSM8K $\numMaeGsmkBinary \to \numMaeGsmkMc$), and on BoolQ, where $C=2$ makes the
+binary law exact by construction, it recovers the same answer,
+$\numMaeBoolqMc$ --- the control condition for the estimator. \textbf{[C4]} The
+exception is MMLU, where it does \emph{not} beat the binary law
+($\numMaeMmluBinary$ against $\numMaeMmluMc$); we have no account of why and do
+not claim the blind estimator is validated there.

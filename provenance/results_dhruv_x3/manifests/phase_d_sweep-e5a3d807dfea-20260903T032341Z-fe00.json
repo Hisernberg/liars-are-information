@@ -1,0 +1,49 @@
+{
+  "run_id": "phase_d_sweep-e5a3d807dfea-20260903T032341Z-fe00",
+  "phase": "phase_d_sweep",
+  "config_hash": "e5a3d807dfea",
+  "config": {
+    "resamples": 500,
+    "attacks": [
+      "always_wrong",
+      "semantic_negation",
+      "semantic_hallucination",
+      "rushing",
+      "falsified_confidence",
+      "burst",
+      "noise"
+    ]
+  },
+  "seeds": {
+    "sweep": 20250825
+  },
+  "git_commit": "397fdb461cb3d680e3e90cbeac497f23d25aa0e6-dirty",
+  "started_at": "2026-09-03T03:23:41.850982+00:00",
+  "finished_at": "2026-09-03T03:23:41.896640+00:00",
+  "status": "ok",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-190-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu02",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA H100 NVL",
+      "memory_total_mib": 95830,
+      "driver": "570.195.03"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "5.16.1",
+    "vllm": "0.19.1"
+  },
+  "notes": {
+    "inference_run": false,
+    "n_rows": 3744
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "benchmark": "medqa",
+  "model": "llama32_3b",
+  "n_rows": 200,
+  "n_tasks": 200,
+  "updated_at": "2026-09-20T15:40:16.573892+00:00",
+  "attack": "semantic_negation",
+  "hf_id": "unsloth/Llama-3.2-3B-Instruct",
+  "prompt_template_hash": "87665e55ae54",
+  "run_id": "x3_repair_adversarial-3df8f36a6704-20260920T150842Z-63f2",
+  "x3_truncated_rows": 1,
+  "x3_context_stale_rows": 0,
+  "x3_budget": 3072
+}

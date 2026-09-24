@@ -1,0 +1,57 @@
+{
+  "run_id": "phase_d-d860860045e7-20260826T091437Z-878f",
+  "phase": "phase_d",
+  "config_hash": "d860860045e7",
+  "config": {
+    "models": [
+      "llama32_3b",
+      "ministral_8b"
+    ],
+    "attacks": [
+      "always_wrong",
+      "semantic_negation",
+      "semantic_hallucination",
+      "rushing"
+    ],
+    "benchmarks": [
+      "gsm8k",
+      "math500",
+      "mmlu"
+    ],
+    "n_tasks": 100,
+    "projected_seconds": 1447.4810141138732
+  },
+  "seeds": {
+    "generation": 20250825
+  },
+  "git_commit": "537c6445769d75d7be0dfe0918fadb145c5571ad-dirty",
+  "started_at": "2026-08-26T09:14:37.696436+00:00",
+  "finished_at": "2026-08-26T09:34:03.535180+00:00",
+  "status": "ok",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-186-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu0",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA L4",
+      "memory_total_mib": 23034,
+      "driver": "550.127.08"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.2.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "4.57.6",
+    "vllm": "0.17.0"
+  },
+  "notes": {
+    "honest_caches_read_only": true,
+    "cache_root": "data/cache_adversarial",
+    "elapsed_seconds": 1165.7765665617771
+  }
+}

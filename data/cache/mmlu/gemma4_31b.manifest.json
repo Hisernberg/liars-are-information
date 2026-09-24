@@ -1,0 +1,19 @@
+{
+  "benchmark": "mmlu",
+  "model": "gemma4_31b",
+  "n_rows": 200,
+  "n_tasks": 200,
+  "updated_at": "2026-09-02T17:33:05.205008+00:00",
+  "prompt_template_hash": "bf465b1d542a",
+  "hf_id": "google/gemma-4-31B-it",
+  "dtype": "bfloat16",
+  "max_model_len": 4096,
+  "seed": 0,
+  "registry_hash": "8d5d82cd5e63",
+  "batch_invariant": true,
+  "sample_index": 0,
+  "temperature": 0.0,
+  "task_list_hash": "f20dc3815a41",
+  "run_id": "phase_a-f425fdae4744-20260902T171856Z-872b",
+  "dry_run": false
+}

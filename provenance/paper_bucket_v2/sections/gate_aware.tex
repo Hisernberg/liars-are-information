@@ -1,0 +1,97 @@
+\section{The Gate-Aware Adversary}
+\label{sec:gateaware}
+
+Every adversary so far has been oblivious to the defence. This one is not. It is
+given the published calibration constant---the honest-coincidence ceiling for the
+answer space---and it is asked to do the obvious thing: coordinate as much as it
+can without crossing it.
+
+\subsection{Construction}
+
+A bloc coordinating with probability $p$ and otherwise picking a wrong answer
+uniformly realises $q(p) = p^2 + (1-p)^2/(C-1)$, so sweeping $p$ sweeps $q$ and
+the adversary picks the $p$ whose $q$ does most damage while staying below the
+ceiling. The map is not monotone --- $q$ falls as $p$ rises from zero, reaches an
+interior minimum, then rises --- which is why the adversary has a genuine optimum
+rather than a corner solution, and why Figure~\ref{fig:evasion} plots points and
+not a curve.
+
+\subsection{The anchor is $f = \numEvasionAnchorF$}
+
+The anchor is the exact tie, and the choice has to be defended because the more
+dramatic numbers live elsewhere. At $f=0.7$ the Byzantine bloc is an outright
+majority and \emph{every} coherence level, independent lying included, drives
+accuracy toward zero; a collapse there cannot be attributed to the gate, and an
+evasion effect is not separable from numerical dominance. An earlier version of
+this work reported the $f=0.7$ attacker gain; it is withdrawn. At
+$f=\numEvasionAnchorF$ the outcome turns on whether the gate fires --- and, at
+that point only, on the normalisation of the adversary's own vote
+(Section~\ref{sec:evaluation}), so the sweep runs in the matched-parity condition
+and the confound is controlled rather than assumed away.
+
+\subsection{Result}
+
+The gate-aware adversary defeats AIP. At its optimum, $\hat q =
+\numEvasionQMedqa$, AIP-gated falls to $\numEvasionAccMedqa$ on MedQA against
+$\numEvasionCoherentMedqa$ under a fully coherent adversary---an attacker gain of
+$\numEvasionGainMedqa$, eight times the floor. On MMLU the same optimum yields
+$\numEvasionAccMmlu$ against $\numEvasionCoherentMmlu$, a gain of
+$\numEvasionGainMmlu$. \textbf{[G1]}
+
+The number that makes this more than an engineering setback is the optimum's
+location. The chance coherence for a four-option space is $1/(C-1) =
+\numEvasionChance$. The attacker's optimum sits at $\numEvasionQMedqa$:
+\textbf{below chance}. At its most damaging the adversary is not merely quieter
+than the calibrated ceiling---it is \emph{less} coherent than honest agents
+failing independently. Raising, lowering, smoothing or randomising a threshold
+cannot help, because there is no threshold on this axis that separates the
+attacker from honest disagreement. Section~\ref{sec:limits} makes that argument
+precisely.
+
+MATH-500 behaves differently and the difference is instructive. There the
+attacker's global optimum is a \emph{fully coherent} channel, not an evading one:
+the open-text ceiling of the answer space is high enough relative to achievable
+coherence that the gate is near-inert, and the adversary has nothing to evade.
+Its best below-ceiling attack yields $\numEvasionAccMathfive$, which is
+\emph{worse} for the attacker than coherence---a gain of
+$\numEvasionGainMathfive$. A low ceiling is not a structural defence.
+\textbf{[L1]}
+
+\subsection{Pre-registered mitigations}
+
+Three mitigations were specified, with success criteria committed to version
+control before any of them ran.
+
+\textbf{M1, soft gating.} Replace the hard binomial threshold with a logistic
+function of the coherence ratio, so that a channel just under the ceiling is
+partially inverted rather than fully trusted. Within the evasion band---the cells
+below the ceiling, which is where the residual attack lives---mean accuracy rises
+from $\numMitigHardBandMean$ to $\numMitigSoftBandMean$ and the worst case from
+$\numMitigHardBandWorst$ to $\numMitigSoftBandWorst$. This is a real improvement
+of about one and a half times the floor.
+
+Over the \emph{whole} attack space at the anchor, however, the improvement is
+$\numMitigHardMean$ to $\numMitigSoftMean$---exactly at the floor. Only the
+band-restricted statement is defensible, and M1 fails its pre-registered success
+criterion regardless: it does not bring the worst case anywhere near the
+committed target. \textbf{[D1]}
+
+\textbf{M2, threshold randomisation. Refuted, and undetectably so.} Randomising
+the threshold within a relative window was intended to deny the adversary a fixed
+target. It reads $\numMitigRandMean$ against the hard gate's
+$\numMitigHardMean$ over the whole space and $\numMitigRandBandMean$ against
+$\numMitigHardBandMean$ within the band. Both differences are far below the
+floor. Randomising a statistic that carries no signal buys no discrimination---in
+either direction. An earlier reading of this experiment called M2 ``actively
+harmful'' on the strength of a difference that was itself below the floor; that
+reading was wrong in the same way, and is withdrawn. \textbf{[D2]}
+
+\textbf{M3, both together.} Band mean $\numMitigBothBandMean$, worst case
+$\numMitigBothBandWorst$. Not separable from M1 alone.
+
+\textbf{Both M1 and M2 were initially inert}, returning results identical to the
+unmitigated baseline, and those identical results were briefly read as a finding.
+They were wiring bugs, caught by probe tests that assert variant activity before
+any verdict is read, and two published verdicts were retracted;
+Section~\ref{sec:limitations} gives the detail and why it belongs in the paper.
+\textbf{[R1]}

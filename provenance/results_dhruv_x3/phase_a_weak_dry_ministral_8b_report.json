@@ -1,0 +1,26 @@
+{
+  "cells": [
+    {
+      "model": "ministral_8b",
+      "benchmark": "gsm8k",
+      "n": 5,
+      "accuracy": 1.0,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.9938385974077624,
+        null
+      ],
+      "self_report_failures": [],
+      "determinism_ok": true,
+      "generate_seconds": 5.359787108027376,
+      "confidence_seconds": 0.08792895299848169,
+      "tasks_per_second": 0.9178158229961881,
+      "error": null
+    }
+  ],
+  "load_times": {
+    "ministral_8b": 42.34257345297374
+  }
+}

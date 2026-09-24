@@ -1,0 +1,20 @@
+{
+  "benchmark": "gsm8k",
+  "model": "olmo2_7b",
+  "n_rows": 500,
+  "n_tasks": 500,
+  "updated_at": "2026-09-20T12:08:29.956916+00:00",
+  "prompt_template_hash": "f9b756633e80",
+  "hf_id": "allenai/OLMo-2-1124-7B-Instruct",
+  "dtype": "bfloat16",
+  "max_model_len": 4096,
+  "seed": 0,
+  "registry_hash": "9855995a45f5",
+  "batch_invariant": true,
+  "sample_index": 0,
+  "temperature": 0.0,
+  "run_id": "x3_repair-4d518437d53e-20260920T120531Z-d794",
+  "x3_repaired_rows": 1,
+  "x3_budget": 3072,
+  "x3_control_drift": 0
+}

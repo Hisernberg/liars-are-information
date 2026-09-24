@@ -1,0 +1,72 @@
+[10/396] 46s
+[20/396] 122s
+[30/396] 162s
+[40/396] 190s
+[50/396] 252s
+[60/396] 286s
+[70/396] 317s
+[80/396] 344s
+[90/396] 354s
+[100/396] 384s
+[110/396] 406s
+[120/396] 450s
+[130/396] 482s
+[140/396] 532s
+[150/396] 544s
+[160/396] 571s
+[170/396] 590s
+[180/396] 621s
+[190/396] 636s
+[200/396] 669s
+[210/396] 689s
+[220/396] 741s
+[230/396] 765s
+[240/396] 815s
+[250/396] 835s
+[260/396] 855s
+[270/396] 887s
+[280/396] 909s
+[290/396] 923s
+[300/396] 953s
+[310/396] 970s
+[320/396] 1011s
+[330/396] 1032s
+[340/396] 1074s
+[350/396] 1085s
+[360/396] 1113s
+[370/396] 1122s
+[380/396] 1140s
+[390/396] 1148s
+[396/396] 1169s
+{
+  "study": "swarm",
+  "worlds": 396,
+  "methods": [
+    "self",
+    "majority",
+    "aip_gated",
+    "aip_trust_only",
+    "aip_soft",
+    "ds_full",
+    "ds_onecoin",
+    "race_noclone",
+    "race_rawclone",
+    "race_ms",
+    "race",
+    "race_full",
+    "race_capself",
+    "oracle_honest_majority",
+    "oracle_channel"
+  ],
+  "rows": 689040,
+  "elapsed_seconds": 1169.13,
+  "peak_rss_mib_parent": 419.0,
+  "peak_rss_mib_children": 269.4,
+  "processes": 4,
+  "python": "3.11.15",
+  "machine": "x86_64",
+  "cpu_count": 4,
+  "gpu_inference": false,
+  "inputs_sha256": "eff90400e30aa91e2157b05b8b3c08bcb9884a4a4171780e458df7d19a208ba4",
+  "code_sha256": "2ce4a027c6610089c29b2d37d689e2577eb335fd9f48094f243970cf53b726c7"
+}

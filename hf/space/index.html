@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liars Are Information — RACE</title>
+<style>
+  :root {
+    --bg: #fcfcfb; --surface: #ffffff; --ink: #0b0b0b; --ink-2: #52514e; --muted: #8a8985;
+    --line: #e6e5e1; --blue: #2a78d6; --red: #e34948; --orange: #eb6834;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141413; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #8f8e88;
+      --line: #2e2e2b; --blue: #3987e5; --red: #e66767; --orange: #d95926;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141413; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #8f8e88;
+    --line: #2e2e2b; --blue: #3987e5; --red: #e66767; --orange: #d95926;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 1080px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.15; margin: 0 0 8px; }
+  h2 { font-size: 1.25rem; margin: 40px 0 12px; }
+  p.lead { color: var(--ink-2); font-size: 1.08rem; max-width: 760px; }
+  a { color: var(--blue); }
+  video, img { width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); display: block; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  figure { margin: 0; }
+  figcaption { color: var(--ink-2); font-size: .92rem; margin-top: 6px; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 620px; font-variant-numeric: tabular-nums; }
+  th, td { padding: 10px 12px; text-align: right; border-bottom: 1px solid var(--line); }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--ink-2); font-weight: 600; font-size: .9rem; }
+  td.race { color: var(--blue); font-weight: 700; }
+  tr:last-child td { border-bottom: none; }
+  .note { color: var(--muted); font-size: .88rem; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink-2); font-size: .85rem; margin-right: 6px; }
+</style>
+</head>
+<body>
+<main>
+  <span class="pill">multi-agent LLMs</span><span class="pill">Byzantine robustness</span><span class="pill">no labels</span>
+  <h1>Liars are information</h1>
+  <p class="lead">When some agents in a multi-agent LLM system lie, honest agents can still use what the liars say, as long as the lies depend on the truth. An agent that never tells the truth rules out one answer every time it speaks. <b>RACE</b> (Receiver-Anchored Channel Estimation) learns this from each honest agent's own unlabeled history, anchored on the one fact the agent knows: that it is itself honest.</p>
+
+  <h2>One honest receiver among seven liars</h2>
+  <video src="media/swarm_mmlu_gateaware_f07.mp4" controls muted playsinline preload="metadata"></video>
+  <p class="note">MMLU, 70% gate-aware liars (the attack that defeats the earlier AIP gate). Blue links: TRUST. Red links: INVERT. â is the receiver's label-free estimate of each peer's accuracy.</p>
+
+  <div class="grid">
+    <figure><video src="media/swarm_boolq_coherent_f05.mp4" controls muted playsinline preload="metadata"></video>
+      <figcaption>BoolQ with 50% coordinated liars: a bloc that always says the opposite, read backwards.</figcaption></figure>
+    <figure><video src="media/swarm_medqa_rushing_llm_f05.mp4" controls muted playsinline preload="metadata"></video>
+      <figcaption>MedQA with 50% real LLM deceivers that see the honest answers first.</figcaption></figure>
+    <figure><video src="media/gate_aware_sweep.mp4" controls muted playsinline preload="metadata"></video>
+      <figcaption>Coherence is tunable, truth-dependence is not: sweeping the attacker's coordination.</figcaption></figure>
+    <figure><video src="media/live_debate_mmlu.mp4" controls muted playsinline preload="metadata"></video>
+      <figcaption>Live six-model swarm: honest agents, covert saboteurs, and a debate round.</figcaption></figure>
+  </div>
+
+  <h2>Headline results</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Honest-receiver accuracy (%)</th><th>Receiver alone</th><th>Majority vote</th><th>AIP (prior work)</th><th>RACE</th></tr></thead>
+    <tbody>
+      <tr><td>Coherent liars, f = 0.9</td><td>85.8</td><td>0.0</td><td>0.0</td><td class="race">88.0</td></tr>
+      <tr><td>Gate-aware liars, f = 0.7</td><td>86.4</td><td>3.9</td><td>48.5</td><td class="race">95.0</td></tr>
+      <tr><td>Real LLM deceivers, f = 0.5</td><td>85.7</td><td>75.9</td><td>83.0</td><td class="race">92.7</td></tr>
+      <tr><td>Real LLM deceivers, f = 0.7</td><td>85.8</td><td>29.4</td><td>70.8</td><td class="race">89.8</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Mean over six benchmarks. The LLM-deceiver rows are a confirmation set evaluated after the method was frozen. Failure modes (camouflage attackers, sleepers, near-chance receivers) are reported in the paper.</p>
+
+  <h2>Figures</h2>
+  <div class="grid">
+    <figure><img src="figures/fig1_main_sweep.png" alt="Accuracy versus Byzantine fraction on six benchmarks" loading="lazy"><figcaption>No breakdown point against a coherent bloc.</figcaption></figure>
+    <figure><img src="figures/fig2_attack_zoo.png" alt="Attack zoo heatmap" loading="lazy"><figcaption>Attack zoo: where pooling helps and where it hurts.</figcaption></figure>
+    <figure><img src="figures/fig4_llm_liars.png" alt="Real LLM deceivers" loading="lazy"><figcaption>Real LLM deceivers (confirmation set).</figcaption></figure>
+    <figure><img src="figures/fig5_channel_estimation.png" alt="Channel estimation" loading="lazy"><figcaption>Label-free channel estimates vs truth: r = 0.977.</figcaption></figure>
+  </div>
+
+  <h2>Code, data and paper</h2>
+  <p>GitHub: <a href="https://github.com/Hisernberg/liars-are-information">Hisernberg/liars-are-information</a>. Builds on the original artifact by Dhruv Jyoti Das (<a href="https://huggingface.co/datasets/Dhruv1000/Liars_Are_Information">Dhruv1000/Liars_Are_Information</a>).</p>
+</main>
+</body>
+</html>

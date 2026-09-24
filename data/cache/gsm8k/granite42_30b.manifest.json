@@ -1,0 +1,20 @@
+{
+  "benchmark": "gsm8k",
+  "model": "granite42_30b",
+  "n_rows": 500,
+  "n_tasks": 500,
+  "updated_at": "2026-09-20T12:42:30.235486+00:00",
+  "prompt_template_hash": "f9b756633e80",
+  "hf_id": "ibm-granite/granite-4.2-30b",
+  "dtype": "bfloat16",
+  "max_model_len": 4096,
+  "seed": 0,
+  "registry_hash": "9855995a45f5",
+  "batch_invariant": true,
+  "sample_index": 0,
+  "temperature": 0.0,
+  "run_id": "x3_repair-2bd079ac5e5e-20260920T122551Z-5054",
+  "x3_repaired_rows": 18,
+  "x3_budget": 3072,
+  "x3_control_drift": 0
+}

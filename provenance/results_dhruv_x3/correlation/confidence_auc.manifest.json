@@ -1,0 +1,35 @@
+{
+  "run_id": "phase_confidence_auc-5eceb01ea13f-20260920T183818Z-9187",
+  "phase": "phase_confidence_auc",
+  "config_hash": "5eceb01ea13f",
+  "config": {
+    "min_wrong": 30
+  },
+  "seeds": {},
+  "git_commit": "63772d9eba9225257b32ebf2c0ecddf8a3a17e0f-dirty",
+  "started_at": "2026-09-20T18:38:18.463256+00:00",
+  "finished_at": null,
+  "status": "running",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-190-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu02",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA H100 NVL",
+      "memory_total_mib": 95830,
+      "driver": "570.195.03"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "5.16.1",
+    "vllm": "0.19.1"
+  },
+  "notes": {}
+}

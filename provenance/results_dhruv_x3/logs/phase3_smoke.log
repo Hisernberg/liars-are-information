@@ -1,0 +1,44 @@
+
+=== 2026-09-02T17:32Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_c_aggregate.py --help ===
+usage: phase_c_aggregate.py [-h] [--cache CACHE] [--cache-t07 CACHE_T07]
+                            [--out OUT] [--resamples RESAMPLES] [--seed SEED]
+                            [--benchmarks [BENCHMARKS ...]] [--quick]
+
+Phase C: the offline aggregation sweep. Cache-only. Honest agents replay Phase
+A answers; Byzantine agents are symbolic (:mod:`aip.swarm.broadcast`). No
+model is loaded. Sweep axes: benchmark x swarm composition x Byzantine
+fraction f x partial observability p_obs x topology x adversary x
+normalization parity x method. Every cell reports accuracy with a bootstrap CI
+over tasks.
+
+options:
+  -h, --help            show this help message and exit
+  --cache CACHE
+  --cache-t07 CACHE_T07
+  --out OUT
+  --resamples RESAMPLES
+  --seed SEED
+  --benchmarks [BENCHMARKS ...]
+  --quick               small grid, for smoke testing
+
+=== 2026-09-02T17:38Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_c_aggregate.py --help ===
+usage: phase_c_aggregate.py [-h] [--cache CACHE] [--cache-t07 CACHE_T07]
+                            [--out OUT] [--resamples RESAMPLES] [--seed SEED]
+                            [--benchmarks [BENCHMARKS ...]] [--quick]
+
+Phase C: the offline aggregation sweep. Cache-only. Honest agents replay Phase
+A answers; Byzantine agents are symbolic (:mod:`aip.swarm.broadcast`). No
+model is loaded. Sweep axes: benchmark x swarm composition x Byzantine
+fraction f x partial observability p_obs x topology x adversary x
+normalization parity x method. Every cell reports accuracy with a bootstrap CI
+over tasks.
+
+options:
+  -h, --help            show this help message and exit
+  --cache CACHE
+  --cache-t07 CACHE_T07
+  --out OUT
+  --resamples RESAMPLES
+  --seed SEED
+  --benchmarks [BENCHMARKS ...]
+  --quick               small grid, for smoke testing

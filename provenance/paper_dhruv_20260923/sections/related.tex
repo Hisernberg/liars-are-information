@@ -1,0 +1,117 @@
+\section{Related Work}
+\label{sec:related}
+
+We organise prior work by what it does with a suspicious contribution:
+\emph{discard} it, \emph{model} it, or \emph{punish} it. Our mechanism belongs to
+none of these, because it \emph{uses} the contribution. Two further subsections
+cover the measurement result we build on and the theoretical result we
+complement.
+
+\subsection{The discard paradigm}
+
+Robust aggregation for distributed learning set the template: Krum selects the
+vector minimising summed distance to its neighbours~\cite{blanchard2017krum},
+coordinate-wise median and trimmed mean achieve order-optimal rates under a
+bounded adversarial fraction~\cite{yin2018trimmed}, geometric median generalises
+the same intuition. All are designed for $f<1/2$ and all assume the adversarial
+contribution carries no usable information. Within LLM multi-agent systems the
+template recurs at the response level, through confidence
+weighting~\cite{cpwbft}, receiver-side re-evaluation and filtering~\cite{sac},
+certifiable agreement instruments~\cite{hcsc}, learned
+aggregation~\cite{laacs}, long-term incentives~\cite{fedmarl} and decentralized
+coordination~\cite{decentllms}, within a broader effort to make multi-LLM
+networks trustworthy~\cite{trustnetwork} whose threat surface is itself an active
+subject~\cite{agentattacks}.
+
+Our results reproduce the expiry: against a symbolic coherent adversary at
+$f=0.7$ every \emph{deployable} discard baseline reads
+$\numDiscardCollapseFseven$ on all $\numBenchmarks$ benchmarks. Two
+qualifications belong here rather than in a footnote, because both weaken the
+comparison in our favour if omitted. The collapse to exactly zero is a property
+of the symbolic adversary --- against real prompt-injected adversaries nothing
+reaches zero, deployable discard spans $\numRealDiscardMinFseven$ to
+$\numRealDiscardMaxFseven$, and on BoolQ plain majority vote \emph{beats} AIP by
+$\numRealSepBoolqFseven$. And methods handed the true Byzantine count do not
+collapse even symbolically: Krum holds $\numDiscardOracleBoolqFseven$ on BoolQ.
+We exclude those as undeployable rather than as beaten, and say so wherever the
+comparison is made.
+
+\subsection{AgentChain and the identity assumption}
+
+AgentChain~\cite{agentchain} is the closest system-level comparison and is
+unusually explicit about its boundary: its guarantees do not extend to
+$f \geq N/2$, and it names external identity verification as the unsolved
+problem. We cross that line without solving identity, by anchoring the gate on
+the receiver's own answer rather than the plurality so the tests do not degrade
+when the plurality is adversarial --- a different resource buying a different
+guarantee, one Section~\ref{sec:gateaware} shows an adaptive adversary dissolves.
+When it dissolves, their gap is exactly where the argument lands. We do not close
+it; we give a reason to think a defence in our family \emph{cannot}, which turns
+an engineering admission into a statement about the statistic.
+
+\subsection{The correlation ceiling in model panels}
+
+The result our measurement section builds on is not a defence. Kim et
+al.~\cite{judgecorr} establish that LLM errors are substantially correlated
+across models, and Kohli~\cite{panelcorr} shows what that costs a panel: nine
+judges are worth roughly two effective votes, so panel size overstates
+reliability. Jiang et al.~\cite{hivemind} document the same homogeneity from the
+generation side.
+
+\textbf{We confirm this ceiling and extend it; we do not claim to discover it.}
+\emph{First}, the deployment-relevant comparison. Their panels are built from
+distinct models; a deployed swarm is more likely built by replicating one, and
+that case is roughly half again as correlated ($\numWithinModelPhi$ within-model
+against $\numCrossModelPhi$ cross-family). \emph{Second}, from observation to
+calibrated law: the multiclass attenuation law is exact at $C=2$ and validated
+against that exactness, which turns a descriptive finding into a constant an
+aggregator calibrates on at run time without labels. \emph{Third}, correlation as
+premise rather than caveat: for a panel the ceiling is a measurement caveat, but
+for a swarm under attack it is the premise of the design --- if honest pooling is
+capped, the only informative structure left is what honest agents do \emph{not}
+share, which is adversarial coherence. Their negative result about panels is what
+makes our positive result about inversion necessary rather than merely available.
+
+\subsection{Detection theory: what a richer monitor buys}
+
+The closest theoretical neighbour points the opposite way, and the contrast is
+the most useful thing we can say about either. The Detection
+Dilemma~\cite{detectiondilemma} establishes in its Theorem~1 that a monitor
+observing \emph{four} channels can force honesty: with enough independent views,
+misreporting becomes detectable and the rational strategy collapses to truthful
+reporting. Our Proposition~1 establishes that a rule measurable with respect to a
+\emph{single} per-question coherence statistic is powerless against an adversary
+at or below chance coherence, because there the two hypotheses induce the same
+distribution.
+
+These bracket the design space from opposite ends --- an existence statement
+about monitors against an impossibility statement about one channel --- and are
+complementary rather than competing: the question is not whether coherence-based
+gating can be repaired but how many independent observations a defence needs, and
+for the one-statistic case the answer is more than one. That is also why external
+information is the first escape class in Section~\ref{sec:limits}. We do not
+evaluate a four-channel monitor and make no claim about whether their bound
+survives our gate-aware adversary.
+
+\subsection{Modelling and punishment}
+
+Dawid--Skene~\cite{dawidskene1979} and its descendants treat unreliable
+contributors as parameters rather than points to reject. That is closer to our
+spirit, but it assumes conditional independence given the truth --- exactly what
+a coordinated adversary violates --- and estimates reliability rather than
+exploiting the systematic \emph{direction} of error. We use a one-coin variant
+inside our blind estimator and as a baseline.
+
+A third line disincentivises adversaries through staking, slashing or reputation
+decay, or analyses the strategic setting directly: a Byzantine agent's broadcast
+is cheap talk, costless and not inherently credible~\cite{cheaptalk}. This is
+orthogonal to aggregation and we make no claim in that direction. We must also
+distinguish work on premature convergence in multi-agent
+deliberation~\cite{consensustrap}, which operates at \emph{token-level
+generation} where shared context collapses diversity before an answer exists. We
+operate at \emph{response-level aggregation} on a pathology that is adversarial
+rather than conformist; the two are complementary and their mitigations do not
+compete.
+
+All inference here is executed offline and cached with vLLM~\cite{vllm}; the
+aggregation experiments never invoke a model (Section~\ref{sec:reproducibility}).

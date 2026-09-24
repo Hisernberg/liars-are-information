@@ -1,0 +1,61 @@
+{
+  "run_id": "phase_b-0ab93d465521-20260904T064105Z-5446",
+  "phase": "phase_b",
+  "config_hash": "0ab93d465521",
+  "config": {
+    "cache": "data/cache",
+    "cache_t07": "data/cache_t07",
+    "resamples": 2000,
+    "models": [
+      "gemma4_31b",
+      "granite42_30b",
+      "llama32_3b",
+      "ministral3_14b",
+      "olmo3_32b_think",
+      "phi4_mini_reasoning",
+      "qwen38_27b"
+    ]
+  },
+  "seeds": {
+    "bootstrap": 20250825
+  },
+  "git_commit": "b3aabf76756a1e3ce697a3e1ab2d509cb9d1f69e-dirty",
+  "started_at": "2026-09-04T06:41:05.511593+00:00",
+  "finished_at": "2026-09-04T06:41:05.576304+00:00",
+  "status": "ok",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-190-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu02",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA H100 NVL",
+      "memory_total_mib": 95830,
+      "driver": "570.195.03"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "5.16.1",
+    "vllm": "0.19.1"
+  },
+  "notes": {
+    "inference_run": false,
+    "caches_read_only": true,
+    "nan_policy": [
+      "phi4_mini_reasoning x mmlu: 30/100 self-reported confidences are NaN (the model reasons about the question and never commits to an integer). Phase B does not use self-reports, so no rows are affected. Missing-data handling is a Phase C decision.",
+      "llama32_3b x mmlu: 1/100 answer extraction failed (generation hit the token cap mid-reevaluation). It is scored incorrect, kept in the analysis, and counts as disagreement with every other agent.",
+      "phi is NaN when either error vector is constant; such pairs are reported as undefined rather than as zero correlation."
+    ],
+    "known_nonreproducing_task_ids": [
+      "gsm8k-test-00000"
+    ],
+    "known_nonreproducing_policy": "retained in the analysis and flagged per pair, never dropped",
+    "n_pairs": 133
+  }
+}

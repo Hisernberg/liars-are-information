@@ -1,0 +1,52 @@
+{
+  "run_id": "phase_e_burst-922bce246519-20260903T162146Z-5b83",
+  "phase": "phase_e_burst",
+  "config_hash": "922bce246519",
+  "config": {
+    "benchmark": "gsm8k",
+    "windows": [
+      5,
+      10,
+      20
+    ],
+    "f_grid": [
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7
+    ],
+    "resamples": 500
+  },
+  "seeds": {
+    "sweep": 20250825
+  },
+  "git_commit": "d04b5d3537146877a4139197af9295326b17c12e-dirty",
+  "started_at": "2026-09-03T16:21:46.036518+00:00",
+  "finished_at": "2026-09-03T16:21:46.096141+00:00",
+  "status": "ok",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-190-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu02",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA H100 NVL",
+      "memory_total_mib": 95830,
+      "driver": "570.195.03"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "5.16.1",
+    "vllm": "0.19.1"
+  },
+  "notes": {
+    "inference_run": false
+  }
+}

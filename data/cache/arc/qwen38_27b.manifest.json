@@ -1,0 +1,19 @@
+{
+  "benchmark": "arc",
+  "model": "qwen38_27b",
+  "n_rows": 200,
+  "n_tasks": 200,
+  "updated_at": "2026-09-02T11:57:18.889751+00:00",
+  "prompt_template_hash": "fa061f3d7fca",
+  "hf_id": "Qwen/Qwen3.8-27B",
+  "dtype": "bfloat16",
+  "max_model_len": 4096,
+  "seed": 0,
+  "registry_hash": "af2ef3f88e90",
+  "batch_invariant": true,
+  "sample_index": 0,
+  "temperature": 0.0,
+  "task_list_hash": "f20dc3815a41",
+  "run_id": "phase_a-f425fdae4744-20260902T113107Z-4cd1",
+  "dry_run": false
+}

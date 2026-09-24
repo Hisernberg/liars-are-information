@@ -1,0 +1,171 @@
+\section{Scope and Limitations}
+\label{sec:limitations}
+
+This section collects every claim this study set out to make and did not, every
+claim it makes only under conditions, and the instrumentation failures that
+produced two retracted verdicts. It is placed before reproducibility rather than
+after the conclusion because the refutations are results.
+
+\subsection{The measurement floor, and what it forbids}
+
+The floor is $\numFloorGsmk$ on GSM8K and $\numFloorWorst$ elsewhere
+(\S\ref{sec:introduction}). Applying it consistently cost this paper three
+findings --- an $N$-scaling result, a mitigation verdict and a Sybil mechanism ---
+which is the point of fixing the rule before seeing which way it cuts.
+
+\subsection{Refuted: claims we set out to make and cannot}
+
+Two refutations are given in prose because they revise the paper's own headline
+and because a table cannot carry the qualification each needs. The remaining
+eight are tabulated in Table~\ref{tab:refutations}; tabulating them raises rather
+than lowers their visibility, and every row carries its magnitude and its floor.
+
+\textbf{Accuracy is not flat in the Byzantine fraction.} This is the claim the
+study was built to make, and it does not survive. Under the real-LLM coherent
+adversary AIP-gated falls by $\numHoneFallBoolq$ on BoolQ, $\numHoneFallMedqa$ on
+MedQA, $\numHoneFallMmlu$ on MMLU and $\numHoneFallArc$ on ARC between $f=0$ and
+$f=0.7$, all at least three times the floor. GSM8K ($\numHoneFallGsmk$) and
+MATH-500 ($\numHoneFallMathfive$) are undetectable, so flatness is there neither
+established nor refuted --- which is a weaker statement than either ``flat'' or
+``not flat'', and is the one the data supports. Under the symbolic adversary
+MATH-500 spans $\numMathfiveAipSpread$. What survives is invariance on specific
+benchmarks under a specific adversary, and we state both names wherever it
+appears. \textbf{[H1]}
+
+\textbf{An earlier evasion anchor is withdrawn, and a deterrence result with it.}
+The attacker gain this project first reported was read off the $f=0.7$ row, where
+the Byzantine bloc is an outright majority and every coherence level including
+independent lying drives accuracy to zero; that row cannot separate an evasion
+effect from numerical dominance and is not an admissible anchor. The anchored
+value is $\numEvasionGainMedqa$ at the tie. Separately, an adaptive-adversary
+deterrence experiment is absent from this paper rather than reported with a
+caveat: the condition for including it, fixed before the audit ran, was that the
+coordinatability claim survive re-verification, and it did not. Its data is in
+the artifact. \textbf{[G1, B2]}
+
+\begin{table}[t]
+\centering
+\caption{The other eight refutations. Each is a claim this study set out to
+confirm and its own data refused. Magnitudes are against the benchmark's
+measurement floor ($\numFloorGsmk$ on GSM8K, $\numFloorWorst$ elsewhere).}
+\label{tab:refutations}
+\footnotesize
+\begin{tabular}{@{}p{0.3\columnwidth}p{0.6\columnwidth}@{}}
+\toprule
+Claim & What the data says \\
+\midrule
+\textbf{[L1]} A low honest-$q$ ceiling is a structural defence &
+MATH-500 has the lowest ceiling and the gate is near-inert there: the gate-aware
+adversary's best strategy is \emph{full coherence}, not evasion. A low ceiling
+means the gate rarely fires, not that the adversary rarely succeeds. \\
+\addlinespace
+\textbf{[I3]} Inversion gain is independent of honest competence &
+Matched benchmark set: weak arm $\numInversionGainWeak$ against the roster's
+$\numInversionGainFseven$, a gap of $\numInversionGainCompetenceDiff$, lower on
+all three individually. The supporting comparison had read six benchmarks against
+three. \\
+\addlinespace
+\textbf{[S1]} Maximising effective swarm size is the composition recipe &
+$N_{\mathrm{eff}}$ tracks mean roster accuracy at $\numCompNeffVsAccMean$ --- it
+restates roster weakness --- and swarm accuracy at $\numCompAccVsNeff$, the wrong
+sign. No composition beats its own best single member detectably. \\
+\addlinespace
+\textbf{[M2b]} AIP does not exploit self-vote share &
+Undetectable away from the tie (largest $\numParityAipOffTieMax$); at $f=0.5$ it
+averages $\numParityAipTieMean$ and reaches $\numParityAipTieMax$. Every number
+quoted at the tie must name its parity condition. \\
+\addlinespace
+\textbf{[E2b]} Sybil robustness comes from coherence amplification &
+AIP is as robust to a disagreeing bloc ($\numSybilDisagreeingAip$) as to a
+coherent one ($\numSybilCoherentAip$). The robustness holds; the explanation does
+not. \\
+\addlinespace
+\textbf{[E1]} A sleeper defeats reputation decay while AIP reclassifies it &
+Reversed. Reputation decay drops least ($\numSleeperDropReputation$), AIP most
+($\numSleeperDropAip$); spread $\numSleeperDropSpread$ against a
+$\numFloorWorst$ floor, so marginal, and reported as marginal. \\
+\addlinespace
+\textbf{[G2']} Coordinatability collapses on closed label spaces &
+The direction is inverted: coherence is \emph{highest} there
+($\numQhatBinaryMean$ binary, $\numQhatMcMean$ multiple choice, against
+$\numQhatOpenTextMean$ open text). What collapses is the margin over honest
+agreement. \\
+\addlinespace
+\textbf{[D2]} Threshold randomisation helps &
+$\numMitigRandDelta$ over the attack space and $\numMitigRandBandDelta$ within
+the band, both far below floor: undetectable in \emph{either} direction. An earlier reading called it
+``actively harmful'' on a difference that was itself below floor. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Undetectable at this scale}
+
+\textbf{Whether inversion gain depends on swarm size.} At $N=\numAgents$, $20$
+and $50$ the gain reads $\numInversionGainNTen$, $\numInversionGainNTwenty$ and
+$\numInversionGainNFifty$: a range of $\numInversionGainNRange$ against a
+$\numFloorWorst$ floor. Neither growth nor invariance in $N$ is supported, and
+the figure caption says so rather than asserting the flat reading its point
+estimates suggest. \textbf{[N1]}
+
+\subsection{Claims we explicitly do not make}
+
+\textbf{Accuracy is not monotone increasing in $f$}, as an early simulation
+predicted: only the ungated variant shows it, and that variant is catastrophic at
+low $f$. \textbf{[U1]}
+
+\textbf{No generality beyond this population.} $\numModels$ models
+($\numParamsMinB$--$\numParamsMaxB$B) plus a $\numModelsWeakArm$-model weak arm,
+$\numBenchmarks$ benchmarks, $\numTasksMin$--$\numTasksMax$ tasks each, one
+adversary family per attack class, one hardware regime. The honest-coincidence
+ceilings must be re-measured for any other population. \textbf{[U2]}
+
+\textbf{No claim that the escape classes survive.} Neither the
+external-information nor the longitudinal defence of Section~\ref{sec:limits} has
+been evaluated against the gate-aware adversary. \textbf{[U3]} And blind
+bootstrapping is not established everywhere: the multiclass law does not beat the
+binary law on MMLU ($\numMaeMmluBinary$ against $\numMaeMmluMc$).
+
+\subsection{Where the mechanism fails by design}
+
+\begin{itemize}
+\item \textbf{Incoherent adversaries.} No coherent channel, nothing to invert; a
+      discard method is the correct choice. \textbf{[I2]}
+\item \textbf{Binary answer spaces.} Coherence is unity by construction and
+      carries no information; majority vote beats AIP on BoolQ by
+      $\numRealSepBoolqFseven$.
+\item \textbf{Non-stationary adversaries.} Pooled statistics are defeated;
+      windowing mitigates but does not eliminate. \textbf{[B1]}
+\item \textbf{Partial observability.} Accuracy falls from
+      $\numPobsFullGsmkFsix$ at $p_{obs}=1$ to $\numPobsHalfGsmkFsix$ at
+      $p_{obs}=0.5$ on GSM8K at $f=0.6$. This, not the Byzantine fraction, is the
+      binding practical constraint.
+\item \textbf{Gate-aware adversaries.} Section~\ref{sec:gateaware}, and the
+      reason is structural rather than incidental (Section~\ref{sec:limits}).
+\end{itemize}
+
+\subsection{Declared data gaps}
+
+The binary answer-space class carries no calibrated honest receiver-conditioned
+coincidence, so BoolQ's ceiling is a placeholder rather than a measurement and no
+margin-over-honest claim is made for it. This is recorded as a gap rather than
+absorbed into the results. \textbf{[X1]}
+
+\subsection{Instrumentation failures and retracted verdicts}
+
+Two mitigation variants were initially inert and returned results identical to
+the unmitigated baseline. Those identical results were read as a finding---that
+the mitigations do not matter---and published internally as such. They were bugs:
+M1 fell through to the hard gate for every adversarial channel, and M2's jitter
+reached only a fixed-ceiling ablation rather than the default rule. Both verdicts
+were retracted.
+
+They were caught by probe tests that assert variant activity before any verdict
+is read. We report this beyond mere disclosure: a mitigation study in which a
+true null and a wiring bug produce the same observation cannot tell them apart
+from the output alone, and an artifact that detects its own instrumentation
+failures is stronger evidence than one that cannot. A related error accounts for
+three refutations above --- comparisons across mismatched bases (six benchmarks
+against three, an upper-bound estimator against a measured one, an $f=0.7$ row
+against an $f=0.5$ claim) where the mismatch and not the effect produced the
+result. The audit that found them runs in the build. \textbf{[R1]}

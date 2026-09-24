@@ -1,0 +1,47 @@
+{
+  "run_id": "phase_composition-51f30e4ec719-20260920T195652Z-4df9",
+  "phase": "phase_composition",
+  "config_hash": "51f30e4ec719",
+  "config": {
+    "subset_sizes": [
+      3,
+      5
+    ],
+    "n_swarm": 10,
+    "benchmarks": [
+      "gsm8k",
+      "math500",
+      "mmlu",
+      "medqa",
+      "boolq",
+      "arc"
+    ]
+  },
+  "seeds": {},
+  "git_commit": "94e10f81106f3266bef79398a7c4e7b7e44e2c12-dirty",
+  "started_at": "2026-09-20T19:56:52.532955+00:00",
+  "finished_at": null,
+  "status": "running",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-190-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu02",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA H100 NVL",
+      "memory_total_mib": 95830,
+      "driver": "570.195.03"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "5.16.1",
+    "vllm": "0.19.1"
+  },
+  "notes": {}
+}

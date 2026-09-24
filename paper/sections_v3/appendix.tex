@@ -1,0 +1,36 @@
+\section{Development log: changes made after inspecting data}\label{app:devlog}
+
+A change was admissible only if all three of the following held:
+\begin{enumerate}
+\item it fixes a mechanism that can be stated without reference to a benchmark number;
+\item it keeps every previously fixed hyper-parameter;
+\item the superseded variant stays in every table.
+\end{enumerate}
+
+\begin{enumerate}
+\item \textbf{Initial design.} Anchored one-coin EM with clone tempering by raw agreement $\ge0.95$ (kept as \texttt{race\_rawclone}).
+\item \textbf{Rejected: multi-start MAP.} We ran EM from both the receiver's answers and the plurality and kept the higher log-posterior (\texttt{race\_ms}). Trigger: a near-chance MATH-500 receiver captured by a rushing liar. It did not help, because with a near-chance anchor the two labellings are likelihood-equivalent. It was harmful when replicated channels inflate the likelihood of the adversarial labelling. The anchor therefore acts through initialisation and constraint, not through a likelihood comparison.
+\item \textbf{Adopted: two-part clone rule.} Same-source links (raw agreement $\ge0.99$, applied before any fit) and dependent-error links (agreement $\ge0.95$ on tasks where a member errs). Trigger: GSM8K with uninformative/partial liars at $f=0.7$, where raw-agreement grouping merged distinct accurate models and collapsed honest evidence (\cref{prop:clones}).
+\end{enumerate}
+The method was then frozen, and every study was re-run from scratch. The replayed LLM deceivers (E3) and the live swarm (E8) had not been inspected at freeze time. On E3 the adopted rule outperforms both superseded variants at every $f\ge0.5$.
+
+\section{Hyper-parameters and implementation}\label{app:hparams}
+\begin{center}\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+Anchor initial posterior on own answer & 0.75\\
+Anchor prior (receiver accuracy) & Beta, mean 0.75, strength 8\\
+Anchor constraint & $a_i\ge\overline{1/K}+0.05$\\
+Peer prior & Beta, mean = chance, strength 2\\
+Same-source / dependent-error thresholds & 0.99 / 0.95\\
+Minimum support for a link & 8 tasks\\
+Accuracy clip & $[10^{-3},1-10^{-3}]$\\
+EM & at most 200 iterations, tolerance $10^{-6}$\\
+Decision band for reporting TRUST/INVERT & $|\lambda|>0.25$ (diagnostic only)\\
+Online forgetting (E6) & $\gamma=0.97$, refit every 8 tasks\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Reproducibility}\label{app:repro}
+All code, data, results, figures, videos and this manuscript are in the accompanying repository and Hugging Face release. \texttt{experiments/run\_all.sh} runs E1--E6 on a 4-core CPU without a GPU. \texttt{experiments/live\_swarm.py} regenerates E8. \texttt{experiments/make\_figures.py} and \texttt{make\_numbers.py} regenerate every figure, table and number in the text: the numbers in this paper are macros written by that script. Each study directory holds a \texttt{run\_manifest.json} with the input and code hashes, wall time and peak memory. The repository's test suite covers RACE's identification, invariance, clone-grouping and causality properties.

@@ -1,0 +1,20 @@
+{
+  "benchmark": "math500",
+  "model": "ministral_8b",
+  "n_rows": 200,
+  "n_tasks": 200,
+  "updated_at": "2026-09-20T12:14:43.873993+00:00",
+  "prompt_template_hash": "44b7019693c2",
+  "hf_id": "mistralai/Ministral-8B-Instruct-2410",
+  "dtype": "bfloat16",
+  "max_model_len": 4096,
+  "seed": 0,
+  "registry_hash": "9855995a45f5",
+  "batch_invariant": true,
+  "sample_index": 0,
+  "temperature": 0.0,
+  "run_id": "x3_repair-25850f1525d1-20260920T121010Z-5f50",
+  "x3_repaired_rows": 36,
+  "x3_budget": 3072,
+  "x3_control_drift": 0
+}

@@ -1,0 +1,76 @@
+{
+  "run_id": "phase_b2-9edf3146d087-20260903T060538Z-31bb",
+  "phase": "phase_b2",
+  "config_hash": "9edf3146d087",
+  "config": {
+    "cache": "data/cache",
+    "resamples": 1000,
+    "models": [
+      "gemma4_31b",
+      "granite42_30b",
+      "llama32_3b",
+      "ministral3_14b",
+      "olmo3_32b_think",
+      "phi4_mini_reasoning",
+      "qwen38_27b"
+    ]
+  },
+  "seeds": {
+    "bootstrap": 20250825
+  },
+  "git_commit": "04cb367ef2c80f4ec605b7df159c068068068f64-dirty",
+  "started_at": "2026-09-03T06:05:38.407036+00:00",
+  "finished_at": "2026-09-03T06:05:38.450084+00:00",
+  "status": "ok",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-190-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu02",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA H100 NVL",
+      "memory_total_mib": 95830,
+      "driver": "570.195.03"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "5.16.1",
+    "vllm": "0.19.1"
+  },
+  "notes": {
+    "inference_run": false,
+    "label_spaces": {
+      "gsm8k": "open-ended, per-task candidates",
+      "math500": "open-ended, per-task candidates",
+      "mmlu": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "medqa": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "boolq": [
+        "A",
+        "B"
+      ],
+      "arc": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    "correction": "Phase B fed the binary law correctness_agreement, which requires gold labels and is therefore not a blind observable. The baseline here uses answer_agreement, which is what an agent can actually see."
+  }
+}

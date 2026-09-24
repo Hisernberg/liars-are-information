@@ -1,0 +1,19 @@
+{
+  "benchmark": "boolq",
+  "model": "olmo3_32b_think",
+  "n_rows": 200,
+  "n_tasks": 200,
+  "updated_at": "2026-09-02T19:08:54.036088+00:00",
+  "prompt_template_hash": "06634c55f216",
+  "hf_id": "allenai/Olmo-3-32B-Think",
+  "dtype": "bfloat16",
+  "max_model_len": 4096,
+  "seed": 0,
+  "registry_hash": "872ad42e0173",
+  "batch_invariant": true,
+  "sample_index": 0,
+  "temperature": 0.0,
+  "task_list_hash": "f20dc3815a41",
+  "run_id": "phase_a-f425fdae4744-20260902T182256Z-6b1d",
+  "dry_run": false
+}

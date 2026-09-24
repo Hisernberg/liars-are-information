@@ -1,0 +1,32 @@
+{
+  "study": "zoo",
+  "worlds": 756,
+  "methods": [
+    "self",
+    "majority",
+    "aip_gated",
+    "aip_trust_only",
+    "aip_soft",
+    "ds_full",
+    "ds_onecoin",
+    "race_noclone",
+    "race_rawclone",
+    "race_ms",
+    "race",
+    "race_full",
+    "race_capself",
+    "oracle_honest_majority",
+    "oracle_channel"
+  ],
+  "rows": 1595160,
+  "elapsed_seconds": 299.66,
+  "peak_rss_mib_parent": 659.2,
+  "peak_rss_mib_children": 237.5,
+  "processes": 4,
+  "python": "3.11.15",
+  "machine": "x86_64",
+  "cpu_count": 4,
+  "gpu_inference": false,
+  "inputs_sha256": "eff90400e30aa91e2157b05b8b3c08bcb9884a4a4171780e458df7d19a208ba4",
+  "code_sha256": "a3a7ababfc387aa39e2e8ea90b0fe493509723d5f7106559c5f4fec45b25c7f0"
+}

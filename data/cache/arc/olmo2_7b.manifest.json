@@ -1,0 +1,19 @@
+{
+  "benchmark": "arc",
+  "model": "olmo2_7b",
+  "n_rows": 200,
+  "n_tasks": 200,
+  "updated_at": "2026-09-03T17:08:12.320911+00:00",
+  "prompt_template_hash": "fa061f3d7fca",
+  "hf_id": "allenai/OLMo-2-1124-7B-Instruct",
+  "dtype": "bfloat16",
+  "max_model_len": 4096,
+  "seed": 0,
+  "registry_hash": "8c8040a8db16",
+  "batch_invariant": true,
+  "sample_index": 0,
+  "temperature": 0.0,
+  "task_list_hash": "f20dc3815a41",
+  "run_id": "phase_a-f425fdae4744-20260903T170550Z-f5e4",
+  "dry_run": false
+}

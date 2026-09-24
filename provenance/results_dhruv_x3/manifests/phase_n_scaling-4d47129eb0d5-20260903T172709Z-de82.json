@@ -1,0 +1,59 @@
+{
+  "run_id": "phase_n_scaling-4d47129eb0d5-20260903T172709Z-de82",
+  "phase": "phase_n_scaling",
+  "config_hash": "4d47129eb0d5",
+  "config": {
+    "benchmarks": [
+      "gsm8k",
+      "math500",
+      "mmlu",
+      "medqa",
+      "boolq",
+      "arc"
+    ],
+    "n_grid": [
+      10,
+      20,
+      50
+    ],
+    "f_grid": [
+      0.0,
+      0.2,
+      0.4,
+      0.5,
+      0.6,
+      0.7
+    ]
+  },
+  "seeds": {
+    "analysis": 20250825
+  },
+  "git_commit": "5a0880086ba4fb7159f132bd3a1c25dc1eb6caa6-dirty",
+  "started_at": "2026-09-03T17:27:09.726870+00:00",
+  "finished_at": "2026-09-03T17:39:36.421188+00:00",
+  "status": "ok",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-190-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu02",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA H100 NVL",
+      "memory_total_mib": 95830,
+      "driver": "570.195.03"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "5.16.1",
+    "vllm": "0.19.1"
+  },
+  "notes": {
+    "n_rows": 648
+  }
+}

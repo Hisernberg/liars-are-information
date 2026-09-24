@@ -1,0 +1,53 @@
+\section{Reproducibility and Conclusions}
+\label{sec:reproducibility}
+
+\subsection{Artifact}
+
+All generation happens once and is written to parquet; aggregation, baselines,
+mitigations and analysis read that cache and never invoke a model. That is what
+makes a sweep of this size affordable on one device, and what makes the offline
+attacks exact --- \texttt{falsified\_confidence} and \texttt{burst} are transforms
+of a cached adversarial run, byte-identical to their control outside the one
+channel each manipulates. Batch-invariant attention is enabled for every
+cache-generating run; without it identical batches return logprobs differing at
+the sixth decimal, enough to flip a near-tie argmax. Seeds derive from a SHA-256
+of the canonical configuration, task identifiers are frozen and committed, and
+every run writes a manifest with its configuration hash, git commit, seeds, GPU
+and package versions. All results come from a single hardware regime in bfloat16;
+an earlier regime with a different model population is not mixed in, for any
+claim.
+
+Every number here is a macro emitted from the result parquets --- a hand-typed
+decimal fails the build --- and the ledger, the section-to-claim map and the
+manuscript are checked against each other mechanically: a cited claim must exist
+in the ledger, a ledger entry must map to a section, no claim may remain
+unaudited against the floor, and every figure must name the script that produced
+it. Those checks caught four constants from an earlier regime surviving inside
+macros, and seven stale figures from it. The release contains the registry, the
+frozen task lists, the cache, every result parquet, the generators, the ledger,
+the pending-claim audit, the technical note supporting Proposition~1, and the
+probe tests of Section~\ref{sec:limitations}. \scaffold{Archive DOI pending
+de-anonymisation.}
+
+\subsection{Conclusions}
+
+The 50\% ceiling is a property of discarding, not of the problem. Correlated error
+caps what honest pooling can buy --- established for evaluation
+panels~\cite{judgecorr,panelcorr}, confirmed here in an adversarial swarm and
+extended to the replicated-model case --- which leaves adversarial coherence as
+the only informative structure a swarm has that its honest members do not already
+share. Inversion is worth $\numInversionGainFseven$ at $f=0.7$ and costs
+$\numInversionCostFzero$, below the floor, at $f=0$. Coherence alone cannot
+license it, because honest agents cohere at $\numHonestQMmlu$ against chance
+$\numMmluChanceQ$; the gate is calibrated per answer space and anchored on the
+receiver's own answer, which lets it work past the point where consensus-based
+estimators have converged on the lie.
+
+The limit is not reachable by threshold engineering. An adversary that reads the
+published ceiling and coordinates below it drives AIP to $\numEvasionAccMedqa$ at
+the tie, with an optimum at $\numEvasionQMedqa$ --- below the chance coherence
+$\numEvasionChance$ of honest independent failure. Escaping that needs
+information the channel does not contain: external verification, which the
+systems literature names as open, or longitudinal statistics, which our sleeper
+result gestures toward and which we have not tested. Both are hypotheses, and we
+state them as such.

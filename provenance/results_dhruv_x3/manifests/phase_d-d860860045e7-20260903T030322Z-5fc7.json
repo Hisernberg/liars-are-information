@@ -1,0 +1,57 @@
+{
+  "run_id": "phase_d-d860860045e7-20260903T030322Z-5fc7",
+  "phase": "phase_d",
+  "config_hash": "d860860045e7",
+  "config": {
+    "models": [
+      "llama32_3b",
+      "ministral_8b"
+    ],
+    "attacks": [
+      "always_wrong",
+      "semantic_negation",
+      "semantic_hallucination",
+      "rushing"
+    ],
+    "benchmarks": [
+      "gsm8k",
+      "math500",
+      "mmlu"
+    ],
+    "n_tasks": 100,
+    "projected_seconds": 1447.4810141138732
+  },
+  "seeds": {
+    "generation": 20250825
+  },
+  "git_commit": "397fdb461cb3d680e3e90cbeac497f23d25aa0e6-dirty",
+  "started_at": "2026-09-03T03:03:22.756590+00:00",
+  "finished_at": "2026-09-03T03:13:35.238720+00:00",
+  "status": "ok",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-190-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu02",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA H100 NVL",
+      "memory_total_mib": 95830,
+      "driver": "570.195.03"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "5.16.1",
+    "vllm": "0.19.1"
+  },
+  "notes": {
+    "honest_caches_read_only": true,
+    "cache_root": "data/cache_adversarial",
+    "elapsed_seconds": 612.4315038920613
+  }
+}

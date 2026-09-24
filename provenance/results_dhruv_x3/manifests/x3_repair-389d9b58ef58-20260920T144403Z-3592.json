@@ -1,0 +1,41 @@
+{
+  "run_id": "x3_repair-389d9b58ef58-20260920T144403Z-3592",
+  "phase": "x3_repair",
+  "config_hash": "389d9b58ef58",
+  "config": {
+    "cells": 2,
+    "n_repair": 19,
+    "registry_hash": "9855995a45f5"
+  },
+  "seeds": {
+    "generation": 0
+  },
+  "git_commit": "42b0b0b38a5c02c2b99a7ff5a6e8a5398c655ca2-dirty",
+  "started_at": "2026-09-20T14:44:03.927175+00:00",
+  "finished_at": "2026-09-20T14:45:17.205217+00:00",
+  "status": "ok",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-190-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu02",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA H100 NVL",
+      "memory_total_mib": 95830,
+      "driver": "570.195.03"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "5.16.1",
+    "vllm": "0.19.1"
+  },
+  "notes": {
+    "n_cells": 2
+  }
+}

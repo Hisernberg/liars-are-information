@@ -1,0 +1,42 @@
+{
+  "receiver": 3,
+  "byzantine": [
+    1,
+    2,
+    6,
+    8,
+    9
+  ],
+  "models": [
+    "granite42_30b",
+    "None",
+    "None",
+    "olmo3_32b_think",
+    "phi4_mini_reasoning",
+    "llama32_3b",
+    "None",
+    "ministral3_14b",
+    "None",
+    "None"
+  ],
+  "final_running_accuracy": {
+    "race": 0.7583333333333333,
+    "aip_gated": 0.425,
+    "majority": 0.625,
+    "self": 0.775
+  },
+  "steps": 120,
+  "world": {
+    "benchmark": "medqa",
+    "f": 0.5,
+    "attack": "llm:rushing",
+    "param": 1.0,
+    "p_obs": 1.0,
+    "seed": 2,
+    "n_agents": 10,
+    "composition": "frozen",
+    "history_n": null,
+    "study": "main",
+    "source": "artifact"
+  }
+}

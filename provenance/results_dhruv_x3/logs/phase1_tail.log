@@ -1,0 +1,73 @@
+
+=== 2026-09-02T17:37Z :: bash /home/ubuntu/Liars_Are_Information/scripts/run_phase1.sh olmo3_32b_think ===
+=== skipping llama32_3b (resuming from olmo3_32b_think) ===
+=== skipping phi4_mini_reasoning (resuming from olmo3_32b_think) ===
+=== skipping ministral3_14b (resuming from olmo3_32b_think) ===
+=== skipping qwen38_27b (resuming from olmo3_32b_think) ===
+=== skipping granite42_30b (resuming from olmo3_32b_think) ===
+=== skipping gemma4_31b (resuming from olmo3_32b_think) ===
+=== 2026-09-02T17:37:30+00:00  olmo3_32b_think  DRY-RUN GATE ===
+GATE FAILED for olmo3_32b_think (exit 1) -- STOPPING, no substitutions.
+
+=== 2026-09-02T17:39Z :: bash /home/ubuntu/Liars_Are_Information/scripts/run_phase1.sh olmo3_32b_think ===
+=== skipping llama32_3b (resuming from olmo3_32b_think) ===
+=== skipping phi4_mini_reasoning (resuming from olmo3_32b_think) ===
+=== skipping ministral3_14b (resuming from olmo3_32b_think) ===
+=== skipping qwen38_27b (resuming from olmo3_32b_think) ===
+=== skipping granite42_30b (resuming from olmo3_32b_think) ===
+=== skipping gemma4_31b (resuming from olmo3_32b_think) ===
+=== 2026-09-02T17:39:23+00:00  olmo3_32b_think  DRY-RUN GATE ===
+GATE FAILED for olmo3_32b_think (exit 1) -- STOPPING, no substitutions.
+
+=== 2026-09-02T18:19Z :: bash /home/ubuntu/Liars_Are_Information/scripts/run_phase1.sh olmo3_32b_think ===
+=== skipping llama32_3b (resuming from olmo3_32b_think) ===
+=== skipping phi4_mini_reasoning (resuming from olmo3_32b_think) ===
+=== skipping ministral3_14b (resuming from olmo3_32b_think) ===
+=== skipping qwen38_27b (resuming from olmo3_32b_think) ===
+=== skipping granite42_30b (resuming from olmo3_32b_think) ===
+=== skipping gemma4_31b (resuming from olmo3_32b_think) ===
+=== 2026-09-02T18:19:25+00:00  olmo3_32b_think  DRY-RUN GATE ===
+=== 2026-09-02T18:22:56+00:00  olmo3_32b_think  GATE PASSED -> FULL CACHE (6 benchmarks) ===
+=== 2026-09-02T19:13:26+00:00  olmo3_32b_think evicted; free: 123G ===
+=== 2026-09-02T19:13:26+00:00  PHASE 1 COMPLETE ===
+
+=== 2026-09-02T19:13Z :: bash /home/ubuntu/Liars_Are_Information/scripts/run_phase1_t07.sh ===
+=== 2026-09-02T19:13:26+00:00  llama32_3b  T=0.7 SECOND PASS (measured greedy GSM8K 15.9s, cap 2700s) ===
+=== 2026-09-02T19:14:34+00:00  ministral3_14b  T=0.7 SECOND PASS (measured greedy GSM8K 47.5s, cap 2700s) ===
+=== 2026-09-02T19:16:30+00:00  phi4_mini_reasoning  T=0.7 SECOND PASS (measured greedy GSM8K 191.7s, cap 2700s) ===
+=== 2026-09-02T19:19:58+00:00  granite42_30b  T=0.7 SECOND PASS (measured greedy GSM8K 101.7s, cap 2700s) ===
+=== 2026-09-02T19:34:19+00:00  gemma4_31b  T=0.7 SECOND PASS (measured greedy GSM8K 291.0s, cap 2700s) ===
+=== 2026-09-02T19:54:07+00:00  qwen38_27b  T=0.7 SECOND PASS (measured greedy GSM8K 364.1s, cap 2700s) ===
+T=0.7 PASS FAILED for qwen38_27b (exit 1) -- STOPPING.
+
+=== 2026-09-02T20:06Z :: bash /home/ubuntu/Liars_Are_Information/scripts/run_phase1.sh olmo3_32b_think ===
+=== skipping llama32_3b (resuming from olmo3_32b_think) ===
+=== skipping phi4_mini_reasoning (resuming from olmo3_32b_think) ===
+=== skipping ministral3_14b (resuming from olmo3_32b_think) ===
+=== skipping qwen38_27b (resuming from olmo3_32b_think) ===
+=== skipping granite42_30b (resuming from olmo3_32b_think) ===
+=== skipping gemma4_31b (resuming from olmo3_32b_think) ===
+=== 2026-09-02T20:06:06+00:00  olmo3_32b_think  DRY-RUN GATE ===
+
+=== 2026-09-02T20:12Z :: bash /home/ubuntu/Liars_Are_Information/scripts/run_phase1.sh olmo3_32b_think ===
+=== skipping llama32_3b (resuming from olmo3_32b_think) ===
+=== skipping phi4_mini_reasoning (resuming from olmo3_32b_think) ===
+=== skipping ministral3_14b (resuming from olmo3_32b_think) ===
+=== skipping qwen38_27b (resuming from olmo3_32b_think) ===
+=== skipping granite42_30b (resuming from olmo3_32b_think) ===
+=== skipping gemma4_31b (resuming from olmo3_32b_think) ===
+=== 2026-09-02T20:12:01+00:00  olmo3_32b_think all 6 cells cached -- skipped (no reload, no evict) ===
+=== 2026-09-02T20:12:01+00:00  PHASE 1 COMPLETE ===
+
+=== 2026-09-02T20:12Z :: bash /home/ubuntu/Liars_Are_Information/scripts/run_phase1_t07.sh ===
+=== 2026-09-02T20:12:01+00:00  llama32_3b T=0.7 already cached -- skipped ===
+=== 2026-09-02T20:12:01+00:00  ministral3_14b T=0.7 already cached -- skipped ===
+=== 2026-09-02T20:12:01+00:00  phi4_mini_reasoning T=0.7 already cached -- skipped ===
+=== 2026-09-02T20:12:02+00:00  granite42_30b T=0.7 already cached -- skipped ===
+=== 2026-09-02T20:12:02+00:00  gemma4_31b T=0.7 already cached -- skipped ===
+=== 2026-09-02T20:12:02+00:00  qwen38_27b  T=0.7 SECOND PASS (measured greedy GSM8K 364.1s, cap 2700s, disk 98G) ===
+=== 2026-09-02T20:28:53+00:00  olmo3_32b_think  T=0.7 SECOND PASS (measured greedy GSM8K 695.8s, cap 2700s, disk 81G) ===
+=== 2026-09-02T20:53:00+00:00  T=0.7 SECOND PASS COMPLETE ===
+
+=== 2026-09-02T20:53Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase1_gate_report.py ===
+wrote results/phase_1_gate_report.md and results/phase_1_gate_report.parquet  (42 cells)

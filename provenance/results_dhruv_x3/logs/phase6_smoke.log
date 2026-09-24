@@ -1,0 +1,6 @@
+
+=== 2026-09-02T17:32Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python -m pytest tests/test_paper.py -q ===
+.......                                                                  [100%]
+
+=== 2026-09-02T17:38Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python -m pytest tests/test_paper.py -q ===
+.......                                                                  [100%]

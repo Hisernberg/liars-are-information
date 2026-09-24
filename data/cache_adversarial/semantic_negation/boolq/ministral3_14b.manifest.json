@@ -1,0 +1,12 @@
+{
+  "benchmark": "boolq",
+  "model": "ministral3_14b",
+  "n_rows": 200,
+  "n_tasks": 200,
+  "updated_at": "2026-09-03T07:12:26.384684+00:00",
+  "attack": "semantic_negation",
+  "hf_id": "mistralai/Ministral-3-14B-Instruct-2512-BF16",
+  "prompt_template_hash": "06634c55f216",
+  "run_id": "phase_d-61f5422d3a53-20260903T070006Z-2885",
+  "pilot": false
+}

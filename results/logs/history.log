@@ -1,0 +1,68 @@
+[10/360] 10s
+[20/360] 19s
+[30/360] 29s
+[40/360] 35s
+[50/360] 43s
+[60/360] 49s
+[70/360] 54s
+[80/360] 58s
+[90/360] 63s
+[100/360] 72s
+[110/360] 80s
+[120/360] 89s
+[130/360] 95s
+[140/360] 101s
+[150/360] 108s
+[160/360] 111s
+[170/360] 115s
+[180/360] 120s
+[190/360] 128s
+[200/360] 134s
+[210/360] 141s
+[220/360] 146s
+[230/360] 152s
+[240/360] 156s
+[250/360] 160s
+[260/360] 163s
+[270/360] 168s
+[280/360] 181s
+[290/360] 194s
+[300/360] 205s
+[310/360] 212s
+[320/360] 220s
+[330/360] 229s
+[340/360] 235s
+[350/360] 242s
+[360/360] 248s
+{
+  "study": "history",
+  "worlds": 360,
+  "methods": [
+    "self",
+    "majority",
+    "aip_gated",
+    "aip_trust_only",
+    "aip_soft",
+    "ds_full",
+    "ds_onecoin",
+    "race_noclone",
+    "race_rawclone",
+    "race_ms",
+    "race",
+    "race_full",
+    "race_capself",
+    "oracle_honest_majority",
+    "oracle_channel"
+  ],
+  "rows": 626400,
+  "elapsed_seconds": 248.66,
+  "peak_rss_mib_parent": 392.0,
+  "peak_rss_mib_children": 233.4,
+  "processes": 4,
+  "python": "3.11.15",
+  "machine": "x86_64",
+  "cpu_count": 4,
+  "gpu_inference": false,
+  "inputs_sha256": "eff90400e30aa91e2157b05b8b3c08bcb9884a4a4171780e458df7d19a208ba4",
+  "code_sha256": "2ce4a027c6610089c29b2d37d689e2577eb335fd9f48094f243970cf53b726c7"
+}

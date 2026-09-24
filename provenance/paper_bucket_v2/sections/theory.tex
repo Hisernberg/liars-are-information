@@ -1,0 +1,66 @@
+\section{Theory}
+\label{sec:theory}
+
+\subsection{The generalized attenuation law}
+
+Partition the event that two agents give the same answer by whether they are
+correct. Two agents can agree by both being right, or by both being wrong in the
+same way; a correct and an incorrect agent cannot agree, so the cross term
+vanishes exactly. Writing $e_i$ for agent $i$'s marginal error rate and $q_{ij}$
+for the probability that two agents who are both wrong chose the same wrong
+answer,
+\[
+  m_{ij} \;=\; (1-e_i)(1-e_j) \;+\; e_i e_j\, q_{ij}.
+\]
+
+The binary case is the special instance. With $C=2$ there is exactly one wrong
+answer, so $q_{ij} \equiv 1$ identically and the law collapses to
+$2m_{ij}-1 = (1-2e_i)(1-2e_j)$, the estimator used in prior work. This is not an
+approximation that happens to hold; it is an algebraic identity, and it gives us
+a control condition with no free parameters. On BoolQ, where $C=2$, the measured
+$q$ is $\numMaeBoolqMc$ in mean absolute error against the multiclass
+law---exactness recovered from data, which is the strongest available evidence
+that the estimator is implemented as specified.
+
+Applying the binary form when $q < 1$ overstates the quality product by exactly
+$e_i e_j (1 - q_{ij})$. The error is second order in the error rates, which is
+why it hides on easy benchmarks and surfaces on hard ones: on MATH-500 the binary
+law's mean absolute error is $\numMaeMathfiveBinary$ against the multiclass law's
+$\numMaeMathfiveMc$. \textbf{[C3, C4]}
+
+The chance level of $q$ for a $C$-ary answer space is $q^{\mathrm{chance}} =
+1/(C-1)$, and approximately zero for open-ended answers. This constant is the
+reference the whole paper turns on: it is what independent wrong answers look
+like, and Section~\ref{sec:limits} shows that an adversary sitting at it is
+indistinguishable from independent honest failure.
+
+\subsection{Identifiability and receiver conditioning}
+
+With $q$ known --- binary, at chance, or zero --- the triplet identity recovers
+every $e_i$ from $n\geq3$ agents. With $q_{ij}$ free, pairwise agreement gives
+$\binom{n}{2}$ equations for $n+\binom{n}{2}$ unknowns: short by exactly $n$ for
+every $n$. This is structural unidentifiability, not a sampling problem, and no
+amount of data fixes it. Three escapes exist --- a structural assumption on $q$,
+the full answer-pattern distribution as Dawid--Skene uses, or ground truth. We
+take the first at run time and use the third to check it. \textbf{[C4]}
+
+There is also a gap between the quantity the theory names and the one a gate can
+compute, and closing it in the wrong direction is the easiest way to build a
+mechanism that validates and then fails. The law is stated in terms of
+$P(\text{same}\mid\text{both wrong})$, which needs labels; a receiver can only
+compute $P(\text{same}\mid\text{both dissent from me})$. The two coincide only
+when the receiver is almost always right, so they are different constants and the
+ceilings must be measured on the statistic the gate computes. Ours are
+receiver-conditioned throughout: honest coincidence is $\numMmluHonestFloor$ on
+four-way multiple choice and $\numGsmkHonestFloor$ on open-numeric answers.
+\textbf{[C3]}
+
+\subsection{Coordinatability and the invertibility threshold}
+
+An adversary is exploitable only if it can be \emph{coherent}, which requires a
+lie rule its members compute identically from the question alone --- the property
+we call \emph{coordinatability}. Which answer spaces permit it, and the direction
+in which that expectation failed, is measured in Section~\ref{sec:designlaws}
+(Law~3). The threshold follows: invert only above the calibrated honest ceiling
+for the answer space. Section~\ref{sec:limits} asks what happens when an
+adversary reads that ceiling off the paper and sits underneath it.

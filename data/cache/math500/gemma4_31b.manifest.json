@@ -1,0 +1,20 @@
+{
+  "benchmark": "math500",
+  "model": "gemma4_31b",
+  "n_rows": 200,
+  "n_tasks": 200,
+  "updated_at": "2026-09-20T13:55:43.602957+00:00",
+  "prompt_template_hash": "44b7019693c2",
+  "hf_id": "google/gemma-4-31B-it",
+  "dtype": "bfloat16",
+  "max_model_len": 4096,
+  "seed": 0,
+  "registry_hash": "9855995a45f5",
+  "batch_invariant": true,
+  "sample_index": 0,
+  "temperature": 0.0,
+  "run_id": "x3_repair-14dbc81d441f-20260920T133005Z-68dc",
+  "x3_repaired_rows": 74,
+  "x3_budget": 3072,
+  "x3_control_drift": 0
+}

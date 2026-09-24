@@ -1,0 +1,101 @@
+# Pre-committed decision rules, in force for the H100 regeneration.
+#
+# These are CONFIGURATION, not commentary: scripts/run_all.py and the phase
+# scripts read this file. A rule that lives only in a comment is a rule that gets
+# applied inconsistently at 3am by a batch job nobody is watching.
+#
+# Amendment history is kept inline, because a rule that changed silently is worse
+# than one that was wrong from the start.
+
+version: 2
+
+# ---------------------------------------------------------------------------
+# R1 -- CEILING AND THE HEADLINE SET
+# ---------------------------------------------------------------------------
+# A cell whose honest accuracy at f=0 is at or above `ceiling` leaves too little
+# for a swarm to work on: at 0.02 headroom ten agents are almost always
+# aggregating unanimous correctness, every method scores alike, and the
+# comparison is vacuous however good the accuracy looks. Such cells are KEPT in
+# the cache and in appendix tables, and excluded from headline figures.
+#
+# AMENDED 2026-09-02 (v1 -> v2): arc was demoted from the headline set. Measured
+# at f=0, three of the first five models ceiling on it -- qwen38_27b 0.98,
+# granite42_30b 0.95, ministral3_14b 0.94 -- giving a median headroom of 0.06.
+# ARC behaves like GSM8K, not like MATH-500. The headline set is now exactly
+# math500, medqa, mmlu.
+#
+# The ceiling distribution is itself a finding, not an inconvenience:
+# current-generation models saturate the easy benchmarks, so swarm robustness
+# matters only where models err.
+r1_ceiling:
+  ceiling: 0.93
+  headline_benchmarks: [math500, medqa, mmlu]
+  appendix_benchmarks: [arc, gsm8k, boolq]
+  # On the appendix benchmarks a cell may still carry a headline claim if it has
+  # genuine headroom -- that is a property of the cell, not of the tier.
+  appendix_headline_requires_headroom: true
+
+# ---------------------------------------------------------------------------
+# R2 -- AUC POWER
+# ---------------------------------------------------------------------------
+# Confidence AUC is interpreted only where the cell contains at least this many
+# wrong answers. Below it, report "underpowered (n_wrong=..)" and attach NO
+# direction-of-effect language. Saturation and underpowering are the same
+# phenomenon, so this is precisely the regime where an AUC below 0.5 would
+# otherwise be written up as miscalibration rather than as fifteen observed
+# errors.
+r2_auc_power:
+  min_wrong: 30
+
+# ---------------------------------------------------------------------------
+# R3 -- SELF-REPORT COMPLIANCE IS A MEASUREMENT
+# ---------------------------------------------------------------------------
+# Reasoning models failing to emit a self-reported number on multiple choice is a
+# FINDING about the surface the falsified_confidence attack targets. Never patch
+# prompts to force compliance.
+r3_self_report:
+  patch_prompts_to_force_compliance: false
+
+# ---------------------------------------------------------------------------
+# R4 -- BUDGET
+# ---------------------------------------------------------------------------
+# Applied in order when a projection exceeds the cap. Over cap after the full cut
+# order is a HARD STOP, not a silent truncation.
+r4_budget:
+  total_gpu_hours_remaining: 10.0
+  per_model_t07_cap_seconds: 2700
+  cut_order:
+    - drop_t07_stragglers
+    - drop_big3_on_non_headline_benchmarks
+    - drop_arc_adversarial_cells
+
+# ---------------------------------------------------------------------------
+# R5 -- ATTACK PRIORITY (Phase 4)
+# ---------------------------------------------------------------------------
+# gsm8k and boolq are attacked only on cells that still have headroom.
+r5_attack_priority:
+  order: [math500, medqa, mmlu, arc]
+  headroom_gated: [gsm8k, boolq]
+  pilot:
+    n_tasks: 5
+    max_fix_attempts: 1
+
+# ---------------------------------------------------------------------------
+# R6 -- LOGGING
+# ---------------------------------------------------------------------------
+r6_logging:
+  runlog: RUNLOG.md
+  status: STATUS.json
+
+# ---------------------------------------------------------------------------
+# HARD STOPS -- the orchestrator exits non-zero and writes STATUS.json
+# ---------------------------------------------------------------------------
+hard_stops:
+  - id: headline_claim_fails
+    description: >-
+      AIP not flat-in-f against baselines on a headline cell, or honest-channel
+      inversion rate > 0 at any f.
+  - id: budget_exceeded
+    description: A budget cap is exceeded after the full cut order has been applied.
+  - id: tests_red
+    description: The test suite is red and stays red after one fix attempt.

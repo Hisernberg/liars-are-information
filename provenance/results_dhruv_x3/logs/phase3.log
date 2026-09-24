@@ -1,0 +1,359 @@
+
+=== 2026-09-02T17:33Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_c_aggregate.py ===
+2026-09-02T17:33:29.848649Z [info     ] phase_c.benchmark              [__main__] accuracy={'gemma4_31b': 0.972, 'granite42_30b': 0.934, 'llama32_3b': 0.802, 'ministral3_14b': 0.96, 'phi4_mini_reasoning': 0.918, 'qwen38_27b': 0.966} benchmark=gsm8k n_tasks=500
+2026-09-02T17:36:10.293189Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_gemma4_31b rows=1008
+2026-09-02T17:38:47.258347Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_granite42_30b rows=2016
+2026-09-02T17:41:28.105742Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_llama32_3b rows=3024
+2026-09-02T17:44:19.175715Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_ministral3_14b rows=4032
+2026-09-02T17:47:17.636960Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_phi4_mini_reasoning rows=5040
+2026-09-02T17:50:11.554648Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_qwen38_27b rows=6048
+2026-09-02T17:55:38.204935Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=mix_all4 rows=7056
+2026-09-02T18:00:29.870351Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=mix_strong_weak rows=8064
+2026-09-02T18:00:29.965422Z [info     ] phase_c.benchmark              [__main__] accuracy={'gemma4_31b': 0.515, 'granite42_30b': 0.405, 'llama32_3b': 0.37, 'ministral3_14b': 0.205, 'phi4_mini_reasoning': 0.48, 'qwen38_27b': 0.67} benchmark=math500 n_tasks=200
+2026-09-02T18:01:28.644338Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_gemma4_31b rows=9072
+2026-09-02T18:02:26.520653Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_granite42_30b rows=10080
+2026-09-02T18:03:25.316464Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_llama32_3b rows=11088
+2026-09-02T18:04:29.701752Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_ministral3_14b rows=12096
+2026-09-02T18:05:28.299850Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_phi4_mini_reasoning rows=13104
+2026-09-02T18:06:29.816314Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_qwen38_27b rows=14112
+2026-09-02T18:09:30.522803Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=mix_all4 rows=15120
+2026-09-02T18:11:26.893803Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=mix_strong_weak rows=16128
+2026-09-02T18:11:27.012625Z [info     ] phase_c.benchmark              [__main__] accuracy={'gemma4_31b': 0.925, 'granite42_30b': 0.82, 'llama32_3b': 0.615, 'ministral3_14b': 0.84, 'phi4_mini_reasoning': 0.745, 'qwen38_27b': 0.895} benchmark=mmlu n_tasks=200
+2026-09-02T18:13:25.039009Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_gemma4_31b rows=17136
+2026-09-02T18:15:24.021708Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_granite42_30b rows=18144
+2026-09-02T18:17:03.328962Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_llama32_3b rows=19152
+2026-09-02T18:19:03.386622Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_ministral3_14b rows=20160
+2026-09-02T18:20:49.795535Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_phi4_mini_reasoning rows=21168
+2026-09-02T18:22:41.374519Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_qwen38_27b rows=22176
+2026-09-02T18:26:26.526140Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=mix_all4 rows=23184
+2026-09-02T18:29:38.054432Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=mix_strong_weak rows=24192
+2026-09-02T18:29:38.203932Z [info     ] phase_c.benchmark              [__main__] accuracy={'gemma4_31b': 0.925, 'granite42_30b': 0.655, 'llama32_3b': 0.54, 'ministral3_14b': 0.785, 'phi4_mini_reasoning': 0.58, 'qwen38_27b': 0.92} benchmark=medqa n_tasks=200
+Traceback (most recent call last):
+  File "/home/ubuntu/Liars_Are_Information/scripts/phase_c_aggregate.py", line 398, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/ubuntu/Liars_Are_Information/scripts/phase_c_aggregate.py", line 335, in main
+    assignment, tasks = build_task_observations(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/Liars_Are_Information/scripts/phase_c_aggregate.py", line 133, in build_task_observations
+    label_space = LABEL_SPACES[cache.benchmark] or []
+                  ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'medqa'
+
+=== 2026-09-02T21:34Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_c_aggregate.py ===
+2026-09-02T21:34:24.656469Z [info     ] phase_c.resume                 [__main__] cells_done=1728
+2026-09-02T21:34:24.835892Z [info     ] phase_c.benchmark              [__main__] accuracy={'gemma4_31b': 0.972, 'granite42_30b': 0.934, 'llama32_3b': 0.802, 'ministral3_14b': 0.96, 'olmo3_32b_think': 0.95, 'phi4_mini_reasoning': 0.918, 'qwen38_27b': 0.966} benchmark=gsm8k n_tasks=500
+2026-09-02T21:34:24.836326Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_gemma4_31b rows=0
+2026-09-02T21:34:24.836535Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_granite42_30b rows=0
+2026-09-02T21:34:24.836747Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_llama32_3b rows=0
+2026-09-02T21:34:24.836924Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_ministral3_14b rows=0
+2026-09-02T21:39:02.692553Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_olmo3_32b_think rows=1008
+2026-09-02T21:39:02.692893Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_phi4_mini_reasoning rows=1008
+2026-09-02T21:39:02.693030Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_qwen38_27b rows=1008
+2026-09-02T21:39:02.693140Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=mix_all4 rows=1008
+2026-09-02T21:39:02.693244Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=mix_strong_weak rows=1008
+2026-09-02T21:39:02.807869Z [info     ] phase_c.benchmark              [__main__] accuracy={'gemma4_31b': 0.515, 'granite42_30b': 0.405, 'llama32_3b': 0.37, 'ministral3_14b': 0.205, 'olmo3_32b_think': 0.505, 'phi4_mini_reasoning': 0.48, 'qwen38_27b': 0.67} benchmark=math500 n_tasks=200
+2026-09-02T21:39:02.808151Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_gemma4_31b rows=1008
+2026-09-02T21:39:02.808283Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_granite42_30b rows=1008
+2026-09-02T21:39:02.808400Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_llama32_3b rows=1008
+2026-09-02T21:39:02.808516Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_ministral3_14b rows=1008
+2026-09-02T21:40:08.597378Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_olmo3_32b_think rows=2016
+2026-09-02T21:40:08.597737Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_phi4_mini_reasoning rows=2016
+2026-09-02T21:40:08.597860Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_qwen38_27b rows=2016
+2026-09-02T21:40:08.597968Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=mix_all4 rows=2016
+2026-09-02T21:40:08.598087Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=mix_strong_weak rows=2016
+2026-09-02T21:40:08.697235Z [info     ] phase_c.benchmark              [__main__] accuracy={'gemma4_31b': 0.925, 'granite42_30b': 0.82, 'llama32_3b': 0.615, 'ministral3_14b': 0.84, 'olmo3_32b_think': 0.87, 'phi4_mini_reasoning': 0.745, 'qwen38_27b': 0.895} benchmark=mmlu n_tasks=200
+2026-09-02T21:40:08.697521Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_gemma4_31b rows=2016
+2026-09-02T21:40:08.697637Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_granite42_30b rows=2016
+2026-09-02T21:40:08.697740Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_llama32_3b rows=2016
+2026-09-02T21:40:08.697841Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_ministral3_14b rows=2016
+2026-09-02T21:42:05.089094Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_olmo3_32b_think rows=3024
+2026-09-02T21:42:05.089522Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_phi4_mini_reasoning rows=3024
+2026-09-02T21:42:05.089730Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_qwen38_27b rows=3024
+2026-09-02T21:42:05.089907Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=mix_all4 rows=3024
+2026-09-02T21:42:05.090081Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=mix_strong_weak rows=3024
+2026-09-02T21:42:05.234358Z [info     ] phase_c.benchmark              [__main__] accuracy={'gemma4_31b': 0.925, 'granite42_30b': 0.655, 'llama32_3b': 0.54, 'ministral3_14b': 0.785, 'olmo3_32b_think': 0.725, 'phi4_mini_reasoning': 0.58, 'qwen38_27b': 0.92} benchmark=medqa n_tasks=200
+Traceback (most recent call last):
+  File "/home/ubuntu/Liars_Are_Information/scripts/phase_c_aggregate.py", line 398, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/ubuntu/Liars_Are_Information/scripts/phase_c_aggregate.py", line 335, in main
+    assignment, tasks = build_task_observations(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/Liars_Are_Information/scripts/phase_c_aggregate.py", line 133, in build_task_observations
+    label_space = LABEL_SPACES[cache.benchmark] or []
+                  ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'medqa'
+
+=== 2026-09-03T02:07Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_c_aggregate.py ===
+2026-09-03T02:07:23.579911Z [info     ] phase_c.resume                 [__main__] cells_done=1944
+2026-09-03T02:07:23.765843Z [info     ] phase_c.benchmark              [__main__] accuracy={'gemma4_31b': 0.972, 'granite42_30b': 0.934, 'llama32_3b': 0.802, 'ministral3_14b': 0.96, 'olmo3_32b_think': 0.95, 'phi4_mini_reasoning': 0.918, 'qwen38_27b': 0.966} benchmark=gsm8k n_tasks=500
+2026-09-03T02:07:23.766231Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_gemma4_31b rows=0
+2026-09-03T02:07:23.766444Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_granite42_30b rows=0
+2026-09-03T02:07:23.766654Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_llama32_3b rows=0
+2026-09-03T02:07:23.766836Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_ministral3_14b rows=0
+2026-09-03T02:07:23.767001Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_olmo3_32b_think rows=0
+2026-09-03T02:07:23.767169Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_phi4_mini_reasoning rows=0
+2026-09-03T02:07:23.767353Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=hom_qwen38_27b rows=0
+2026-09-03T02:07:23.767511Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=mix_all4 rows=0
+2026-09-03T02:07:23.767671Z [info     ] phase_c.composition_done       [__main__] benchmark=gsm8k composition=mix_strong_weak rows=0
+2026-09-03T02:07:23.869376Z [info     ] phase_c.benchmark              [__main__] accuracy={'gemma4_31b': 0.515, 'granite42_30b': 0.405, 'llama32_3b': 0.37, 'ministral3_14b': 0.205, 'olmo3_32b_think': 0.505, 'phi4_mini_reasoning': 0.48, 'qwen38_27b': 0.67} benchmark=math500 n_tasks=200
+2026-09-03T02:07:23.869691Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_gemma4_31b rows=0
+2026-09-03T02:07:23.869888Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_granite42_30b rows=0
+2026-09-03T02:07:23.870056Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_llama32_3b rows=0
+2026-09-03T02:07:23.870219Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_ministral3_14b rows=0
+2026-09-03T02:07:23.870374Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_olmo3_32b_think rows=0
+2026-09-03T02:07:23.870532Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_phi4_mini_reasoning rows=0
+2026-09-03T02:07:23.870700Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=hom_qwen38_27b rows=0
+2026-09-03T02:07:23.870862Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=mix_all4 rows=0
+2026-09-03T02:07:23.871011Z [info     ] phase_c.composition_done       [__main__] benchmark=math500 composition=mix_strong_weak rows=0
+2026-09-03T02:07:23.970959Z [info     ] phase_c.benchmark              [__main__] accuracy={'gemma4_31b': 0.925, 'granite42_30b': 0.82, 'llama32_3b': 0.615, 'ministral3_14b': 0.84, 'olmo3_32b_think': 0.87, 'phi4_mini_reasoning': 0.745, 'qwen38_27b': 0.895} benchmark=mmlu n_tasks=200
+2026-09-03T02:07:23.971258Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_gemma4_31b rows=0
+2026-09-03T02:07:23.971446Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_granite42_30b rows=0
+2026-09-03T02:07:23.971611Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_llama32_3b rows=0
+2026-09-03T02:07:23.971791Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_ministral3_14b rows=0
+2026-09-03T02:07:23.971949Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_olmo3_32b_think rows=0
+2026-09-03T02:07:23.972105Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_phi4_mini_reasoning rows=0
+2026-09-03T02:07:23.972256Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=hom_qwen38_27b rows=0
+2026-09-03T02:07:23.972403Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=mix_all4 rows=0
+2026-09-03T02:07:23.972553Z [info     ] phase_c.composition_done       [__main__] benchmark=mmlu composition=mix_strong_weak rows=0
+2026-09-03T02:07:24.085268Z [info     ] phase_c.benchmark              [__main__] accuracy={'gemma4_31b': 0.925, 'granite42_30b': 0.655, 'llama32_3b': 0.54, 'ministral3_14b': 0.785, 'olmo3_32b_think': 0.725, 'phi4_mini_reasoning': 0.58, 'qwen38_27b': 0.92} benchmark=medqa n_tasks=200
+2026-09-03T02:09:15.808186Z [info     ] phase_c.composition_done       [__main__] benchmark=medqa composition=hom_gemma4_31b rows=1008
+2026-09-03T02:10:48.684021Z [info     ] phase_c.composition_done       [__main__] benchmark=medqa composition=hom_granite42_30b rows=2016
+2026-09-03T02:12:18.527574Z [info     ] phase_c.composition_done       [__main__] benchmark=medqa composition=hom_llama32_3b rows=3024
+2026-09-03T02:14:04.037677Z [info     ] phase_c.composition_done       [__main__] benchmark=medqa composition=hom_ministral3_14b rows=4032
+2026-09-03T02:15:52.750083Z [info     ] phase_c.composition_done       [__main__] benchmark=medqa composition=hom_olmo3_32b_think rows=5040
+2026-09-03T02:17:22.657186Z [info     ] phase_c.composition_done       [__main__] benchmark=medqa composition=hom_phi4_mini_reasoning rows=6048
+2026-09-03T02:19:10.118420Z [info     ] phase_c.composition_done       [__main__] benchmark=medqa composition=hom_qwen38_27b rows=7056
+2026-09-03T02:23:48.220736Z [info     ] phase_c.composition_done       [__main__] benchmark=medqa composition=mix_all4 rows=8064
+2026-09-03T02:26:53.883553Z [info     ] phase_c.composition_done       [__main__] benchmark=medqa composition=mix_strong_weak rows=9072
+2026-09-03T02:26:53.993955Z [info     ] phase_c.benchmark              [__main__] accuracy={'gemma4_31b': 0.905, 'granite42_30b': 0.915, 'llama32_3b': 0.83, 'ministral3_14b': 0.905, 'olmo3_32b_think': 0.905, 'phi4_mini_reasoning': 0.83, 'qwen38_27b': 0.915} benchmark=boolq n_tasks=200
+2026-09-03T02:28:51.007645Z [info     ] phase_c.composition_done       [__main__] benchmark=boolq composition=hom_gemma4_31b rows=10080
+2026-09-03T02:30:35.847046Z [info     ] phase_c.composition_done       [__main__] benchmark=boolq composition=hom_granite42_30b rows=11088
+2026-09-03T02:32:24.622369Z [info     ] phase_c.composition_done       [__main__] benchmark=boolq composition=hom_llama32_3b rows=12096
+2026-09-03T02:34:14.249537Z [info     ] phase_c.composition_done       [__main__] benchmark=boolq composition=hom_ministral3_14b rows=13104
+2026-09-03T02:36:04.154742Z [info     ] phase_c.composition_done       [__main__] benchmark=boolq composition=hom_olmo3_32b_think rows=14112
+2026-09-03T02:37:56.176282Z [info     ] phase_c.composition_done       [__main__] benchmark=boolq composition=hom_phi4_mini_reasoning rows=15120
+2026-09-03T02:39:54.311191Z [info     ] phase_c.composition_done       [__main__] benchmark=boolq composition=hom_qwen38_27b rows=16128
+2026-09-03T02:42:34.134840Z [info     ] phase_c.composition_done       [__main__] benchmark=boolq composition=mix_all4 rows=17136
+2026-09-03T02:45:05.979817Z [info     ] phase_c.composition_done       [__main__] benchmark=boolq composition=mix_strong_weak rows=18144
+2026-09-03T02:45:06.110965Z [info     ] phase_c.benchmark              [__main__] accuracy={'gemma4_31b': 1.0, 'granite42_30b': 0.955, 'llama32_3b': 0.82, 'ministral3_14b': 0.94, 'olmo3_32b_think': 0.955, 'phi4_mini_reasoning': 0.87, 'qwen38_27b': 0.98} benchmark=arc n_tasks=200
+2026-09-03T02:46:48.693215Z [info     ] phase_c.composition_done       [__main__] benchmark=arc composition=hom_gemma4_31b rows=19152
+2026-09-03T02:48:31.948881Z [info     ] phase_c.composition_done       [__main__] benchmark=arc composition=hom_granite42_30b rows=20160
+2026-09-03T02:50:20.940639Z [info     ] phase_c.composition_done       [__main__] benchmark=arc composition=hom_llama32_3b rows=21168
+2026-09-03T02:52:05.333038Z [info     ] phase_c.composition_done       [__main__] benchmark=arc composition=hom_ministral3_14b rows=22176
+2026-09-03T02:53:49.376684Z [info     ] phase_c.composition_done       [__main__] benchmark=arc composition=hom_olmo3_32b_think rows=23184
+2026-09-03T02:55:42.881615Z [info     ] phase_c.composition_done       [__main__] benchmark=arc composition=hom_phi4_mini_reasoning rows=24192
+2026-09-03T02:57:23.792377Z [info     ] phase_c.composition_done       [__main__] benchmark=arc composition=hom_qwen38_27b rows=25200
+2026-09-03T03:00:24.525181Z [info     ] phase_c.composition_done       [__main__] benchmark=arc composition=mix_all4 rows=26208
+2026-09-03T03:03:14.428573Z [info     ] phase_c.composition_done       [__main__] benchmark=arc composition=mix_strong_weak rows=27216
+2026-09-03T03:03:14.704050Z [info     ] phase_c.done                   [__main__] path=results/aggregation/sweep.parquet rows=54432
+
+wrote results/aggregation/sweep.parquet  (54432 rows)
+
+=== 2026-09-03T03:03Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_c_report.py ===
+sweep rows: 54432   methods: 14   cells: 3888
+
+========================================================================================================
+1. ACCURACY vs f  (mix_all4, complete graph, p_obs=1, coherent adversary,
+   matched parity)
+========================================================================================================
+
+  gsm8k
+f                                 0.0    0.1    0.2    0.3    0.4    0.5    0.6    0.7
+method                                                                                
+aip_gated                       0.976  0.976  0.980  0.984  0.980  0.984  0.980  0.976
+aip_naive                       0.747  0.017  0.021  0.073  0.789  0.947  0.968  0.969
+aip_trust_only                  0.976  0.976  0.960  0.952  0.804  0.000  0.000  0.000
+confidence_weighted             0.977  0.977  0.976  0.972  0.955  0.870  0.600  0.000
+confidence_weighted_selfreport  0.975  0.973  0.949  0.921  0.563  0.288  0.037  0.000
+coord_median                    0.966  0.960  0.956  0.956  0.820  0.736  0.000  0.000
+dawid_skene                     0.976  0.980  0.980  0.982  0.980  0.000  0.000  0.000
+dawid_skene_anchors             0.976  0.980  0.980  0.982  0.980  0.000  0.000  0.000
+geometric_median                0.974  0.974  0.964  0.954  0.820  0.736  0.000  0.000
+krum                            0.978  0.968  0.962  0.956  0.734  0.898  0.940  0.000
+majority                        0.974  0.974  0.964  0.954  0.820  0.736  0.000  0.000
+multi_krum                      0.974  0.974  0.962  0.958  0.900  0.752  0.000  0.000
+sac_filter_refine               0.971  0.972  0.974  0.976  0.955  0.870  0.000  0.000
+trimmed_mean                    0.974  0.974  0.964  0.954  0.820  0.736  0.000  0.000
+
+  math500
+f                                 0.0    0.1    0.2    0.3    0.4    0.5    0.6    0.7
+method                                                                                
+aip_gated                       0.477  0.463  0.387  0.179  0.114  0.000  0.000  0.000
+aip_naive                       0.270  0.122  0.182  0.281  0.408  0.387  0.425  0.523
+aip_trust_only                  0.477  0.453  0.387  0.179  0.000  0.000  0.000  0.000
+confidence_weighted             0.552  0.550  0.513  0.511  0.424  0.297  0.156  0.000
+confidence_weighted_selfreport  0.578  0.560  0.496  0.410  0.158  0.067  0.012  0.000
+coord_median                    0.455  0.455  0.445  0.415  0.235  0.165  0.000  0.000
+dawid_skene                     0.515  0.515  0.515  0.000  0.000  0.000  0.000  0.000
+dawid_skene_anchors             0.515  0.515  0.515  0.000  0.000  0.000  0.000  0.000
+geometric_median                0.555  0.535  0.480  0.400  0.235  0.165  0.000  0.000
+krum                            0.555  0.550  0.480  0.455  0.280  0.190  0.000  0.000
+majority                        0.555  0.535  0.480  0.400  0.235  0.165  0.000  0.000
+multi_krum                      0.555  0.535  0.480  0.455  0.235  0.000  0.235  0.000
+sac_filter_refine               0.558  0.559  0.506  0.499  0.217  0.083  0.000  0.000
+trimmed_mean                    0.555  0.535  0.480  0.400  0.235  0.165  0.000  0.000
+
+  mmlu
+f                                 0.0    0.1    0.2    0.3    0.4    0.5    0.6    0.7
+method                                                                                
+aip_gated                       0.888  0.877  0.918  0.920  0.911  0.889  0.911  0.902
+aip_naive                       0.017  0.024  0.022  0.025  0.017  0.028  0.041  0.062
+aip_trust_only                  0.885  0.877  0.874  0.828  0.538  0.000  0.000  0.000
+confidence_weighted             0.908  0.904  0.902  0.906  0.818  0.591  0.190  0.000
+confidence_weighted_selfreport  0.898  0.904  0.888  0.838  0.528  0.112  0.024  0.000
+coord_median                    0.880  0.860  0.855  0.815  0.685  0.205  0.000  0.000
+dawid_skene                     0.885  0.910  0.925  0.925  0.910  0.000  0.000  0.000
+dawid_skene_anchors             0.885  0.910  0.925  0.925  0.910  0.000  0.000  0.000
+geometric_median                0.885  0.870  0.875  0.835  0.690  0.205  0.000  0.000
+krum                            0.880  0.875  0.865  0.845  0.755  0.000  0.790  0.000
+majority                        0.885  0.870  0.875  0.835  0.690  0.205  0.000  0.000
+multi_krum                      0.885  0.870  0.875  0.840  0.750  0.645  0.000  0.000
+sac_filter_refine               0.918  0.914  0.918  0.926  0.818  0.154  0.000  0.000
+trimmed_mean                    0.885  0.870  0.875  0.835  0.685  0.205  0.000  0.000
+
+========================================================================================================
+2. WHERE INVERSION HELPS AND WHERE IT HURTS
+========================================================================================================
+benchmark    f  AIP-gated  best baseline                  name    delta
+gsm8k      0.0      0.976          0.978                  krum   -0.002
+gsm8k      0.1      0.976          0.980           dawid_skene   -0.004
+gsm8k      0.2      0.980          0.980           dawid_skene   +0.000
+gsm8k      0.3      0.984          0.982           dawid_skene   +0.002
+gsm8k      0.4      0.980          0.980           dawid_skene   +0.000
+gsm8k      0.5      0.984          0.898                  krum   +0.086  <-- inversion wins
+gsm8k      0.6      0.980          0.940                  krum   +0.040  <-- inversion wins
+gsm8k      0.7      0.976          0.000              majority   +0.976  <-- inversion wins
+math500    0.0      0.477          0.578confidence_weighted_selfreport   -0.101  <-- inversion loses
+math500    0.1      0.463          0.560confidence_weighted_selfreport   -0.097  <-- inversion loses
+math500    0.2      0.387          0.515           dawid_skene   -0.128  <-- inversion loses
+math500    0.3      0.179          0.511   confidence_weighted   -0.331  <-- inversion loses
+math500    0.4      0.114          0.424   confidence_weighted   -0.310  <-- inversion loses
+math500    0.5      0.000          0.297   confidence_weighted   -0.297  <-- inversion loses
+math500    0.6      0.000          0.235            multi_krum   -0.235  <-- inversion loses
+math500    0.7      0.000          0.000              majority   +0.000
+mmlu       0.0      0.888          0.917     sac_filter_refine   -0.029  <-- inversion loses
+mmlu       0.1      0.877          0.914     sac_filter_refine   -0.038  <-- inversion loses
+mmlu       0.2      0.917          0.925           dawid_skene   -0.008
+mmlu       0.3      0.920          0.926     sac_filter_refine   -0.006
+mmlu       0.4      0.911          0.910           dawid_skene   +0.001
+mmlu       0.5      0.889          0.645            multi_krum   +0.244  <-- inversion wins
+mmlu       0.6      0.911          0.790                  krum   +0.121  <-- inversion wins
+mmlu       0.7      0.902          0.000              majority   +0.902  <-- inversion wins
+
+========================================================================================================
+3. DID THE HONEST-q THRESHOLD DO ITS JOB?
+========================================================================================================
+   honest channels inverted / honest channels judged
+benchmarkmethod                  0.0      0.1      0.2      0.3      0.4      0.5      0.6      0.7
+gsm8k    aip_gated              0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+gsm8k    aip_naive              0.91     0.92     0.93     0.95     1.00     1.00     1.00     1.00
+math500  aip_gated              0.00     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+math500  aip_naive              0.91     0.92     0.93     0.95     1.00     1.00     1.00     1.00
+mmlu     aip_gated              0.04     0.00     0.00     0.00     0.00     0.00     0.00     0.00
+mmlu     aip_naive              0.91     0.92     0.93     0.95     1.00     1.00     1.00     1.00
+
+   accuracy cost of naive inversion (gated minus naive)
+benchmark      0.0      0.1      0.2      0.3      0.4      0.5      0.6      0.7
+gsm8k       +0.229   +0.960   +0.959   +0.911   +0.191   +0.036   +0.011   +0.007
+math500     +0.207   +0.342   +0.204   -0.101   -0.294   -0.387   -0.425   -0.523
+mmlu        +0.871   +0.853   +0.896   +0.895   +0.894   +0.861   +0.870   +0.840
+
+========================================================================================================
+4. NORMALIZATION-PARITY AUDIT
+========================================================================================================
+method                           mean |effect|  max |effect|  n cells  weighted?
+aip_gated                               0.0279        0.8400      432  yes
+aip_trust_only                          0.0274        0.8400      432  yes
+confidence_weighted_selfreport          0.0096        0.1890      432  yes
+aip_naive                               0.0087        0.4850      432  yes
+confidence_weighted                     0.0063        0.4225      432  yes
+sac_filter_refine                       0.0045        0.3690      432  yes
+coord_median                            0.0000        0.0000      432  no
+dawid_skene                             0.0000        0.0000      432  no
+geometric_median                        0.0000        0.0000      432  no
+dawid_skene_anchors                     0.0000        0.0000      432  no
+krum                                    0.0000        0.0000      432  no
+majority                                0.0000        0.0000      432  no
+multi_krum                              0.0000        0.0000      432  no
+trimmed_mean                            0.0000        0.0000      432  no
+
+   Effect = unmatched minus matched accuracy. A method with a large effect is 
+   partly being scored on how much it leans on its own vote rather than on how 
+   well it weights peers, which is exactly the confound parity controls for.
+
+   wrote results/aggregation/parity_audit.parquet
+
+========================================================================================================
+5. SENSITIVITY: topology and partial observability
+========================================================================================================
+   AIP-gated accuracy by topology (p_obs=1)
+f                      0.0    0.1    0.2    0.3    0.4    0.5    0.6    0.7
+benchmark topology                                                         
+arc       complete   0.984  0.986  0.999  0.991  0.989  0.975  0.980  0.978
+          k_nearest  0.972  0.969  0.975  0.967  0.954  0.973  0.462  0.657
+          ring       0.966  0.953  0.937  0.804  0.633  0.159  0.682  0.000
+boolq     complete   0.920  0.907  0.893  0.861  0.701  0.000  0.000  0.000
+          k_nearest  0.914  0.903  0.868  0.855  0.696  0.480  0.585  0.760
+          ring       0.911  0.902  0.884  0.741  0.587  0.662  0.875  0.000
+gsm8k     complete   0.976  0.976  0.980  0.984  0.980  0.984  0.980  0.976
+          k_nearest  0.966  0.946  0.963  0.966  0.971  0.770  0.726  0.649
+          ring       0.957  0.926  0.951  0.685  0.599  0.152  0.462  0.000
+math500   complete   0.477  0.463  0.387  0.179  0.114  0.000  0.000  0.000
+          k_nearest  0.417  0.449  0.382  0.251  0.130  0.312  0.000  0.178
+          ring       0.390  0.439  0.438  0.269  0.167  0.352  0.252  0.265
+medqa     complete   0.870  0.867  0.933  0.917  0.872  0.862  0.869  0.842
+          k_nearest  0.762  0.811  0.786  0.809  0.771  0.470  0.784  0.732
+          ring       0.828  0.681  0.632  0.369  0.268  0.157  0.000  0.000
+mmlu      complete   0.888  0.877  0.918  0.920  0.911  0.889  0.911  0.902
+          k_nearest  0.859  0.853  0.868  0.881  0.882  0.876  0.866  0.508
+          ring       0.815  0.671  0.632  0.524  0.412  0.330  0.380  0.000
+
+   AIP-gated accuracy by p_obs (complete graph)
+f                  0.0    0.1    0.2    0.3    0.4    0.5    0.6    0.7
+benchmark p_obs                                                        
+arc       0.10   0.934  0.901  0.837  0.761  0.699  0.625  0.736  0.925
+          0.25   0.944  0.929  0.881  0.761  0.640  0.560  0.929  0.925
+          0.50   0.972  0.969  0.948  0.851  0.678  0.465  0.929  0.925
+          1.00   0.984  0.986  0.999  0.991  0.989  0.975  0.980  0.978
+boolq     0.10   0.886  0.855  0.779  0.724  0.638  0.611  0.520  0.475
+          0.25   0.897  0.860  0.778  0.691  0.544  0.394  0.311  0.263
+          0.50   0.902  0.894  0.850  0.783  0.621  0.385  0.249  0.058
+          1.00   0.920  0.907  0.893  0.861  0.701  0.000  0.000  0.000
+gsm8k     0.10   0.932  0.879  0.848  0.790  0.729  0.633  0.845  0.903
+          0.25   0.943  0.898  0.867  0.765  0.663  0.524  0.917  0.903
+          0.50   0.966  0.946  0.926  0.830  0.648  0.437  0.917  0.903
+          1.00   0.976  0.976  0.980  0.984  0.980  0.984  0.980  0.976
+math500   0.10   0.418  0.424  0.388  0.383  0.378  0.315  0.264  0.195
+          0.25   0.452  0.451  0.413  0.353  0.303  0.290  0.158  0.113
+          0.50   0.497  0.481  0.427  0.367  0.228  0.146  0.178  0.023
+          1.00   0.477  0.463  0.387  0.179  0.114  0.000  0.000  0.000
+medqa     0.10   0.736  0.718  0.676  0.626  0.531  0.579  0.726  0.422
+          0.25   0.781  0.753  0.700  0.621  0.525  0.646  0.726  0.707
+          0.50   0.822  0.811  0.781  0.647  0.449  0.468  0.726  0.707
+          1.00   0.870  0.867  0.933  0.917  0.872  0.862  0.869  0.842
+mmlu      0.10   0.812  0.764  0.744  0.689  0.609  0.585  0.748  0.638
+          0.25   0.837  0.803  0.752  0.703  0.573  0.477  0.801  0.787
+          0.50   0.870  0.838  0.836  0.759  0.557  0.414  0.801  0.787
+          1.00   0.888  0.877  0.918  0.920  0.911  0.889  0.911  0.902
+
+   Coherent vs noise adversary (AIP-gated, p_obs=1, complete)
+f                         0.0    0.1    0.2    0.3    0.4    0.5    0.6    0.7
+benchmark adversary                                                           
+arc       always_wrong  0.984  0.986  0.999  0.991  0.989  0.975  0.980  0.978
+          noise         0.984  0.978  0.985  0.954  0.939  0.874  0.604  0.000
+boolq     always_wrong  0.920  0.907  0.893  0.861  0.701  0.000  0.000  0.000
+          noise         0.920  0.907  0.893  0.861  0.701  0.000  0.000  0.000
+gsm8k     always_wrong  0.976  0.976  0.980  0.984  0.980  0.984  0.980  0.976
+          noise         0.976  0.976  0.980  0.984  0.986  0.988  0.986  0.986
+math500   always_wrong  0.477  0.463  0.387  0.179  0.114  0.000  0.000  0.000
+          noise         0.477  0.443  0.493  0.483  0.508  0.456  0.229  0.000
+medqa     always_wrong  0.870  0.867  0.933  0.917  0.872  0.862  0.869  0.842
+          noise         0.870  0.859  0.879  0.736  0.453  0.243  0.040  0.000
+mmlu      always_wrong  0.888  0.877  0.918  0.920  0.911  0.889  0.911  0.902
+          noise         0.888  0.875  0.877  0.868  0.789  0.616  0.155  0.000
+
+=== 2026-09-03T03:03Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_c_figures.py ===
+wrote figures/money_figure_draft.pdf
+wrote figures/gating_ablation.pdf

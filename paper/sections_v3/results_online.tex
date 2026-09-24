@@ -1,0 +1,8 @@
+% RESULTS-DEPENDENT: interpretation below must be checked against results/online before release.
+The sleeper is the one attack in the zoo that defeats every static defender, including the known-channel oracle, because it violates stationarity. We therefore re-ran four schedules under a strictly causal protocol. At each step every honest receiver predicts from a state fitted only on earlier questions, then commits the observation. Methods refit every 8 questions. A test confirms that future broadcasts or labels cannot change a past prediction. \Cref{fig:online} shows $f=0.5$. Under the sleeper schedule, averaged over the last questions after the switch, a \race\ fit frozen at warm-up scores \onSleeperFixed\%. Cumulative refitting scores \onSleeperCum\%, forgetting ($\gamma=0.97$) \onSleeperDecay\% and a 64-question window \onSleeperWin\%. A windowed \aip\ scores \onSleeperAipWin\% and the receiver alone \onSleeperSelf\%. On a stationary coherent schedule, forgetting costs \race\ little (\onStatDecay\% vs.\ \onStatCum\% cumulative), so forgetting is a cheap default when stationarity cannot be assumed.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/fig8_online.pdf}
+\caption{\textbf{E6.} Causal online accuracy (16-question rolling mean) at $f=0.5$ under four attacker schedules. Vertical line: the attacker's switch.}\label{fig:online}
+\end{figure}

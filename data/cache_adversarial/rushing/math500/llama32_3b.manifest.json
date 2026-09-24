@@ -1,0 +1,14 @@
+{
+  "benchmark": "math500",
+  "model": "llama32_3b",
+  "n_rows": 200,
+  "n_tasks": 200,
+  "updated_at": "2026-09-20T15:45:42.773819+00:00",
+  "attack": "rushing",
+  "hf_id": "unsloth/Llama-3.2-3B-Instruct",
+  "prompt_template_hash": "44b7019693c2",
+  "run_id": "x3_repair_adversarial-3df8f36a6704-20260920T150842Z-63f2",
+  "x3_truncated_rows": 33,
+  "x3_context_stale_rows": 119,
+  "x3_budget": 3072
+}

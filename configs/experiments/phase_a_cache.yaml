@@ -1,0 +1,84 @@
+# Phase A: cache-once inference over the benchmark x model grid.
+#
+# Everything downstream reads the artefacts this produces. No later phase may
+# re-run inference (design principle 1).
+
+phase: phase_a
+run_name: phase_a_cache
+
+seeds:
+  task_selection: 20250825   # fixes which questions enter the study
+  generation: 0              # vLLM sampling seed (irrelevant at temperature 0)
+
+# 1500 tasks. Sizes are not uniform: GSM8K carries 500 because the open-numeric
+# honest-q ceiling was the least-powered of the calibration classes on the L4
+# regime (82 joint errors), and quadrupling the task count is what buys it a
+# usable CI. Every answer-space class in configs/inversion_thresholds.yaml now
+# has at least one benchmark.
+benchmarks:
+  - name: gsm8k
+    n_tasks: 500             # open_numeric; frozen 100 + disjoint ext 400
+  - name: math500
+    n_tasks: 200             # open_text; frozen 100 preserved + 100
+  - name: mmlu
+    n_tasks: 200             # multiple_choice C=4; subject-stratified, 100 preserved + 100
+  - name: medqa
+    n_tasks: 200             # multiple_choice C=4; USMLE clinical vignettes
+  - name: boolq
+    n_tasks: 200             # binary C=2; label-balanced, the exact-law control
+  - name: arc
+    n_tasks: 200             # multiple_choice C=4; ARC-Challenge, four-option items
+
+models: null                 # null = every enabled model in configs/models.yaml
+
+inference:
+  temperature: 0.0                     # greedy for all benchmark answers
+  elicit_self_reported_confidence: true
+  # Both budgets come from each model's registry entry. These overrides exist
+  # only for debugging: a single global cap truncated Phi-4-mini-reasoning
+  # mid-thought and cost 3/5 of its GSM8K answers in the first dry run.
+  max_tokens_override: null
+  confidence_max_tokens_override: null
+  batch_size: null           # null = one vLLM batch per (model, benchmark) cell
+
+reproducibility:
+  # Gate d. With VLLM_BATCH_INVARIANT on, a handful of long generations still did
+  # not reproduce byte-identically across identical re-runs on the L4 regime;
+  # long completions amplify residual float nondeterminism. Downstream phases
+  # read the cache, so results remain internally consistent -- what is not
+  # guaranteed is regenerating a bit-identical cache from scratch.
+  #
+  # The list is EMPTY because this is a new hardware regime (RULE 1): the L4's
+  # seven non-reproducing ids were measured against different models on a
+  # different card and say nothing about this one. It is repopulated from gate d
+  # of this regime's own runs, not carried over.
+  note: >-
+    Cache is authoritative and internally consistent; bit-identical regeneration
+    from scratch is not guaranteed for the ids listed here.
+  known_nonreproducing:
+    # MEASURED ON THIS REGIME, not carried over from the L4 run.
+    #
+    # qwen38_27b. Qwen 3.8's Gated Delta Net linear-attention layers (48 of its
+    # 64) run through FlashInfer's chunk_gated_delta_rule, which
+    # VLLM_BATCH_INVARIANT does not cover -- that flag makes attention
+    # batch-invariant, not a chunked linear-attention scan. Measured rate under
+    # vLLM 0.19.1: 1 in 30 GSM8K tasks, and the SAME task every time, which
+    # reads as one numerical near-tie rather than diffuse jitter. The other six
+    # models pass gate d under the identical code path, so the flag itself is
+    # working. --enforce-eager was tested and ruled it out as a CUDA-graph
+    # capture effect: identical failure, 25% slower. No kernel-level workaround
+    # was attempted; the experiment matters more than the model.
+    - gsm8k-test-00000                           # qwen38_27b, GDN kernel
+
+paths:
+  registry: configs/models.yaml
+  task_lists: configs/task_lists.json
+  task_cache: data/benchmarks
+  prediction_cache: data/cache
+  results: results
+  logs: results/logs
+
+runtime:
+  dry_run_tasks: 5           # --dry-run uses this many tasks per cell
+  resume: true               # skip (task_id, model) cells already cached
+  fail_on_budget_violation: true

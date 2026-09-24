@@ -1,0 +1,21 @@
+{
+  "benchmark": "gsm8k",
+  "model": "ministral3_14b",
+  "n_rows": 500,
+  "n_tasks": 500,
+  "updated_at": "2026-09-20T15:01:53.832921+00:00",
+  "prompt_template_hash": "f9b756633e80",
+  "hf_id": "mistralai/Ministral-3-14B-Instruct-2512-BF16",
+  "dtype": "bfloat16",
+  "max_model_len": 4096,
+  "seed": 0,
+  "registry_hash": "9855995a45f5",
+  "batch_invariant": true,
+  "sample_index": 1,
+  "temperature": 0.7,
+  "run_id": "x3_repair-d454ff5360dc-20260920T144520Z-84c7",
+  "x3_repaired_rows": 25,
+  "x3_budget": 3072,
+  "x3_control_drift": 0,
+  "x3_control_answer_drift": 0
+}

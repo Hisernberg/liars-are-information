@@ -1,0 +1,101 @@
+[
+  {
+    "model": "olmo3_32b_think",
+    "benchmark": "gsm8k",
+    "budget": 3072,
+    "n_repair": 24,
+    "still_pinned": 8,
+    "n_control": 8,
+    "control_drift": [
+      "gsm8k-test-00060",
+      "gsm8k-test-00124",
+      "gsm8k-test-00186",
+      "gsm8k-test-00247",
+      "gsm8k-test-00309",
+      "gsm8k-test-00369"
+    ],
+    "control_answer_drift": [],
+    "seconds": 263.2
+  },
+  {
+    "model": "olmo3_32b_think",
+    "benchmark": "math500",
+    "budget": 3072,
+    "n_repair": 83,
+    "still_pinned": 52,
+    "n_control": 8,
+    "control_drift": [
+      "math500-test/algebra/1004.json",
+      "math500-test/algebra/187.json",
+      "math500-test/algebra/2570.json",
+      "math500-test/counting_and_probability/1009.json",
+      "math500-test/geometry/483.json",
+      "math500-test/intermediate_algebra/834.json",
+      "math500-test/number_theory/691.json",
+      "math500-test/prealgebra/1730.json"
+    ],
+    "control_answer_drift": [],
+    "seconds": 554.9
+  },
+  {
+    "model": "olmo3_32b_think",
+    "benchmark": "mmlu",
+    "budget": 3072,
+    "n_repair": 12,
+    "still_pinned": 6,
+    "n_control": 8,
+    "control_drift": [
+      "mmlu-test-00011",
+      "mmlu-test-00886",
+      "mmlu-test-01607",
+      "mmlu-test-02798",
+      "mmlu-test-04260",
+      "mmlu-test-05895",
+      "mmlu-test-06890",
+      "mmlu-test-09143"
+    ],
+    "control_answer_drift": [],
+    "seconds": 258.1
+  },
+  {
+    "model": "olmo3_32b_think",
+    "benchmark": "medqa",
+    "budget": 3072,
+    "n_repair": 31,
+    "still_pinned": 10,
+    "n_control": 8,
+    "control_drift": [
+      "medqa-test-00000",
+      "medqa-test-00193",
+      "medqa-test-00335",
+      "medqa-test-00534",
+      "medqa-test-00685",
+      "medqa-test-00818",
+      "medqa-test-00967",
+      "medqa-test-01140"
+    ],
+    "control_answer_drift": [
+      "medqa-test-01140"
+    ],
+    "seconds": 267.8
+  },
+  {
+    "model": "olmo3_32b_think",
+    "benchmark": "arc",
+    "budget": 3072,
+    "n_repair": 3,
+    "still_pinned": 1,
+    "n_control": 8,
+    "control_drift": [
+      "arc-test-ACTAAP_2007_7_3",
+      "arc-test-MDSA_2007_5_16",
+      "arc-test-Mercury_400887",
+      "arc-test-Mercury_416536",
+      "arc-test-Mercury_7094133",
+      "arc-test-Mercury_SC_400985",
+      "arc-test-Mercury_SC_409171"
+    ],
+    "control_answer_drift": [],
+    "seconds": 248.9
+  }
+]

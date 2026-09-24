@@ -1,0 +1,186 @@
+{
+  "cells": [
+    {
+      "model": "llama32_3b",
+      "benchmark": "gsm8k",
+      "sample_index": 0,
+      "temperature": 0.0,
+      "n": 500,
+      "accuracy": 0.802,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [
+        "gsm8k-test-00397"
+      ],
+      "confidence_correct_incorrect": [
+        0.9902084804186423,
+        0.9781399579110566
+      ],
+      "confidence_auc": 0.7205093327287841,
+      "headroom_flag": "ok",
+      "self_report_failures": [],
+      "wall_seconds": 15.878880993986968,
+      "error": null
+    },
+    {
+      "model": "llama32_3b",
+      "benchmark": "math500",
+      "sample_index": 0,
+      "temperature": 0.0,
+      "n": 200,
+      "accuracy": 0.425,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [
+        "math500-test/intermediate_algebra/1994.json",
+        "math500-test/intermediate_algebra/607.json",
+        "math500-test/intermediate_algebra/1217.json",
+        "math500-test/precalculus/675.json",
+        "math500-test/precalculus/1313.json",
+        "math500-test/intermediate_algebra/47.json",
+        "math500-test/intermediate_algebra/1849.json",
+        "math500-test/algebra/2700.json",
+        "math500-test/intermediate_algebra/662.json",
+        "math500-test/precalculus/1300.json",
+        "math500-test/intermediate_algebra/582.json",
+        "math500-test/intermediate_algebra/558.json",
+        "math500-test/intermediate_algebra/362.json",
+        "math500-test/intermediate_algebra/345.json",
+        "math500-test/number_theory/753.json",
+        "math500-test/intermediate_algebra/1151.json",
+        "math500-test/intermediate_algebra/991.json",
+        "math500-test/intermediate_algebra/183.json",
+        "math500-test/number_theory/234.json",
+        "math500-test/algebra/2102.json",
+        "math500-test/number_theory/417.json",
+        "math500-test/precalculus/1056.json",
+        "math500-test/precalculus/920.json",
+        "math500-test/prealgebra/1995.json",
+        "math500-test/precalculus/580.json",
+        "math500-test/geometry/826.json",
+        "math500-test/algebra/1184.json",
+        "math500-test/intermediate_algebra/1411.json",
+        "math500-test/intermediate_algebra/960.json",
+        "math500-test/counting_and_probability/25149.json",
+        "math500-test/number_theory/488.json",
+        "math500-test/geometry/711.json",
+        "math500-test/precalculus/742.json",
+        "math500-test/intermediate_algebra/117.json",
+        "math500-test/algebra/509.json",
+        "math500-test/intermediate_algebra/1566.json",
+        "math500-test/counting_and_probability/116.json",
+        "math500-test/intermediate_algebra/1166.json",
+        "math500-test/algebra/853.json",
+        "math500-test/precalculus/398.json",
+        "math500-test/precalculus/681.json",
+        "math500-test/precalculus/1133.json",
+        "math500-test/counting_and_probability/10.json",
+        "math500-test/precalculus/323.json",
+        "math500-test/prealgebra/805.json",
+        "math500-test/intermediate_algebra/834.json",
+        "math500-test/number_theory/1128.json",
+        "math500-test/intermediate_algebra/1467.json",
+        "math500-test/number_theory/1090.json",
+        "math500-test/intermediate_algebra/1930.json",
+        "math500-test/intermediate_algebra/1508.json"
+      ],
+      "confidence_correct_incorrect": [
+        0.9896928016779439,
+        0.9465732425631015
+      ],
+      "confidence_auc": 0.7889514066496164,
+      "headroom_flag": "ok",
+      "self_report_failures": [],
+      "wall_seconds": 14.54491144104395,
+      "error": null
+    },
+    {
+      "model": "llama32_3b",
+      "benchmark": "mmlu",
+      "sample_index": 0,
+      "temperature": 0.0,
+      "n": 200,
+      "accuracy": 0.615,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [
+        "mmlu-test-01170",
+        "mmlu-test-02095",
+        "mmlu-test-04347",
+        "mmlu-test-04755"
+      ],
+      "confidence_correct_incorrect": [
+        0.9563720342684646,
+        0.8908499982725663
+      ],
+      "confidence_auc": 0.7005596029986274,
+      "headroom_flag": "ok",
+      "self_report_failures": [],
+      "wall_seconds": 8.745463148050476,
+      "error": null
+    },
+    {
+      "model": "llama32_3b",
+      "benchmark": "medqa",
+      "sample_index": 0,
+      "temperature": 0.0,
+      "n": 200,
+      "accuracy": 0.54,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.9606851897415025,
+        0.9207130950818828
+      ],
+      "confidence_auc": 0.6313405797101449,
+      "headroom_flag": "ok",
+      "self_report_failures": [],
+      "wall_seconds": 6.4529504959937185,
+      "error": null
+    },
+    {
+      "model": "llama32_3b",
+      "benchmark": "boolq",
+      "sample_index": 0,
+      "temperature": 0.0,
+      "n": 200,
+      "accuracy": 0.83,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.9760134591016453,
+        0.912753037117954
+      ],
+      "confidence_auc": 0.810772501771793,
+      "headroom_flag": "ok",
+      "self_report_failures": [],
+      "wall_seconds": 3.4968157059629448,
+      "error": null
+    },
+    {
+      "model": "llama32_3b",
+      "benchmark": "arc",
+      "sample_index": 0,
+      "temperature": 0.0,
+      "n": 200,
+      "accuracy": 0.82,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.9669845659639803,
+        0.8893499684337863
+      ],
+      "confidence_auc": 0.7803184281842819,
+      "headroom_flag": "ok",
+      "self_report_failures": [],
+      "wall_seconds": 3.2491898530279286,
+      "error": null
+    }
+  ],
+  "load_times": {
+    "llama32_3b": 31.804517937998753
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "run_id": "phase_e_sleeper_sybil-4bbb5a5e0bd1-20260903T120515Z-0f33",
+  "phase": "phase_e_sleeper_sybil",
+  "config_hash": "4bbb5a5e0bd1",
+  "config": {
+    "benchmarks": [
+      "math500",
+      "medqa",
+      "mmlu"
+    ],
+    "k_grid": [
+      10,
+      25,
+      50
+    ],
+    "sybil_sizes": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "window": 20
+  },
+  "seeds": {
+    "analysis": 20250825
+  },
+  "git_commit": "ebc495174280e8592b51b039a740fd59d712061e-dirty",
+  "started_at": "2026-09-03T12:05:15.653551+00:00",
+  "finished_at": "2026-09-03T12:06:38.791970+00:00",
+  "status": "ok",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-190-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu02",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA H100 NVL",
+      "memory_total_mib": 95830,
+      "driver": "570.195.03"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "5.16.1",
+    "vllm": "0.19.1"
+  },
+  "notes": {
+    "n_rows": 306
+  }
+}

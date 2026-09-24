@@ -1,0 +1,4619 @@
+{
+  "info": {
+    "id": "Nabidnur/Liars_Are_Information-bucket",
+    "private": false,
+    "created_at": "2026-09-11 15:10:48+00:00",
+    "size": 42368540,
+    "total_files": 576
+  },
+  "files": [
+    {
+      "type": "file",
+      "path": ".gitattributes",
+      "size": 1031,
+      "xet_hash": "cec1e84f8770b03cb928d645883ec14dab207d3493c8650057ee2699c2dcde28",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": ".gitignore",
+      "size": 1393,
+      "xet_hash": "9061ef85c7ba69d21db3ea6eee5faee50a04d296b5e480a033c7c0a281b5e772",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "LICENSE",
+      "size": 1827,
+      "xet_hash": "63a15309ac793a658bc27a73dcbcaf1508b375841845b3836d8435533e2fbd1c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "README.md",
+      "size": 31269,
+      "xet_hash": "632c2d5722c36347bf9518eed091079428dbaa42f083b9d001d0479fbbd56620",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "RUNLOG.md",
+      "size": 23576,
+      "xet_hash": "aaaa2bbb752eff57b7545f3ddce0378f918e703875ebce8d568e27a0e942c6ab",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "configs/decision_rules.yaml",
+      "size": 4625,
+      "xet_hash": "270081b6af25279d1ee54e84a69e6c32679cc2ff3dd63a72a44c4148617c2079",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "configs/experiments/phase_a_cache.yaml",
+      "size": 4018,
+      "xet_hash": "49cfde4d81cea0d7eba1b1355ab04541ffdb4a4cefc033defa65348d134324b9",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "configs/inversion_thresholds.yaml",
+      "size": 7783,
+      "xet_hash": "3c6309590bf11c4afa5d840651c8cb8dd352911430f54692dcc52dbeff5d2afd",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "configs/models.yaml",
+      "size": 18536,
+      "xet_hash": "f50b33786642ccb4a5ac54c53177fd2e40f889d144564f8811cc2590a34869b2",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "configs/task_lists.json",
+      "size": 52879,
+      "xet_hash": "239c1e726dff3741776e099302996d6784c6a138bdc09975ff538b35ddd07ea3",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "configs/task_lists_gsm8k_ext.json",
+      "size": 11812,
+      "xet_hash": "4fcf4f3f1031493a4777f0e66b26e3794911fde011f57956b71257596eb3adb9",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "configs/task_lists_v1_l4.json",
+      "size": 13272,
+      "xet_hash": "4e2e7f7ac18c5abaf1d2e7dfeef9c906181fe5a0f66dc05d6cce85be063dd089",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/.gitkeep",
+      "size": 0,
+      "xet_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/arc_n100_seed20250825.json",
+      "size": 52792,
+      "xet_hash": "30aa9f603609e2b5d30d6316dd900e2688dac40e036d4f45638d644c208e08c9",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/arc_n200_seed20250825.json",
+      "size": 105518,
+      "xet_hash": "baeccb47bee9da84b27aa470b7d32eee829c1ceb82e54d87023f7e3b5637d1ed",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/arc_nall_seed20250825.json",
+      "size": 608340,
+      "xet_hash": "5bf8b637318eec36a78d07e55d3fcef2f148f3910ba9ccf6a96e54a7ee2d05f5",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/boolq_n100_seed20250825.json",
+      "size": 85717,
+      "xet_hash": "51f0bab91f0e8840d83cc961b178aae48fe062355a8b8e031f6f26110255b36b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/boolq_n200_seed20250825.json",
+      "size": 170105,
+      "xet_hash": "7b4a20035abe292eae8d234b258135a786b3585166099aa2610fc5157f3b4941",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/boolq_nall_seed20250825.json",
+      "size": 2831791,
+      "xet_hash": "beebb73d9d1d93b5403a0e009646d88b6d125b4fb6a38dbdc945db8aed453ce8",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/gsm8k_n100_seed20250825.json",
+      "size": 75066,
+      "xet_hash": "f3a3009d466b79b227b9b207afd80205a7d999b94341a1951d0278151df5de4d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/gsm8k_n5_seed20250825.json",
+      "size": 3701,
+      "xet_hash": "7be775547a9b9e9b9459b0c135758a31213cb83a0c2251265801e1a77c2f53f4",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/gsm8k_nall_seed20250825.json",
+      "size": 976386,
+      "xet_hash": "28f66e52e90c3b73a3ace08050b0abc4d48cc7678e9e4b1697183e0f69f8077b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/math500_n100_seed20250825.json",
+      "size": 105845,
+      "xet_hash": "fe575f56ef2a231c372317db0cd6543ed25749df93a3dada8af26bb2f092f403",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/math500_n200_seed20250825.json",
+      "size": 197221,
+      "xet_hash": "744a27c685db4db44cb9cfea646c54b11388eaf3737ce6e851db72be509f9576",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/math500_n5_seed20250825.json",
+      "size": 3884,
+      "xet_hash": "c0ecd562cb6d705fb76dd21f12dc88351053dc93894354a45ddf76045b21d090",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/math500_nall_seed0.json",
+      "size": 514956,
+      "xet_hash": "813121446c5b5f69eae5ccb5f881b6a66c1fc04bc16d6e68ead101938c6d4104",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/math500_nall_seed20250825.json",
+      "size": 514956,
+      "xet_hash": "813121446c5b5f69eae5ccb5f881b6a66c1fc04bc16d6e68ead101938c6d4104",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/medqa_n100_seed20250825.json",
+      "size": 109627,
+      "xet_hash": "2bdac0481d6ef83b03484c00a763e8787bdbc25625df15131d3f2e9f1ef3b413",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/medqa_n200_seed20250825.json",
+      "size": 222012,
+      "xet_hash": "c32ca41bf7e70e080450ccb37cc9437d78617fbc17258fef49c49090abc9b507",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/medqa_nall_seed20250825.json",
+      "size": 1407269,
+      "xet_hash": "bd485f0b2a9f2adf155af1093b654deca6a4a07e1755ec16e004781b52771442",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/mmlu_n100_seed20250825.json",
+      "size": 64194,
+      "xet_hash": "5cc8d72cca4c8c8c12b8addb6299334b2e407289f995a2334cb4987018fe8ab4",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/mmlu_n200_seed20250825.json",
+      "size": 124243,
+      "xet_hash": "e02236402dcfd1459cfb72316c6772fa4565d0d81abc9054d76e35bf8ec33d8c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/mmlu_n5_seed20250825.json",
+      "size": 2022,
+      "xet_hash": "895f06cdfde0e85e9be9365cc91713940e50010b05318ed2b9bf5d472133ebe7",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/benchmarks/mmlu_nall_seed20250825.json",
+      "size": 9843276,
+      "xet_hash": "edeb891ba75383cf236cc0649b0c84b3060488ecf3c0e43c150b731f93f75821",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/gemma4_31b.manifest.json",
+      "size": 494,
+      "xet_hash": "ab59cd874b45ce85f527f6366944203d5f5217dfee4cbcb9a3e52e65f738ca80",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/gemma4_31b.parquet",
+      "size": 84300,
+      "xet_hash": "6d75d6fac501ffdd6fa6783ea2c40000cfca6663b6997cb156376f24a80d1294",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/granite42_30b.manifest.json",
+      "size": 503,
+      "xet_hash": "a9b7b0437765929d9fb6a5c4d8e3a7fb2faa9a5753dfd527c93cdc860317150b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/granite42_30b.parquet",
+      "size": 62842,
+      "xet_hash": "24e814e3e9eda420c529fcdc4cec400997b79c87550afa27eb8b0adca809d65e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/llama32_3b.manifest.json",
+      "size": 502,
+      "xet_hash": "e5feed81a672eb05b9e7f63f18fb349ed3c9c78f9a4e0a32a53a9edd1cb6a140",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/llama32_3b.parquet",
+      "size": 45179,
+      "xet_hash": "9fb0c45fae08c8150680c1006b88a8044fe3eddd31deada84bbc78f56edf0b9a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/ministral3_14b.manifest.json",
+      "size": 521,
+      "xet_hash": "3bb84bffedb81c32593ef334697949f6f455468f4bed80c264ec989aeae58fa3",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/ministral3_14b.parquet",
+      "size": 31520,
+      "xet_hash": "979f283a2a67d382f797b592107fd4ccb55897551c63537b33826c9bdd4dd82b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/ministral_8b.manifest.json",
+      "size": 511,
+      "xet_hash": "9c14c703eddccfb574cd86efd32909502e4dc7175d60657cabe1bdb23b7723cd",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/ministral_8b.parquet",
+      "size": 16565,
+      "xet_hash": "e5218a7bf291bc3465004cb29b752275f7927999b99d35887b33671fdcd4fd74",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/olmo2_7b.manifest.json",
+      "size": 502,
+      "xet_hash": "dd402dc2163cbad27b1bf69f3fe05e08cc557e38996cbe63d465db67b06ddb02",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/olmo2_7b.parquet",
+      "size": 14852,
+      "xet_hash": "043cb01afe39918fbacd8c4f7fd5a0deb228c5825be33bcf482f086c7ef9ba2b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/olmo3_32b_think.manifest.json",
+      "size": 502,
+      "xet_hash": "a3479c97e9b1590125e62ed91e664f03f6dbf134afd0869fd6a0c964ca302881",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/olmo3_32b_think.parquet",
+      "size": 233399,
+      "xet_hash": "13fe72dfc69c8faced03acfe61755caaf1534b5b2f58a841d39a31e2f1bbef15",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/phi4_mini_reasoning.manifest.json",
+      "size": 512,
+      "xet_hash": "a20b7aeb53ae1ba34d17a13dc7314514e98d7d1ee98d137c012b8c18e4568499",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/phi4_mini_reasoning.parquet",
+      "size": 328341,
+      "xet_hash": "b333f0fc8e96b13721d9931914237f88536abe981bb911194dc7015b23f1751d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/qwen38_27b.manifest.json",
+      "size": 489,
+      "xet_hash": "3c581dfee1017cb3f33aec4f92c42c6c5ae5390e562b169d0b0ec8b2f36bb972",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/arc/qwen38_27b.parquet",
+      "size": 154150,
+      "xet_hash": "ef44a70b9c40f0b09f0bcfe8a9058034c4f68df7d62fc3441deec5cde8625ce1",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/gemma4_31b.manifest.json",
+      "size": 496,
+      "xet_hash": "c6bc2e35d872d27dd3e6424d64a632f1eb87ace292313a11b6ace94191a371d4",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/gemma4_31b.parquet",
+      "size": 42830,
+      "xet_hash": "8462485ed6e8a0ca7378fb5506f622223758845ebab9bbab525caf97872218e4",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/granite42_30b.manifest.json",
+      "size": 505,
+      "xet_hash": "4aeb941143fc9dbc7cd0e466c969f3e972cfd9d00b034844377912a338bd7d20",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/granite42_30b.parquet",
+      "size": 51294,
+      "xet_hash": "9e0ab588bf95df587bdf80517debfbf6130e210b3898bfc81aa39f046903150e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/llama32_3b.manifest.json",
+      "size": 504,
+      "xet_hash": "e89d6a4f21b38efc3b70599b7fcc1417ac69a6712854b36e103dae7227bda7e2",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/llama32_3b.parquet",
+      "size": 32946,
+      "xet_hash": "7aa96b872362fac48d88717258f0d04b998aceb26034dd85bb7efcc2c4c6bccc",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/ministral3_14b.manifest.json",
+      "size": 523,
+      "xet_hash": "c0228c1f450a64c3aea6041fde1016a0fc2643362712241f495ef1c6bba73027",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/ministral3_14b.parquet",
+      "size": 17897,
+      "xet_hash": "cc77e630d53f9e6595551c93d88c93238bb6cf38e0ede34695efa310c85bacfa",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/ministral_8b.manifest.json",
+      "size": 513,
+      "xet_hash": "7d66edd8c6244a0c5d7a53f9b5f4b19c623e2e618c8024ac72e22bfc9f99b25b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/ministral_8b.parquet",
+      "size": 14127,
+      "xet_hash": "53e9f8d9998eae8dcc6c0b0da57df99978b318aa6420b7051783bf530543df72",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/olmo2_7b.manifest.json",
+      "size": 504,
+      "xet_hash": "ebb8447085ab49461da71bc6e77f52d509c8898fda2a7fde908022c4fe2ca0cf",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/olmo2_7b.parquet",
+      "size": 14353,
+      "xet_hash": "84345d417da448953f75d3e517d3a95605ef973c803b6569334923ef979f2ed7",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/olmo3_32b_think.manifest.json",
+      "size": 504,
+      "xet_hash": "28dd464f22bf225da175a8b8c48c23857bc8d2cb6a4f3173be29109f52bdaff6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/olmo3_32b_think.parquet",
+      "size": 118498,
+      "xet_hash": "fea00ded48b22c051952d06918e0ba7a9a8393e7906ac41e98912c023efb5f6e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/phi4_mini_reasoning.manifest.json",
+      "size": 514,
+      "xet_hash": "3ebb291214a0f41622d82bb9b1cf2ed7a57bf61e1c7674edf5b8dbfae97e667e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/phi4_mini_reasoning.parquet",
+      "size": 143370,
+      "xet_hash": "879867eeca5280dcbdb93ba3c78b7377ffe6d2a3988b6a1980c95d9667e6c93f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/qwen38_27b.manifest.json",
+      "size": 491,
+      "xet_hash": "971a78df3fd5a0662aff03fbbe2f49ec3dc9f498967323a2bd3d97e3355b186d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/boolq/qwen38_27b.parquet",
+      "size": 66903,
+      "xet_hash": "fa1e0bbfdb232a86eec95f7613f3d0c9ff65c51c610b9461b525c2082eca4006",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/gemma4_31b.manifest.json",
+      "size": 496,
+      "xet_hash": "9341f0a0a6f0d0449d3d22086cbf309f1df3c6567049f7df4aaa1cbebc0766b6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/gemma4_31b.parquet",
+      "size": 199322,
+      "xet_hash": "ac9c4335c68d0a419841ade98cd3c58b8e9b3290279c75e5b73f5e47a4f04199",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/granite42_30b.manifest.json",
+      "size": 505,
+      "xet_hash": "356cd8961dbafef6cc3adf22a572666adeb4e3534a21fe214a1e3882a8727d01",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/granite42_30b.parquet",
+      "size": 174376,
+      "xet_hash": "04477b1c7df5ee99e2d933aacb9b4fd397bdba8beec9478ad8c29a73630608b8",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/llama32_3b.manifest.json",
+      "size": 504,
+      "xet_hash": "b501f569320bd8e909fc0d58b8d6528d065037d2f6af60cd548dc2043e9523cd",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/llama32_3b.parquet",
+      "size": 168378,
+      "xet_hash": "7c17b6f0cf0b40ba7b52571eae8e72b05c86879bba91649260e67cdb12ecd986",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/ministral3_14b.manifest.json",
+      "size": 523,
+      "xet_hash": "98a53622fb4feaa423485402af3417b52be9be1d29edc1504137e729d43cce47",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/ministral3_14b.parquet",
+      "size": 194890,
+      "xet_hash": "2a3962b32c3967a8d077e04ee60fabf4da4771db29c20fab493785a64f09d874",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/ministral_8b.manifest.json",
+      "size": 513,
+      "xet_hash": "ab816c9981f6870d99732c3c3908397a145f085f7ec1149833e724422dcdea9e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/ministral_8b.parquet",
+      "size": 168123,
+      "xet_hash": "e7d52cbc5adbcc616fc2490b0c23bd75c06f02c234266b10edcdac922e060483",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/olmo2_7b.manifest.json",
+      "size": 504,
+      "xet_hash": "630149b2045274b9d2b8a2795aeb19d87e520f7f8721544382d57ed462f4d88d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/olmo2_7b.parquet",
+      "size": 148196,
+      "xet_hash": "5e106b52464ea3fa08dce25983fb1f698d1f0363232f572f27b06b5568e4ba3a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/olmo3_32b_think.manifest.json",
+      "size": 504,
+      "xet_hash": "16847eca5bf6c7e1ea69bf4ede8e41ee7ae49f5a3426a52bc7088d210772cd9c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/olmo3_32b_think.parquet",
+      "size": 597880,
+      "xet_hash": "a8edc958354d457058aa9e2cc7e68f8daf8a65c1448c6ab6d5a6f9bdc98cf026",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/phi4_mini_reasoning.manifest.json",
+      "size": 514,
+      "xet_hash": "ebe9aa4b69064613e39c0539c131e9424d51fa857597da50f6017f2bdc9248e1",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/phi4_mini_reasoning.parquet",
+      "size": 630807,
+      "xet_hash": "29b3d2d32d22e3d46d4cf75d4904177a057d64ac585c0a7ac8c74790363edc6a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/qwen38_27b.manifest.json",
+      "size": 491,
+      "xet_hash": "81c0a056968f75a4bf79fed7732544ac3e4f706ed156e954888dc61a08fc3d22",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/gsm8k/qwen38_27b.parquet",
+      "size": 315322,
+      "xet_hash": "3d53f5aefac87e7755530d77038a6487478322ff9b84c1807a781bda3c7d4376",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/gemma4_31b.manifest.json",
+      "size": 498,
+      "xet_hash": "3a6cd08aa27d321528652b9a8c98a25cc3c94135065229f2c1516753c318eb52",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/gemma4_31b.parquet",
+      "size": 148336,
+      "xet_hash": "6c55edb074dae03342133e660c610d30c9dde76780ac97fb0d3e8ac5409d4ad8",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/granite42_30b.manifest.json",
+      "size": 507,
+      "xet_hash": "737449286fb610ebe688971ba37baeb7e190c20b8afae80d54d08f6801b2bcf7",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/granite42_30b.parquet",
+      "size": 140074,
+      "xet_hash": "f93bf08e3b2ad62b90a7c77fff68cadaa000ae079bb2fddc9c05e4803fc6d2c2",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/llama32_3b.manifest.json",
+      "size": 506,
+      "xet_hash": "7a9d9bbf7e17efa30d74d18b87ee14dd650948f5b6913cb54756137c9b48f2ba",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/llama32_3b.parquet",
+      "size": 111818,
+      "xet_hash": "b68e8c2ef505b5149f7e168b8bfd370b9aba1751cc74b557c89aa748cd8879f8",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/ministral3_14b.manifest.json",
+      "size": 525,
+      "xet_hash": "a3ff6939949e19920c007449e9d32a0a52e906b7904e890a5bda317fca6344a6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/ministral3_14b.parquet",
+      "size": 183917,
+      "xet_hash": "0a3d8d3d4bcaacb87eb0c024b7cd838a39a6da26c8ad0f6394e3103706a2d0aa",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/ministral_8b.manifest.json",
+      "size": 515,
+      "xet_hash": "1679495de5f06b41be9e1639a55288103f0e68f5384489e4715c05dd9eee6db6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/ministral_8b.parquet",
+      "size": 117094,
+      "xet_hash": "4924586fdc7c3bc4e314dcf6233661e412ff031a0abcd21e8977088835ae04b5",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/olmo2_7b.manifest.json",
+      "size": 506,
+      "xet_hash": "79ed93360ef8686830afca502e3e70a3f849f9fdb01f04d5941fa3d3327d7e4e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/olmo2_7b.parquet",
+      "size": 125083,
+      "xet_hash": "98a64b68817f92c57979824efc6b4aedb5a097db38c67f495ada46e2feed2a51",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/olmo3_32b_think.manifest.json",
+      "size": 506,
+      "xet_hash": "6f8d36b6f7e9c2e9496200aca36942d24a74820963e6236721d20c4f3f990643",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/olmo3_32b_think.parquet",
+      "size": 479830,
+      "xet_hash": "e876239458d09dcfa96e05285619d7a6e94dd7edf46a28ecaca2f5df38108bf2",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/phi4_mini_reasoning.manifest.json",
+      "size": 516,
+      "xet_hash": "39437ec44e2427ab300ef6341e57314afce773c8a12a9ed135e4622db1e13b52",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/phi4_mini_reasoning.parquet",
+      "size": 481338,
+      "xet_hash": "40f133be3735ccc2cd9d2432eebe3456eed08f3d9a856c84312bc38f1f7403f1",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/qwen38_27b.manifest.json",
+      "size": 493,
+      "xet_hash": "418a084d3cb3bc23f17c1bbda7f1b6a043d6fcce767f7659e3fb69fe0944af3a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/math500/qwen38_27b.parquet",
+      "size": 265004,
+      "xet_hash": "df224d20a9cdb252da6a50e156e94588951733cfbae05ef4d3e35ceb69f2bfdb",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/gemma4_31b.manifest.json",
+      "size": 496,
+      "xet_hash": "2dc78bae6645d0a8fd3d336f51792d46b3a0657ad8796c7c162994dad1bbb800",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/gemma4_31b.parquet",
+      "size": 168197,
+      "xet_hash": "edb3cb57b39dce47e5c89830c6fabc13fbe455521ee730bfb0102e309fca6913",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/granite42_30b.manifest.json",
+      "size": 505,
+      "xet_hash": "22801a13fa23fd6943febd543856de398090d35a11c24e64dedd6fb899b9c407",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/granite42_30b.parquet",
+      "size": 151564,
+      "xet_hash": "9d6bad7ffa711fdc0875a91e6e8de2d7458908e7e95085185e14a9a2f1cb6979",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/llama32_3b.manifest.json",
+      "size": 504,
+      "xet_hash": "762b6d1dfd0e0e13f1f1e362fa32a53703399106d6ac22395954b4d4050c9a06",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/llama32_3b.parquet",
+      "size": 64815,
+      "xet_hash": "da7b9a8d9da08d3ea8f1538b1520751ceaf93fef11a3f168c9fde4991bfd0da8",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/ministral3_14b.manifest.json",
+      "size": 523,
+      "xet_hash": "90c1e4e032e263ebbfdce0e0e5a9c299d91ee494d07297930c7f4b8a97a4b1cc",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/ministral3_14b.parquet",
+      "size": 134589,
+      "xet_hash": "7e08ebcfaf09b1c9b6f45170383cc075e5817d53cfbf54dab9939e5e68002ba2",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/ministral_8b.manifest.json",
+      "size": 513,
+      "xet_hash": "2dc544873cb2e7d6a0202845d084a599e69b71e148df1bfa32a851cf9a9c0d96",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/ministral_8b.parquet",
+      "size": 18230,
+      "xet_hash": "d72ad163f2e539b131bcfccff0d8ce20ba802ede97c167b42fdfab26c52d6c5d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/olmo2_7b.manifest.json",
+      "size": 504,
+      "xet_hash": "9840d69cd0b12b7045d01aaf6f2cd1329ff42df0bcf5f76563e6bc5d8ebc18aa",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/olmo2_7b.parquet",
+      "size": 14393,
+      "xet_hash": "04f40e9b675a4a79b4eede698ad4410bc48ddec4d83030ad9d19bfa38b4f490f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/olmo3_32b_think.manifest.json",
+      "size": 504,
+      "xet_hash": "107b0f5357861dc01b12b420ff692da4f97d651c4df5bd9b4451d83b96a98914",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/olmo3_32b_think.parquet",
+      "size": 419095,
+      "xet_hash": "350a7ec56abc282a478192217c888aedbdd8352c178310eb07bbd2db6ca078eb",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/phi4_mini_reasoning.manifest.json",
+      "size": 514,
+      "xet_hash": "349054e00c58b8d5fae355581b6699c424c09a52ba220d76c5c99cacc6f3d18c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/phi4_mini_reasoning.parquet",
+      "size": 529595,
+      "xet_hash": "5cc0cd93d5db175fb3105ce0b02672d61ae082384bc8e482400f84d738a7663f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/qwen38_27b.manifest.json",
+      "size": 491,
+      "xet_hash": "5033a912bdcc2d3d96d63f5d37ffb837367fb6c8ea5d5c40f16939c5cd289ec3",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/medqa/qwen38_27b.parquet",
+      "size": 294495,
+      "xet_hash": "b38d5345e80dd5b7021f538f29fe161114c4fdf2360a7c62006d7c263398eb63",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/gemma4_31b.manifest.json",
+      "size": 495,
+      "xet_hash": "d674cd77887ea80ef1605e53f37cd5c2f8953569ccbff42f9b6b60c35e22a4a7",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/gemma4_31b.parquet",
+      "size": 103655,
+      "xet_hash": "0bdc0d409518cdb8ead9422d7a5b0faa48364ee1c40170b36f9b127ae3a621b3",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/granite42_30b.manifest.json",
+      "size": 504,
+      "xet_hash": "99037d811e84229c7796dfc80bc5083460421678f00361939da871b47843e509",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/granite42_30b.parquet",
+      "size": 79659,
+      "xet_hash": "87a9a7aeac3e28e45f4d2c8b9b3f43f038ec646f5716e4373eeef7176003e4b1",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/llama32_3b.manifest.json",
+      "size": 503,
+      "xet_hash": "8980d9ee88e7b2739eac050fea37a548f42eb69e8687e608cdb8d36b3f71babb",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/llama32_3b.parquet",
+      "size": 51426,
+      "xet_hash": "7a4d6b1fbc912a739b6087c66d40138870d2e7c4dd4f6f992ac25eb7f63c07b8",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:21.749000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/ministral3_14b.manifest.json",
+      "size": 522,
+      "xet_hash": "1e172fb9c3f450b5a737b7c2f7e0f72e885a2d5a0fde851f19b3cffc8ef5a417",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/ministral3_14b.parquet",
+      "size": 46153,
+      "xet_hash": "6034007d739f3f77d295d4952613d65a967a28c911085b0210282239b536c5d4",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/ministral_8b.manifest.json",
+      "size": 512,
+      "xet_hash": "497812c655b15147873ce460496849a4d8f7a399d34394660ac7ae6670499bbe",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/ministral_8b.parquet",
+      "size": 21541,
+      "xet_hash": "59fdaa75f57615c20d44d403b210b706afe3d3c731ecb07fcee64a9cc80d0e29",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/olmo2_7b.manifest.json",
+      "size": 503,
+      "xet_hash": "d75dfb15f65bd524c45c59d32f0e0ab20115d0ada48aebecae6329da47623e8e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/olmo2_7b.parquet",
+      "size": 14340,
+      "xet_hash": "6ac6d92d01f44bbb0441c3b56aac8a97cbf1907f998233fe888aaa1fb6000f09",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/olmo3_32b_think.manifest.json",
+      "size": 503,
+      "xet_hash": "3f3e57d1e6f473bbf8ffe9414df4b85fece67b2bbf1953ed1d0d56196974ca2f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/olmo3_32b_think.parquet",
+      "size": 291395,
+      "xet_hash": "26d617e32cd0755618925592614cf02d82026b18b154f52db21b9cc832aa3d38",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/phi4_mini_reasoning.manifest.json",
+      "size": 513,
+      "xet_hash": "fb84b44d1bb2057c459e859cf5c2322903f629b7f35e351f4d983cb0fb527e85",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/phi4_mini_reasoning.parquet",
+      "size": 389825,
+      "xet_hash": "12c17cfbff29f9c5652aeae8052666cece23606ca9ab666e60833995be8e052e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/qwen38_27b.manifest.json",
+      "size": 490,
+      "xet_hash": "b23c6de491e3b16ee254133d99cb0d43afba3dad15cf9a60dd606ed78bcfbe93",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache/mmlu/qwen38_27b.parquet",
+      "size": 210187,
+      "xet_hash": "ff5489f82c2bb3eaee3ee95258db53ece713db3c1230c7c9dc4dc85bcc871f7e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/arc/llama32_3b.manifest.json",
+      "size": 326,
+      "xet_hash": "e0a4215393ae680d2bd99abb5d59ce079bc3d068dca4efb6fc8cdd49a651c7e9",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/arc/llama32_3b.parquet",
+      "size": 85427,
+      "xet_hash": "fed6988eeddc93479fe4a27827a6cffa5cc77bf07de9afd87bf26bd75de9e18e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/arc/ministral3_14b.manifest.json",
+      "size": 345,
+      "xet_hash": "9f907bf222a12e98a2a146354373d26493f373832b15a8a92c767b5df646fb7d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/arc/ministral3_14b.parquet",
+      "size": 152547,
+      "xet_hash": "6d12dc780b689aeb0b4a1723994ac683d6829ee27635059f5d7f97b4af6672c4",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/boolq/llama32_3b.manifest.json",
+      "size": 328,
+      "xet_hash": "c36a52c50ce0139d0cebded1cfa2c43a38bee9ef44a54e560b16b6440ad8a81e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/boolq/llama32_3b.parquet",
+      "size": 74222,
+      "xet_hash": "54de39ba54721669b3668f54970b469b96acaed194f05b3c75495a50284e363f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/boolq/ministral3_14b.manifest.json",
+      "size": 347,
+      "xet_hash": "3e008f5c1d8690c9be77f0e89ecd98da4d430406dd89e868e909b64eaba1418a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/boolq/ministral3_14b.parquet",
+      "size": 167091,
+      "xet_hash": "521b100e5d23ac2cf67de5eb9c550df432109d07b4812109a743ec33a8deba7e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/gsm8k/llama32_3b.manifest.json",
+      "size": 328,
+      "xet_hash": "23cadcd7f20345dca9da8c95e066e73f790c2541398e369baf5b65e5eadd8d13",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/gsm8k/llama32_3b.parquet",
+      "size": 156571,
+      "xet_hash": "ec0faf7742c0ce23dfffd255744c25336d4558adb70a159f6ffede6a81b25c05",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/gsm8k/ministral3_14b.manifest.json",
+      "size": 347,
+      "xet_hash": "9bd1ebceb07140d6b273c53b8de18a2b35bd50ff0f2be9ddf94336a1363bc805",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/gsm8k/ministral3_14b.parquet",
+      "size": 246759,
+      "xet_hash": "47c9e81b56d5e629609356886f1240c07cab18ebe65dfb3cf9bfd573bd26f3ab",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/math500/llama32_3b.manifest.json",
+      "size": 330,
+      "xet_hash": "7b159b5fda76ba8a63d08c9b4140e7133283108a03ea83b4a3f0379239275b92",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/math500/llama32_3b.parquet",
+      "size": 105407,
+      "xet_hash": "1d7252abceb094833710fe39a3c91b969ebb77029c49c87ad074031f6d5fd0e8",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/math500/ministral3_14b.manifest.json",
+      "size": 349,
+      "xet_hash": "09ac163557679f7bff6e657bce8cd8173399e92af5f455263e7430d935b407b5",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/math500/ministral3_14b.parquet",
+      "size": 159982,
+      "xet_hash": "5e25298b8355f51c47de647e7300fc9352a63d3f9b0012157f5d8c3c39848240",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/medqa/llama32_3b.manifest.json",
+      "size": 328,
+      "xet_hash": "eb542173a31f1abab41188377ec539272affc4f0913da25a74aac49c7f151003",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/medqa/llama32_3b.parquet",
+      "size": 96830,
+      "xet_hash": "4bcd4b692130987f3bdd2046a043e30bddfc72b0084d824ac4cb8c5de3cfba46",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/medqa/ministral3_14b.manifest.json",
+      "size": 347,
+      "xet_hash": "66a679ed7f0637c4538369b8d6d82f0c8b264e2ba638f2e76199fc564d9b95f4",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/medqa/ministral3_14b.parquet",
+      "size": 183579,
+      "xet_hash": "130daaf0a92d07085424ce292628d8ba92c06340e47d43ddf7360aef9ae89ce8",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/mmlu/llama32_3b.manifest.json",
+      "size": 327,
+      "xet_hash": "2406ec9eb27e006f7c92cf1ed2cec028d1d7ef1f57f383d9f7fd431c52e91beb",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/mmlu/llama32_3b.parquet",
+      "size": 83865,
+      "xet_hash": "80bd327858bd4be36cfb9d8f1c4f9c669bbe15a880c63eb61537729abd6d15a6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/mmlu/ministral3_14b.manifest.json",
+      "size": 346,
+      "xet_hash": "aada8adeb613d55441b1e72fae21804b352ee89b6fc01beedecc16ea944334b1",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/always_wrong/mmlu/ministral3_14b.parquet",
+      "size": 167990,
+      "xet_hash": "fa6ff05b388d25eb9f0f82a73d6ab754cb6efed223eda99528844b13bf24485e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/arc/llama32_3b.manifest.json",
+      "size": 321,
+      "xet_hash": "384c1805831d6843bb089d59e1c39666577dc7144f11ab950d53557697b5405a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/arc/llama32_3b.parquet",
+      "size": 64266,
+      "xet_hash": "9c1922f4cbf2aec47b0f35f5a509d9f56003913ace9f219032628fb75cae6216",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/arc/ministral3_14b.manifest.json",
+      "size": 340,
+      "xet_hash": "e395da5067f8004822d48c48df31b65a5ca49c7519b01552dd84188203b132de",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/arc/ministral3_14b.parquet",
+      "size": 109734,
+      "xet_hash": "e29a41b0605f90f2287344384a98d8ece45fbf750cd3aa9dfdf608a48f7bed21",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/boolq/llama32_3b.manifest.json",
+      "size": 323,
+      "xet_hash": "0481e79ef3cd45076e8603d049f532c16d83026a413d9e0f0711c3e98bea0137",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/boolq/llama32_3b.parquet",
+      "size": 51418,
+      "xet_hash": "0e7e36d73c1ea33373daae01bb22234ebdfd31ed744f179da3362af5380746cd",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/boolq/ministral3_14b.manifest.json",
+      "size": 342,
+      "xet_hash": "89ec6743a1e87336b8d8c4c86e30d55073eea18ad6190fb8f3f90688b75dc0c1",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/boolq/ministral3_14b.parquet",
+      "size": 26577,
+      "xet_hash": "a31bc5e1bb5b039a81cf30ceb14584df2f34f15f8e9c2b87b2e143cfcb7f7c84",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/gsm8k/llama32_3b.manifest.json",
+      "size": 323,
+      "xet_hash": "fa247458a5e866daf5dd943ea56e858a9112608caf939aaf35d406c1d686bcad",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/gsm8k/llama32_3b.parquet",
+      "size": 170256,
+      "xet_hash": "b6f31e606812918f9b8a75a82ee6b48edcc6eac87cba6729a5bd98983e00fdd6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/gsm8k/ministral3_14b.manifest.json",
+      "size": 342,
+      "xet_hash": "6f0f81d3e285eb82c0cdea2d255f784d239ee05492b9d47aa651cf1292a59ef2",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/gsm8k/ministral3_14b.parquet",
+      "size": 302790,
+      "xet_hash": "c71d2f29d6a89f0eb727cf8a925260b91b63491927c8fc73eee9d6f09136597f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/math500/llama32_3b.manifest.json",
+      "size": 325,
+      "xet_hash": "089a6b728e22b47b06aeac2a97ec6871538de429742cd4426c5ca3a17a3fa446",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/math500/llama32_3b.parquet",
+      "size": 109688,
+      "xet_hash": "bdff8900dd7c5c9d455b06132bab443ba5085ffb7b28a59bbd30177692fc8890",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/math500/ministral3_14b.manifest.json",
+      "size": 344,
+      "xet_hash": "8d53d06ca67e78027d4f127844c22d4c9891563e40c565556322fa6a443a1a24",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/math500/ministral3_14b.parquet",
+      "size": 175353,
+      "xet_hash": "153a1620217c0b2e8abd782b4e584d4794dbdf6011b90f9c4201088501de95b7",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/medqa/llama32_3b.manifest.json",
+      "size": 323,
+      "xet_hash": "685ec51f5524155ea5811a2b52aa96f3f12073148dddd78709df9461e7f212cc",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/medqa/llama32_3b.parquet",
+      "size": 85003,
+      "xet_hash": "41e673da2afe176f91049550c83f62fbc0287b3f56032cbf07c6f5610fe55f6c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/medqa/ministral3_14b.manifest.json",
+      "size": 342,
+      "xet_hash": "0fd6ca9aead413cfacc45748987d88b8184682904c11b5be9faefb6ea629e56a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/medqa/ministral3_14b.parquet",
+      "size": 181184,
+      "xet_hash": "631bed806e32397073df8fb79e68aaac6115c10e6e7f726256a1196883410bcc",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/mmlu/llama32_3b.manifest.json",
+      "size": 322,
+      "xet_hash": "6531e68cbf04551f9c05ab253e494bd33cae7b535b778a3119344e79d227a7f7",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/mmlu/llama32_3b.parquet",
+      "size": 67628,
+      "xet_hash": "8494240aeda55535e349bbe720d7bf30c14c876cf55e520243cfef05b5c3a8e0",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/mmlu/ministral3_14b.manifest.json",
+      "size": 341,
+      "xet_hash": "941e8886308c0b65282de7600e366f05f681cfe362413b5cefe58979f5482be0",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/rushing/mmlu/ministral3_14b.parquet",
+      "size": 106105,
+      "xet_hash": "6d4c15b51f623798256c2a58e92d61bec4ad5370dd799dd565d5b69fc3469757",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/arc/llama32_3b.manifest.json",
+      "size": 336,
+      "xet_hash": "0c522a7bd72565554667b04ef2a137a4b47a9490400eae3a90316822b753255f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/arc/llama32_3b.parquet",
+      "size": 61207,
+      "xet_hash": "4056c18846d5525c75bfb9531dc329c4fdd841de3da62c14168f3d1606f96007",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/arc/ministral3_14b.manifest.json",
+      "size": 355,
+      "xet_hash": "1ba08534f72d5898ab7a6e7d6e72871435df2dce98d7596e9752bf0aeaa8a884",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/arc/ministral3_14b.parquet",
+      "size": 83229,
+      "xet_hash": "2c83a3abf596f4a00be2a89f69fb8f895cdd55a1dbce34eebb15c25139313b8a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/boolq/llama32_3b.manifest.json",
+      "size": 338,
+      "xet_hash": "a01151dedaca86ef8a25c05fe6eb5d240a48c45a9d9e9290b80af4d21e22b081",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/boolq/llama32_3b.parquet",
+      "size": 54756,
+      "xet_hash": "6cb704e6281ecacf2433133148bf6e1c82a12d063390dc8aed13e0bde2776b6d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/boolq/ministral3_14b.manifest.json",
+      "size": 357,
+      "xet_hash": "bc0a2f4b4df29c62709bdfb4f9186692a57cc3016e33f18c73216a7bff791e5e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/boolq/ministral3_14b.parquet",
+      "size": 83830,
+      "xet_hash": "51022c88220763627bb5829b88b7989c17ca1d20fe16866ba2ee0a7aa9276680",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/gsm8k/llama32_3b.manifest.json",
+      "size": 338,
+      "xet_hash": "5b22042be5dddceb01119348730550adc695283de26e7049067d1def2aaf6dc6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/gsm8k/llama32_3b.parquet",
+      "size": 184080,
+      "xet_hash": "ca46b7491774c1224df1ff25cb0e0603d196e5bc4e69fa80dc3235032aa0c21c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/gsm8k/ministral3_14b.manifest.json",
+      "size": 357,
+      "xet_hash": "c4984d60236ffcbfd7ee454cc7ba152202cd0063748b30f3f7535c61f816a455",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/gsm8k/ministral3_14b.parquet",
+      "size": 172702,
+      "xet_hash": "41fee94d73c9277ad42a9eee1e3580f3e717ab4c50c32cc984430d75b72afeb7",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/math500/llama32_3b.manifest.json",
+      "size": 340,
+      "xet_hash": "cb86826df47862c120f90ac6f9699796c94c85a8b1c89b618cd0f0f759c8345c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/math500/llama32_3b.parquet",
+      "size": 119988,
+      "xet_hash": "451d1e7aa2118decab711c3f759d299b0b6ab737a5e7d86d89ee36239179020e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/math500/ministral3_14b.manifest.json",
+      "size": 359,
+      "xet_hash": "90508ffa353993fbaa2da84ceaa86bcec70429d046ad3ad3813891321caffbdb",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/math500/ministral3_14b.parquet",
+      "size": 133473,
+      "xet_hash": "b5f89fd54c91361027d30677be6a273de8435b44cd0845a7ed29cab9645aa043",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/medqa/llama32_3b.manifest.json",
+      "size": 338,
+      "xet_hash": "49dc7c72c4f68706225bb9dd01ba3721ac4e5a20e85a149bb6cb2204198a4a53",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/medqa/llama32_3b.parquet",
+      "size": 93372,
+      "xet_hash": "3b069ded69254a80dcf82bfa542d721a233c90094709c988ba98b88fc48ceadb",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/medqa/ministral3_14b.manifest.json",
+      "size": 357,
+      "xet_hash": "e367ff7a1a476021b54d2bb1d38b6b24b55f064ab4551bc4e3ce253f8917b890",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/medqa/ministral3_14b.parquet",
+      "size": 138453,
+      "xet_hash": "0a87116626ac74d74d43a3ddfb11b7cd31d67b53ef372925fa65662c31430ef3",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/mmlu/llama32_3b.manifest.json",
+      "size": 337,
+      "xet_hash": "5073880e3f91b0cac51f452f64a9b7a3d5472e652063c2c9ae2bf2781b6e9a57",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/mmlu/llama32_3b.parquet",
+      "size": 68199,
+      "xet_hash": "69a7f56548015ba559c2509e1ac49e941e770c1011b37a7c9674f16de1a3affc",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/mmlu/ministral3_14b.manifest.json",
+      "size": 356,
+      "xet_hash": "67a136bf6a76e040e131e0782ab86f72c646ebd298d6417f5fe4b530eff185a0",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_hallucination/mmlu/ministral3_14b.parquet",
+      "size": 97219,
+      "xet_hash": "9f67a0ddf2d820396dea26e73e8f20faaffe25c20626b831fe357d48e46a9f52",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/arc/llama32_3b.manifest.json",
+      "size": 331,
+      "xet_hash": "102fb3e74272ea62f6d908d15e9119fad2bcccaa3f7ef868c0dfdf71808f3eef",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/arc/llama32_3b.parquet",
+      "size": 92198,
+      "xet_hash": "54b4c5b2bf7d04d0c9a0406b7552a68f222c0e8fbd7cec50fde99d1e687ed76c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/arc/ministral3_14b.manifest.json",
+      "size": 350,
+      "xet_hash": "c7c760be1253bcdd8f4fa10a110243e076352ddbac60f9efaf1d27f4c6dce51b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/arc/ministral3_14b.parquet",
+      "size": 75141,
+      "xet_hash": "362c76c0c4556671d11a2449a61c576ab6dd93e03e5399d3ee26b1ed7f7df8a9",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/boolq/llama32_3b.manifest.json",
+      "size": 333,
+      "xet_hash": "4fbb57ad9abf1068cfc07e0cd62f0ecf5dca8589de1a0196d5bb548c4e5caf95",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/boolq/llama32_3b.parquet",
+      "size": 61176,
+      "xet_hash": "82e52831b42ebf462b44b3d1efcdfa56f767c667921ea04d9e6717ef03f3b367",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/boolq/ministral3_14b.manifest.json",
+      "size": 352,
+      "xet_hash": "96c4599ebb5dbc20ccd9637bf7d9f8c7c342996a6f2c0bfa26f4d8c01178a90b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/boolq/ministral3_14b.parquet",
+      "size": 52322,
+      "xet_hash": "0bec3668fa1913e6f0edb9d7a1b8137f9c00e9b4aedec5e7fb05531414985657",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/gsm8k/llama32_3b.manifest.json",
+      "size": 333,
+      "xet_hash": "973933279a3f5799f31a5dd0bf4a947816a6b5e48f6d4aa515504246130d2af7",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/gsm8k/llama32_3b.parquet",
+      "size": 150153,
+      "xet_hash": "2a01e505baeb0179ef702193865806615d08cea09bd4ca0232af3d196f90ee15",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/gsm8k/ministral3_14b.manifest.json",
+      "size": 352,
+      "xet_hash": "16e7d567fc405a7d9200eb216ecbf17bd17042b35d031bf54de088a87be9d195",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/gsm8k/ministral3_14b.parquet",
+      "size": 148021,
+      "xet_hash": "e4bc521bc21333917f4f10be916052145f7c0b31f0c37dadde59b279c9e352ea",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/math500/llama32_3b.manifest.json",
+      "size": 335,
+      "xet_hash": "529f5dac78407237967518fcaebef981f5bfd5032269d167c8d7b5eaada31a2f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/math500/llama32_3b.parquet",
+      "size": 100323,
+      "xet_hash": "98c6365e0d06c80a856e390ce2c45ad30f3b152635612d6e3cd65313e2608c61",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/math500/ministral3_14b.manifest.json",
+      "size": 354,
+      "xet_hash": "2c98a4b4ba79235864fe73902f39dee66d6cf7e69d7fed30653f3a31a1ba2c14",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/math500/ministral3_14b.parquet",
+      "size": 136700,
+      "xet_hash": "13cea9d9ba957c5a1e796640da32c59f695501ffdce2d025b3dfd2f1d08535b8",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/medqa/llama32_3b.manifest.json",
+      "size": 333,
+      "xet_hash": "9425b3159bf84090a7830053fe5265595a9a8ce04a3040f422a6f0c108f91eab",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/medqa/llama32_3b.parquet",
+      "size": 123973,
+      "xet_hash": "2df71d68d5598920b78d8415e4014defb364d0519ebd746cc40380ba4ac0d228",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/medqa/ministral3_14b.manifest.json",
+      "size": 352,
+      "xet_hash": "46b03ecb413ff74097db2a85073180d1a0358fdf2bb53f103a05a0af8b14864e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/medqa/ministral3_14b.parquet",
+      "size": 154614,
+      "xet_hash": "80e70911a6ba16ec3c7ce5c74bb6d74415309206b0fdaddc5721da92e658b072",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/mmlu/llama32_3b.manifest.json",
+      "size": 332,
+      "xet_hash": "c3557a972a261c6fcec70f7e52362f7c688ba66f547aab5159c0ca4d3c55f5e6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/mmlu/llama32_3b.parquet",
+      "size": 103300,
+      "xet_hash": "ef835316ea48229a97a5455b0f4f17a9f74f126435038bda3ad906117bf6c1b0",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/mmlu/ministral3_14b.manifest.json",
+      "size": 351,
+      "xet_hash": "67aab366a15f4a51f82b8fff4c5948df331d759a2d85daeb13003d582d051446",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_adversarial/semantic_negation/mmlu/ministral3_14b.parquet",
+      "size": 98073,
+      "xet_hash": "2dad8d725f4300233347f0e043a71691bd69ea413f22af6b7ae18b52b133ae20",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_t07/gsm8k/gemma4_31b.manifest.json",
+      "size": 496,
+      "xet_hash": "bb845ac62685ea811ff504b0543cf9c534da52b18b2516696ae273aa96829e85",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_t07/gsm8k/gemma4_31b.parquet",
+      "size": 201265,
+      "xet_hash": "f16a6007c8d88b19ea4d895788e359a377c6d0467dc616481fedc2061acb055f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_t07/gsm8k/granite42_30b.manifest.json",
+      "size": 505,
+      "xet_hash": "2d3a8de731db80c4367bda827c74b75d26775d4ac1c034352d58b7ec24a34f11",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_t07/gsm8k/granite42_30b.parquet",
+      "size": 169082,
+      "xet_hash": "97681b3a9d2460c2ee6975d959898ced8fcf726011d3d1c78ff73163041820c1",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_t07/gsm8k/llama32_3b.manifest.json",
+      "size": 504,
+      "xet_hash": "0746b18a357a4db0f2f3b6b3e3d61bf438fb64c6f65cea8406c8aafa34c177aa",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_t07/gsm8k/llama32_3b.parquet",
+      "size": 177961,
+      "xet_hash": "fc72fd485c0f605bb6c9a5e75172e2b4c68fe460c62e7fe055551a1b28bb22d7",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_t07/gsm8k/ministral3_14b.manifest.json",
+      "size": 523,
+      "xet_hash": "782fbf104be3ccca520e4e89545ba9e9580f9362c09ebc7b75f052a674d31153",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_t07/gsm8k/ministral3_14b.parquet",
+      "size": 211422,
+      "xet_hash": "79a3b22a15ef3bd716f2af7f79b6777ee08c8aa62fd7957ac57d524094790a4e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_t07/gsm8k/olmo3_32b_think.manifest.json",
+      "size": 504,
+      "xet_hash": "75adc377c998e16747a0b611036f9a2a80beabf0b4df1aefe0e7b8c9aaeacc7e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_t07/gsm8k/olmo3_32b_think.parquet",
+      "size": 650207,
+      "xet_hash": "209cda82a63c36d794660db318cc0d1857d492b0e8482dcb5577656ad57d091a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_t07/gsm8k/phi4_mini_reasoning.manifest.json",
+      "size": 514,
+      "xet_hash": "be266bbd3f7399d1d0f2eee03c882a608aaa4d73e15bd92178af5d03bdef650c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_t07/gsm8k/phi4_mini_reasoning.parquet",
+      "size": 662217,
+      "xet_hash": "fc07d7443d50fc3689dfc3d053bcbdc16b7316647e86e1aa6e552ec7b55ff4d6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_t07/gsm8k/qwen38_27b.manifest.json",
+      "size": 491,
+      "xet_hash": "ef34d5eb77d7a05a2b380547e46aba350a9df76ae2ded41041374524fb59a26c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "data/cache_t07/gsm8k/qwen38_27b.parquet",
+      "size": 328935,
+      "xet_hash": "3295123ba8bd6de32e2b70f35a50d1a05e0a6b0bfb4fafa9573328270e0f395f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "docs/attenuation_law.md",
+      "size": 9173,
+      "xet_hash": "9ad8b26c6fe002e75d0b119fcf5d77e9c280844feb1232192f673db4e7b7b18d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "docs/proposition1_note.md",
+      "size": 2682,
+      "xet_hash": "ec9b29483298916e9fc92505570b39365bee3a313fc6a1f2cc9e9243b3b5ab10",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/CUT_PLAN.md",
+      "size": 2558,
+      "xet_hash": "6f7dcb9a596b273148c369bdd412e53ed55867e873207f0ebfc48b8edcf9a3a1",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/Makefile",
+      "size": 355,
+      "xet_hash": "7327ad0fc9ca242b3081e60a3b869daaf1080227a8058230b30e147ff9fa2e5f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/TODO_BIB.md",
+      "size": 2673,
+      "xet_hash": "90ff7cf2df16f601cb87d2d88190cfde2e8f920cba1c27b303588ddc8658a18d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/claims_map.md",
+      "size": 7185,
+      "xet_hash": "5d52adcd60673830ee802271ab349e604db16a4665e883473fde8a789ffe5aed",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/figures/MANIFEST.json",
+      "size": 2684,
+      "xet_hash": "c78c07fd6304497e28f78202d2da188f708c8d375e6fe50e1bb7705a5de96b56",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/figures/burst_windowed.pdf",
+      "size": 24371,
+      "xet_hash": "6eabddd2c8e0733743fae5f1997c13c5db9e1a26ff9ab032452e13ec21fd9c1d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/figures/correlation_heatmap.pdf",
+      "size": 38425,
+      "xet_hash": "dd2106cbde079ebcddf12e1332ee39537c4b26eaa4ebe2cf11ae8501a0ce6420",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/figures/deterrence_timeseries.pdf",
+      "size": 20960,
+      "xet_hash": "e7592c3138d5c4ec781e5d0d281c1aaf51c2ab985b5b46bdf00d1b516a7ed6fc",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/figures/evasion_band.pdf",
+      "size": 41680,
+      "xet_hash": "8786f60334cffeb6f3828715f243f3f96b62fd6cc10fa23ef08ebfc3ae8d1ef9",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/figures/gating_ablation.pdf",
+      "size": 24697,
+      "xet_hash": "35f9039d1a24969af269085fb38074f5423d9cfd1424b81a0b523dccfab5842b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/figures/invertibility_spectrum.pdf",
+      "size": 32516,
+      "xet_hash": "0c83f6691dc37dce8c9384a985b9c6c4ff714945b5427c45c2714da2fe74fd67",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/figures/money_figure.pdf",
+      "size": 41783,
+      "xet_hash": "6e4d9734e112d4b77d73e758fd76fa6638e593615fb81e9c822be3e9b51e817d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/figures/money_figure_draft.pdf",
+      "size": 33140,
+      "xet_hash": "4ad747eee0406b4132f279471941ae14901719ac67187c2cf865f284eee90e81",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:12:49.624000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/figures/pobs_constraint.pdf",
+      "size": 34081,
+      "xet_hash": "53203b829c9970a75bff35b19248d50f13f6f0d17552b811174a7a6e5b4a3d44",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/figures/sybil_accuracy.pdf",
+      "size": 23310,
+      "xet_hash": "f0168b8093d881770589d33336573bfa2bd9d28a90fd12161f42866cc4cd2aaf",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/latexmkrc",
+      "size": 241,
+      "xet_hash": "ce3e3ebde6ca208d8b54cad426d7ebe69c8c59c08dd1a5b0bdfd84f0bf34b397",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/main.pdf",
+      "size": 242259,
+      "xet_hash": "95264ab4a8ed589bcffc4a17d80ff616c25f96e1d5b58d4da41c0ac4e2f8bfb4",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/main.tex",
+      "size": 3288,
+      "xet_hash": "d21bf375f33cc9bd8f5eee9f3bcc549b8c258f95b03d0a1db260cfc7b0d6f94d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/numbers.tex",
+      "size": 16188,
+      "xet_hash": "2fa46f91db2e9767a7ebf1d94100d15ef2f1264476be76cd8dd80d1f84c22545",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/references.bib",
+      "size": 6866,
+      "xet_hash": "b551e14dd66c1e0dddc0fe19a5e3458a63f33060929fd08212f129ebb7ed1e43",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/sections/abstract.tex",
+      "size": 2345,
+      "xet_hash": "b16de018091769b465638eb3a9e0c214580671a5bb5bc1292397daea5e746640",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/sections/design_laws.tex",
+      "size": 12249,
+      "xet_hash": "dd07968ede6869fe8f017a4408bf93f0591ffde3cd828626e30c916c80e3bd8f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/sections/evaluation.tex",
+      "size": 12579,
+      "xet_hash": "1420339aa4bbc99f2858ef13bcda3b1aed84faf0f6e8fe834a1eda19c5589da3",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/sections/gate_aware.tex",
+      "size": 5457,
+      "xet_hash": "dede8ce6efd8785151f940ff5f46128940af5654258fd0e8fda2e7243cdae2da",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/sections/introduction.tex",
+      "size": 6151,
+      "xet_hash": "02d2d34b373725206bbf6b47fec196952a8c6684b33348fc4af0127851af181e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/sections/limitations.tex",
+      "size": 9643,
+      "xet_hash": "0e32494630afb5816fa2a845b7f519ba27f8ee5d0072d0905435bb6551d91182",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/sections/limits_gating.tex",
+      "size": 7628,
+      "xet_hash": "bb3bac6f4d0072f1d2524452e2cbb78843296c82b013f11823fa2d20434a616e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/sections/related.tex",
+      "size": 7091,
+      "xet_hash": "a8684b5ad8d80e92ba3bb3382ed7a337d08b03871e3f16180e488da847e07d5c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/sections/reproducibility.tex",
+      "size": 3262,
+      "xet_hash": "66c442f2e103e9b84433b23e82eda69b942144d2769a7ca98119d98873b5adc8",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/sections/system.tex",
+      "size": 5818,
+      "xet_hash": "a8b0758a9843f88d2e38754907004474af7ec5c99951dff49800d3d3d2268289",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "paper/sections/theory.tex",
+      "size": 3777,
+      "xet_hash": "cc7ccda1887c7f4c7ea676633a95a088b13b4b2dd8502a473c370d49269b3161",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "pyproject.toml",
+      "size": 3061,
+      "xet_hash": "0e3db4fb8f65d2a742c4f110ee4714129596052d1733eac93387b9f90a668866",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/.gitkeep",
+      "size": 0,
+      "xet_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/FINAL_REPORT.md",
+      "size": 7625,
+      "xet_hash": "4af5db191ce1f2065d669c725490cbb3fdc32b896d32d3f78e4d3fe467b92431",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/STATUS.json",
+      "size": 189,
+      "xet_hash": "d654624c9571592b9426324106d4f9fa58e2acc4ae8ae92c8822276d46e68ade",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/adversarial/adversarial_sweep.parquet",
+      "size": 232382,
+      "xet_hash": "cec34a64a83c766f3278e5f09d0ab246becc3043e574b78f0e47e6298365f2a6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/adversarial/bandit_log.parquet",
+      "size": 6304,
+      "xet_hash": "54ee1e8080fc55f8dfcabc017c69adcc399dac2d1ca195939c59c943cd32e10d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/adversarial/burst_windowed.parquet",
+      "size": 10419,
+      "xet_hash": "977cd2a747dd086a34554c32a7da37c1ad2c757db4bb845813c767b7130dc845",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/adversarial/channel_decisions.parquet",
+      "size": 5543,
+      "xet_hash": "51203140d31b2c4beb42fb0dd67b595a208416c789672550a3c7fc5e3557cb3c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/adversarial/channel_stats.parquet",
+      "size": 3342,
+      "xet_hash": "81b1c1c9cb0b6fb587376b9851b2898069f8092bd20dd14ec3a20bc7ea06475a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/adversarial/gate_aware.parquet",
+      "size": 12967,
+      "xet_hash": "3ef46609ce9b070a83986a62af3d152f7a2cbfcc56b49fa0fb49cfc8241e96ef",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/adversarial/gate_aware_mitigations.parquet",
+      "size": 16067,
+      "xet_hash": "303b8c6fa2933ce7ec669451235e02c4126da9184d8834a18710527057057471",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/adversarial/q_by_answer_space.parquet",
+      "size": 5067,
+      "xet_hash": "79100ff64abafc195b2c8f6e775353caf57d4df3aabfc9810b8db530ce441e85",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/adversarial/sleeper_e1.parquet",
+      "size": 22092,
+      "xet_hash": "48257b3415ba4491bfbd89cc619cd14a8e50e1fc39296eb244a41c7b0926b82b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/adversarial/sybil_e2.parquet",
+      "size": 17245,
+      "xet_hash": "f74c9c6c4b4949568f3ca3f7fe345b94e60838dfab067f592ff569bd50f36c84",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/aggregation/accuracy_landscape.parquet",
+      "size": 3513,
+      "xet_hash": "5089f0b49fcaf875bbc85279bf528a9dd03a993eea2c01703d4cc598647b5a77",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/aggregation/cost_of_defence.manifest.json",
+      "size": 965,
+      "xet_hash": "ff60e45734aa7b9a3134e634711ab1a4f62d5158f66ba64e4081973950c33b6b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/aggregation/cost_of_defence.parquet",
+      "size": 9035,
+      "xet_hash": "da6b95e561060469128ca5bfe08e97f6a2fe542a4f0cdd5a20df6f36cd7b3640",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/aggregation/inference_cost.parquet",
+      "size": 4863,
+      "xet_hash": "1845283f5a745055aa9bdb8393b553b834fe91568906d672668af9223d495a71",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/aggregation/minimax_regret.parquet",
+      "size": 4379,
+      "xet_hash": "04aac69ac2aa24ce38fa1f4301328cc191bde27e486344b3962ec12bed8fb6e1",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/aggregation/n_scaling.parquet",
+      "size": 12363,
+      "xet_hash": "0cdfa41ff532e91224f9bcf01c60e99816cb647095e29337eaec05e70495af82",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/aggregation/n_scaling_weak.parquet",
+      "size": 16163,
+      "xet_hash": "915f6b324479762b232afc357a3ec1cc6ed2805319cea27558285c74023929f3",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/aggregation/parity_audit.parquet",
+      "size": 20196,
+      "xet_hash": "5f89260cdeb77fff9fe6b382705195e1daa731ee91306d0beb5219d80023f521",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/aggregation/sweep.parquet",
+      "size": 382231,
+      "xet_hash": "6496daa3dd139b2a1e6a227c5654a8a2dbcb00a95968bb5e64d319b3b79a22fe",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.572000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/claims.md",
+      "size": 16007,
+      "xet_hash": "f4a0c850a4bec33736ebb1044a848335217f77d5ae776c63926983d45253147e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/correlation/blind_marginals.parquet",
+      "size": 5256,
+      "xet_hash": "6b17dc217dcc4f6b398c9950368cf006c01bc570184e1766d11dbd2033284032",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/correlation/composition_floor.parquet",
+      "size": 4719,
+      "xet_hash": "ba29df13d45a179ef900e5ee15c9f2bf02d6a08bfaf3aa9237d17788484016b3",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/correlation/composition_neff.manifest.json",
+      "size": 1021,
+      "xet_hash": "60cfd1551323d2789b6d6938cbdeee65dec315855b071dad356725b72335a9cd",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/correlation/composition_neff.parquet",
+      "size": 24451,
+      "xet_hash": "8c38fde452d5e30f8d4c16a88cdd9fca348ad90fa75d8edf3457edee634819e5",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/correlation/composition_predictors.parquet",
+      "size": 8170,
+      "xet_hash": "9b8cb467e7ea6bae5edb80ee6bad7529de26da2fc3bfcfc2dbc99d51c6e00db3",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/correlation/confidence_auc.manifest.json",
+      "size": 868,
+      "xet_hash": "2be68b91e06e90e49b2db33c2a93a288adb9ea1a61b2f18bef2952651ca2e1df",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/correlation/confidence_auc.parquet",
+      "size": 13039,
+      "xet_hash": "fb9d6d37b05efc4b723874ea6d045919d1bfd80b34c9cbe53404f564c2d1b905",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/correlation/effective_swarm_size.parquet",
+      "size": 6874,
+      "xet_hash": "5f38c2e609e34cdb8b9b42ff37a747d2cb178210f2fd55ec358730a959218b94",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/correlation/multiclass_validation.parquet",
+      "size": 34070,
+      "xet_hash": "9158ce7b51318405a05cb2858e039e21e8511b1cbc47556312860f2a2337cfe3",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/correlation/pairwise_estimates.parquet",
+      "size": 54102,
+      "xet_hash": "7bb753c3fa1eb68e4a0f0419da989e056c4699ec5b83a317aa6c5bbf3e0a87ba",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/correlation/q_pairwise.parquet",
+      "size": 9159,
+      "xet_hash": "1964aecf4f42b0a2ee6fc42b01b80fee64a48d96cd871599384a66d21e00042e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/logs/phase1_tail.log",
+      "size": 5041,
+      "xet_hash": "8bd00bd72beb3d5c83c28a9b3d2eb7bf03935a90a1a80c764ca73395b1c927ee",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/logs/phase1_tail_smoke.log",
+      "size": 472,
+      "xet_hash": "560dcf5429f2109390db5caf4058197ececdf0d2ff59cb0f8b9245a5928397b7",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/logs/phase2.log",
+      "size": 93386,
+      "xet_hash": "49700510024c8ce99789d4b859a0a258b1334576b2dc0919148045a58241f5f1",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/logs/phase2_smoke.log",
+      "size": 2196,
+      "xet_hash": "fee433ab312967e54cffd521b0724d58e1723e0ffebfcf32984068943d702575",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/logs/phase3.log",
+      "size": 35480,
+      "xet_hash": "c179eae2ff1dc7dd6a09de22653f1897a17db197fc75667a5c14b61973495086",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/logs/phase3_smoke.log",
+      "size": 1996,
+      "xet_hash": "b3943b2bcde6a61a4c0428dd9d314f38eb36ec73d5d78df2263bb55a2b8f8691",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/logs/phase4.log",
+      "size": 698379,
+      "xet_hash": "916e838b6a1ed467c461f3839284f261b08f002339360983b2f634a3dd1cf033",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/logs/phase4_smoke.log",
+      "size": 2328,
+      "xet_hash": "cfd1f6eaa41c186ef9d597ccad051d862d314342ae448f20c2713554a6194f94",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/logs/phase5.log",
+      "size": 218,
+      "xet_hash": "4b58f52578953ee1d2b7345de33db3d924fdf98182b1ceae822ba922e187a940",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/logs/phase6.log",
+      "size": 77555,
+      "xet_hash": "f89a6989b017671b99526584223f6ca7775d620fe7ada96b03a137362fb74f95",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/logs/phase6_smoke.log",
+      "size": 390,
+      "xet_hash": "5c610b3b4ab20e5d3e73e41f5e1c91468c1333e3f8aa58a70e055df9c941a973",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-d496520512ad-20260826T072138Z-e86f.json",
+      "size": 3005,
+      "xet_hash": "f43b846efcfbd243b7e1aba3efb1476730e091542d3ce81b9d5e86c32545b7a5",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-ec31ed29cdc6-20260902T103205Z-5b20.json",
+      "size": 2661,
+      "xet_hash": "f2ac149aa1df3e4cbe33aecc50d9cd0acde716db2ba3c8da238efa1811e73520",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-ec31ed29cdc6-20260902T103634Z-74b2.json",
+      "size": 2670,
+      "xet_hash": "aacaa2486a8c889bf9dda2c012ee1478977f7d5ed71ea6b8c52419823c85d65e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-ec31ed29cdc6-20260902T105903Z-9df8.json",
+      "size": 2665,
+      "xet_hash": "380c06686087c5a29fe20030317a7173ec2156af45f99c8fbbf0bd7ba3028d2b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-f425fdae4744-20260902T113107Z-4cd1.json",
+      "size": 2725,
+      "xet_hash": "53082fd1d76070ad6f71f04dfacca6d7d755c104c13f0f7860465d7ac5de5d3c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-f425fdae4744-20260902T120400Z-e96f.json",
+      "size": 2728,
+      "xet_hash": "3abd72449121187c57be4459daba2c07fd18c6785ad2670302425054e17195a1",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-f425fdae4744-20260902T171856Z-872b.json",
+      "size": 2725,
+      "xet_hash": "84beec51dacdad743caa78a131d72070affd870d4e025c40c01fb656f3eb206b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-f425fdae4744-20260902T182256Z-6b1d.json",
+      "size": 2730,
+      "xet_hash": "8fcf513c97e830ea349c0aa02f5970bb3230119031a1ba33c8e39c4ff4b3bf5f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-f425fdae4744-20260902T191327Z-932a.json",
+      "size": 2724,
+      "xet_hash": "1d33aa60df1a361e2a95e2cf3027fa837a40b25e7882500d9a083d91f40a32f4",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-f425fdae4744-20260902T191434Z-6334.json",
+      "size": 2728,
+      "xet_hash": "f31a220f972df9b8f9d4c34ae20e0952c35afd8970e761b17e7c854791c96cf8",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-f425fdae4744-20260902T191631Z-2abc.json",
+      "size": 2733,
+      "xet_hash": "d93c00cc3d44cb7b3765fcfc94a9e57068c2a077274591e22efe4a431ba6c1be",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-f425fdae4744-20260902T191959Z-99ab.json",
+      "size": 2727,
+      "xet_hash": "e206440e3efad42093c40d186026960ca8f811d12b58e47c4e4e6d3a28cdda41",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-f425fdae4744-20260902T193420Z-a236.json",
+      "size": 2724,
+      "xet_hash": "a53a67fbc1ee54c270328bfce7d90a428c6e79a3ea29fe92590e32c59797b6ee",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-f425fdae4744-20260902T195407Z-8890.json",
+      "size": 2724,
+      "xet_hash": "bd7b9e61f5c499cc47ba21a38f20a9f97dc85d58ee03ed6face0c22a12781808",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-f425fdae4744-20260902T201202Z-4124.json",
+      "size": 2724,
+      "xet_hash": "b911dfca387f7609b9d8ca91e71c216fe660f3de72e528464e6aee79e930b5d0",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-f425fdae4744-20260902T202854Z-2ab1.json",
+      "size": 2729,
+      "xet_hash": "e8272a559a1972ee558e50d04c70d891c61500667261265356c15e1e21b08746",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-f425fdae4744-20260903T164133Z-e4f3.json",
+      "size": 2727,
+      "xet_hash": "a2c101789b7456be35ab91d0434ff5686e739896cfe1f127e16b2a607ece41c0",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a-f425fdae4744-20260903T170550Z-f5e4.json",
+      "size": 2717,
+      "xet_hash": "3489a8002d44c191f9bda68b30e33af812d9ee53a1a4b42909daeabc87de5a6e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-5bdf5e8bf867-20260826T045248Z-3ae7.json",
+      "size": 2674,
+      "xet_hash": "52edc13be9f30c27c83846d86c93c71459a59f3960ac23346770ec4235f31d88",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-68f9bde7a8e2-20260902T111603Z-04e9.json",
+      "size": 2675,
+      "xet_hash": "1cd941cd96b1a92e1fb01d7c4c1b9ab45013d6d97446d6b772f0d42310d156a2",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-d496520512ad-20260902T100739Z-e55a.json",
+      "size": 2979,
+      "xet_hash": "adc66e9ab84bdb8c6f2eba7124b164a666d0e2323a054431c22d7b9fcdf3a65b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-ec31ed29cdc6-20260902T102924Z-480c.json",
+      "size": 2674,
+      "xet_hash": "e47598ec291e03d10c42023d7065c54a0865aacfe82671c093f616f9a54f4491",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-ec31ed29cdc6-20260902T103102Z-f9e1.json",
+      "size": 2674,
+      "xet_hash": "e9deeaed4d0aaba3506b86b92fe2eb528fc2a0f86f15dc5c62aa7589af561f95",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-ec31ed29cdc6-20260902T103419Z-cdee.json",
+      "size": 2683,
+      "xet_hash": "5da09ba24d9891ee5bde617e142a9bda14535524263626702365d0cdb079e206",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-ec31ed29cdc6-20260902T105013Z-e608.json",
+      "size": 2678,
+      "xet_hash": "8361d2d94d61ad717099989d3419f9c6b9b8ed7abf5ed6372735f10c613c2a26",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-ec31ed29cdc6-20260902T105427Z-91bb.json",
+      "size": 2678,
+      "xet_hash": "51e80a6994fa27a11b08add6f6500bc8a4e9bcb896e88f5c6161d7e6c496cb4f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-ec31ed29cdc6-20260902T105730Z-6864.json",
+      "size": 2672,
+      "xet_hash": "65acce9f49a7ae6e9b70440358e9b72210fcb92f04977bd222c69a6c27758314",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-ec31ed29cdc6-20260902T110311Z-b0d9.json",
+      "size": 2674,
+      "xet_hash": "d0e75a56a3c810b56a54e3603f1e10b8c04ff845634b3c9113a0d8476049790f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-ec31ed29cdc6-20260902T110708Z-ab9d.json",
+      "size": 2674,
+      "xet_hash": "9dd1be51b101c129598a955d373434141183d83efdfa724e60df003cb7062503",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-ec31ed29cdc6-20260902T111236Z-1c2f.json",
+      "size": 2674,
+      "xet_hash": "3899d194c34ac81acddd6747edabb48532ae789f873e8c1a6397d9a361a36dfa",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-f425fdae4744-20260902T112236Z-37c0.json",
+      "size": 2738,
+      "xet_hash": "4cdbf13b57d30fc3c92084896a2821c5978409b64b8c99e52b2d8501d5c4fbe0",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-f425fdae4744-20260902T112838Z-bf76.json",
+      "size": 2732,
+      "xet_hash": "26e6d4eb224d44defa075918caed2767a5e7a2996959d9ae3e5efa0024a338f4",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-f425fdae4744-20260902T115737Z-fa74.json",
+      "size": 2741,
+      "xet_hash": "8da2221d1fd067d7231e2f3ae9b1733ff5f7e05e2d130a27e274362c91f44b5e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-f425fdae4744-20260902T121230Z-8d9a.json",
+      "size": 2738,
+      "xet_hash": "92167a26de2d3d4651398758027364cdc9e1f4b5ed024384b79af91b52c76ccf",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-f425fdae4744-20260902T171552Z-8708.json",
+      "size": 2732,
+      "xet_hash": "f4f99206fe516d1fd9e009d42e38f7cda2523467dc7acedda1593b25cbfa0a8c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-f425fdae4744-20260902T173731Z-76e3.json",
+      "size": 2743,
+      "xet_hash": "c6b15ec09f3c14af40c1d7d95fd2732333a24da54e60004e450167a28d9f5d49",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-f425fdae4744-20260902T173836Z-b8bb.json",
+      "size": 2743,
+      "xet_hash": "ede60a2afc7899bf77a3127d2567c1935f92e24700358d76a44330fe5ef4aaf5",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-f425fdae4744-20260902T173924Z-6d74.json",
+      "size": 2743,
+      "xet_hash": "7061c4b7bac64eede19cb10318d35c55e95ffd57fa2720121964c2670979e7af",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-f425fdae4744-20260902T181357Z-cc98.json",
+      "size": 2743,
+      "xet_hash": "1bc63aedd19372ab29a82a13954a429cee1cb5fc64e7e3c4960c25e00f9b8955",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:16.967000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-f425fdae4744-20260902T181926Z-45ec.json",
+      "size": 2743,
+      "xet_hash": "6eb64afee3cf6c0183c9d694e9a348102cb5d5f0b3e9c6e12ddc18545089e922",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-f425fdae4744-20260903T164017Z-b2e9.json",
+      "size": 2740,
+      "xet_hash": "c3b447bf73f7a856468e8ae1106f08089dee4c2a1e0d6c496c6bddb1d0af781d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-f425fdae4744-20260903T164400Z-a96f.json",
+      "size": 2736,
+      "xet_hash": "bba95e84cb8f4b5ceb5d11523582accc7ad9c0fc591620aebcecbfc2432010e5",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_a_dryrun-f425fdae4744-20260903T170404Z-ec13.json",
+      "size": 2736,
+      "xet_hash": "65d9e7988e93b2601a81ce58e71ee09e2809a14997d7659f083379b7eb7a876d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_b-0ab93d465521-20260902T205357Z-107e.json",
+      "size": 2007,
+      "xet_hash": "5bb6f34c1625f06df6cf3cf372c38656f0f474c8185cd8e70b556fcb5b54af27",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_b-0ab93d465521-20260903T050358Z-eceb.json",
+      "size": 2007,
+      "xet_hash": "1beb21c2894d73084e00df6c5dab918f7da0a9cac74821d18e8aadfc06403f5b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_b-0ab93d465521-20260904T063719Z-e5f8.json",
+      "size": 2007,
+      "xet_hash": "bd9205d952b39a883ec5ef2204e795bc644cc93ee5020c9dba7cf2054b335f2c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_b-0ab93d465521-20260904T064105Z-5446.json",
+      "size": 2007,
+      "xet_hash": "9244ff46adde4d32056c3b535856762550023ac282fce27bcfab9d85d2dbe9b4",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_b-a5f2ba7ea0eb-20260826T114117Z-00cb.json",
+      "size": 2141,
+      "xet_hash": "7842c383fb2d378c6424d744bece70a03062be5c6d2f366704d0895aaa00d56b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_b2-6af434bb2151-20260826T070900Z-bcd1.json",
+      "size": 1488,
+      "xet_hash": "0cbe60f33266484905b59145e6edf1c75e74e263cc0acd9c2979e55a8a215fe0",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_b2-9edf3146d087-20260902T213353Z-a4b4.json",
+      "size": 1567,
+      "xet_hash": "36b2e7c3bdc77bc26cdb8afbe239359a4d2cf1622087b7c4c6f33d89a2b78cf9",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_b2-9edf3146d087-20260903T060538Z-31bb.json",
+      "size": 1770,
+      "xet_hash": "c0d869e29500b3fa0998b5ba9574f746eb0bf02c917947d216b297fc9e89a126",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_c-43a058f7d8f8-20260826T112320Z-605a.json",
+      "size": 1324,
+      "xet_hash": "81a16f5745641d63fa628701f7f21be72dc39cae587da024c9b514b5ecd667fb",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_c-48bc1d4ba3e8-20260903T030314Z-5edb.json",
+      "size": 1403,
+      "xet_hash": "c17c9a92454955da80005bb4d333dda257b5e9f32e852369d6c99c552573cadd",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_d-61f5422d3a53-20260903T070006Z-2885.json",
+      "size": 1491,
+      "xet_hash": "586f078d14cb7a82107ab03290db83ebe33f58f8ccdc51e4c0cd3139acbee086",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_d-61f5422d3a53-20260903T095418Z-9851.json",
+      "size": 1491,
+      "xet_hash": "84f7832ef01263f0ac0f12d0f6242498a2e9c9d238410ee152c0908d1cb19b58",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_d-d860860045e7-20260826T091437Z-878f.json",
+      "size": 1317,
+      "xet_hash": "03fad1cf570774f81fc49f3281ec5965bb89ba2f1573f29bc54c467de4372d57",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_d-d860860045e7-20260903T030322Z-5fc7.json",
+      "size": 1323,
+      "xet_hash": "754fb25589d5db3fca3133b18d64802f00da3ad763c11cbe667ba424aea75255",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_d_bandit-af9bd3dbdb6d-20260826T114021Z-0952.json",
+      "size": 988,
+      "xet_hash": "942fe58b8941df2fe83f3da7ac26e19604d3f8e790ba53afdfb8246a89283f7a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_d_bandit-af9bd3dbdb6d-20260903T111025Z-ba10.json",
+      "size": 995,
+      "xet_hash": "7c928980189beacd62b57db1939bd81601d1cd4ffba658bf51df76dd71c58b3a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_d_pilot-6ea7f2def758-20260826T091235Z-ae54.json",
+      "size": 1278,
+      "xet_hash": "a65ca3f4461bdf60d609a2c5b655e1fa2deee090be7e6292b13f827c055b513a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_d_sweep-e5a3d807dfea-20260826T113951Z-63ad.json",
+      "size": 1130,
+      "xet_hash": "b4d7f0dd7247f859212585ee86411bdbfc50bfe3fa02591a97127d799ce2ca2d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_d_sweep-e5a3d807dfea-20260903T032341Z-fe00.json",
+      "size": 1136,
+      "xet_hash": "e763a796f5fce12cee5ac4795f2a8e71972ba9b0c1f29e93ec3f917e07e48d43",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_d_sweep-e5a3d807dfea-20260903T084101Z-12a2.json",
+      "size": 1137,
+      "xet_hash": "85af3b482d2a03ae69450d38a3caf55dcb8813b9e62af6087e21e71e335baa51",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_d_sweep-e5a3d807dfea-20260903T111019Z-9c4a.json",
+      "size": 1137,
+      "xet_hash": "9893482a7184d72190cdbad08186c09ad8b31be88338dc7ceeaf67ea00a470b2",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_e_burst-922bce246519-20260826T114014Z-d510.json",
+      "size": 1083,
+      "xet_hash": "d7ada4514348a05530ff6343cc1f54a7b13b49956257039aaee924c0d3c93ac9",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_e_burst-922bce246519-20260903T111216Z-3a6d.json",
+      "size": 1090,
+      "xet_hash": "401d708f7fb6c35f2f674c8c408a1f9a8373dc4541404105af24f619d0792394",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_e_burst-922bce246519-20260903T120817Z-6936.json",
+      "size": 1090,
+      "xet_hash": "794032364f350df1551bbb261993c8559ff1de39dce42886e193715345d5cea1",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_e_burst-922bce246519-20260903T162146Z-5b83.json",
+      "size": 1090,
+      "xet_hash": "9dc0ea459edf219ebe9267b5b1d16640463c9749f151b2809942651c1224b7bb",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_e_decomposition-2a6cdd185e0d-20260826T114018Z-373c.json",
+      "size": 1043,
+      "xet_hash": "4a4e02be9e0c2826491d29b5900432d4c5e3021e0fb8e048beca382898ea8f9a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_e_decomposition-2a6cdd185e0d-20260903T111225Z-0818.json",
+      "size": 1050,
+      "xet_hash": "7c7aafbdaad427af53adb697a9b611fa6f77f3452f7a73aa572cb687975fa207",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_e_decomposition-2a6cdd185e0d-20260903T120825Z-2810.json",
+      "size": 1050,
+      "xet_hash": "833742385c3b5e77df848e7e4cdafc312170b203250f765d1c5e48dbbe7e41c0",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_e_decomposition-2a6cdd185e0d-20260903T162155Z-f6d5.json",
+      "size": 1050,
+      "xet_hash": "d8ad6dc50314eb832607e9aeb47a8959f42e9a1d36a789ec3b8ddffe834d1782",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_e_sleeper_sybil-4bbb5a5e0bd1-20260903T120515Z-0f33.json",
+      "size": 1128,
+      "xet_hash": "0d02e66284e20e296232fc5555bc53f87241c1e5d8a1f242567ac3e236c452b5",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_e_sleeper_sybil-d175f36ab209-20260903T100115Z-80e4.json",
+      "size": 1050,
+      "xet_hash": "2f288add196aa43a9cbc18f5a68de8d949918697183203f12e7567c4515af659",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_gate_aware-6a379b767118-20260903T164752Z-7b46.json",
+      "size": 1169,
+      "xet_hash": "88ef22da8ef125966af41a332117aa52b8f65fe8787afadf87c1568f158159e7",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_gate_aware-6a379b767118-20260903T173244Z-b6bc.json",
+      "size": 1169,
+      "xet_hash": "88b26a51721300cd6632b3dc831b6d88f06a474a9a9afd54fdc8f507139cfb13",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_gate_aware-6a379b767118-20260903T182541Z-30da.json",
+      "size": 1169,
+      "xet_hash": "674a7e5bad69c4e87d4d15aab20c06b561739a27cc0d714f9650063f0a42b8c6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_gate_aware-6a379b767118-20260903T184722Z-3cd2.json",
+      "size": 1169,
+      "xet_hash": "06b3d76c07f851fe9c664b44ca32b680641a923605e1769b242a19decc28223d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_gate_aware-6a6f1dcc79e3-20260903T164735Z-33d2.json",
+      "size": 1039,
+      "xet_hash": "fc4870331c264a819b1c474456f7ec8871c3fd131fa9d1b7ff2c68e815fa0e19",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_n_scaling-337f5bcee5dd-20260903T163850Z-cbdf.json",
+      "size": 1123,
+      "xet_hash": "62e74954a70217e1f3676624742fcda484d461a8b210627254e7abe9432e46e7",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_n_scaling-4d47129eb0d5-20260903T172709Z-de82.json",
+      "size": 1166,
+      "xet_hash": "d5cc13d0f73cafe50b0c567712d28ad3319b336e2f8f67bc29a688c9ef5de7c6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/manifests/phase_n_scaling-d9d154bc5a44-20260903T163834Z-8618.json",
+      "size": 1039,
+      "xet_hash": "227095f43ba299921dc06e26246a036007089d429131b59c0e4b49abd58cd42d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/measurement_floor.json",
+      "size": 859,
+      "xet_hash": "74fc04a02f980dce203dd47626936e21f2c22825a4ab37ebb00813e914bed882",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/measurement_floor.parquet",
+      "size": 5566,
+      "xet_hash": "dbb144e53ff9aa7077578e8abffad668e14252d2fa6870805932db7fce8e84dd",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/measurement_floor_audit.md",
+      "size": 3641,
+      "xet_hash": "6f7df50878b425869655b8c37fdd594a2dc050c00283ccb73c95ba77af829a9e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/pending_claims_audit.md",
+      "size": 26431,
+      "xet_hash": "413a05db05258ec5d998e207a558065ae5797e73ea3ed4c3aabe0fb85367fbfa",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/pending_claims_audit.parquet",
+      "size": 28970,
+      "xet_hash": "5b5aff3ce545b944f684746bed7320ffdba4004aec778bc98466cb3c93401cce",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase1_run.log",
+      "size": 2446796,
+      "xet_hash": "9e1923bd36b7fdf101a14f0510b4eb764d401f9446cf0269f287511bf48a5685",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase1_t07_run.log",
+      "size": 481954,
+      "xet_hash": "80fc17628e89b3a22f1617d47578aab07f40d85a39fbc1a9ea14e286e41e7e09",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_0_report.md",
+      "size": 12796,
+      "xet_hash": "6a570cd5c9d1f3b65b41d966d5f229028b5a2a69091b344c72315998e16add33",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_1_gate_report.md",
+      "size": 7038,
+      "xet_hash": "b194e82019e20fd5576e71a561849997e7994eb74d08d509bc48a07930d1bee7",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_1_gate_report.parquet",
+      "size": 9634,
+      "xet_hash": "eb266a84118b6cd29d04875f1d8f1ac7e96acd522ca2f33e6f891f31092d90a0",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_5_report.md",
+      "size": 5753,
+      "xet_hash": "2d38e3e9b9a53104de1abeb5cd102979570157029154e2474a3ac4ea54f5966d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_dryrun_gemma4_31b_report.json",
+      "size": 582,
+      "xet_hash": "ee8c2300ad472d53d5787d48198a47ea2b1e2f7120996311fc3552e87897e69c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_dryrun_granite42_30b_report.json",
+      "size": 591,
+      "xet_hash": "fc85dc8a06e69c34448821b0b96934dfdc28ab5fd0bf7cf5aa1cf712eb8dd973",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_dryrun_llama32_3b_report.json",
+      "size": 586,
+      "xet_hash": "d5301c91f998bc4517ce0df682641362e1a06e575762a1c53626bb26dbc0a9e3",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_dryrun_ministral3_14b_report.json",
+      "size": 593,
+      "xet_hash": "3f3d7ee41b93b773fdd1cb3d47ea5021327c19c7eb773de195bc594f12bfc5d3",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_dryrun_olmo3_32b_think_report.json",
+      "size": 593,
+      "xet_hash": "98d1ddd87e7368623d10a416eb71db69b83becb5b7439c743bea92d4505f58b3",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_dryrun_phi4_mini_reasoning_report.json",
+      "size": 602,
+      "xet_hash": "4da22d357c9c0b43f2b94b1d95b14c6a3db9b477a901278e55bee358c852680b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_dryrun_qwen38_27b_report.json",
+      "size": 586,
+      "xet_hash": "226d7b78730297d880dc0bac1cbcc340b0c2470831d8c8c2feb2eda718b42b63",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_dryrun_report.json",
+      "size": 4975,
+      "xet_hash": "6a3b781f45d14114a6cda13e5cdf758f7f5ba1fcd3a301b92e6bbf64a3d8163e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_fixcheck_ministral_report.json",
+      "size": 591,
+      "xet_hash": "d7c577e5f4117eece063e091568650941ef44cfe2a3ed9e1b77103fb673e3b00",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_fixcheck_qwen_report.json",
+      "size": 588,
+      "xet_hash": "b087c3901bb8fab0ee1be95e143f7f19573ce88d6b0425fe36e359eef53a7180",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_full_gemma4_31b_report.json",
+      "size": 7339,
+      "xet_hash": "2a6db2fd64f32a5f564347fec9365f7005b5c630bfc98584814054b469723466",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_full_granite42_30b_report.json",
+      "size": 9909,
+      "xet_hash": "5a34b692dbc6658720aac8065d05b8facda2a6cd43cf82730440b524cc0aa5fb",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_full_llama32_3b_report.json",
+      "size": 5887,
+      "xet_hash": "27f543b744fb86095a31e9fafc629d6c689ecc4b72ef551e949e608345f08e63",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_full_ministral3_14b_report.json",
+      "size": 10121,
+      "xet_hash": "50a384900326f6dd6acacbcb9d48a0db19606992d7ee0d67437d24eb0b710f07",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_full_olmo3_32b_think_report.json",
+      "size": 11405,
+      "xet_hash": "b813364645c393b6b25d197a1c6f31413fa26b90ca2166712fc59e2a91c413e6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_full_phi4_mini_reasoning_report.json",
+      "size": 18340,
+      "xet_hash": "8408d74c7a572c073b0250ebf8f59eaab415cdd58e058c7f953ec8e51171257d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_full_qwen38_27b_report.json",
+      "size": 5834,
+      "xet_hash": "e245c4b8e647415ee1f770a91f0d77be13273262ed532c3030642c2c3bfc181b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_full_s0_report.json",
+      "size": 13529,
+      "xet_hash": "e697dd44ab67625241a68c3892551ac1ed8588d84053047f467a79179783c547",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_gatecheck_report.json",
+      "size": 588,
+      "xet_hash": "ccdb89081abc168ea47223220bb22c26d1a6a53116e32a1ba1f0e948363a8fca",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_gsm8k_ext_report.json",
+      "size": 1263,
+      "xet_hash": "ec76ea9a8a1a0d302bc60f20799f96f645a3854919939a8df4eca011ccc17c37",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_olmo3_fix_report.json",
+      "size": 594,
+      "xet_hash": "8d59ffe58eb7f252cf51d4f88a3e44b459c50b715101384ea10fe1690e4f8255",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_olmo_dryrun_report.json",
+      "size": 1621,
+      "xet_hash": "f9bf9261f21d38856d134ccadb3d94451204dafbdac6b65d0fd36b329dd688c3",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_qwen_det30_report.json",
+      "size": 585,
+      "xet_hash": "8e92b687ae7943007c8ce985d61440172b72270bacfd6dee1df0de407676e33f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_qwen_eager_report.json",
+      "size": 587,
+      "xet_hash": "fed1705c81f2e1587aaf44671064c64157aab23e96fda009cf9d865e5c5c8dd1",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_qwen_gated_report.json",
+      "size": 586,
+      "xet_hash": "d39f7feb017479d1959ba02beb25c427abfa1406284d51eb7626cf835c08c925",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_resume_check_report.json",
+      "size": 76,
+      "xet_hash": "f4fbe81a4e73081ecc375d698b78a88ee8c4ca8983be0d9bd4aa7353d69a91d8",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_t07_gemma4_31b_report.json",
+      "size": 14773,
+      "xet_hash": "dbff301aac99114c1a0f777939006325d745fa4781fc4fcc50e937993de5f547",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_t07_granite42_30b_report.json",
+      "size": 15024,
+      "xet_hash": "f1a781bec1ad195d4478f1d4f5c4e86dbbea2c1fe077f4dd412a7098bdb3f9e2",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_t07_llama32_3b_report.json",
+      "size": 14822,
+      "xet_hash": "8850c8e27c7c780e2649150f8d5607742528cff74a2932b84ca5db94d5cd7914",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_t07_ministral3_14b_report.json",
+      "size": 15363,
+      "xet_hash": "4b8e6533a24fd2c114a2ad184bec07fda5f23a8e8059733cd3705f8b0b351b93",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_t07_olmo3_32b_think_report.json",
+      "size": 15342,
+      "xet_hash": "2bbf6e7125b957a7b17a1df676888ab23e9c80867b3a865ab0a3298bcb340e7d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_t07_phi4_mini_reasoning_report.json",
+      "size": 16437,
+      "xet_hash": "220b56c5adc6c348dd705b7d23b097e11720829d71955526bb6b69d37f137694",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_t07_qwen38_27b_report.json",
+      "size": 14969,
+      "xet_hash": "2a70ff84528ee1ed59299b3dae792ba6593e7a5b3d17db8bad0eefd968e60898",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_t07_s1_report.json",
+      "size": 13765,
+      "xet_hash": "ed4b6c0fc05b23b8d2d2c3cdda66fa44f249dba723a667a4b8b819c980508abb",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_weak_dry2_olmo2_report.json",
+      "size": 579,
+      "xet_hash": "e244c4748a18603a7ee931b1b9a55efe9c08371b5231313f7c97e34a8eebc9c6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_weak_dry_ministral_8b_report.json",
+      "size": 589,
+      "xet_hash": "bf4281204124777ab541bd834b2bc986dd8fd531424ed15ce8e2572143d60483",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_weak_dry_olmo2_7b_report.json",
+      "size": 580,
+      "xet_hash": "b1aa6d9cf00266d07b13a39ef93314aa359934456821f14d4788b3db13d9bc69",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_weak_full_ministral_8b_report.json",
+      "size": 5453,
+      "xet_hash": "7940fcb6e1b9b96f99d46f7d5ee04d1a60641f2f6172a7ed868246ff75951652",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_a_weak_full_olmo2_7b_report.json",
+      "size": 6514,
+      "xet_hash": "2d313eced8283632ab7a28e0bfcb6bd6382cc5e082ecfdfd359442df85875eba",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_b2_report.md",
+      "size": 9036,
+      "xet_hash": "0825961c6628f615435a2c3ca0c86a5fc69d509da9cc72795fe365826d0a7106",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_b_report.md",
+      "size": 8079,
+      "xet_hash": "882c2000fbb79110ae5fb0e11d32a4fd1320968f006fcaf46d0067b8ef33b0a9",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_c_report.md",
+      "size": 8654,
+      "xet_hash": "719de4a29f73678017fe37797031a3482b0575fe4c94e176161ea9c0fc6a8cde",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_d_report.md",
+      "size": 12351,
+      "xet_hash": "c38c676937c5a1a4b5ad716ced2deef10438a104a9f9e0c117ae4792989c7964",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_e_report.md",
+      "size": 9898,
+      "xet_hash": "72f8f7766ad5d6249c97b1876f70f628bec0ce3de2e1ac1e54773a75320448cc",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/phase_gate_aware_report.md",
+      "size": 5536,
+      "xet_hash": "09479af153716685f2fba0dcbab0afdd5b2f7eba9b35e80898bf96b239d172f9",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/resample_noise.parquet",
+      "size": 5575,
+      "xet_hash": "4d9adf659114c93ed54f41081f5ebdeee0144d9b3ce18cac030c8c0ede1eaae3",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:13:44.527000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/task3_mitigation_verdict.md",
+      "size": 4208,
+      "xet_hash": "8efa41b05ed703a2fc2e6599afeb625302d4b0ab544af1d46bc1240a1071bbb8",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "results/task3_preregistration.md",
+      "size": 2058,
+      "xet_hash": "5e8a3f35b584f2bce84ec01ad5dd90f3f93dd2e087b2ab87e67c3d7b50b89a01",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/calibrate_receiver_coherence.py",
+      "size": 4106,
+      "xet_hash": "81696ece4f6d446e202619dfbd41d76199c75e3b3cd92651e1a548742fbb60cf",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/fig_evasion_band.py",
+      "size": 9947,
+      "xet_hash": "ea41f0ccb00cc803ed58ca2c6ee352bb4fe6d7f8df53c08e3e36826d1a76001a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/fig_sybil.py",
+      "size": 3181,
+      "xet_hash": "a524fd5451fd5dea550e625d73c6de4a8450f1d6e863e3da07187027b6228c0f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/hf_evict.py",
+      "size": 4659,
+      "xet_hash": "175d47e86a10910257a30bd4d1f54d18e14b4e55bdc702f626cf27c07371c67e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/hf_push.py",
+      "size": 10145,
+      "xet_hash": "d80e434e14261fc2dedded8a0d1d7f1acbad9437e8c4ca0e5dca3d53108e03ca",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/make_numbers.py",
+      "size": 3536,
+      "xet_hash": "7fb23852b64722c16669708481ad80f7097f168457a60167fe5be63fb63484c6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/make_task_lists.py",
+      "size": 3121,
+      "xet_hash": "006119ce5715fae628b5d0ecc7b61dc6c55676c1d17a5fb629266757543e0813",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/measurement_floor.py",
+      "size": 8109,
+      "xet_hash": "7fa67fc648c712bff7ff3415ef15cfa115d3e3ca6a4becb58cda2a6dbce59134",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase1_gate_report.py",
+      "size": 7673,
+      "xet_hash": "e4d1a4a2d964ad4364d46231597a909f12557f39fb286385fff8d1b22979d914",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_a_cache.py",
+      "size": 35444,
+      "xet_hash": "fe6578efec016e5443755783f4dd25211315bf14c03e7541a82aba351790b359",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_b2_multiclass.py",
+      "size": 14502,
+      "xet_hash": "ca07cc1da7161c411a746e54bacba41719ae4876be62456e21a6deec3efedb88",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_b_correlation.py",
+      "size": 18509,
+      "xet_hash": "72374a17dbe024c06b9103a287fb3bbde919d73f798035bf19e362dca5acaa1e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_c_aggregate.py",
+      "size": 16186,
+      "xet_hash": "53fd8387afb95820e70c3c497ae1eb3aa60815d195ec5d16228e899bad8cef14",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_c_figures.py",
+      "size": 5814,
+      "xet_hash": "0143727ed147122a686a3c9b30037040e1ac1f897cce726fd1a4ed8fff43a975",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_c_report.py",
+      "size": 8719,
+      "xet_hash": "2be5a7980ab98ec7493048d269b2445c43310fe563224f19e93a9967521b44f6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_composition.py",
+      "size": 16569,
+      "xet_hash": "c3cbaf0b2b280016cfd7636bc04ea388f40696fb6e4a185a8f5c4790c1099719",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_confidence_auc.py",
+      "size": 9173,
+      "xet_hash": "4f80aa044195d2ef814cf76927b7c66e548177c83f0108d981a3d79a1d10f939",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_d_adversarial.py",
+      "size": 13751,
+      "xet_hash": "ee2a751df271dc124c36b75f4d7b41c054b06d38bf8328e322b5c8a1ec8b0395",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_d_bandit.py",
+      "size": 8607,
+      "xet_hash": "4f0dafc17581edad98c7074919883c79935e3b7091f365171572d52a00c31f48",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_d_figures.py",
+      "size": 11454,
+      "xet_hash": "d3bcc450f69124b217950bf13de8bf1f2f95dac88499e3fb4dbf0eafc97fa865",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_d_sweep.py",
+      "size": 15884,
+      "xet_hash": "a59c6fb002da6695cf77913ff57bd2a240191760e8b38c2049720f2c52080fea",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_e3_cost.py",
+      "size": 9902,
+      "xet_hash": "4177d7d574b16ff1fee24e927d70f23dde0f8ede61eafb82e704ccea5107d674",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_e_burst.py",
+      "size": 7705,
+      "xet_hash": "8ffa44d9b8add714acfe9d5ed82449e856f845e71cd2d8d98878ceccb1c53828",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_e_claims.py",
+      "size": 21521,
+      "xet_hash": "af24145ba3fda7ee1f2e1f8832b953fad75b02b3fa1d4bc12702d75e62f4c186",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_e_decomposition.py",
+      "size": 7326,
+      "xet_hash": "daee43dbe4abf5ddd8ee5d435780305af63dc6ecfa1bc043fd487e17c0794bbd",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_e_figures.py",
+      "size": 6653,
+      "xet_hash": "9ae15aa79bb02c41ea3af9fb0fe4bb9d982596031e3af93a9025065bf36894e9",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_e_sleeper_sybil.py",
+      "size": 11132,
+      "xet_hash": "e94252021798db4a7d711e5104f5095c95a6b45d46a2a15d4bc01a64fb88993b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_e_tables.py",
+      "size": 8495,
+      "xet_hash": "b05cb6b31a15f90ec338339353a2fc7c9aa8b171cd0f06b210263e6ac2cad73d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_gate_aware.py",
+      "size": 8315,
+      "xet_hash": "dc1774360d9e84e7ce015da44112b072902d1a4455ffadaa53e7a033bf7d4e66",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/phase_n_scaling.py",
+      "size": 7972,
+      "xet_hash": "3ae51b020bfa27a7e465d8f14910c98c29a9cae428c83a4176658293573e1c79",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/preflight.py",
+      "size": 10637,
+      "xet_hash": "ccb27665c236551f44a6337050dbb49bcc8af7a7bbf5ade820c2c4e841eafb14",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/run_all.py",
+      "size": 18009,
+      "xet_hash": "5defb3a53f1892920a6d9f3465fc0cdab2e253c06bd0624fa921bba8afa00cce",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/run_phase1.sh",
+      "size": 3994,
+      "xet_hash": "e15f8b8b7bb5584277f18d0f2f4735bff1107c6c3d1a5dd0fba22395a542d5f9",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/run_phase1_t07.sh",
+      "size": 5462,
+      "xet_hash": "399dbb062cbccb1250b5e11abc04d93496c1a2acedcedf06d6a9138c33c05d38",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "scripts/task6_audit_pending.py",
+      "size": 22103,
+      "xet_hash": "a0ee695cfa6d906749646d393083ce54eb60cfd152afd42b9661201f2d1ca0f4",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/__init__.py",
+      "size": 103,
+      "xet_hash": "4f846b4b724f36b2de6f4af763e4c0090aaaeb833d6365a15737d5aee6f74d7f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/aggregation/__init__.py",
+      "size": 35,
+      "xet_hash": "1bf7ff3faf8a5f0eb95d72ac421bb35d25c9be6df85d20330b9a334bc836814b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/aggregation/aip.py",
+      "size": 40543,
+      "xet_hash": "606bc91b98e2efd0da3f2b5cc7ea6ac49cc6ec5ea6f4a54fa647de1f3b2386c5",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/aggregation/base.py",
+      "size": 4678,
+      "xet_hash": "eae13a93bf3185f89b20b1128e13e66057e578b3ab44c11ebcccc076cecce84e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/aggregation/baselines.py",
+      "size": 19132,
+      "xet_hash": "b1fad13851ed72bdea5d89b4f3be989ad0354526b44ee659c2899bdc9bede4e8",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/aggregation/correlation.py",
+      "size": 16147,
+      "xet_hash": "6dfd8fd83f86352013c7fb4b38e315453a258a53aa66f4247588e9af464ee094",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/aggregation/reputation.py",
+      "size": 5874,
+      "xet_hash": "bd7b2733c8eee5d9e3165ac7e49af2ec6173d73de146818b90dd91d83ee2a331",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/analysis/__init__.py",
+      "size": 32,
+      "xet_hash": "797c7b4030eff0ea02dc6db9cf4974a83a886451268beb798d6ecdfbf7bf28a5",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/analysis/bootstrap.py",
+      "size": 3013,
+      "xet_hash": "c46fe56cc6546064b82d78d1952cebcd3b2aedd86820a89315e45d1de2e3493b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/analysis/figures.py",
+      "size": 6545,
+      "xet_hash": "044f60bc24dd453a75e47d60a8a25f18fc876dcf88b34fc07058eebcb195993a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/analysis/metrics.py",
+      "size": 1505,
+      "xet_hash": "df40362bdd3cc41bbcfcbd587aa38b89d857d2af44f59fa4b2f4d65f0538938e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/analysis/paper_numbers.py",
+      "size": 41211,
+      "xet_hash": "e99b50951143e9fb24c9f691af09dc19ef34870e2f88a321454fe959fa21c2cc",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/analysis/provenance.py",
+      "size": 2363,
+      "xet_hash": "3587dd7b797cba541076320a6f1d48d16dc33b7ab536494d8f29a1429e4ea7a9",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/analysis/regret.py",
+      "size": 2379,
+      "xet_hash": "99957de0dbd9c238e88ebbcf889f9be983502765a0fbce4bc1d88d18aec9f6b6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/analysis/tables.py",
+      "size": 280,
+      "xet_hash": "bacade93ff5f18492d28fe222f41a6ad03d535dee9396c0cb1d87237a1e5746c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/attacks/__init__.py",
+      "size": 1042,
+      "xet_hash": "c15c279e00b2d99f5717f0913a34b9c464a9ac5fc936159ea304a42d54853bbb",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/attacks/adaptive_bandit.py",
+      "size": 4173,
+      "xet_hash": "a2526a64317ff0fdf318353e1793b8b4b437e7cabcc3fccfa85b7a4cd36e8d39",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/attacks/always_wrong.py",
+      "size": 2448,
+      "xet_hash": "dcce904ecb352038e660ca1822169a467445cf39b50db08a462e683b6a35a32e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/attacks/base.py",
+      "size": 1989,
+      "xet_hash": "3464b016499ea234ca27f85ea74c7e0f4b2c3386a7b5ce46b5f1b49875cd089c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/attacks/burst.py",
+      "size": 1494,
+      "xet_hash": "5a861f8e33c902d34163f5c9917d0b470e94491cec5008feb095bf1c73b5d93a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/attacks/falsified_confidence.py",
+      "size": 1662,
+      "xet_hash": "4136937f051fb7b2350bcb029790e067ab934d2cbb54eddc69a410fe6ce3a62e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/attacks/rushing.py",
+      "size": 3043,
+      "xet_hash": "b48f77b2048c419402a7127502e388fe351c0deda655d1c685fe3c3043667e85",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/attacks/semantic_hallucination.py",
+      "size": 3250,
+      "xet_hash": "69e8b39b31c5e0bbd67ecb075feb4cc99b88dcfa1f0a62a1cbbc78872ca8de36",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/attacks/semantic_negation.py",
+      "size": 3701,
+      "xet_hash": "0b19f3aad9f8e4b5697b6bd3b3fbeafb4063f0abd2140238cb8e469f5f4d0470",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/harness/__init__.py",
+      "size": 78,
+      "xet_hash": "6a82d772893b390d8fca5cc54d8543c80def64c59713300c054915ece7f9d29a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/harness/cache.py",
+      "size": 8955,
+      "xet_hash": "f5f53257964e7a10fcd549956f131c8b5e5a038457624317b63005c1b359ac19",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/harness/logging.py",
+      "size": 3005,
+      "xet_hash": "056d2b682b06d2a30d4d17a81669ee6e7d48276f5acc0117292fe405091c2355",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/harness/manifest.py",
+      "size": 6558,
+      "xet_hash": "c343b4e0a12a3a6e13cedb84181d40a37c0186f0d766b3699b99adfc08cf5c9c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/harness/rules.py",
+      "size": 3414,
+      "xet_hash": "c3a16e7737631b064f2adc8988fe6211adf8c52c64a27421f988d65627c47d7c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/harness/runner.py",
+      "size": 271,
+      "xet_hash": "fc49d8b20ca7851610ba3181b4b3febcedf74477cb1870a0ad0e60f98b478fb8",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/models/__init__.py",
+      "size": 73,
+      "xet_hash": "7a00ebf31f44de37bfd3577f172653275ec58a68a6396ebfca3f159dbe670b9e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/models/confidence.py",
+      "size": 4356,
+      "xet_hash": "f5b464ebedef81c7608d721a40fd43f8d887a094fad9f87a371bdea783ced206",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/models/inference.py",
+      "size": 17603,
+      "xet_hash": "ddbed571fafaeac30cc4c561fc110948f795997f5f727fdb57380fefa611b121",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/models/registry.py",
+      "size": 17234,
+      "xet_hash": "dcf4cede6cb1d4d2529be3e64efb8ba33c066a3e3a7297f03a241d7e3aa3433a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/swarm/__init__.py",
+      "size": 29,
+      "xet_hash": "412c3c13965b19eff3a0518506fa04a89b863de3c534463d4bf062f4dd770ad3",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/swarm/assignment.py",
+      "size": 2253,
+      "xet_hash": "e65eff67c12d641af5be2a7b0488e4256dcbf47ba48cda8e49687f1e254176a1",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/swarm/broadcast.py",
+      "size": 7210,
+      "xet_hash": "978e981283e65704020fdcdc3e336595ecdcd767450310ea70bd0d0c0505c8a6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/swarm/topology.py",
+      "size": 2996,
+      "xet_hash": "9c1878a7a5ffd8460cd50266a7e6c54d4448bb718c9aa5543c47d09ac7e18f32",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/tasks/__init__.py",
+      "size": 1286,
+      "xet_hash": "07e07d937bea47fee51a34451b78d5d259f0b2190f80c86d597f4189095a11ba",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/tasks/arc.py",
+      "size": 4761,
+      "xet_hash": "9ef22e2c1534e1451086c42266bdb5a11ae5f2ec8dee26bebe00004284d12fdb",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/tasks/base.py",
+      "size": 8112,
+      "xet_hash": "9f3d7bfde9c438a93eea633c00a7de72f43fa4ddc69aa5d734806047092c9b90",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/tasks/boolq.py",
+      "size": 9694,
+      "xet_hash": "89e4bfb1bf715a9437f15f9ec7a2ad56403fc156253b5c2cf08bbff63e5000e7",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/tasks/gsm8k.py",
+      "size": 5236,
+      "xet_hash": "40ec32079f57485ac4fb27271e70a5f785c29daf44b9bc94ae6737deed3e649e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/tasks/math500.py",
+      "size": 10017,
+      "xet_hash": "e2a5808e026f87775ec461ac9a031d4cbf547bd2e046b642ff2f3cb6f22bec84",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/tasks/medqa.py",
+      "size": 4275,
+      "xet_hash": "f3ddd8d1b3204395c09778218c6db8ad1bad421dd9d27cffde825687195fa1a7",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/tasks/mmlu.py",
+      "size": 7003,
+      "xet_hash": "7c8f22208eb8c218f0e1b5575061886758455136bfca5086417ee79b813c15c0",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/tasks/roster.py",
+      "size": 2787,
+      "xet_hash": "786c42a726153cf52196cf32cbf0e1a06324f283be79810e0f5a377edc2e7a30",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/tasks/task_lists.py",
+      "size": 7237,
+      "xet_hash": "f8043fb2d2ba5ec13b1cf038d7c2f8c11666a7dd8cb0c30b5dc98cc1d003f017",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "src/aip/types.py",
+      "size": 5347,
+      "xet_hash": "f90a3343021483d7734c13b9f6dabc01848f08c72e0b2b39fb0fe56de145cd8b",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/__init__.py",
+      "size": 0,
+      "xet_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/conftest.py",
+      "size": 334,
+      "xet_hash": "c5f74fe25ab7ce2fcaea798d62bb4de6e7a70874a16970336067180aac5a006d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_aggregation.py",
+      "size": 16177,
+      "xet_hash": "b4fb67ea84dcb18e91c6051f21ce8aab502a3b2e7a97068da6ed7b186a378dff",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_artifact.py",
+      "size": 2552,
+      "xet_hash": "96257a88cdad1d6cecf6835bf0a4dfc8de21b5410e305536b80846bd6eb75c6c",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_cache.py",
+      "size": 4835,
+      "xet_hash": "55cc23ac3ebe14617d37b43456d85db6f4843ddc6b3e13047a96b4b58c3db7f0",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_confidence.py",
+      "size": 3552,
+      "xet_hash": "3ec7264ef7c79d4d27b5eea70ebdbec2446ccd9a881836374aff9bd95df9acd5",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_confidence_raw.py",
+      "size": 5115,
+      "xet_hash": "7fe83d11521298bd7c90f543471eb961362f54ef516e88c7493de87d410bffc6",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_correlation.py",
+      "size": 14062,
+      "xet_hash": "1cbb7263f13407e4e8c81ee80ef8d743b1d4dbe5273cd8893ef519931018cd7d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_correlation_mc.py",
+      "size": 12394,
+      "xet_hash": "5912594dffb3924816dc405a60729bba352c927b2445e8f91476abba04498c1e",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_datasets.py",
+      "size": 8142,
+      "xet_hash": "84f5a1a5ebfaa532eb5fd85edfc8793635e1de79a0a4d49749070d5f9b9ecf9f",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_determinism_gate.py",
+      "size": 2035,
+      "xet_hash": "4aa9d7769516bd6ffe1f788cdb250a2d845419d6c03d612255ca16592294e2c0",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_extraction.py",
+      "size": 5892,
+      "xet_hash": "d8f71a94b170ceb2eddd58679d5dfc341d442168ed5e84ac1fc673a2e5a53c84",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_inference.py",
+      "size": 6817,
+      "xet_hash": "40f9960762b17359ab41b07af5267f42af6c7f41e3244a7bc2317f5c91b0f14d",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_manifest.py",
+      "size": 1828,
+      "xet_hash": "2b89477ec376e833bcc23610d77993c159b1cbe277849094c30b8dcf6692a1d9",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:11.481000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_mitigation_variants.py",
+      "size": 5869,
+      "xet_hash": "89e631b6b25be4dffa6c675a216c8ddcf28df6b642d10a3c6405ee0de4d625d2",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.269000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_paper.py",
+      "size": 10127,
+      "xet_hash": "747a15aae779db0ea63af13cf6876111e241c49f8af058b9f2f10cff378cfedf",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.269000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_readme.py",
+      "size": 4923,
+      "xet_hash": "fcbbeb74ed88646c20c56d0b5b194346c1a4c021fa3bd77959059e3471f3be44",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.269000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_registry.py",
+      "size": 13104,
+      "xet_hash": "19d365d45940161aa109e9417cfb8ffae973556300910fd6aac53e8a642480b4",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.269000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_scoring.py",
+      "size": 3589,
+      "xet_hash": "a50d7728fbee9612e1c58e123be15b412c102e333b2f9306f0aa927ebd85f88a",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.269000+00:00"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_tasks.py",
+      "size": 6178,
+      "xet_hash": "0afb1f9667d58bfa9aff4f2fda9ab598c270f82aa0820174d94aa7a64273ffb5",
+      "mtime": null,
+      "uploaded_at": "2026-09-11 15:14:16.269000+00:00"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+[
+  {
+    "model": "phi4_mini_reasoning",
+    "benchmark": "gsm8k",
+    "budget": 3072,
+    "n_repair": 63,
+    "still_pinned": 44,
+    "n_control": 8,
+    "control_drift": [],
+    "control_answer_drift": [],
+    "seconds": 110.3
+  },
+  {
+    "model": "llama32_3b",
+    "benchmark": "gsm8k",
+    "budget": 3072,
+    "n_repair": 6,
+    "still_pinned": 0,
+    "n_control": 8,
+    "control_drift": [
+      "gsm8k-test-00248",
+      "gsm8k-test-00310",
+      "gsm8k-test-00470"
+    ],
+    "control_answer_drift": [
+      "gsm8k-test-00310"
+    ],
+    "seconds": 9.8
+  },
+  {
+    "model": "ministral3_14b",
+    "benchmark": "gsm8k",
+    "budget": 3072,
+    "n_repair": 25,
+    "still_pinned": 1,
+    "n_control": 8,
+    "control_drift": [],
+    "control_answer_drift": [],
+    "seconds": 108.2
+  }
+]

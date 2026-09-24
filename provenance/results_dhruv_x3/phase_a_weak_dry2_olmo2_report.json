@@ -1,0 +1,26 @@
+{
+  "cells": [
+    {
+      "model": "olmo2_7b",
+      "benchmark": "gsm8k",
+      "n": 5,
+      "accuracy": 0.8,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.977954908241526,
+        1.0
+      ],
+      "self_report_failures": [],
+      "determinism_ok": true,
+      "generate_seconds": 3.5385192680405453,
+      "confidence_seconds": 0.06036384403705597,
+      "tasks_per_second": 1.389319920733282,
+      "error": null
+    }
+  ],
+  "load_times": {
+    "olmo2_7b": 34.08847748406697
+  }
+}

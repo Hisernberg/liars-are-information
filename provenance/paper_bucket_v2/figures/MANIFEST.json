@@ -1,0 +1,84 @@
+{
+  "burst_windowed.pdf": {
+    "script": "scripts/phase_e_figures.py",
+    "sources": [
+      "results/adversarial/burst_windowed.parquet"
+    ],
+    "git_commit": "b3aabf76756a1e3ce697a3e1ab2d509cb9d1f69e",
+    "written_at": "2026-09-04T06:35:26+00:00"
+  },
+  "correlation_heatmap.pdf": {
+    "script": "scripts/phase_b_correlation.py",
+    "sources": [
+      "results/correlation/pairwise_estimates.parquet"
+    ],
+    "git_commit": "b3aabf76756a1e3ce697a3e1ab2d509cb9d1f69e",
+    "written_at": "2026-09-04T06:41:05+00:00"
+  },
+  "deterrence_timeseries.pdf": {
+    "script": "scripts/phase_d_figures.py",
+    "sources": [
+      "results/adversarial/bandit_log.parquet"
+    ],
+    "git_commit": "b3aabf76756a1e3ce697a3e1ab2d509cb9d1f69e",
+    "written_at": "2026-09-04T06:35:24+00:00"
+  },
+  "evasion_band.pdf": {
+    "script": "scripts/fig_evasion_band.py",
+    "sources": [
+      "results/adversarial/gate_aware_mitigations.parquet",
+      "results/correlation/q_pairwise.parquet"
+    ],
+    "git_commit": "b3aabf76756a1e3ce697a3e1ab2d509cb9d1f69e",
+    "written_at": "2026-09-04T06:40:00+00:00"
+  },
+  "gating_ablation.pdf": {
+    "script": "scripts/phase_c_figures.py",
+    "sources": [
+      "results/aggregation/sweep.parquet"
+    ],
+    "git_commit": "b3aabf76756a1e3ce697a3e1ab2d509cb9d1f69e",
+    "written_at": "2026-09-04T06:36:10+00:00"
+  },
+  "invertibility_spectrum.pdf": {
+    "script": "scripts/phase_d_figures.py",
+    "sources": [
+      "results/adversarial/adversarial_sweep.parquet",
+      "results/adversarial/channel_stats.parquet"
+    ],
+    "git_commit": "b3aabf76756a1e3ce697a3e1ab2d509cb9d1f69e",
+    "written_at": "2026-09-04T06:35:24+00:00"
+  },
+  "money_figure.pdf": {
+    "script": "scripts/phase_d_figures.py",
+    "sources": [
+      "results/adversarial/adversarial_sweep.parquet"
+    ],
+    "git_commit": "b3aabf76756a1e3ce697a3e1ab2d509cb9d1f69e",
+    "written_at": "2026-09-04T06:35:23+00:00"
+  },
+  "money_figure_draft.pdf": {
+    "script": "scripts/phase_c_figures.py",
+    "sources": [
+      "results/aggregation/sweep.parquet"
+    ],
+    "git_commit": "b3aabf76756a1e3ce697a3e1ab2d509cb9d1f69e",
+    "written_at": "2026-09-04T06:36:10+00:00"
+  },
+  "pobs_constraint.pdf": {
+    "script": "scripts/phase_e_figures.py",
+    "sources": [
+      "results/aggregation/sweep.parquet"
+    ],
+    "git_commit": "b3aabf76756a1e3ce697a3e1ab2d509cb9d1f69e",
+    "written_at": "2026-09-04T06:35:27+00:00"
+  },
+  "sybil_accuracy.pdf": {
+    "script": "scripts/fig_sybil.py",
+    "sources": [
+      "results/adversarial/sybil_e2.parquet"
+    ],
+    "git_commit": "b3aabf76756a1e3ce697a3e1ab2d509cb9d1f69e",
+    "written_at": "2026-09-04T06:35:30+00:00"
+  }
+}

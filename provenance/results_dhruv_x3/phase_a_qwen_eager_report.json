@@ -1,0 +1,26 @@
+{
+  "cells": [
+    {
+      "model": "qwen38_27b",
+      "benchmark": "gsm8k",
+      "n": 5,
+      "accuracy": 1.0,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.9999799057541491,
+        null
+      ],
+      "self_report_failures": [],
+      "determinism_ok": false,
+      "generate_seconds": 42.761359272000846,
+      "confidence_seconds": 0.5837264169822447,
+      "tasks_per_second": 0.11535333061461307,
+      "error": null
+    }
+  ],
+  "load_times": {
+    "qwen38_27b": 55.46783532598056
+  }
+}

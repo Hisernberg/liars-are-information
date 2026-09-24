@@ -1,0 +1,20 @@
+{
+  "benchmark": "medqa",
+  "model": "gemma4_31b",
+  "n_rows": 200,
+  "n_tasks": 200,
+  "updated_at": "2026-09-20T13:56:32.392525+00:00",
+  "prompt_template_hash": "87665e55ae54",
+  "hf_id": "google/gemma-4-31B-it",
+  "dtype": "bfloat16",
+  "max_model_len": 4096,
+  "seed": 0,
+  "registry_hash": "9855995a45f5",
+  "batch_invariant": true,
+  "sample_index": 0,
+  "temperature": 0.0,
+  "run_id": "x3_repair-14dbc81d441f-20260920T133005Z-68dc",
+  "x3_repaired_rows": 3,
+  "x3_budget": 3072,
+  "x3_control_drift": 0
+}

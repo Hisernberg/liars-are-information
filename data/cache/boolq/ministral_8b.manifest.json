@@ -1,0 +1,19 @@
+{
+  "benchmark": "boolq",
+  "model": "ministral_8b",
+  "n_rows": 200,
+  "n_tasks": 200,
+  "updated_at": "2026-09-03T16:43:42.292700+00:00",
+  "prompt_template_hash": "06634c55f216",
+  "hf_id": "mistralai/Ministral-8B-Instruct-2410",
+  "dtype": "bfloat16",
+  "max_model_len": 4096,
+  "seed": 0,
+  "registry_hash": "8c8040a8db16",
+  "batch_invariant": true,
+  "sample_index": 0,
+  "temperature": 0.0,
+  "task_list_hash": "f20dc3815a41",
+  "run_id": "phase_a-f425fdae4744-20260903T164133Z-e4f3",
+  "dry_run": false
+}

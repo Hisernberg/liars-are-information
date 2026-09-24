@@ -1,0 +1,371 @@
+[
+  {
+    "model": "ministral3_14b",
+    "attack": "always_wrong",
+    "benchmark": "arc",
+    "n_truncated": 1,
+    "n_context_stale": 0,
+    "still_pinned": 0,
+    "seconds": 24.1
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "always_wrong",
+    "benchmark": "boolq",
+    "n_truncated": 1,
+    "n_context_stale": 0,
+    "still_pinned": 0,
+    "seconds": 23.2
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "always_wrong",
+    "benchmark": "gsm8k",
+    "n_truncated": 26,
+    "n_context_stale": 0,
+    "still_pinned": 0,
+    "seconds": 69.8
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "always_wrong",
+    "benchmark": "math500",
+    "n_truncated": 88,
+    "n_context_stale": 0,
+    "still_pinned": 27,
+    "seconds": 160.2
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "always_wrong",
+    "benchmark": "medqa",
+    "n_truncated": 3,
+    "n_context_stale": 0,
+    "still_pinned": 0,
+    "seconds": 46.1
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "always_wrong",
+    "benchmark": "mmlu",
+    "n_truncated": 14,
+    "n_context_stale": 0,
+    "still_pinned": 4,
+    "seconds": 107.2
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "semantic_negation",
+    "benchmark": "arc",
+    "n_truncated": 5,
+    "n_context_stale": 0,
+    "still_pinned": 1,
+    "seconds": 99.8
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "semantic_negation",
+    "benchmark": "gsm8k",
+    "n_truncated": 2,
+    "n_context_stale": 0,
+    "still_pinned": 0,
+    "seconds": 44.3
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "semantic_negation",
+    "benchmark": "math500",
+    "n_truncated": 72,
+    "n_context_stale": 0,
+    "still_pinned": 18,
+    "seconds": 148.2
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "semantic_negation",
+    "benchmark": "medqa",
+    "n_truncated": 8,
+    "n_context_stale": 0,
+    "still_pinned": 0,
+    "seconds": 52.1
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "semantic_negation",
+    "benchmark": "mmlu",
+    "n_truncated": 9,
+    "n_context_stale": 0,
+    "still_pinned": 3,
+    "seconds": 104.9
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "semantic_hallucination",
+    "benchmark": "arc",
+    "n_truncated": 3,
+    "n_context_stale": 0,
+    "still_pinned": 0,
+    "seconds": 30.7
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "semantic_hallucination",
+    "benchmark": "gsm8k",
+    "n_truncated": 4,
+    "n_context_stale": 0,
+    "still_pinned": 0,
+    "seconds": 45.7
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "semantic_hallucination",
+    "benchmark": "math500",
+    "n_truncated": 71,
+    "n_context_stale": 0,
+    "still_pinned": 17,
+    "seconds": 148.6
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "semantic_hallucination",
+    "benchmark": "medqa",
+    "n_truncated": 10,
+    "n_context_stale": 0,
+    "still_pinned": 0,
+    "seconds": 29.3
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "semantic_hallucination",
+    "benchmark": "mmlu",
+    "n_truncated": 13,
+    "n_context_stale": 0,
+    "still_pinned": 6,
+    "seconds": 111.1
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "rushing",
+    "benchmark": "arc",
+    "n_truncated": 0,
+    "n_context_stale": 9,
+    "still_pinned": 0,
+    "seconds": 14.8
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "rushing",
+    "benchmark": "boolq",
+    "n_truncated": 1,
+    "n_context_stale": 1,
+    "still_pinned": 0,
+    "seconds": 4.1
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "rushing",
+    "benchmark": "gsm8k",
+    "n_truncated": 67,
+    "n_context_stale": 41,
+    "still_pinned": 2,
+    "seconds": 107.1
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "rushing",
+    "benchmark": "math500",
+    "n_truncated": 93,
+    "n_context_stale": 62,
+    "still_pinned": 6,
+    "seconds": 142.4
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "rushing",
+    "benchmark": "medqa",
+    "n_truncated": 5,
+    "n_context_stale": 52,
+    "still_pinned": 0,
+    "seconds": 44.2
+  },
+  {
+    "model": "ministral3_14b",
+    "attack": "rushing",
+    "benchmark": "mmlu",
+    "n_truncated": 3,
+    "n_context_stale": 26,
+    "still_pinned": 0,
+    "seconds": 20.3
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "always_wrong",
+    "benchmark": "arc",
+    "n_truncated": 2,
+    "n_context_stale": 0,
+    "still_pinned": 0,
+    "seconds": 2.8
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "always_wrong",
+    "benchmark": "gsm8k",
+    "n_truncated": 2,
+    "n_context_stale": 0,
+    "still_pinned": 0,
+    "seconds": 9.8
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "always_wrong",
+    "benchmark": "math500",
+    "n_truncated": 45,
+    "n_context_stale": 0,
+    "still_pinned": 13,
+    "seconds": 58.1
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "always_wrong",
+    "benchmark": "mmlu",
+    "n_truncated": 4,
+    "n_context_stale": 0,
+    "still_pinned": 2,
+    "seconds": 42.1
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "semantic_negation",
+    "benchmark": "gsm8k",
+    "n_truncated": 2,
+    "n_context_stale": 0,
+    "still_pinned": 0,
+    "seconds": 7.7
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "semantic_negation",
+    "benchmark": "math500",
+    "n_truncated": 37,
+    "n_context_stale": 0,
+    "still_pinned": 14,
+    "seconds": 60.9
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "semantic_negation",
+    "benchmark": "medqa",
+    "n_truncated": 1,
+    "n_context_stale": 0,
+    "still_pinned": 0,
+    "seconds": 2.5
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "semantic_negation",
+    "benchmark": "mmlu",
+    "n_truncated": 3,
+    "n_context_stale": 0,
+    "still_pinned": 3,
+    "seconds": 44.2
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "semantic_hallucination",
+    "benchmark": "boolq",
+    "n_truncated": 3,
+    "n_context_stale": 0,
+    "still_pinned": 1,
+    "seconds": 41.3
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "semantic_hallucination",
+    "benchmark": "gsm8k",
+    "n_truncated": 18,
+    "n_context_stale": 0,
+    "still_pinned": 6,
+    "seconds": 48.5
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "semantic_hallucination",
+    "benchmark": "math500",
+    "n_truncated": 63,
+    "n_context_stale": 0,
+    "still_pinned": 23,
+    "seconds": 68.4
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "semantic_hallucination",
+    "benchmark": "medqa",
+    "n_truncated": 2,
+    "n_context_stale": 0,
+    "still_pinned": 0,
+    "seconds": 4.3
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "semantic_hallucination",
+    "benchmark": "mmlu",
+    "n_truncated": 8,
+    "n_context_stale": 0,
+    "still_pinned": 2,
+    "seconds": 43.4
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "rushing",
+    "benchmark": "arc",
+    "n_truncated": 0,
+    "n_context_stale": 9,
+    "still_pinned": 0,
+    "seconds": 1.8
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "rushing",
+    "benchmark": "boolq",
+    "n_truncated": 0,
+    "n_context_stale": 1,
+    "still_pinned": 0,
+    "seconds": 0.9
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "rushing",
+    "benchmark": "gsm8k",
+    "n_truncated": 13,
+    "n_context_stale": 45,
+    "still_pinned": 0,
+    "seconds": 7.1
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "rushing",
+    "benchmark": "math500",
+    "n_truncated": 33,
+    "n_context_stale": 119,
+    "still_pinned": 11,
+    "seconds": 66.0
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "rushing",
+    "benchmark": "medqa",
+    "n_truncated": 3,
+    "n_context_stale": 50,
+    "still_pinned": 0,
+    "seconds": 5.2
+  },
+  {
+    "model": "llama32_3b",
+    "attack": "rushing",
+    "benchmark": "mmlu",
+    "n_truncated": 3,
+    "n_context_stale": 27,
+    "still_pinned": 0,
+    "seconds": 4.3
+  }
+]

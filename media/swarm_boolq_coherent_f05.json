@@ -1,0 +1,42 @@
+{
+  "receiver": 2,
+  "byzantine": [
+    0,
+    4,
+    5,
+    8,
+    9
+  ],
+  "models": [
+    "None",
+    "llama32_3b",
+    "ministral3_14b",
+    "gemma4_31b",
+    "None",
+    "None",
+    "phi4_mini_reasoning",
+    "granite42_30b",
+    "None",
+    "None"
+  ],
+  "final_running_accuracy": {
+    "race": 0.9166666666666666,
+    "aip_gated": 0.041666666666666664,
+    "majority": 0.26666666666666666,
+    "self": 0.8833333333333333
+  },
+  "steps": 120,
+  "world": {
+    "benchmark": "boolq",
+    "f": 0.5,
+    "attack": "coherent",
+    "param": 1.0,
+    "p_obs": 1.0,
+    "seed": 1,
+    "n_agents": 10,
+    "composition": "frozen",
+    "history_n": null,
+    "study": "main",
+    "source": "artifact"
+  }
+}

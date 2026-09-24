@@ -1,0 +1,110 @@
+{
+  "run_id": "phase_a_dryrun-d496520512ad-20260902T100739Z-e55a",
+  "phase": "phase_a_dryrun",
+  "config_hash": "d496520512ad",
+  "config": {
+    "phase": "phase_a",
+    "run_name": "phase_a_cache",
+    "seeds": {
+      "task_selection": 20250825,
+      "generation": 0
+    },
+    "benchmarks": [
+      {
+        "name": "gsm8k",
+        "n_tasks": 100
+      },
+      {
+        "name": "math500",
+        "n_tasks": 100
+      },
+      {
+        "name": "mmlu",
+        "n_tasks": 100
+      }
+    ],
+    "models": null,
+    "inference": {
+      "temperature": 0.0,
+      "elicit_self_reported_confidence": true,
+      "max_tokens_override": null,
+      "confidence_max_tokens_override": null,
+      "batch_size": null
+    },
+    "reproducibility": {
+      "note": "Cache is authoritative and internally consistent; bit-identical regeneration from scratch is not guaranteed for the ids listed here.",
+      "known_nonreproducing": [
+        "math500-test/prealgebra/1353.json",
+        "mmlu-test-00389",
+        "mmlu-test-00591",
+        "gsm8k-test-00025",
+        "gsm8k-test-00031",
+        "math500-test/prealgebra/1139.json",
+        "math500-test/intermediate_algebra/607.json"
+      ]
+    },
+    "paths": {
+      "registry": "configs/models.yaml",
+      "task_lists": "configs/task_lists.json",
+      "task_cache": "data/benchmarks",
+      "prediction_cache": "data/cache",
+      "results": "results",
+      "logs": "results/logs"
+    },
+    "runtime": {
+      "dry_run_tasks": 5,
+      "resume": true,
+      "fail_on_budget_violation": true
+    }
+  },
+  "seeds": {
+    "task_selection": 20250825,
+    "generation": 0
+  },
+  "git_commit": "9deb2df7157ecef7b0d223765c24b63c3ded9669",
+  "started_at": "2026-09-02T10:07:39.081278+00:00",
+  "finished_at": "2026-09-02T10:11:12.800692+00:00",
+  "status": "ok",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-190-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu02",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA H100 NVL",
+      "memory_total_mib": 95830,
+      "driver": "570.195.03"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "5.16.1",
+    "vllm": "0.19.1"
+  },
+  "notes": {
+    "dry_run": true,
+    "models": [
+      "llama32_3b"
+    ],
+    "sample_index": 0,
+    "temperature_override": null,
+    "batch_invariant": true,
+    "task_list_hash": "e3674c571c55",
+    "known_nonreproducing_task_ids": [
+      "math500-test/prealgebra/1353.json",
+      "mmlu-test-00389",
+      "mmlu-test-00591",
+      "gsm8k-test-00025",
+      "gsm8k-test-00031",
+      "math500-test/prealgebra/1139.json",
+      "math500-test/intermediate_algebra/607.json"
+    ],
+    "reproducibility_note": "Cache is authoritative and internally consistent; bit-identical regeneration from scratch is not guaranteed for the ids listed here.",
+    "n_cells": 1
+  }
+}

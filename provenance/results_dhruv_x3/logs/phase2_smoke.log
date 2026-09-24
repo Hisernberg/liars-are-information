@@ -1,0 +1,48 @@
+
+=== 2026-09-02T17:32Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_b_correlation.py --help ===
+usage: phase_b_correlation.py [-h] [--cache CACHE] [--cache-t07 CACHE_T07]
+                              [--out OUT] [--figure FIGURE]
+                              [--resamples RESAMPLES] [--seed SEED]
+                              [--config CONFIG]
+
+Phase B: pairwise error correlation and blind-estimator validation. **Cache-
+only.** This script never loads a model. It reads the Phase A parquet caches
+read-only and writes analysis artefacts; if it ever needs new inference, that
+is a bug to report rather than an action to take. It answers the headline
+question -- whether a homogeneous swarm is epistemically one agent -- and
+validates the attenuation-law estimator that lets an agent measure pair
+quality from broadcasts alone, with no labels.
+
+options:
+  -h, --help            show this help message and exit
+  --cache CACHE
+  --cache-t07 CACHE_T07
+  --out OUT
+  --figure FIGURE
+  --resamples RESAMPLES
+  --seed SEED
+  --config CONFIG
+
+=== 2026-09-02T17:38Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_b_correlation.py --help ===
+usage: phase_b_correlation.py [-h] [--cache CACHE] [--cache-t07 CACHE_T07]
+                              [--out OUT] [--figure FIGURE]
+                              [--resamples RESAMPLES] [--seed SEED]
+                              [--config CONFIG]
+
+Phase B: pairwise error correlation and blind-estimator validation. **Cache-
+only.** This script never loads a model. It reads the Phase A parquet caches
+read-only and writes analysis artefacts; if it ever needs new inference, that
+is a bug to report rather than an action to take. It answers the headline
+question -- whether a homogeneous swarm is epistemically one agent -- and
+validates the attenuation-law estimator that lets an agent measure pair
+quality from broadcasts alone, with no labels.
+
+options:
+  -h, --help            show this help message and exit
+  --cache CACHE
+  --cache-t07 CACHE_T07
+  --out OUT
+  --figure FIGURE
+  --resamples RESAMPLES
+  --seed SEED
+  --config CONFIG

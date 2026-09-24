@@ -1,0 +1,35 @@
+[
+  {
+    "model": "llama32_3b",
+    "benchmark": "math500",
+    "budget": 3072,
+    "n_repair": 0,
+    "still_pinned": 0,
+    "n_control": 8,
+    "control_drift": [
+      "math500-test/algebra/1004.json",
+      "math500-test/algebra/2176.json",
+      "math500-test/number_theory/1287.json",
+      "math500-test/prealgebra/105.json"
+    ],
+    "control_answer_drift": [
+      "math500-test/number_theory/1287.json",
+      "math500-test/prealgebra/105.json"
+    ],
+    "seconds": 61.7
+  },
+  {
+    "model": "llama32_3b",
+    "benchmark": "mmlu",
+    "budget": 3072,
+    "n_repair": 0,
+    "still_pinned": 0,
+    "n_control": 8,
+    "control_drift": [
+      "mmlu-test-00901",
+      "mmlu-test-05832"
+    ],
+    "control_answer_drift": [],
+    "seconds": 43.3
+  }
+]

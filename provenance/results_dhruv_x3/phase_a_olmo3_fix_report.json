@@ -1,0 +1,26 @@
+{
+  "cells": [
+    {
+      "model": "olmo3_32b_think",
+      "benchmark": "gsm8k",
+      "n": 5,
+      "accuracy": 1.0,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.9797719156144975,
+        null
+      ],
+      "self_report_failures": [],
+      "determinism_ok": true,
+      "generate_seconds": 44.275667134905234,
+      "confidence_seconds": 33.42720979801379,
+      "tasks_per_second": 0.0643476818022646,
+      "error": null
+    }
+  ],
+  "load_times": {
+    "olmo3_32b_think": 141.6989155759802
+  }
+}

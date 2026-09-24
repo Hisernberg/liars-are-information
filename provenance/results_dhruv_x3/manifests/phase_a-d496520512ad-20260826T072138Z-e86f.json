@@ -1,0 +1,112 @@
+{
+  "run_id": "phase_a-d496520512ad-20260826T072138Z-e86f",
+  "phase": "phase_a",
+  "config_hash": "d496520512ad",
+  "config": {
+    "phase": "phase_a",
+    "run_name": "phase_a_cache",
+    "seeds": {
+      "task_selection": 20250825,
+      "generation": 0
+    },
+    "benchmarks": [
+      {
+        "name": "gsm8k",
+        "n_tasks": 100
+      },
+      {
+        "name": "math500",
+        "n_tasks": 100
+      },
+      {
+        "name": "mmlu",
+        "n_tasks": 100
+      }
+    ],
+    "models": null,
+    "inference": {
+      "temperature": 0.0,
+      "elicit_self_reported_confidence": true,
+      "max_tokens_override": null,
+      "confidence_max_tokens_override": null,
+      "batch_size": null
+    },
+    "reproducibility": {
+      "note": "Cache is authoritative and internally consistent; bit-identical regeneration from scratch is not guaranteed for the ids listed here.",
+      "known_nonreproducing": [
+        "math500-test/prealgebra/1353.json",
+        "mmlu-test-00389",
+        "mmlu-test-00591",
+        "gsm8k-test-00025",
+        "gsm8k-test-00031",
+        "math500-test/prealgebra/1139.json",
+        "math500-test/intermediate_algebra/607.json"
+      ]
+    },
+    "paths": {
+      "registry": "configs/models.yaml",
+      "task_lists": "configs/task_lists.json",
+      "task_cache": "data/benchmarks",
+      "prediction_cache": "data/cache",
+      "results": "results",
+      "logs": "results/logs"
+    },
+    "runtime": {
+      "dry_run_tasks": 5,
+      "resume": true,
+      "fail_on_budget_violation": true
+    }
+  },
+  "seeds": {
+    "task_selection": 20250825,
+    "generation": 0
+  },
+  "git_commit": "2d8bbdbb770038e38083202b2f46ea8102d73209-dirty",
+  "started_at": "2026-08-26T07:21:38.628650+00:00",
+  "finished_at": "2026-08-26T07:29:36.187525+00:00",
+  "status": "ok",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-186-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu0",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA L4",
+      "memory_total_mib": 23034,
+      "driver": "550.127.08"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.2.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "4.57.6",
+    "vllm": "0.17.0"
+  },
+  "notes": {
+    "dry_run": false,
+    "models": [
+      "llama32_3b",
+      "ministral_8b",
+      "olmo2_7b"
+    ],
+    "sample_index": 0,
+    "temperature_override": null,
+    "batch_invariant": true,
+    "task_list_hash": "a70035fdde1d",
+    "known_nonreproducing_task_ids": [
+      "math500-test/prealgebra/1353.json",
+      "mmlu-test-00389",
+      "mmlu-test-00591",
+      "gsm8k-test-00025",
+      "gsm8k-test-00031",
+      "math500-test/prealgebra/1139.json",
+      "math500-test/intermediate_algebra/607.json"
+    ],
+    "reproducibility_note": "Cache is authoritative and internally consistent; bit-identical regeneration from scratch is not guaranteed for the ids listed here.",
+    "n_cells": 2
+  }
+}

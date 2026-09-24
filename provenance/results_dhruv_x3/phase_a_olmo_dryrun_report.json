@@ -1,0 +1,64 @@
+{
+  "cells": [
+    {
+      "model": "olmo2_7b",
+      "benchmark": "gsm8k",
+      "n": 5,
+      "accuracy": 0.8,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.9810533687056757,
+        1.0
+      ],
+      "self_report_failures": [],
+      "determinism_ok": false,
+      "generate_seconds": 10.278706652112305,
+      "confidence_seconds": 0.2670777649618685,
+      "tasks_per_second": 0.4741231000232415,
+      "error": null
+    },
+    {
+      "model": "olmo2_7b",
+      "benchmark": "math500",
+      "n": 5,
+      "accuracy": 0.4,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.975411523355208,
+        0.9991369933487714
+      ],
+      "self_report_failures": [],
+      "determinism_ok": false,
+      "generate_seconds": 36.23238427191973,
+      "confidence_seconds": 0.20221994072198868,
+      "tasks_per_second": 0.13723217551146472,
+      "error": null
+    },
+    {
+      "model": "olmo2_7b",
+      "benchmark": "mmlu",
+      "n": 5,
+      "accuracy": 0.6,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.9913200272951194,
+        0.6530470416285449
+      ],
+      "self_report_failures": [],
+      "determinism_ok": true,
+      "generate_seconds": 0.3707757801748812,
+      "confidence_seconds": 0.24814139399677515,
+      "tasks_per_second": 8.078625393925897,
+      "error": null
+    }
+  ],
+  "load_times": {
+    "olmo2_7b": 75.79263968998566
+  }
+}

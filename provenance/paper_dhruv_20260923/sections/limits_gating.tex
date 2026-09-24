@@ -1,0 +1,128 @@
+\section{Limits of Coherence-Based Gating}
+\label{sec:limits}
+
+Section~\ref{sec:gateaware} showed an adversary whose optimum coherence is below
+chance. This section argues that no amount of threshold engineering recovers
+from that, and identifies what a successor defence would have to bring instead.
+
+\subsection{Proposition 1, informally}
+
+Fix a question with a closed answer space of size $C$. AIP's gate is a decision
+rule computed from a channel's per-question coherence $q$, the probability that
+two agents on the channel, both wrong, are wrong the same way. Honest agents
+failing independently collide at the chance rate $q_{\mathrm{ind}} = 1/(C-1)$.
+
+\begin{quote}
+\emph{Let $\mathcal{A}$ be an adversarial channel with $q_{\mathcal{A}} \leq
+q_{\mathrm{ind}}$, and $\mathcal{H}$ a population of honest agents failing
+independently on the same space. Then for any decision rule computed solely from
+per-question coherence, the sum of its false-positive and false-negative rates is
+at least $1 - d_{TV}$, where $d_{TV}$ is the total variation distance between the
+statistic's distributions under the two hypotheses, and $d_{TV} \to 0$ as
+$q_{\mathcal{A}} \to q_{\mathrm{ind}}$.}
+\end{quote}
+
+The argument is short. Collision counts among jointly-dissenting peers are a
+sufficient statistic for $q$ under the exchangeability the estimator already
+assumes; by the Neyman--Pearson lemma the best achievable separation between two
+hypotheses on a common statistic is governed by the total variation distance
+between its distributions; the count is Binomial$(n, q)$, so $d_{TV}$ is
+continuous in $q$ and vanishes as the two parameters meet. The bound therefore
+constrains \emph{every} rule measurable with respect to that statistic, not the
+particular threshold we chose. The formal setup, the exchangeability condition in
+full and the finite-$n$ statement are in the artifact's technical note; the
+substance is that $d_{TV}$ degrades as $\sqrt{n}$ in the number of
+jointly-dissenting observations, which is bounded by the swarm size --- so the
+escape route is longitudinal rather than per-question --- and that at
+$q_{\mathcal{A}} = q_{\mathrm{ind}}$ exactly, $d_{TV}=0$ for every $n$.
+
+This is why M1 helps a little and M2 not at all: soft gating recovers accuracy in
+the band below the \emph{calibrated ceiling} but still above chance, where the
+statistic carries signal, while at and below chance there is nothing for any
+function of $q$ to find and randomising the threshold only adds variance.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{evasion_band.pdf}
+\caption{The evasion band at the anchor, $f = \numEvasionAnchorF$. Markers are
+the measured grid; nothing is interpolated between them. The dashed line is the
+calibrated honest ceiling the gate fires against, the dotted line is the chance
+coherence $1/(C-1)$ of independent wrong answers, and the rug shows the
+per-pair honest coherence with underpowered pairs ($n_{\text{both wrong}} < 30$,
+rule R2) drawn in grey. On MedQA the attacker's optimum sits below both lines;
+on MATH-500 the gate is near-inert and the attacker's optimum is a fully
+coherent channel, so there is nothing there to evade.}
+\label{fig:evasion}
+\end{figure}
+
+\subsection{What the measurement can and cannot say}
+
+The anchor is a single grid point and we are explicit about its resolution: the
+parameterisation reaches only $\numEvasionQDistinct$ distinct coherence values
+inside $[\numEvasionBandLo, \numEvasionBandHi]$ and cannot express a channel less
+coherent than $\numEvasionQFloorMc$, the interior minimum of $q(p)$. The optimum
+is \emph{measured} at a grid point, not interpolated; we claim nothing about its
+shape between points, and whether a differently constructed adversary could reach
+lower $q$ is untested.
+
+\subsection{Inversion and evasion are one law, read from two answer spaces}
+
+The mechanism's success and its defeat are not two findings. They are the same
+inequality evaluated on two answer spaces.
+
+The inequality is whether the adversary's coherence exceeds the honest
+receiver-conditioned coincidence on that space. On open-numeric answers under
+negation it does --- $\hat q = \numGsmkNegQhat$ against an honest floor of
+$\numGsmkHonestFloor$ --- so there is a separable channel, the gate fires, and
+inversion converts the adversary into a contributor. Every benchmark where AIP
+separates from the discard family is on this side of the line. On four-way
+multiple choice it does not: $\numQhatMcMean$ against $\numMmluHonestFloor$. The
+adversary is \emph{more} coordinated in absolute terms than on open text and
+still carries no channel, because the honest agents are more coordinated too.
+\textbf{[G2']}
+
+The gate-aware adversary is what happens when an adversary chooses the second
+side of that line deliberately: its optimum $\numEvasionQMedqa$ sits below the
+honest floor and below chance $\numEvasionChance$. It is not evading a threshold,
+it is moving into the regime where no threshold on this statistic has anything to
+work with --- exactly the regime Proposition~1 describes. So the practitioner's
+question is not ``does inversion work'' but ``does this answer space put my
+adversary above the honest floor''; on a binary space the answer is no by
+construction, which is why majority vote beats AIP on BoolQ. The same law
+predicts the win and the loss. \textbf{[D3]}
+
+\subsection{Two escape classes, both untested}
+
+The proposition constrains defences whose statistic is per-question channel
+coherence. It says nothing about defences drawing on information that statistic
+does not contain. Two such classes are identifiable, and both are stated here as
+\textbf{hypotheses that have not been evaluated against the gate-aware
+adversary}.
+
+\textbf{External information.} Identity verification, stake, or a ground-truth
+anchor breaks the symmetry the proposition relies on by supplying evidence from
+outside the channel. This is precisely the gap AgentChain~\cite{agentchain}
+names as unsolved when it admits that its guarantees stop at $f \geq N/2$
+(Section~\ref{sec:related}). Our contribution here is not to close that gap but
+to give a reason to think a coherence-based defence cannot: the information
+required is not present in the statistic, so no better estimator of the statistic
+will supply it.
+
+\textbf{Longitudinal statistics.} Cross-task reputation accumulated over rounds
+is not a function of per-question coherence and is therefore outside the
+proposition's scope. Our own sleeper experiment is suggestive in this direction
+and against our prior expectation: reputation decay degraded least of the
+memory-carrying defenders, at $\numSleeperDropReputation$ against AIP-gated's
+$\numSleeperDropAip$, a spread of $\numSleeperDropSpread$ that only just clears
+the $\numFloorWorst$ floor. That is a marginal result pointing at an untested
+hypothesis, and it is worth exactly that much. A longitudinal defence has not
+been run against the gate-aware adversary and we do not claim it survives.
+
+\subsection{What this means for the mechanism}
+
+Sections~\ref{sec:evaluation}--\ref{sec:limits} describe a defence with a
+characterised operating envelope rather than a solution: close to free when idle,
+large when the adversary is coherent and the answer space open, useless when the
+space is binary, and defeated by an adversary that reads its calibration constant
+and sits below it. That last is a property of the statistic, not a bug to be
+patched.

@@ -1,0 +1,53 @@
+{
+  "cells": [
+    {
+      "model": "ministral_8b",
+      "benchmark": "gsm8k",
+      "sample_index": 0,
+      "temperature": 0.0,
+      "n": 400,
+      "accuracy": 0.8975,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [
+        "gsm8k-test-00153"
+      ],
+      "confidence_correct_incorrect": [
+        0.9970404101768424,
+        0.9839995573084178
+      ],
+      "confidence_auc": 0.6675725253074257,
+      "headroom_flag": "ok",
+      "self_report_failures": [],
+      "wall_seconds": 155.03480074508116,
+      "error": null
+    },
+    {
+      "model": "olmo2_7b",
+      "benchmark": "gsm8k",
+      "sample_index": 0,
+      "temperature": 0.0,
+      "n": 400,
+      "accuracy": 0.84,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [
+        "gsm8k-test-00153"
+      ],
+      "confidence_correct_incorrect": [
+        0.9970705948689972,
+        0.9850208365057911
+      ],
+      "confidence_auc": 0.6520879836309523,
+      "headroom_flag": "ok",
+      "self_report_failures": [],
+      "wall_seconds": 138.12422822322696,
+      "error": null
+    }
+  ],
+  "load_times": {
+    "llama32_3b": 25.802514403592795,
+    "ministral_8b": 41.17812096280977,
+    "olmo2_7b": 77.06669579679146
+  }
+}

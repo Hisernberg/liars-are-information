@@ -1,0 +1,50 @@
+
+=== 2026-09-02T17:32Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_d_adversarial.py --help ===
+usage: phase_d_adversarial.py [-h] [--project] [--pilot]
+                              [--models [MODELS ...]]
+                              [--attacks [ATTACKS ...]]
+                              [--benchmarks [BENCHMARKS ...]]
+                              [--n-tasks N_TASKS] [--seed SEED] [--out OUT]
+
+Phase D: generate real-LLM adversarial broadcasts. Only the four inference
+attacks run here. Honest Phase A caches are read-only; adversarial outputs go
+to ``data/cache_adversarial/{attack}/{benchmark}/{model}``. python
+scripts/phase_d_adversarial.py --project # budget only, no GPU python
+scripts/phase_d_adversarial.py --pilot # 5 tasks, verbatim python
+scripts/phase_d_adversarial.py # full generation
+
+options:
+  -h, --help            show this help message and exit
+  --project             print the budget and exit
+  --pilot               5-task pilot, verbatim output
+  --models [MODELS ...]
+  --attacks [ATTACKS ...]
+  --benchmarks [BENCHMARKS ...]
+  --n-tasks N_TASKS
+  --seed SEED
+  --out OUT
+
+=== 2026-09-02T17:38Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_d_adversarial.py --help ===
+usage: phase_d_adversarial.py [-h] [--project] [--pilot]
+                              [--models [MODELS ...]]
+                              [--attacks [ATTACKS ...]]
+                              [--benchmarks [BENCHMARKS ...]]
+                              [--n-tasks N_TASKS] [--seed SEED] [--out OUT]
+
+Phase D: generate real-LLM adversarial broadcasts. Only the four inference
+attacks run here. Honest Phase A caches are read-only; adversarial outputs go
+to ``data/cache_adversarial/{attack}/{benchmark}/{model}``. python
+scripts/phase_d_adversarial.py --project # budget only, no GPU python
+scripts/phase_d_adversarial.py --pilot # 5 tasks, verbatim python
+scripts/phase_d_adversarial.py # full generation
+
+options:
+  -h, --help            show this help message and exit
+  --project             print the budget and exit
+  --pilot               5-task pilot, verbatim output
+  --models [MODELS ...]
+  --attacks [ATTACKS ...]
+  --benchmarks [BENCHMARKS ...]
+  --n-tasks N_TASKS
+  --seed SEED
+  --out OUT

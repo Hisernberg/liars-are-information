@@ -1,0 +1,20 @@
+{
+  "benchmark": "medqa",
+  "model": "qwen38_27b",
+  "n_rows": 200,
+  "n_tasks": 200,
+  "updated_at": "2026-09-20T13:28:47.768653+00:00",
+  "prompt_template_hash": "87665e55ae54",
+  "hf_id": "Qwen/Qwen3.8-27B",
+  "dtype": "bfloat16",
+  "max_model_len": 4096,
+  "seed": 0,
+  "registry_hash": "9855995a45f5",
+  "batch_invariant": true,
+  "sample_index": 0,
+  "temperature": 0.0,
+  "run_id": "x3_repair-e614b153d52b-20260920T130117Z-6d79",
+  "x3_repaired_rows": 6,
+  "x3_budget": 3072,
+  "x3_control_drift": 8
+}

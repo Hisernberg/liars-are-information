@@ -1,0 +1,155 @@
+# Calibrated honest-q ceilings for AIP's three-way channel gate.
+#
+# WHAT THESE ARE. q_ij = P(two agents give the same answer | both are wrong).
+# Phase B2 measured that HONEST models share wrong-answer attractors: on MMLU,
+# four models from four different families pick the same distractor 47.6% of the
+# time rather than the 33.3% chance rate, with a bootstrap CI entirely above
+# chance. So coherence alone is NOT evidence of adversarial coordination, and an
+# inversion rule keyed on coherence would invert honest agents on exactly the
+# questions they find hardest.
+#
+# A ceiling is therefore the honest-q level a channel must EXCEED before its
+# coherence counts as adversarial. Each is the upper bound of the measured
+# honest 95% bootstrap CI for that answer-space class: crossing it means the
+# channel is more coherent than an honest population of this kind ever was in
+# measurement.
+#
+# THESE ARE CALIBRATION CONSTANTS, NOT HYPERPARAMETERS. They are a property of
+# the model population and the task type, measured once against labelled data in
+# Phase B2. They are never tuned per experiment, and no sweep may search over
+# them. Re-measure them only when the model population or benchmark changes, and
+# record the new provenance here.
+#
+# PROVENANCE: results/phase_b2_report.md §3-4, results/correlation/q_pairwise.parquet,
+# commit 2d8bbdb. Bootstrap 1000 resamples over tasks, seed 20250825.
+
+# CONDITIONING (added in Phase D). Phase B2 measured q = P(same answer | both
+# agents WRONG), which needs gold labels. AIP's gate cannot use that -- a receiver
+# has none -- so it conditions on what it can see: P(same | both peers dissent
+# from ME). The two coincide only when the receiver is almost always right. On
+# MATH-500, where models are wrong 28-66% of the time, honest peers score 0.143
+# on the receiver-conditioned statistic against the 0.020 measured for the
+# gold-conditioned one, and a ceiling set from the latter fired on honest
+# channels. The `ceiling` values below are therefore the RECEIVER-CONDITIONED
+# honest coherence, which is the quantity the gate compares against;
+# `gold_conditioned_q` records the Phase B2 measurement for reference and for the
+# theory in docs/attenuation_law.md. Measured by
+# scripts/calibrate_receiver_coherence.py from honest caches only.
+
+version: 2
+measured_by: phase_b2
+measured_commit: 2d8bbdb
+n_models: 4
+models: [llama32_3b, ministral_8b, olmo2_7b, phi4_mini_reasoning]
+
+classes:
+
+  binary:
+    ceiling: 1.0
+    chance: 1.0
+    n_joint_errors: null
+    provenance: >-
+      Not measured; derived. With C=2 there is exactly one wrong answer, so two
+      wrong agents agree with probability 1 identically (docs/attenuation_law.md
+      §3). q is degenerate on a binary space and carries no information, so the
+      ceiling is 1.0 and the q-gate can never fire. Inversion on a binary answer
+      space must be driven by a different signal; AIP falls back to trust-only
+      there. No benchmark in this study is binary.
+
+  multiple_choice:
+    ceiling: 0.677
+    chance: 0.3333333333333333
+    n_joint_errors: 126
+    n_options: 4
+    receiver_conditioned_q: 0.535
+    receiver_conditioned_ci: [0.412, 0.677]
+    gold_conditioned_q_phase_b2: 0.476
+    provenance_receiver_conditioned: >-
+      OPERATIVE CEILING. Receiver-conditioned honest coherence on MMLU,
+      P(two peers give the same answer | both dissent from an honest receiver),
+      pooled over every honest receiver and peer pair in the Phase A cache:
+      0.535 with 95% CI [0.412, 0.677]. Ceiling is the upper bound, 0.677.
+      This is the statistic AIP's gate actually computes.
+    provenance: >-
+      MMLU, pooled over all 126 jointly-wrong events across the 6 honest model
+      pairs: q = 0.476, 95% CI [0.364, 0.589]. The CI lies entirely above the
+      1/3 chance level, which is the finding that motivates this whole file.
+      Ceiling is the upper CI bound, 0.589.
+    caveat: >-
+      Calibrated at C=4. For other option counts the chance level moves to
+      1/(C-1) and this ceiling should be re-measured rather than rescaled.
+
+  open_numeric:
+    ceiling: 0.8
+    chance: 0.0
+    n_joint_errors: 82
+    provisional: false
+    receiver_conditioned_q: 0.597
+    receiver_conditioned_ci: [0.448, 0.8]
+    gold_conditioned_q_phase_b2: 0.28
+    provenance_receiver_conditioned: >-
+      OPERATIVE CEILING. Receiver-conditioned honest coherence on GSM8K,
+      P(two peers give the same answer | both dissent from an honest receiver),
+      pooled over every honest receiver and peer pair in the Phase A cache:
+      0.597 with 95% CI [0.448, 0.8]. Ceiling is the upper bound, 0.8.
+      This is the statistic AIP's gate actually computes.
+    provenance: >-
+      RECALIBRATED from the gsm8k_ext run (400 GSM8K test tasks disjoint from the
+      frozen 100, 3 non-reasoning models, data/cache_gsm8k_ext). Pooled over 82
+      jointly-wrong events: q = 0.280, 95% CI [0.156, 0.416]. Ceiling is the upper
+      CI bound, 0.416.
+      SUPERSEDES the Phase B2 provisional value of 0.775, which came from only 23
+      joint errors on the frozen 100 and was both noisier and substantially
+      higher (q = 0.478 [0.143, 0.775]). Quadrupling the joint-error count moved
+      the point estimate down by 0.20 and halved the CI width, which is why the
+      extension was worth running: the provisional ceiling was so high that the
+      gate could almost never fire on open-numeric answers.
+    caveat: >-
+      Measured on 3 models (llama32_3b, ministral_8b, olmo2_7b), not 4 --
+      phi4_mini_reasoning was excluded from the extension run by instruction, so
+      this class is calibrated on a slightly narrower population than the
+      multiple_choice and open_text classes.
+
+  open_text:
+    ceiling: 0.198
+    chance: 0.0
+    n_joint_errors: 196
+    receiver_conditioned_q: 0.143
+    receiver_conditioned_ci: [0.096, 0.198]
+    gold_conditioned_q_phase_b2: 0.02
+    provenance_receiver_conditioned: >-
+      OPERATIVE CEILING. Receiver-conditioned honest coherence on MATH-500,
+      P(two peers give the same answer | both dissent from an honest receiver),
+      pooled over every honest receiver and peer pair in the Phase A cache:
+      0.143 with 95% CI [0.096, 0.198]. Ceiling is the upper bound, 0.198.
+      This is the statistic AIP's gate actually computes.
+    provenance: >-
+      MATH-500, pooled over 196 jointly-wrong events: q = 0.020, 95% CI
+      [0.004, 0.042]. Ceiling is the upper CI bound, 0.042. Honest models
+      essentially never produce the same wrong expression, exactly as the theory
+      predicts for a large answer space, so this class has the most headroom for
+      inversion and the gate is most informative here.
+
+# Which class each benchmark's answer space belongs to.
+#
+# medqa and arc join mmlu in the C=4 multiple_choice class: all three present
+# exactly four options, which is the option count that class is calibrated at.
+# boolq is the first benchmark in the binary class, whose ceiling of 1.0 is
+# derived rather than measured -- on a two-label space q is degenerate, so the
+# q-gate provably cannot fire and AIP must fall back to trust-only weighting
+# there. That is a prediction this regeneration finally gets to test; on the L4
+# regime the binary class had no benchmark at all.
+benchmark_classes:
+  gsm8k: open_numeric
+  math500: open_text
+  mmlu: multiple_choice
+  medqa: multiple_choice
+  arc: multiple_choice
+  boolq: binary
+
+# Secondary gate: a channel is only TRUSTED if its blind error estimate is below
+# this. Above it the channel is uninformative-or-worse but not coherent enough to
+# inspect, so it is DISCARDED rather than trusted or inverted.
+trust:
+  max_blind_error_rate: 0.5
+  min_observations: 5   # peers seen on fewer tasks than this are discarded, not trusted

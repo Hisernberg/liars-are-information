@@ -1,0 +1,1072 @@
+
+=== 2026-09-03T08:41Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_e_claims.py ===
+Traceback (most recent call last):
+  File "/home/ubuntu/Liars_Are_Information/scripts/phase_e_claims.py", line 523, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/ubuntu/Liars_Are_Information/scripts/phase_e_claims.py", line 448, in main
+    claims = build([])
+             ^^^^^^^^^
+  File "/home/ubuntu/Liars_Are_Information/scripts/phase_e_claims.py", line 355, in build
+    parity.assign(a=parity.effect.abs())
+                    ^^^^^^^^^^^^^
+  File "/home/ubuntu/Liars_Are_Information/.venv/lib/python3.11/site-packages/pandas/core/generic.py", line 6194, in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DataFrame' object has no attribute 'effect'
+
+=== 2026-09-03T11:10Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_e_burst.py ===
+
+============================================================================================
+WINDOWED CHANNEL STATISTICS vs BURST (gsm8k)
+============================================================================================
+
+burst
+f                    0.3    0.4    0.5    0.6    0.7
+method                                              
+aip_gated          0.963  0.956  0.883  0.601  0.470
+aip_gated_w10      0.973  0.972  0.970  0.962  0.955
+aip_gated_w20      0.972  0.975  0.973  0.965  0.965
+aip_gated_w5       0.968  0.969  0.967  0.958  0.955
+coord_median       0.950  0.888  0.692  0.410  0.418
+geometric_median   0.962  0.908  0.738  0.482  0.368
+majority           0.962  0.908  0.738  0.482  0.368
+sac_filter_refine  0.976  0.971  0.965  0.892  0.229
+
+semantic_negation
+f                    0.3    0.4    0.5    0.6    0.7
+method                                              
+aip_gated          0.978  0.969  0.968  0.964  0.965
+aip_gated_w10      0.975  0.968  0.964  0.961  0.959
+aip_gated_w20      0.978  0.971  0.969  0.966  0.967
+aip_gated_w5       0.973  0.968  0.962  0.962  0.959
+coord_median       0.962  0.934  0.616  0.106  0.108
+geometric_median   0.978  0.972  0.698  0.220  0.008
+majority           0.978  0.972  0.698  0.220  0.008
+sac_filter_refine  0.975  0.976  0.960  0.004  0.002
+
+noise
+f                    0.3    0.4    0.5    0.6    0.7
+method                                              
+aip_gated          0.963  0.900  0.758  0.766  0.839
+aip_gated_w10      0.972  0.962  0.966  0.958  0.958
+aip_gated_w20      0.976  0.968  0.972  0.965  0.967
+aip_gated_w5       0.969  0.963  0.964  0.956  0.955
+coord_median       0.956  0.912  0.744  0.720  0.766
+geometric_median   0.960  0.932  0.792  0.766  0.772
+majority           0.960  0.932  0.792  0.766  0.772
+sac_filter_refine  0.976  0.966  0.966  0.950  0.817
+
+============================================================================================
+SUCCESS CRITERION
+============================================================================================
+  best discard baseline (mean over f): 0.844
+  AIP static                          : 0.774   gap -0.070
+  AIP windowed W=5                    : 0.963   recovered +0.189 of 0.035 needed  [MEETS]  regime flags 0
+  AIP windowed W=10                   : 0.966   recovered +0.192 of 0.035 needed  [MEETS]  regime flags 0
+  AIP windowed W=20                   : 0.970   recovered +0.196 of 0.035 needed  [MEETS]  regime flags 0
+
+  stationary controls (windowed minus static; must stay within CI width)
+    semantic_negation    W=5   0.965 vs 0.969  delta -0.004  CI width 0.029  [ok]
+    semantic_negation    W=10  0.965 vs 0.969  delta -0.003  CI width 0.029  [ok]
+    semantic_negation    W=20  0.970 vs 0.969  delta +0.002  CI width 0.029  [ok]
+    noise                W=5   0.961 vs 0.845  delta +0.116  CI width 0.058  [ok]
+    noise                W=10  0.963 vs 0.845  delta +0.118  CI width 0.058  [ok]
+    noise                W=20  0.970 vs 0.845  delta +0.124  CI width 0.058  [ok]
+
+wrote results/adversarial/burst_windowed.parquet
+
+=== 2026-09-03T11:12Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_e_decomposition.py ===
+
+====================================================================================================
+COORDINATABILITY: adversary coherence vs the honest floor
+====================================================================================================
+benchmarkclass            attack                   q_hat adv  honest q  ceiling  above honest?
+gsm8k    open_numeric     semantic_negation            0.674     0.597    0.800  YES
+gsm8k    open_numeric     always_wrong                 0.100     0.597    0.800  no
+gsm8k    open_numeric     semantic_hallucination       0.062     0.597    0.800  no
+gsm8k    open_numeric     rushing                      0.146     0.597    0.800  no
+math500  open_text        semantic_negation            0.145     0.143    0.198  YES
+math500  open_text        always_wrong                 0.030     0.143    0.198  no
+math500  open_text        semantic_hallucination       0.015     0.143    0.198  no
+math500  open_text        rushing                      0.085     0.143    0.198  no
+mmlu     multiple_choice  semantic_negation            0.320     0.535    0.677  no
+mmlu     multiple_choice  always_wrong                 0.290     0.535    0.677  no
+mmlu     multiple_choice  semantic_hallucination       0.250     0.535    0.677  no
+mmlu     multiple_choice  rushing                      0.355     0.535    0.677  no
+medqa    multiple_choice  semantic_negation            0.195     0.535    0.677  no
+medqa    multiple_choice  always_wrong                 0.275     0.535    0.677  no
+medqa    multiple_choice  semantic_hallucination       0.305     0.535    0.677  no
+medqa    multiple_choice  rushing                      0.275     0.535    0.677  no
+boolq    binary           semantic_negation            0.455       nan    1.000  no
+boolq    binary           always_wrong                 0.600       nan    1.000  no
+boolq    binary           semantic_hallucination       0.545       nan    1.000  no
+boolq    binary           rushing                      0.630       nan    1.000  no
+arc      multiple_choice  semantic_negation            0.275     0.535    0.677  no
+arc      multiple_choice  always_wrong                 0.305     0.535    0.677  no
+arc      multiple_choice  semantic_hallucination       0.285     0.535    0.677  no
+arc      multiple_choice  rushing                      0.270     0.535    0.677  no
+
+====================================================================================================
+CHANNEL DECISIONS (honest receivers only)
+====================================================================================================
+benchmarkattack                      fchannel      inverted  trusted  discarded
+gsm8k    semantic_negation         0.3honest             0%     100%         0%
+gsm8k    semantic_negation         0.3adversary         67%      33%         0%
+gsm8k    semantic_negation         0.5honest             0%     100%         0%
+gsm8k    semantic_negation         0.5adversary        100%       0%         0%
+gsm8k    semantic_negation         0.7honest             0%     100%         0%
+gsm8k    semantic_negation         0.7adversary        100%       0%         0%
+gsm8k    always_wrong              0.3honest             0%     100%         0%
+gsm8k    always_wrong              0.3adversary         67%      33%         0%
+gsm8k    always_wrong              0.5honest             0%     100%         0%
+gsm8k    always_wrong              0.5adversary        100%       0%         0%
+gsm8k    always_wrong              0.7honest             0%     100%         0%
+gsm8k    always_wrong              0.7adversary        100%       0%         0%
+gsm8k    semantic_hallucination    0.3honest             0%     100%         0%
+gsm8k    semantic_hallucination    0.3adversary         67%      33%         0%
+gsm8k    semantic_hallucination    0.5honest             0%     100%         0%
+gsm8k    semantic_hallucination    0.5adversary        100%       0%         0%
+gsm8k    semantic_hallucination    0.7honest             0%     100%         0%
+gsm8k    semantic_hallucination    0.7adversary        100%       0%         0%
+gsm8k    rushing                   0.3honest             0%     100%         0%
+gsm8k    rushing                   0.3adversary         67%      33%         0%
+gsm8k    rushing                   0.5honest             0%     100%         0%
+gsm8k    rushing                   0.5adversary        100%       0%         0%
+gsm8k    rushing                   0.7honest             0%     100%         0%
+gsm8k    rushing                   0.7adversary        100%       0%         0%
+math500  semantic_negation         0.3honest             0%     100%         0%
+math500  semantic_negation         0.3adversary         19%      81%         0%
+math500  semantic_negation         0.5honest             0%     100%         0%
+math500  semantic_negation         0.5adversary         40%      60%         0%
+math500  semantic_negation         0.7honest             0%     100%         0%
+math500  semantic_negation         0.7adversary        100%       0%         0%
+math500  always_wrong              0.3honest             0%     100%         0%
+math500  always_wrong              0.3adversary         57%      43%         0%
+math500  always_wrong              0.5honest             0%     100%         0%
+math500  always_wrong              0.5adversary        100%       0%         0%
+math500  always_wrong              0.7honest             0%     100%         0%
+math500  always_wrong              0.7adversary        100%       0%         0%
+math500  semantic_hallucination    0.3honest             0%     100%         0%
+math500  semantic_hallucination    0.3adversary         48%      52%         0%
+math500  semantic_hallucination    0.5honest             0%     100%         0%
+math500  semantic_hallucination    0.5adversary         80%      20%         0%
+math500  semantic_hallucination    0.7honest             0%     100%         0%
+math500  semantic_hallucination    0.7adversary        100%       0%         0%
+math500  rushing                   0.3honest             0%     100%         0%
+math500  rushing                   0.3adversary         19%      81%         0%
+math500  rushing                   0.5honest             0%     100%         0%
+math500  rushing                   0.5adversary         40%      60%         0%
+math500  rushing                   0.7honest             0%     100%         0%
+math500  rushing                   0.7adversary         67%      33%         0%
+mmlu     semantic_negation         0.3honest             0%     100%         0%
+mmlu     semantic_negation         0.3adversary         67%      33%         0%
+mmlu     semantic_negation         0.5honest             0%     100%         0%
+mmlu     semantic_negation         0.5adversary        100%       0%         0%
+mmlu     semantic_negation         0.7honest             0%     100%         0%
+mmlu     semantic_negation         0.7adversary        100%       0%         0%
+mmlu     always_wrong              0.3honest             0%     100%         0%
+mmlu     always_wrong              0.3adversary         67%      33%         0%
+mmlu     always_wrong              0.5honest             0%     100%         0%
+mmlu     always_wrong              0.5adversary        100%       0%         0%
+mmlu     always_wrong              0.7honest             0%     100%         0%
+mmlu     always_wrong              0.7adversary        100%       0%         0%
+mmlu     semantic_hallucination    0.3honest             0%     100%         0%
+mmlu     semantic_hallucination    0.3adversary         67%      33%         0%
+mmlu     semantic_hallucination    0.5honest             0%     100%         0%
+mmlu     semantic_hallucination    0.5adversary        100%       0%         0%
+mmlu     semantic_hallucination    0.7honest             0%     100%         0%
+mmlu     semantic_hallucination    0.7adversary        100%       0%         0%
+mmlu     rushing                   0.3honest             0%     100%         0%
+mmlu     rushing                   0.3adversary         67%      33%         0%
+mmlu     rushing                   0.5honest             0%     100%         0%
+mmlu     rushing                   0.5adversary        100%       0%         0%
+mmlu     rushing                   0.7honest             0%     100%         0%
+mmlu     rushing                   0.7adversary        100%       0%         0%
+medqa    semantic_negation         0.3honest             0%     100%         0%
+medqa    semantic_negation         0.3adversary         67%      33%         0%
+medqa    semantic_negation         0.5honest             0%     100%         0%
+medqa    semantic_negation         0.5adversary         60%      40%         0%
+medqa    semantic_negation         0.7honest             0%     100%         0%
+medqa    semantic_negation         0.7adversary         57%      43%         0%
+medqa    always_wrong              0.3honest             0%     100%         0%
+medqa    always_wrong              0.3adversary         38%      62%         0%
+medqa    always_wrong              0.5honest             0%     100%         0%
+medqa    always_wrong              0.5adversary         80%      20%         0%
+medqa    always_wrong              0.7honest             0%     100%         0%
+medqa    always_wrong              0.7adversary        100%       0%         0%
+medqa    semantic_hallucination    0.3honest             0%     100%         0%
+medqa    semantic_hallucination    0.3adversary         67%      33%         0%
+medqa    semantic_hallucination    0.5honest             0%     100%         0%
+medqa    semantic_hallucination    0.5adversary        100%       0%         0%
+medqa    semantic_hallucination    0.7honest             0%     100%         0%
+medqa    semantic_hallucination    0.7adversary        100%       0%         0%
+medqa    rushing                   0.3honest             0%     100%         0%
+medqa    rushing                   0.3adversary         67%      33%         0%
+medqa    rushing                   0.5honest             0%     100%         0%
+medqa    rushing                   0.5adversary         68%      32%         0%
+medqa    rushing                   0.7honest             0%     100%         0%
+medqa    rushing                   0.7adversary         71%      29%         0%
+boolq    semantic_negation         0.3honest             0%     100%         0%
+boolq    semantic_negation         0.3adversary          0%     100%         0%
+boolq    semantic_negation         0.5honest             0%     100%         0%
+boolq    semantic_negation         0.5adversary          0%     100%         0%
+boolq    semantic_negation         0.7honest             0%     100%         0%
+boolq    semantic_negation         0.7adversary          0%     100%         0%
+boolq    always_wrong              0.3honest             0%     100%         0%
+boolq    always_wrong              0.3adversary          0%     100%         0%
+boolq    always_wrong              0.5honest             0%     100%         0%
+boolq    always_wrong              0.5adversary          0%     100%         0%
+boolq    always_wrong              0.7honest             0%     100%         0%
+boolq    always_wrong              0.7adversary          0%     100%         0%
+boolq    semantic_hallucination    0.3honest             0%     100%         0%
+boolq    semantic_hallucination    0.3adversary          0%     100%         0%
+boolq    semantic_hallucination    0.5honest             0%     100%         0%
+boolq    semantic_hallucination    0.5adversary          0%     100%         0%
+boolq    semantic_hallucination    0.7honest             0%     100%         0%
+boolq    semantic_hallucination    0.7adversary          0%     100%         0%
+boolq    rushing                   0.3honest             0%     100%         0%
+boolq    rushing                   0.3adversary          0%     100%         0%
+boolq    rushing                   0.5honest             0%     100%         0%
+boolq    rushing                   0.5adversary          0%     100%         0%
+boolq    rushing                   0.7honest             0%     100%         0%
+boolq    rushing                   0.7adversary          0%     100%         0%
+arc      semantic_negation         0.3honest             0%     100%         0%
+arc      semantic_negation         0.3adversary         67%      33%         0%
+arc      semantic_negation         0.5honest             0%     100%         0%
+arc      semantic_negation         0.5adversary        100%       0%         0%
+arc      semantic_negation         0.7honest             0%     100%         0%
+arc      semantic_negation         0.7adversary        100%       0%         0%
+arc      always_wrong              0.3honest             0%     100%         0%
+arc      always_wrong              0.3adversary         67%      33%         0%
+arc      always_wrong              0.5honest             0%     100%         0%
+arc      always_wrong              0.5adversary        100%       0%         0%
+arc      always_wrong              0.7honest             0%     100%         0%
+arc      always_wrong              0.7adversary        100%       0%         0%
+arc      semantic_hallucination    0.3honest             0%     100%         0%
+arc      semantic_hallucination    0.3adversary         67%      33%         0%
+arc      semantic_hallucination    0.5honest             0%     100%         0%
+arc      semantic_hallucination    0.5adversary        100%       0%         0%
+arc      semantic_hallucination    0.7honest             0%     100%         0%
+arc      semantic_hallucination    0.7adversary        100%       0%         0%
+arc      rushing                   0.3honest             0%     100%         0%
+arc      rushing                   0.3adversary         67%      33%         0%
+arc      rushing                   0.5honest             0%     100%         0%
+arc      rushing                   0.5adversary        100%       0%         0%
+arc      rushing                   0.7honest             0%     100%         0%
+arc      rushing                   0.7adversary        100%       0%         0%
+
+====================================================================================================
+DIAGNOSIS
+====================================================================================================
+  gsm8k: negation q_hat=0.674 vs honest 0.597; honest channels inverted 0%, adversary channels inverted 89%
+  math500: negation q_hat=0.145 vs honest 0.143; honest channels inverted 0%, adversary channels inverted 53%
+  mmlu: negation q_hat=0.320 vs honest 0.535; honest channels inverted 0%, adversary channels inverted 89%
+  medqa: negation q_hat=0.195 vs honest 0.535; honest channels inverted 0%, adversary channels inverted 61%
+  boolq: negation q_hat=0.455 vs honest nan; honest channels inverted 0%, adversary channels inverted 0%
+  arc: negation q_hat=0.275 vs honest 0.535; honest channels inverted 0%, adversary channels inverted 89%
+
+wrote results/adversarial/channel_decisions.parquet, results/adversarial/q_by_answer_space.parquet
+
+=== 2026-09-03T11:12Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_e_tables.py ===
+Traceback (most recent call last):
+  File "/home/ubuntu/Liars_Are_Information/scripts/phase_e_tables.py", line 196, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/ubuntu/Liars_Are_Information/scripts/phase_e_tables.py", line 177, in main
+    v1 = pd.read_parquet(args.v1)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/Liars_Are_Information/.venv/lib/python3.11/site-packages/pandas/io/parquet.py", line 671, in read_parquet
+    return impl.read(
+           ^^^^^^^^^^
+  File "/home/ubuntu/Liars_Are_Information/.venv/lib/python3.11/site-packages/pandas/io/parquet.py", line 253, in read
+    path_or_handle, handles, filesystem = _get_path_or_handle(
+                                          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/Liars_Are_Information/.venv/lib/python3.11/site-packages/pandas/io/parquet.py", line 141, in _get_path_or_handle
+    handles = get_handle(
+              ^^^^^^^^^^^
+  File "/home/ubuntu/Liars_Are_Information/.venv/lib/python3.11/site-packages/pandas/io/common.py", line 939, in get_handle
+    handle = open(handle, ioargs.mode)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'results/aggregation/v1_archive/sweep_v1.parquet'
+
+=== 2026-09-03T12:06Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_e_burst.py ===
+
+============================================================================================
+WINDOWED CHANNEL STATISTICS vs BURST (gsm8k)
+============================================================================================
+
+burst
+f                    0.3    0.4    0.5    0.6    0.7
+method                                              
+aip_gated          0.967  0.956  0.883  0.601  0.470
+aip_gated_w10      0.973  0.972  0.970  0.962  0.955
+aip_gated_w20      0.972  0.975  0.973  0.965  0.965
+aip_gated_w5       0.968  0.970  0.967  0.958  0.955
+coord_median       0.950  0.888  0.692  0.410  0.418
+geometric_median   0.966  0.910  0.738  0.482  0.368
+majority           0.966  0.910  0.738  0.482  0.368
+sac_filter_refine  0.976  0.971  0.965  0.892  0.229
+
+semantic_negation
+f                    0.3    0.4    0.5    0.6    0.7
+method                                              
+aip_gated          0.978  0.969  0.968  0.964  0.965
+aip_gated_w10      0.975  0.968  0.964  0.961  0.959
+aip_gated_w20      0.978  0.971  0.969  0.966  0.967
+aip_gated_w5       0.973  0.968  0.962  0.962  0.959
+coord_median       0.962  0.934  0.616  0.106  0.108
+geometric_median   0.978  0.972  0.698  0.220  0.008
+majority           0.978  0.972  0.698  0.220  0.008
+sac_filter_refine  0.975  0.976  0.960  0.004  0.002
+
+noise
+f                    0.3    0.4    0.5    0.6    0.7
+method                                              
+aip_gated          0.963  0.896  0.758  0.766  0.839
+aip_gated_w10      0.972  0.962  0.966  0.958  0.958
+aip_gated_w20      0.976  0.968  0.972  0.965  0.967
+aip_gated_w5       0.969  0.963  0.964  0.956  0.955
+coord_median       0.956  0.912  0.742  0.720  0.766
+geometric_median   0.960  0.930  0.792  0.766  0.772
+majority           0.960  0.930  0.792  0.766  0.772
+sac_filter_refine  0.976  0.968  0.967  0.949  0.817
+
+============================================================================================
+SUCCESS CRITERION
+============================================================================================
+  best discard baseline (mean over f): 0.844
+  AIP static                          : 0.775   gap -0.069
+  AIP windowed W=5                    : 0.963   recovered +0.188 of 0.035 needed  [MEETS]  regime flags 0
+  AIP windowed W=10                   : 0.966   recovered +0.191 of 0.035 needed  [MEETS]  regime flags 0
+  AIP windowed W=20                   : 0.970   recovered +0.195 of 0.035 needed  [MEETS]  regime flags 0
+
+  stationary controls (windowed minus static; must stay within CI width)
+    semantic_negation    W=5   0.965 vs 0.969  delta -0.004  CI width 0.029  [ok]
+    semantic_negation    W=10  0.965 vs 0.969  delta -0.003  CI width 0.029  [ok]
+    semantic_negation    W=20  0.970 vs 0.969  delta +0.002  CI width 0.029  [ok]
+    noise                W=5   0.961 vs 0.844  delta +0.117  CI width 0.058  [ok]
+    noise                W=10  0.963 vs 0.844  delta +0.119  CI width 0.058  [ok]
+    noise                W=20  0.970 vs 0.844  delta +0.125  CI width 0.058  [ok]
+
+wrote results/adversarial/burst_windowed.parquet
+
+=== 2026-09-03T12:08Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_e_decomposition.py ===
+
+====================================================================================================
+COORDINATABILITY: adversary coherence vs the honest floor
+====================================================================================================
+benchmarkclass            attack                   q_hat adv  honest q  ceiling  above honest?
+gsm8k    open_numeric     semantic_negation            0.674     0.597    0.800  YES
+gsm8k    open_numeric     always_wrong                 0.100     0.597    0.800  no
+gsm8k    open_numeric     semantic_hallucination       0.062     0.597    0.800  no
+gsm8k    open_numeric     rushing                      0.146     0.597    0.800  no
+math500  open_text        semantic_negation            0.145     0.143    0.198  YES
+math500  open_text        always_wrong                 0.030     0.143    0.198  no
+math500  open_text        semantic_hallucination       0.015     0.143    0.198  no
+math500  open_text        rushing                      0.085     0.143    0.198  no
+mmlu     multiple_choice  semantic_negation            0.320     0.535    0.677  no
+mmlu     multiple_choice  always_wrong                 0.290     0.535    0.677  no
+mmlu     multiple_choice  semantic_hallucination       0.250     0.535    0.677  no
+mmlu     multiple_choice  rushing                      0.355     0.535    0.677  no
+medqa    multiple_choice  semantic_negation            0.195     0.535    0.677  no
+medqa    multiple_choice  always_wrong                 0.275     0.535    0.677  no
+medqa    multiple_choice  semantic_hallucination       0.305     0.535    0.677  no
+medqa    multiple_choice  rushing                      0.275     0.535    0.677  no
+boolq    binary           semantic_negation            0.455       nan    1.000  no
+boolq    binary           always_wrong                 0.600       nan    1.000  no
+boolq    binary           semantic_hallucination       0.545       nan    1.000  no
+boolq    binary           rushing                      0.630       nan    1.000  no
+arc      multiple_choice  semantic_negation            0.275     0.535    0.677  no
+arc      multiple_choice  always_wrong                 0.305     0.535    0.677  no
+arc      multiple_choice  semantic_hallucination       0.285     0.535    0.677  no
+arc      multiple_choice  rushing                      0.270     0.535    0.677  no
+
+====================================================================================================
+CHANNEL DECISIONS (honest receivers only)
+====================================================================================================
+benchmarkattack                      fchannel      inverted  trusted  discarded
+gsm8k    semantic_negation         0.3honest             0%     100%         0%
+gsm8k    semantic_negation         0.3adversary         67%      33%         0%
+gsm8k    semantic_negation         0.5honest             0%     100%         0%
+gsm8k    semantic_negation         0.5adversary        100%       0%         0%
+gsm8k    semantic_negation         0.7honest             0%     100%         0%
+gsm8k    semantic_negation         0.7adversary        100%       0%         0%
+gsm8k    always_wrong              0.3honest             0%     100%         0%
+gsm8k    always_wrong              0.3adversary         67%      33%         0%
+gsm8k    always_wrong              0.5honest             0%     100%         0%
+gsm8k    always_wrong              0.5adversary        100%       0%         0%
+gsm8k    always_wrong              0.7honest             0%     100%         0%
+gsm8k    always_wrong              0.7adversary        100%       0%         0%
+gsm8k    semantic_hallucination    0.3honest             0%     100%         0%
+gsm8k    semantic_hallucination    0.3adversary         67%      33%         0%
+gsm8k    semantic_hallucination    0.5honest             0%     100%         0%
+gsm8k    semantic_hallucination    0.5adversary        100%       0%         0%
+gsm8k    semantic_hallucination    0.7honest             0%     100%         0%
+gsm8k    semantic_hallucination    0.7adversary        100%       0%         0%
+gsm8k    rushing                   0.3honest             0%     100%         0%
+gsm8k    rushing                   0.3adversary         67%      33%         0%
+gsm8k    rushing                   0.5honest             0%     100%         0%
+gsm8k    rushing                   0.5adversary        100%       0%         0%
+gsm8k    rushing                   0.7honest             0%     100%         0%
+gsm8k    rushing                   0.7adversary        100%       0%         0%
+math500  semantic_negation         0.3honest             0%     100%         0%
+math500  semantic_negation         0.3adversary         19%      81%         0%
+math500  semantic_negation         0.5honest             0%     100%         0%
+math500  semantic_negation         0.5adversary         40%      60%         0%
+math500  semantic_negation         0.7honest             0%     100%         0%
+math500  semantic_negation         0.7adversary        100%       0%         0%
+math500  always_wrong              0.3honest             0%     100%         0%
+math500  always_wrong              0.3adversary         57%      43%         0%
+math500  always_wrong              0.5honest             0%     100%         0%
+math500  always_wrong              0.5adversary        100%       0%         0%
+math500  always_wrong              0.7honest             0%     100%         0%
+math500  always_wrong              0.7adversary        100%       0%         0%
+math500  semantic_hallucination    0.3honest             0%     100%         0%
+math500  semantic_hallucination    0.3adversary         48%      52%         0%
+math500  semantic_hallucination    0.5honest             0%     100%         0%
+math500  semantic_hallucination    0.5adversary         80%      20%         0%
+math500  semantic_hallucination    0.7honest             0%     100%         0%
+math500  semantic_hallucination    0.7adversary        100%       0%         0%
+math500  rushing                   0.3honest             0%     100%         0%
+math500  rushing                   0.3adversary         19%      81%         0%
+math500  rushing                   0.5honest             0%     100%         0%
+math500  rushing                   0.5adversary         40%      60%         0%
+math500  rushing                   0.7honest             0%     100%         0%
+math500  rushing                   0.7adversary         67%      33%         0%
+mmlu     semantic_negation         0.3honest             0%     100%         0%
+mmlu     semantic_negation         0.3adversary         67%      33%         0%
+mmlu     semantic_negation         0.5honest             0%     100%         0%
+mmlu     semantic_negation         0.5adversary        100%       0%         0%
+mmlu     semantic_negation         0.7honest             0%     100%         0%
+mmlu     semantic_negation         0.7adversary        100%       0%         0%
+mmlu     always_wrong              0.3honest             0%     100%         0%
+mmlu     always_wrong              0.3adversary         67%      33%         0%
+mmlu     always_wrong              0.5honest             0%     100%         0%
+mmlu     always_wrong              0.5adversary        100%       0%         0%
+mmlu     always_wrong              0.7honest             0%     100%         0%
+mmlu     always_wrong              0.7adversary        100%       0%         0%
+mmlu     semantic_hallucination    0.3honest             0%     100%         0%
+mmlu     semantic_hallucination    0.3adversary         67%      33%         0%
+mmlu     semantic_hallucination    0.5honest             0%     100%         0%
+mmlu     semantic_hallucination    0.5adversary        100%       0%         0%
+mmlu     semantic_hallucination    0.7honest             0%     100%         0%
+mmlu     semantic_hallucination    0.7adversary        100%       0%         0%
+mmlu     rushing                   0.3honest             0%     100%         0%
+mmlu     rushing                   0.3adversary         67%      33%         0%
+mmlu     rushing                   0.5honest             0%     100%         0%
+mmlu     rushing                   0.5adversary        100%       0%         0%
+mmlu     rushing                   0.7honest             0%     100%         0%
+mmlu     rushing                   0.7adversary        100%       0%         0%
+medqa    semantic_negation         0.3honest             0%     100%         0%
+medqa    semantic_negation         0.3adversary         67%      33%         0%
+medqa    semantic_negation         0.5honest             0%     100%         0%
+medqa    semantic_negation         0.5adversary         60%      40%         0%
+medqa    semantic_negation         0.7honest             0%     100%         0%
+medqa    semantic_negation         0.7adversary         57%      43%         0%
+medqa    always_wrong              0.3honest             0%     100%         0%
+medqa    always_wrong              0.3adversary         38%      62%         0%
+medqa    always_wrong              0.5honest             0%     100%         0%
+medqa    always_wrong              0.5adversary         80%      20%         0%
+medqa    always_wrong              0.7honest             0%     100%         0%
+medqa    always_wrong              0.7adversary        100%       0%         0%
+medqa    semantic_hallucination    0.3honest             0%     100%         0%
+medqa    semantic_hallucination    0.3adversary         67%      33%         0%
+medqa    semantic_hallucination    0.5honest             0%     100%         0%
+medqa    semantic_hallucination    0.5adversary        100%       0%         0%
+medqa    semantic_hallucination    0.7honest             0%     100%         0%
+medqa    semantic_hallucination    0.7adversary        100%       0%         0%
+medqa    rushing                   0.3honest             0%     100%         0%
+medqa    rushing                   0.3adversary         67%      33%         0%
+medqa    rushing                   0.5honest             0%     100%         0%
+medqa    rushing                   0.5adversary         68%      32%         0%
+medqa    rushing                   0.7honest             0%     100%         0%
+medqa    rushing                   0.7adversary         71%      29%         0%
+boolq    semantic_negation         0.3honest             0%     100%         0%
+boolq    semantic_negation         0.3adversary          0%     100%         0%
+boolq    semantic_negation         0.5honest             0%     100%         0%
+boolq    semantic_negation         0.5adversary          0%     100%         0%
+boolq    semantic_negation         0.7honest             0%     100%         0%
+boolq    semantic_negation         0.7adversary          0%     100%         0%
+boolq    always_wrong              0.3honest             0%     100%         0%
+boolq    always_wrong              0.3adversary          0%     100%         0%
+boolq    always_wrong              0.5honest             0%     100%         0%
+boolq    always_wrong              0.5adversary          0%     100%         0%
+boolq    always_wrong              0.7honest             0%     100%         0%
+boolq    always_wrong              0.7adversary          0%     100%         0%
+boolq    semantic_hallucination    0.3honest             0%     100%         0%
+boolq    semantic_hallucination    0.3adversary          0%     100%         0%
+boolq    semantic_hallucination    0.5honest             0%     100%         0%
+boolq    semantic_hallucination    0.5adversary          0%     100%         0%
+boolq    semantic_hallucination    0.7honest             0%     100%         0%
+boolq    semantic_hallucination    0.7adversary          0%     100%         0%
+boolq    rushing                   0.3honest             0%     100%         0%
+boolq    rushing                   0.3adversary          0%     100%         0%
+boolq    rushing                   0.5honest             0%     100%         0%
+boolq    rushing                   0.5adversary          0%     100%         0%
+boolq    rushing                   0.7honest             0%     100%         0%
+boolq    rushing                   0.7adversary          0%     100%         0%
+arc      semantic_negation         0.3honest             0%     100%         0%
+arc      semantic_negation         0.3adversary         67%      33%         0%
+arc      semantic_negation         0.5honest             0%     100%         0%
+arc      semantic_negation         0.5adversary        100%       0%         0%
+arc      semantic_negation         0.7honest             0%     100%         0%
+arc      semantic_negation         0.7adversary        100%       0%         0%
+arc      always_wrong              0.3honest             0%     100%         0%
+arc      always_wrong              0.3adversary         67%      33%         0%
+arc      always_wrong              0.5honest             0%     100%         0%
+arc      always_wrong              0.5adversary        100%       0%         0%
+arc      always_wrong              0.7honest             0%     100%         0%
+arc      always_wrong              0.7adversary        100%       0%         0%
+arc      semantic_hallucination    0.3honest             0%     100%         0%
+arc      semantic_hallucination    0.3adversary         67%      33%         0%
+arc      semantic_hallucination    0.5honest             0%     100%         0%
+arc      semantic_hallucination    0.5adversary        100%       0%         0%
+arc      semantic_hallucination    0.7honest             0%     100%         0%
+arc      semantic_hallucination    0.7adversary        100%       0%         0%
+arc      rushing                   0.3honest             0%     100%         0%
+arc      rushing                   0.3adversary         67%      33%         0%
+arc      rushing                   0.5honest             0%     100%         0%
+arc      rushing                   0.5adversary        100%       0%         0%
+arc      rushing                   0.7honest             0%     100%         0%
+arc      rushing                   0.7adversary        100%       0%         0%
+
+====================================================================================================
+DIAGNOSIS
+====================================================================================================
+  gsm8k: negation q_hat=0.674 vs honest 0.597; honest channels inverted 0%, adversary channels inverted 89%
+  math500: negation q_hat=0.145 vs honest 0.143; honest channels inverted 0%, adversary channels inverted 53%
+  mmlu: negation q_hat=0.320 vs honest 0.535; honest channels inverted 0%, adversary channels inverted 89%
+  medqa: negation q_hat=0.195 vs honest 0.535; honest channels inverted 0%, adversary channels inverted 61%
+  boolq: negation q_hat=0.455 vs honest nan; honest channels inverted 0%, adversary channels inverted 0%
+  arc: negation q_hat=0.275 vs honest 0.535; honest channels inverted 0%, adversary channels inverted 89%
+
+wrote results/adversarial/channel_decisions.parquet, results/adversarial/q_by_answer_space.parquet
+
+=== 2026-09-03T12:08Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_e_tables.py ===
+gate delta skipped: no v1 archive at results/aggregation/v1_archive/sweep_v1.parquet (single-gate regime)
+
+================================================================================================
+2. MINIMAX REGRET over f (deployable, non-oracle methods only)
+================================================================================================
+benchmark method                              minimax regret  mean regret
+arc       aip_gated                                    0.006        0.002
+arc       confidence_weighted                          0.978        0.230
+arc       confidence_weighted_selfreport               0.978        0.398
+arc       aip_trust_only                               0.980        0.393
+arc       coord_median                                 0.980        0.345
+arc       dawid_skene                                  0.980        0.367
+arc       geometric_median                             0.980        0.344
+arc       majority                                     0.980        0.344
+arc       sac_filter_refine                            0.980        0.365
+arc       aip_naive                                    0.998        0.984
+boolq     confidence_weighted                          0.161        0.034
+boolq     confidence_weighted_selfreport               0.231        0.074
+boolq     sac_filter_refine                            0.292        0.087
+boolq     coord_median                                 0.402        0.134
+boolq     geometric_median                             0.402        0.134
+boolq     majority                                     0.402        0.134
+boolq     aip_gated                                    0.737        0.186
+boolq     aip_naive                                    0.737        0.186
+boolq     aip_trust_only                               0.737        0.186
+boolq     dawid_skene                                  0.737        0.129
+gsm8k     aip_gated                                    0.004        0.001
+gsm8k     aip_naive                                    0.963        0.414
+gsm8k     confidence_weighted                          0.976        0.189
+gsm8k     confidence_weighted_selfreport               0.976        0.392
+gsm8k     coord_median                                 0.980        0.306
+gsm8k     geometric_median                             0.980        0.302
+gsm8k     majority                                     0.980        0.302
+gsm8k     sac_filter_refine                            0.980        0.265
+gsm8k     aip_trust_only                               0.984        0.397
+gsm8k     dawid_skene                                  0.984        0.368
+math500   aip_naive                                    0.438        0.166
+math500   aip_gated                                    0.523        0.288
+math500   aip_trust_only                               0.523        0.303
+math500   confidence_weighted                          0.523        0.115
+math500   confidence_weighted_selfreport               0.523        0.205
+math500   coord_median                                 0.523        0.219
+math500   dawid_skene                                  0.523        0.297
+math500   geometric_median                             0.523        0.194
+math500   majority                                     0.523        0.194
+math500   sac_filter_refine                            0.523        0.188
+medqa     aip_gated                                    0.068        0.018
+medqa     confidence_weighted                          0.842        0.287
+medqa     confidence_weighted_selfreport               0.869        0.473
+medqa     coord_median                                 0.869        0.396
+medqa     dawid_skene                                  0.869        0.323
+medqa     geometric_median                             0.869        0.393
+medqa     majority                                     0.869        0.393
+medqa     sac_filter_refine                            0.869        0.346
+medqa     aip_trust_only                               0.895        0.499
+medqa     aip_naive                                    0.912        0.834
+mmlu      aip_gated                                    0.038        0.010
+mmlu      confidence_weighted                          0.902        0.259
+mmlu      confidence_weighted_selfreport               0.902        0.388
+mmlu      aip_naive                                    0.903        0.883
+mmlu      aip_trust_only                               0.911        0.412
+mmlu      coord_median                                 0.911        0.374
+mmlu      dawid_skene                                  0.911        0.343
+mmlu      geometric_median                             0.911        0.367
+mmlu      majority                                     0.911        0.367
+mmlu      sac_filter_refine                            0.911        0.331
+
+  Oracle methods (Krum, Multi-Krum, trimmed mean) are excluded: they are given
+  the true Byzantine count, which no deployed agent has.
+
+================================================================================================
+3. NORMALIZATION-PARITY AUDIT (v2)
+================================================================================================
+method                              mean |effect|  max |effect|  cells
+aip_gated                                  0.0279        0.8400    432
+aip_trust_only                             0.0274        0.8400    432
+confidence_weighted_selfreport             0.0096        0.1890    432
+aip_naive                                  0.0087        0.4850    432
+confidence_weighted                        0.0063        0.4225    432
+sac_filter_refine                          0.0045        0.3690    432
+coord_median                               0.0000        0.0000    432
+dawid_skene                                0.0000        0.0000    432
+geometric_median                           0.0000        0.0000    432
+dawid_skene_anchors                        0.0000        0.0000    432
+krum                                       0.0000        0.0000    432
+majority                                   0.0000        0.0000    432
+multi_krum                                 0.0000        0.0000    432
+trimmed_mean                               0.0000        0.0000    432
+
+================================================================================================
+4. MODEL-ACCURACY LANDSCAPE (Phase A gate f)
+================================================================================================
+benchmark            gsm8k  math500  mmlu
+model                                    
+llama32_3b            0.84     0.45  0.59
+ministral_8b          0.87     0.57  0.68
+olmo2_7b              0.89     0.34  0.63
+phi4_mini_reasoning   0.93     0.72  0.74
+
+  cells above 0.95 or below 0.20: 0 (none)
+
+wrote results/aggregation/minimax_regret.parquet, parity_audit.parquet, accuracy_landscape.parquet
+
+=== 2026-09-03T12:08Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_e_figures.py ===
+wrote figures/burst_windowed.pdf
+wrote figures/pobs_constraint.pdf
+
+=== 2026-09-03T12:08Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_e_claims.py ===
+wrote results/claims.md  (17 supported, 4 unsupported)
+  [H1-gsm8k] range 0.976–0.984, spread 0.008
+  [H1-mmlu] range 0.877–0.920, spread 0.043
+  [H2] max accuracy across those methods at f=0.7 = 0.000
+  [I1] gsm8k negation q̂=0.674 gain 0.050; hallucination q̂=0.062 gain 0.027
+  [I2] gain over best discard = 0.027 (vs 0.050 for negation)
+  [G1] max honest inverted 0.0%; mean adversary inverted at f>=0.5 76.3%
+  [G2] mmlu q̂=0.320 vs honest 0.535; gsm8k q̂=0.674 vs honest 0.597
+  [C1] within 0.652 vs cross 0.444 on gsm8k (ratio 1.47x)
+  [C2] homogeneous N_eff 1.07–1.91; best heterogeneous 6.86 of 10
+  [C3] mmlu mean q=0.806 vs chance 0.333; math500 mean q=0.015 vs chance 0
+  [C4] gsm8k: product MAE binary 0.029 -> mc 0.019; math500: product MAE binary 0.124 -> mc 0.013; mmlu: product MAE binary 0.087 -> mc 0.073; medqa: product MAE binary 0.048 -> mc 0.047; boolq: product MAE binary 0.092 -> mc 0.076; arc: product MAE binary 0.020 -> mc 0.013
+  [F1] gsm8k: AIP 0.000, self-report reader -0.043; math500: AIP 0.000, self-report reader -0.133; mmlu: AIP 0.000, self-report reader -0.159; medqa: AIP 0.000, self-report reader -0.104; boolq: AIP 0.000, self-report reader -0.053; arc: AIP 0.000, self-report reader -0.234
+  [B1] static 0.775 -> W=5 0.963, W=10 0.966, W=20 0.970
+  [D1] aip_gated: value(coherent)=0.137 value(noise)=0.138 acc=0.863; sac_filter_refine: value(coherent)=0.859 value(noise)=0.138 acc=0.177
+  [D2] arm share unchanged; see D1 values
+  [M1] max mean |effect| among unweighted methods 0.0000 (sanity: ~0); aip_gated 0.0279
+  [M2] lowest minimax regret per benchmark — arc: aip_gated (0.006); boolq: confidence_weighted (0.161); gsm8k: aip_gated (0.004); math500: aip_naive (0.438); medqa: aip_gated (0.068); mmlu: aip_gated (0.038)
+
+=== 2026-09-03T12:08Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/make_numbers.py ===
+Traceback (most recent call last):
+  File "/home/ubuntu/Liars_Are_Information/scripts/make_numbers.py", line 86, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/ubuntu/Liars_Are_Information/scripts/make_numbers.py", line 36, in main
+    nums = collect()
+           ^^^^^^^^^
+  File "/home/ubuntu/Liars_Are_Information/src/aip/analysis/paper_numbers.py", line 188, in collect
+    tag = {"gsm8k": "Gsmk", "math500": "Mathfive", "mmlu": "Mmlu"}[r.benchmark]
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'medqa'
+
+=== 2026-09-03T16:20Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_e_burst.py ===
+
+============================================================================================
+WINDOWED CHANNEL STATISTICS vs BURST (gsm8k)
+============================================================================================
+
+burst
+f                    0.3    0.4    0.5    0.6    0.7
+method                                              
+aip_gated          0.966  0.958  0.883  0.601  0.470
+aip_gated_w10      0.973  0.972  0.970  0.962  0.955
+aip_gated_w20      0.972  0.975  0.973  0.965  0.965
+aip_gated_w5       0.968  0.970  0.967  0.958  0.955
+coord_median       0.950  0.888  0.692  0.410  0.418
+geometric_median   0.968  0.910  0.738  0.482  0.368
+majority           0.968  0.910  0.738  0.482  0.368
+sac_filter_refine  0.976  0.971  0.965  0.819  0.229
+
+semantic_negation
+f                    0.3    0.4    0.5    0.6    0.7
+method                                              
+aip_gated          0.978  0.969  0.968  0.964  0.965
+aip_gated_w10      0.975  0.968  0.964  0.961  0.959
+aip_gated_w20      0.978  0.971  0.969  0.966  0.967
+aip_gated_w5       0.973  0.968  0.962  0.962  0.959
+coord_median       0.962  0.934  0.616  0.106  0.108
+geometric_median   0.978  0.972  0.698  0.220  0.008
+majority           0.978  0.972  0.698  0.220  0.008
+sac_filter_refine  0.975  0.976  0.960  0.004  0.002
+
+noise
+f                    0.3    0.4    0.5    0.6    0.7
+method                                              
+aip_gated          0.959  0.900  0.758  0.766  0.838
+aip_gated_w10      0.972  0.962  0.966  0.958  0.958
+aip_gated_w20      0.976  0.968  0.972  0.965  0.967
+aip_gated_w5       0.969  0.963  0.964  0.956  0.955
+coord_median       0.956  0.912  0.742  0.720  0.766
+geometric_median   0.962  0.932  0.792  0.766  0.772
+majority           0.962  0.932  0.792  0.766  0.772
+sac_filter_refine  0.976  0.964  0.963  0.884  0.781
+
+============================================================================================
+SUCCESS CRITERION
+============================================================================================
+  best discard baseline (mean over f): 0.830
+  AIP static                          : 0.776   gap -0.054
+  AIP windowed W=5                    : 0.963   recovered +0.188 of 0.027 needed  [MEETS]  regime flags 0
+  AIP windowed W=10                   : 0.966   recovered +0.191 of 0.027 needed  [MEETS]  regime flags 0
+  AIP windowed W=20                   : 0.970   recovered +0.195 of 0.027 needed  [MEETS]  regime flags 0
+
+  stationary controls (windowed minus static; must stay within CI width)
+    semantic_negation    W=5   0.965 vs 0.969  delta -0.004  CI width 0.029  [ok]
+    semantic_negation    W=10  0.965 vs 0.969  delta -0.003  CI width 0.029  [ok]
+    semantic_negation    W=20  0.970 vs 0.969  delta +0.002  CI width 0.029  [ok]
+    noise                W=5   0.961 vs 0.844  delta +0.117  CI width 0.058  [ok]
+    noise                W=10  0.963 vs 0.844  delta +0.119  CI width 0.058  [ok]
+    noise                W=20  0.970 vs 0.844  delta +0.126  CI width 0.058  [ok]
+
+wrote results/adversarial/burst_windowed.parquet
+
+=== 2026-09-03T16:21Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_e_decomposition.py ===
+
+====================================================================================================
+COORDINATABILITY: adversary coherence vs the honest floor
+====================================================================================================
+benchmarkclass            attack                   q_hat adv  honest q  ceiling  above honest?
+gsm8k    open_numeric     semantic_negation            0.674     0.597    0.800  YES
+gsm8k    open_numeric     always_wrong                 0.100     0.597    0.800  no
+gsm8k    open_numeric     semantic_hallucination       0.062     0.597    0.800  no
+gsm8k    open_numeric     rushing                      0.146     0.597    0.800  no
+math500  open_text        semantic_negation            0.145     0.143    0.198  YES
+math500  open_text        always_wrong                 0.030     0.143    0.198  no
+math500  open_text        semantic_hallucination       0.015     0.143    0.198  no
+math500  open_text        rushing                      0.085     0.143    0.198  no
+mmlu     multiple_choice  semantic_negation            0.320     0.535    0.677  no
+mmlu     multiple_choice  always_wrong                 0.290     0.535    0.677  no
+mmlu     multiple_choice  semantic_hallucination       0.250     0.535    0.677  no
+mmlu     multiple_choice  rushing                      0.355     0.535    0.677  no
+medqa    multiple_choice  semantic_negation            0.195     0.535    0.677  no
+medqa    multiple_choice  always_wrong                 0.275     0.535    0.677  no
+medqa    multiple_choice  semantic_hallucination       0.305     0.535    0.677  no
+medqa    multiple_choice  rushing                      0.275     0.535    0.677  no
+boolq    binary           semantic_negation            0.455       nan    1.000  no
+boolq    binary           always_wrong                 0.600       nan    1.000  no
+boolq    binary           semantic_hallucination       0.545       nan    1.000  no
+boolq    binary           rushing                      0.630       nan    1.000  no
+arc      multiple_choice  semantic_negation            0.275     0.535    0.677  no
+arc      multiple_choice  always_wrong                 0.305     0.535    0.677  no
+arc      multiple_choice  semantic_hallucination       0.285     0.535    0.677  no
+arc      multiple_choice  rushing                      0.270     0.535    0.677  no
+
+====================================================================================================
+CHANNEL DECISIONS (honest receivers only)
+====================================================================================================
+benchmarkattack                      fchannel      inverted  trusted  discarded
+gsm8k    semantic_negation         0.3honest             0%     100%         0%
+gsm8k    semantic_negation         0.3adversary         67%      33%         0%
+gsm8k    semantic_negation         0.5honest             0%     100%         0%
+gsm8k    semantic_negation         0.5adversary        100%       0%         0%
+gsm8k    semantic_negation         0.7honest             0%     100%         0%
+gsm8k    semantic_negation         0.7adversary        100%       0%         0%
+gsm8k    always_wrong              0.3honest             0%     100%         0%
+gsm8k    always_wrong              0.3adversary         67%      33%         0%
+gsm8k    always_wrong              0.5honest             0%     100%         0%
+gsm8k    always_wrong              0.5adversary        100%       0%         0%
+gsm8k    always_wrong              0.7honest             0%     100%         0%
+gsm8k    always_wrong              0.7adversary        100%       0%         0%
+gsm8k    semantic_hallucination    0.3honest             0%     100%         0%
+gsm8k    semantic_hallucination    0.3adversary         67%      33%         0%
+gsm8k    semantic_hallucination    0.5honest             0%     100%         0%
+gsm8k    semantic_hallucination    0.5adversary        100%       0%         0%
+gsm8k    semantic_hallucination    0.7honest             0%     100%         0%
+gsm8k    semantic_hallucination    0.7adversary        100%       0%         0%
+gsm8k    rushing                   0.3honest             0%     100%         0%
+gsm8k    rushing                   0.3adversary         67%      33%         0%
+gsm8k    rushing                   0.5honest             0%     100%         0%
+gsm8k    rushing                   0.5adversary        100%       0%         0%
+gsm8k    rushing                   0.7honest             0%     100%         0%
+gsm8k    rushing                   0.7adversary        100%       0%         0%
+math500  semantic_negation         0.3honest             0%     100%         0%
+math500  semantic_negation         0.3adversary         19%      81%         0%
+math500  semantic_negation         0.5honest             0%     100%         0%
+math500  semantic_negation         0.5adversary         40%      60%         0%
+math500  semantic_negation         0.7honest             0%     100%         0%
+math500  semantic_negation         0.7adversary        100%       0%         0%
+math500  always_wrong              0.3honest             0%     100%         0%
+math500  always_wrong              0.3adversary         57%      43%         0%
+math500  always_wrong              0.5honest             0%     100%         0%
+math500  always_wrong              0.5adversary        100%       0%         0%
+math500  always_wrong              0.7honest             0%     100%         0%
+math500  always_wrong              0.7adversary        100%       0%         0%
+math500  semantic_hallucination    0.3honest             0%     100%         0%
+math500  semantic_hallucination    0.3adversary         48%      52%         0%
+math500  semantic_hallucination    0.5honest             0%     100%         0%
+math500  semantic_hallucination    0.5adversary         80%      20%         0%
+math500  semantic_hallucination    0.7honest             0%     100%         0%
+math500  semantic_hallucination    0.7adversary        100%       0%         0%
+math500  rushing                   0.3honest             0%     100%         0%
+math500  rushing                   0.3adversary         19%      81%         0%
+math500  rushing                   0.5honest             0%     100%         0%
+math500  rushing                   0.5adversary         40%      60%         0%
+math500  rushing                   0.7honest             0%     100%         0%
+math500  rushing                   0.7adversary         67%      33%         0%
+mmlu     semantic_negation         0.3honest             0%     100%         0%
+mmlu     semantic_negation         0.3adversary         67%      33%         0%
+mmlu     semantic_negation         0.5honest             0%     100%         0%
+mmlu     semantic_negation         0.5adversary        100%       0%         0%
+mmlu     semantic_negation         0.7honest             0%     100%         0%
+mmlu     semantic_negation         0.7adversary        100%       0%         0%
+mmlu     always_wrong              0.3honest             0%     100%         0%
+mmlu     always_wrong              0.3adversary         67%      33%         0%
+mmlu     always_wrong              0.5honest             0%     100%         0%
+mmlu     always_wrong              0.5adversary        100%       0%         0%
+mmlu     always_wrong              0.7honest             0%     100%         0%
+mmlu     always_wrong              0.7adversary        100%       0%         0%
+mmlu     semantic_hallucination    0.3honest             0%     100%         0%
+mmlu     semantic_hallucination    0.3adversary         67%      33%         0%
+mmlu     semantic_hallucination    0.5honest             0%     100%         0%
+mmlu     semantic_hallucination    0.5adversary        100%       0%         0%
+mmlu     semantic_hallucination    0.7honest             0%     100%         0%
+mmlu     semantic_hallucination    0.7adversary        100%       0%         0%
+mmlu     rushing                   0.3honest             0%     100%         0%
+mmlu     rushing                   0.3adversary         67%      33%         0%
+mmlu     rushing                   0.5honest             0%     100%         0%
+mmlu     rushing                   0.5adversary        100%       0%         0%
+mmlu     rushing                   0.7honest             0%     100%         0%
+mmlu     rushing                   0.7adversary        100%       0%         0%
+medqa    semantic_negation         0.3honest             0%     100%         0%
+medqa    semantic_negation         0.3adversary         67%      33%         0%
+medqa    semantic_negation         0.5honest             0%     100%         0%
+medqa    semantic_negation         0.5adversary         60%      40%         0%
+medqa    semantic_negation         0.7honest             0%     100%         0%
+medqa    semantic_negation         0.7adversary         57%      43%         0%
+medqa    always_wrong              0.3honest             0%     100%         0%
+medqa    always_wrong              0.3adversary         38%      62%         0%
+medqa    always_wrong              0.5honest             0%     100%         0%
+medqa    always_wrong              0.5adversary         80%      20%         0%
+medqa    always_wrong              0.7honest             0%     100%         0%
+medqa    always_wrong              0.7adversary        100%       0%         0%
+medqa    semantic_hallucination    0.3honest             0%     100%         0%
+medqa    semantic_hallucination    0.3adversary         67%      33%         0%
+medqa    semantic_hallucination    0.5honest             0%     100%         0%
+medqa    semantic_hallucination    0.5adversary        100%       0%         0%
+medqa    semantic_hallucination    0.7honest             0%     100%         0%
+medqa    semantic_hallucination    0.7adversary        100%       0%         0%
+medqa    rushing                   0.3honest             0%     100%         0%
+medqa    rushing                   0.3adversary         67%      33%         0%
+medqa    rushing                   0.5honest             0%     100%         0%
+medqa    rushing                   0.5adversary         68%      32%         0%
+medqa    rushing                   0.7honest             0%     100%         0%
+medqa    rushing                   0.7adversary         71%      29%         0%
+boolq    semantic_negation         0.3honest             0%     100%         0%
+boolq    semantic_negation         0.3adversary          0%     100%         0%
+boolq    semantic_negation         0.5honest             0%     100%         0%
+boolq    semantic_negation         0.5adversary          0%     100%         0%
+boolq    semantic_negation         0.7honest             0%     100%         0%
+boolq    semantic_negation         0.7adversary          0%     100%         0%
+boolq    always_wrong              0.3honest             0%     100%         0%
+boolq    always_wrong              0.3adversary          0%     100%         0%
+boolq    always_wrong              0.5honest             0%     100%         0%
+boolq    always_wrong              0.5adversary          0%     100%         0%
+boolq    always_wrong              0.7honest             0%     100%         0%
+boolq    always_wrong              0.7adversary          0%     100%         0%
+boolq    semantic_hallucination    0.3honest             0%     100%         0%
+boolq    semantic_hallucination    0.3adversary          0%     100%         0%
+boolq    semantic_hallucination    0.5honest             0%     100%         0%
+boolq    semantic_hallucination    0.5adversary          0%     100%         0%
+boolq    semantic_hallucination    0.7honest             0%     100%         0%
+boolq    semantic_hallucination    0.7adversary          0%     100%         0%
+boolq    rushing                   0.3honest             0%     100%         0%
+boolq    rushing                   0.3adversary          0%     100%         0%
+boolq    rushing                   0.5honest             0%     100%         0%
+boolq    rushing                   0.5adversary          0%     100%         0%
+boolq    rushing                   0.7honest             0%     100%         0%
+boolq    rushing                   0.7adversary          0%     100%         0%
+arc      semantic_negation         0.3honest             0%     100%         0%
+arc      semantic_negation         0.3adversary         67%      33%         0%
+arc      semantic_negation         0.5honest             0%     100%         0%
+arc      semantic_negation         0.5adversary        100%       0%         0%
+arc      semantic_negation         0.7honest             0%     100%         0%
+arc      semantic_negation         0.7adversary        100%       0%         0%
+arc      always_wrong              0.3honest             0%     100%         0%
+arc      always_wrong              0.3adversary         67%      33%         0%
+arc      always_wrong              0.5honest             0%     100%         0%
+arc      always_wrong              0.5adversary        100%       0%         0%
+arc      always_wrong              0.7honest             0%     100%         0%
+arc      always_wrong              0.7adversary        100%       0%         0%
+arc      semantic_hallucination    0.3honest             0%     100%         0%
+arc      semantic_hallucination    0.3adversary         67%      33%         0%
+arc      semantic_hallucination    0.5honest             0%     100%         0%
+arc      semantic_hallucination    0.5adversary        100%       0%         0%
+arc      semantic_hallucination    0.7honest             0%     100%         0%
+arc      semantic_hallucination    0.7adversary        100%       0%         0%
+arc      rushing                   0.3honest             0%     100%         0%
+arc      rushing                   0.3adversary         67%      33%         0%
+arc      rushing                   0.5honest             0%     100%         0%
+arc      rushing                   0.5adversary        100%       0%         0%
+arc      rushing                   0.7honest             0%     100%         0%
+arc      rushing                   0.7adversary        100%       0%         0%
+
+====================================================================================================
+DIAGNOSIS
+====================================================================================================
+  gsm8k: negation q_hat=0.674 vs honest 0.597; honest channels inverted 0%, adversary channels inverted 89%
+  math500: negation q_hat=0.145 vs honest 0.143; honest channels inverted 0%, adversary channels inverted 53%
+  mmlu: negation q_hat=0.320 vs honest 0.535; honest channels inverted 0%, adversary channels inverted 89%
+  medqa: negation q_hat=0.195 vs honest 0.535; honest channels inverted 0%, adversary channels inverted 61%
+  boolq: negation q_hat=0.455 vs honest nan; honest channels inverted 0%, adversary channels inverted 0%
+  arc: negation q_hat=0.275 vs honest 0.535; honest channels inverted 0%, adversary channels inverted 89%
+
+wrote results/adversarial/channel_decisions.parquet, results/adversarial/q_by_answer_space.parquet
+
+=== 2026-09-03T16:21Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_e_tables.py ===
+gate delta skipped: no v1 archive at results/aggregation/v1_archive/sweep_v1.parquet (single-gate regime)
+
+================================================================================================
+2. MINIMAX REGRET over f (deployable, non-oracle methods only)
+================================================================================================
+benchmark method                              minimax regret  mean regret
+arc       aip_gated                                    0.006        0.002
+arc       confidence_weighted                          0.978        0.230
+arc       confidence_weighted_selfreport               0.978        0.398
+arc       aip_trust_only                               0.980        0.393
+arc       coord_median                                 0.980        0.345
+arc       dawid_skene                                  0.980        0.367
+arc       geometric_median                             0.980        0.344
+arc       majority                                     0.980        0.344
+arc       sac_filter_refine                            0.980        0.365
+arc       aip_naive                                    0.998        0.984
+boolq     confidence_weighted                          0.161        0.034
+boolq     confidence_weighted_selfreport               0.231        0.074
+boolq     sac_filter_refine                            0.292        0.087
+boolq     coord_median                                 0.402        0.134
+boolq     geometric_median                             0.402        0.134
+boolq     majority                                     0.402        0.134
+boolq     aip_gated                                    0.737        0.186
+boolq     aip_naive                                    0.737        0.186
+boolq     aip_trust_only                               0.737        0.186
+boolq     dawid_skene                                  0.737        0.129
+gsm8k     aip_gated                                    0.004        0.001
+gsm8k     aip_naive                                    0.963        0.414
+gsm8k     confidence_weighted                          0.976        0.189
+gsm8k     confidence_weighted_selfreport               0.976        0.392
+gsm8k     coord_median                                 0.980        0.306
+gsm8k     geometric_median                             0.980        0.302
+gsm8k     majority                                     0.980        0.302
+gsm8k     sac_filter_refine                            0.980        0.265
+gsm8k     aip_trust_only                               0.984        0.397
+gsm8k     dawid_skene                                  0.984        0.368
+math500   aip_naive                                    0.438        0.166
+math500   aip_gated                                    0.523        0.288
+math500   aip_trust_only                               0.523        0.303
+math500   confidence_weighted                          0.523        0.115
+math500   confidence_weighted_selfreport               0.523        0.205
+math500   coord_median                                 0.523        0.219
+math500   dawid_skene                                  0.523        0.297
+math500   geometric_median                             0.523        0.194
+math500   majority                                     0.523        0.194
+math500   sac_filter_refine                            0.523        0.188
+medqa     aip_gated                                    0.068        0.018
+medqa     confidence_weighted                          0.842        0.287
+medqa     confidence_weighted_selfreport               0.869        0.473
+medqa     coord_median                                 0.869        0.396
+medqa     dawid_skene                                  0.869        0.323
+medqa     geometric_median                             0.869        0.393
+medqa     majority                                     0.869        0.393
+medqa     sac_filter_refine                            0.869        0.346
+medqa     aip_trust_only                               0.895        0.499
+medqa     aip_naive                                    0.912        0.834
+mmlu      aip_gated                                    0.038        0.010
+mmlu      confidence_weighted                          0.902        0.259
+mmlu      confidence_weighted_selfreport               0.902        0.388
+mmlu      aip_naive                                    0.903        0.883
+mmlu      aip_trust_only                               0.911        0.412
+mmlu      coord_median                                 0.911        0.374
+mmlu      dawid_skene                                  0.911        0.343
+mmlu      geometric_median                             0.911        0.367
+mmlu      majority                                     0.911        0.367
+mmlu      sac_filter_refine                            0.911        0.331
+
+  Oracle methods (Krum, Multi-Krum, trimmed mean) are excluded: they are given
+  the true Byzantine count, which no deployed agent has.
+
+================================================================================================
+3. NORMALIZATION-PARITY AUDIT (v2)
+================================================================================================
+method                              mean |effect|  max |effect|  cells
+aip_gated                                  0.0279        0.8400    432
+aip_trust_only                             0.0274        0.8400    432
+confidence_weighted_selfreport             0.0096        0.1890    432
+aip_naive                                  0.0087        0.4850    432
+confidence_weighted                        0.0063        0.4225    432
+sac_filter_refine                          0.0045        0.3690    432
+coord_median                               0.0000        0.0000    432
+dawid_skene                                0.0000        0.0000    432
+geometric_median                           0.0000        0.0000    432
+dawid_skene_anchors                        0.0000        0.0000    432
+krum                                       0.0000        0.0000    432
+majority                                   0.0000        0.0000    432
+multi_krum                                 0.0000        0.0000    432
+trimmed_mean                               0.0000        0.0000    432
+
+================================================================================================
+4. MODEL-ACCURACY LANDSCAPE (Phase A gate f)
+================================================================================================
+benchmark            gsm8k  math500  mmlu
+model                                    
+llama32_3b            0.84     0.45  0.59
+ministral_8b          0.87     0.57  0.68
+olmo2_7b              0.89     0.34  0.63
+phi4_mini_reasoning   0.93     0.72  0.74
+
+  cells above 0.95 or below 0.20: 0 (none)
+
+wrote results/aggregation/minimax_regret.parquet, parity_audit.parquet, accuracy_landscape.parquet
+
+=== 2026-09-03T16:22Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_e_figures.py ===
+wrote figures/burst_windowed.pdf
+wrote figures/pobs_constraint.pdf
+
+=== 2026-09-03T16:22Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/phase_e_claims.py ===
+wrote results/claims.md  (17 supported, 4 unsupported)
+  [H1-gsm8k] range 0.976–0.984, spread 0.008
+  [H1-mmlu] range 0.877–0.920, spread 0.043
+  [H2] max accuracy across those methods at f=0.7 = 0.000
+  [I1] gsm8k negation q̂=0.674 gain 0.050; hallucination q̂=0.062 gain 0.027
+  [I2] gain over best discard = 0.027 (vs 0.050 for negation)
+  [G1] max honest inverted 0.0%; mean adversary inverted at f>=0.5 76.3%
+  [G2] mmlu q̂=0.320 vs honest 0.535; gsm8k q̂=0.674 vs honest 0.597
+  [C1] within 0.652 vs cross 0.444 on gsm8k (ratio 1.47x)
+  [C2] homogeneous N_eff 1.07–1.91; best heterogeneous 6.86 of 10
+  [C3] mmlu mean q=0.806 vs chance 0.333; math500 mean q=0.015 vs chance 0
+  [C4] gsm8k: product MAE binary 0.029 -> mc 0.019; math500: product MAE binary 0.124 -> mc 0.013; mmlu: product MAE binary 0.087 -> mc 0.073; medqa: product MAE binary 0.048 -> mc 0.047; boolq: product MAE binary 0.092 -> mc 0.076; arc: product MAE binary 0.020 -> mc 0.013
+  [F1] gsm8k: AIP 0.000, self-report reader -0.043; math500: AIP 0.000, self-report reader -0.133; mmlu: AIP 0.000, self-report reader -0.159; medqa: AIP 0.000, self-report reader -0.104; boolq: AIP 0.000, self-report reader -0.053; arc: AIP 0.000, self-report reader -0.234
+  [B1] static 0.776 -> W=5 0.963, W=10 0.966, W=20 0.970
+  [D1] aip_gated: value(coherent)=0.137 value(noise)=0.138 acc=0.863; sac_filter_refine: value(coherent)=0.859 value(noise)=0.138 acc=0.177
+  [D2] arm share unchanged; see D1 values
+  [M1] max mean |effect| among unweighted methods 0.0000 (sanity: ~0); aip_gated 0.0279
+  [M2] lowest minimax regret per benchmark — arc: aip_gated (0.006); boolq: confidence_weighted (0.161); gsm8k: aip_gated (0.004); math500: aip_naive (0.438); medqa: aip_gated (0.068); mmlu: aip_gated (0.038)
+
+=== 2026-09-03T16:22Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python /home/ubuntu/Liars_Are_Information/scripts/make_numbers.py ===
+wrote paper/numbers.tex with 83 macros
+
+=== 2026-09-03T16:22Z :: /home/ubuntu/Liars_Are_Information/.venv/bin/python -m pytest tests/test_paper.py -q ===
+........                                                                 [100%]

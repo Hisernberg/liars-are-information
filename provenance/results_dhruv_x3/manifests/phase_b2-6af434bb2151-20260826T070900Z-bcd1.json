@@ -1,0 +1,57 @@
+{
+  "run_id": "phase_b2-6af434bb2151-20260826T070900Z-bcd1",
+  "phase": "phase_b2",
+  "config_hash": "6af434bb2151",
+  "config": {
+    "cache": "data/cache",
+    "resamples": 1000,
+    "models": [
+      "llama32_3b",
+      "ministral_8b",
+      "olmo2_7b",
+      "phi4_mini_reasoning"
+    ]
+  },
+  "seeds": {
+    "bootstrap": 20250825
+  },
+  "git_commit": "d1b71f75a72ddad16c89fa04db18c53425e9ae07-dirty",
+  "started_at": "2026-08-26T07:09:00.795075+00:00",
+  "finished_at": "2026-08-26T07:09:00.865743+00:00",
+  "status": "ok",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-186-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu0",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA L4",
+      "memory_total_mib": 23034,
+      "driver": "550.127.08"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.2.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "4.57.6",
+    "vllm": "0.17.0"
+  },
+  "notes": {
+    "inference_run": false,
+    "label_spaces": {
+      "gsm8k": "open-ended, per-task candidates",
+      "math500": "open-ended, per-task candidates",
+      "mmlu": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    "correction": "Phase B fed the binary law correctness_agreement, which requires gold labels and is therefore not a blind observable. The baseline here uses answer_agreement, which is what an agent can actually see."
+  }
+}

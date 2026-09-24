@@ -1,0 +1,42 @@
+{
+  "run_id": "phase_d_bandit-af9bd3dbdb6d-20260826T114021Z-0952",
+  "phase": "phase_d_bandit",
+  "config_hash": "af9bd3dbdb6d",
+  "config": {
+    "benchmark": "gsm8k",
+    "f": 0.6,
+    "epochs": 40,
+    "epoch_len": 10
+  },
+  "seeds": {
+    "bandit": 20250825
+  },
+  "git_commit": "a61b55d19f28adbc28dae75fc05dbf041a196d23-dirty",
+  "started_at": "2026-08-26T11:40:21.991446+00:00",
+  "finished_at": "2026-08-26T11:40:22.050670+00:00",
+  "status": "ok",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-186-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu0",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA L4",
+      "memory_total_mib": 23034,
+      "driver": "550.127.08"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.2.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "4.57.6",
+    "vllm": "0.17.0"
+  },
+  "notes": {
+    "inference_run": false
+  }
+}

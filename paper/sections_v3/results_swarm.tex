@@ -1,0 +1,8 @@
+% RESULTS-DEPENDENT: interpretation below must be checked against results/swarm before release.
+Deployed swarms usually replicate one model (\cref{fig:swarm}). In a swarm of ten replicas of Llama-3.2-3B, the weakest roster model, facing a coherent bloc at $f=0.5$, \race\ scores \swarmHomLlamaRace\% (\aip: \swarmHomLlamaAip\%, receiver alone: \swarmHomLlamaSelf\%). With ten replicas of Qwen-3.8-27B the figures are \swarmHomQwenRace\%, \swarmHomQwenAip\% and \swarmHomQwenSelf\%. In a homogeneous swarm the honest agents are one source. Clone tempering counts them once, and the only information left to pool is what the liars leak. Adding the two weak-tier models to the roster (``7 + weak arm'') gives \swarmWeakRace\% for \race\ against \swarmWeakAip\% for \aip. Scaling the frozen swarm from 5 to 40 agents at fixed $f$ changes \race\ from \sizeRaceFive\% to \sizeRaceFourZero\% and \aip\ from \sizeAipFive\% to \sizeAipFourZero\% (pooled over $f\in\{.3,.5,.7\}$ and the coherent and gate-aware attacks). Both results are consistent with \cref{thm:silence}: extra copies of the same information do not add information.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/fig7_swarm.pdf}
+\caption{\textbf{E4.} Left: composition and replication at $f=0.5$ (coherent bloc). Right: swarm size.}\label{fig:swarm}
+\end{figure}

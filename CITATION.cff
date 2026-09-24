@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+title: "Liars Are Information v3: Receiver-Anchored Channel Estimation for Byzantine-Robust Aggregation in Multi-Agent LLM Systems"
+message: "If you use this software or data, please cite it and the original artifact it builds on."
+type: software
+license: MIT
+version: 3.0.0
+date-released: 2026-09-24
+keywords:
+  - multi-agent systems
+  - large language models
+  - Byzantine robustness
+  - Dawid-Skene
+  - deception
+authors:
+  - name: "Liars Are Information contributors"
+references:
+  - type: dataset
+    title: "Liars Are Information: Threshold-Gated Inversion of Coherent Adversaries in Multi-Agent LLM Swarms, and Its Limit"
+    authors:
+      - family-names: Das
+        given-names: Dhruv Jyoti
+    url: "https://huggingface.co/datasets/Dhruv1000/Liars_Are_Information"
+    year: 2026
+  - type: dataset
+    title: "Liars Are Information: six-contribution DGX research release"
+    authors:
+      - name: Nabidnur
+    url: "https://huggingface.co/buckets/Nabidnur/Liars_Are_Information-bucket"
+    year: 2026

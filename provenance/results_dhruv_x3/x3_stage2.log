@@ -1,0 +1,4 @@
+=== batch-matched probe, CUDA graphs ON ===
+=== batch-matched probe, CUDA graphs OFF (--enforce-eager) ===
+=== adversarial repair ===
+PROBES+ADV DONE

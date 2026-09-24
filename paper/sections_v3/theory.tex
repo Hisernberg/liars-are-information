@@ -1,0 +1,60 @@
+\section{Theory}\label{sec:theory}
+
+Let $Y$ be the truth on a question, $H$ the honest reports (including the receiver's), and $B$ the Byzantine reports. An adversary strategy $\sigma$ is any conditional law $B\sim\sigma(\cdot\mid Y,H)$, so the adversary may be gold-aware and rushing.
+
+\begin{theorem}[A lie can only add information; the minimax attack is silence]\label{thm:silence}
+Let $\mathrm{acc}^*(\sigma)=\E[\max_y P_\sigma(Y{=}y\mid H,B)]$ be the accuracy of the Bayes receiver that knows the joint law induced by $\sigma$, and $\mathrm{acc}^*_H=\E[\max_y P(Y{=}y\mid H)]$. Then $\mathrm{acc}^*(\sigma)\ge\mathrm{acc}^*_H$ for every $\sigma$, with equality whenever $B\perp Y\mid H$. Hence $\inf_\sigma\mathrm{acc}^*(\sigma)=\mathrm{acc}^*_H$, and the infimum is attained, for example by answering at random or by echoing a random honest report.
+\end{theorem}
+\begin{proof}
+$P(Y{=}y\mid H)=\E[P(Y{=}y\mid H,B)\mid H]$. The maximum is convex, so by Jensen $\max_y\E[\cdot\mid H]\le\E[\max_y\cdot\mid H]$. Take expectations. If $B\perp Y\mid H$, the two posteriors coincide.
+\end{proof}
+
+\begin{corollary}[No breakdown point for a known-channel receiver]
+Since $\mathrm{acc}^*_H$ is at least the receiver's own accuracy, the known-channel receiver never falls below ``trust yourself'', at any $f<1$. By contrast, any plurality rule reaches $0$ against a coherent bloc once $f>1/2$.
+\end{corollary}
+Theorem~\ref{thm:silence} is Blackwell's comparison of experiments~\citep{blackwell1953} read adversarially. Its consequence is that robustness is an \emph{estimation} problem. The adversary has exactly three levers:
+\begin{enumerate}
+\item estimation error;
+\item violating the model's assumptions, namely conditional independence given $Y$ and stationarity;
+\item withholding its own information.
+\end{enumerate}
+\Cref{sec:results} is organised around these levers.
+
+\begin{proposition}[Label switching, and what the anchor buys]\label{prop:switching}
+(a) \emph{Binary one-coin model.} For $Y$ uniform on $\{0,1\}$ and conditionally independent reports with accuracies $\theta=(a_1,\dots,a_n)$, the report law under $\theta$ equals the law under $\theta'=(1-a_1,\dots,1-a_n)$. If a coherent always-wrong bloc holds a majority, any rule that selects the labelling in which the plurality is accurate outputs the lie on every question. This covers majority vote, plurality-initialised EM and label-free Dawid--Skene.
+(b) \emph{Dawid--Skene.} For any permutation $\tau$ of latent classes, relabelling the class prior and the rows of every confusion matrix by $\tau$ leaves the report law unchanged. Uniqueness results~\citep{kruskal1977,allman2009} identify the model only up to such $\tau$.
+(c) \emph{Anchor.} If the receiver's confusion matrix is strictly row-diagonally dominant, $\pi_i[k,k]>\pi_i[k,l]$ for all $l\neq k$, then among all relabellings of the true parameters only $\tau=\mathrm{id}$ keeps $\pi_i$ row-diagonally dominant.
+\end{proposition}
+\begin{proof}[Proof of (c)]
+For $\tau\neq\mathrm{id}$ pick $k$ with $m=\tau^{-1}(k)\neq k$. Row $k$ of the relabelled matrix is row $m$ of $\pi_i$. Its largest entry is in column $m\neq k$, so dominance fails in row $k$.
+\end{proof}
+The anchor is also \emph{necessary}. In the binary case with $a_i=1/2$, $\theta$ and $\theta'$ both satisfy any constraint the truth satisfies. A near-chance receiver therefore cannot identify the truth from its own history, whatever estimator it uses. We observe exactly this weak-anchor capture on open-answer questions (\cref{sec:limits}).
+
+\begin{proposition}[AIP's gate quantises the Bayes weight; Proposition~1 of~\citep{das2026aip} does not bind \race]\label{prop:quantisation}
+Under the one-coin model a report $R_j=c$ shifts the log-odds of $c$ against any alternative by $\lambda_j=\log\frac{(K-1)a_j}{1-a_j}$, and $\operatorname{sign}\lambda_j=\operatorname{sign}(a_j-1/K)$. Consider the gate-aware attacker: it joins a shared lie with probability $p$, otherwise lies independently, and never states the truth. Its pair coherence is $q(p)=p^2+(1-p^2)/(K-1)$, which sweeps $[1/(K-1),1]$. Yet $a_j=0$ and $\lambda_j=-\infty$ for every $p$.
+\end{proposition}
+Coherence therefore carries no information about the quantity that determines the Bayes weight (\cref{fig:concept}). The original impossibility result concerns rules measurable with respect to per-question coherence. \race's statistic depends on the joint law of $(R_j,Y)$, estimated through the anchored latent model, so it lies outside that class.
+
+\begin{proposition}[History needed to invert correctly]\label{prop:history}
+Fix the groups. Let $\hat y$ have error rate $\delta$ on the $n_j$ history questions where peer $j$ was heard, and let $\hat a_j$ be $j$'s agreement with $\hat y$. Then
+\[
+P\bigl(\operatorname{sign}(\hat a_j-1/K)\neq\operatorname{sign}(a_j-1/K)\bigr)\le 2\exp\!\bigl(-2n_j(|a_j-1/K|-\delta)^2\bigr)
+\qquad\text{whenever }|a_j-1/K|>\delta.
+\]
+\end{proposition}
+\begin{proof}
+$|\hat a_j-\bar a_j|\le\delta$, where $\bar a_j$ is the empirical accuracy. Apply Hoeffding's inequality~\citep{hoeffding1963} to $\bar a_j$.
+\end{proof}
+Take an always-wrong liar on four-way questions ($|a_j-1/4|=0.25$) and $\delta=0.1$. Then $n_j=80$ gives a bound of $0.055$, and $n_j=160$ gives $0.003$. \Cref{fig:history} measures the realised curve.
+
+\begin{proposition}[Raw agreement confuses competence with dependence]\label{prop:clones}
+Take two channels that are conditionally independent given $Y$, with accuracies $a,b$ and symmetric errors. Then $P(R_1{=}R_2)=ab+\frac{(1-a)(1-b)}{K-1}\to1$ as $a,b\to1$, while
+\[
+P(R_1{=}R_2\mid R_1{\neq}Y\text{ or }R_2{\neq}Y)=\frac{(1-a)(1-b)}{(K-1)(1-ab)}\le\frac1{K-1}.
+\]
+For replicas of one source, and for a perfectly coordinated bloc, the second quantity equals $1$.
+\end{proposition}
+\begin{proof}
+$P(\text{equal},\ \text{not both correct})=(1-a)(1-b)/(K-1)$ and $P(\text{not both correct})=1-ab\ge(1-a)(1-b)$.
+\end{proof}
+The same confound explains a refuted recipe in the original ledger: ``maximise effective swarm size'' largely restated roster weakness~\citep{das2026aip}.

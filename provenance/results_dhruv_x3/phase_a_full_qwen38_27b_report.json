@@ -1,0 +1,198 @@
+{
+  "cells": [
+    {
+      "model": "qwen38_27b",
+      "benchmark": "gsm8k",
+      "sample_index": 0,
+      "temperature": 0.0,
+      "n": 500,
+      "accuracy": 0.966,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [
+        "gsm8k-test-01119",
+        "gsm8k-test-00012",
+        "gsm8k-test-00062",
+        "gsm8k-test-00093",
+        "gsm8k-test-00119",
+        "gsm8k-test-00139",
+        "gsm8k-test-00187",
+        "gsm8k-test-00255",
+        "gsm8k-test-00353",
+        "gsm8k-test-00406",
+        "gsm8k-test-00423",
+        "gsm8k-test-00425"
+      ],
+      "confidence_correct_incorrect": [
+        0.990232833497504,
+        0.9876839083892177
+      ],
+      "confidence_auc": 0.39666301303129947,
+      "headroom_flag": "CEILING",
+      "self_report_failures": [
+        "gsm8k-test-00157"
+      ],
+      "wall_seconds": 364.0997622659779,
+      "error": null
+    },
+    {
+      "model": "qwen38_27b",
+      "benchmark": "math500",
+      "sample_index": 0,
+      "temperature": 0.0,
+      "n": 200,
+      "accuracy": 0.8,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [
+        "math500-test/prealgebra/1139.json",
+        "math500-test/intermediate_algebra/1197.json",
+        "math500-test/intermediate_algebra/607.json",
+        "math500-test/intermediate_algebra/1247.json",
+        "math500-test/intermediate_algebra/1849.json",
+        "math500-test/prealgebra/1646.json",
+        "math500-test/intermediate_algebra/662.json",
+        "math500-test/intermediate_algebra/582.json",
+        "math500-test/intermediate_algebra/558.json",
+        "math500-test/intermediate_algebra/362.json",
+        "math500-test/intermediate_algebra/894.json",
+        "math500-test/intermediate_algebra/345.json",
+        "math500-test/intermediate_algebra/128.json",
+        "math500-test/intermediate_algebra/2022.json",
+        "math500-test/prealgebra/1003.json",
+        "math500-test/counting_and_probability/181.json",
+        "math500-test/prealgebra/378.json",
+        "math500-test/number_theory/417.json",
+        "math500-test/precalculus/920.json",
+        "math500-test/geometry/826.json",
+        "math500-test/prealgebra/260.json",
+        "math500-test/intermediate_algebra/1411.json",
+        "math500-test/intermediate_algebra/960.json",
+        "math500-test/geometry/965.json",
+        "math500-test/geometry/711.json",
+        "math500-test/intermediate_algebra/2152.json",
+        "math500-test/intermediate_algebra/117.json",
+        "math500-test/algebra/2176.json",
+        "math500-test/intermediate_algebra/190.json",
+        "math500-test/intermediate_algebra/1806.json",
+        "math500-test/precalculus/398.json",
+        "math500-test/precalculus/1133.json",
+        "math500-test/intermediate_algebra/1014.json",
+        "math500-test/intermediate_algebra/1467.json",
+        "math500-test/intermediate_algebra/1350.json",
+        "math500-test/intermediate_algebra/1930.json"
+      ],
+      "confidence_correct_incorrect": [
+        0.994768572377034,
+        0.9201914701622668
+      ],
+      "confidence_auc": 0.92671875,
+      "headroom_flag": "ok",
+      "self_report_failures": [],
+      "wall_seconds": 374.1211101450026,
+      "error": null
+    },
+    {
+      "model": "qwen38_27b",
+      "benchmark": "mmlu",
+      "sample_index": 0,
+      "temperature": 0.0,
+      "n": 200,
+      "accuracy": 0.895,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [
+        "mmlu-test-01001",
+        "mmlu-test-01145",
+        "mmlu-test-02569"
+      ],
+      "confidence_correct_incorrect": [
+        0.9989068594656332,
+        0.9577748502384192
+      ],
+      "confidence_auc": 0.6820963022080341,
+      "headroom_flag": "ok",
+      "self_report_failures": [
+        "mmlu-test-03381"
+      ],
+      "wall_seconds": 193.60802335100016,
+      "error": null
+    },
+    {
+      "model": "qwen38_27b",
+      "benchmark": "medqa",
+      "sample_index": 0,
+      "temperature": 0.0,
+      "n": 200,
+      "accuracy": 0.92,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [
+        "medqa-test-00139",
+        "medqa-test-00180",
+        "medqa-test-00241",
+        "medqa-test-00284",
+        "medqa-test-00659",
+        "medqa-test-01162"
+      ],
+      "confidence_correct_incorrect": [
+        0.9993920580962478,
+        0.9954859155130339
+      ],
+      "confidence_auc": 0.6317934782608695,
+      "headroom_flag": "ok",
+      "self_report_failures": [
+        "medqa-test-00284",
+        "medqa-test-00759",
+        "medqa-test-00771"
+      ],
+      "wall_seconds": 283.9270655249711,
+      "error": null
+    },
+    {
+      "model": "qwen38_27b",
+      "benchmark": "boolq",
+      "sample_index": 0,
+      "temperature": 0.0,
+      "n": 200,
+      "accuracy": 0.915,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [
+        "boolq-validation-00050"
+      ],
+      "confidence_correct_incorrect": [
+        0.9878617979214586,
+        0.9761244085559518
+      ],
+      "confidence_auc": 0.7193828351012537,
+      "headroom_flag": "ok",
+      "self_report_failures": [],
+      "wall_seconds": 135.60655485495226,
+      "error": null
+    },
+    {
+      "model": "qwen38_27b",
+      "benchmark": "arc",
+      "sample_index": 0,
+      "temperature": 0.0,
+      "n": 200,
+      "accuracy": 0.98,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.9992199200593884,
+        0.9999924899335915
+      ],
+      "confidence_auc": 0.6970663265306123,
+      "headroom_flag": "CEILING",
+      "self_report_failures": [],
+      "wall_seconds": 136.37330384697998,
+      "error": null
+    }
+  ],
+  "load_times": {
+    "qwen38_27b": 77.13181833602721
+  }
+}

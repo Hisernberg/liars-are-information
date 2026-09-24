@@ -1,0 +1,26 @@
+{
+  "worst_case_floor": 0.09944626623080356,
+  "per_benchmark": {
+    "gsm8k:answer_level:N10": 0.0628,
+    "gsm8k:answer_level:N20": 0.0628,
+    "gsm8k:answer_level:N50": 0.0628,
+    "gsm8k:path_level:N10": 0.0664,
+    "gsm8k:path_level:N20": 0.0664,
+    "gsm8k:path_level:N50": 0.0664,
+    "math500:proxy(gsm8k):N10": 0.0994,
+    "math500:proxy(gsm8k):N20": 0.0994,
+    "math500:proxy(gsm8k):N50": 0.0994,
+    "mmlu:proxy(gsm8k):N10": 0.0994,
+    "mmlu:proxy(gsm8k):N20": 0.0994,
+    "mmlu:proxy(gsm8k):N50": 0.0994,
+    "medqa:proxy(gsm8k):N10": 0.0994,
+    "medqa:proxy(gsm8k):N20": 0.0994,
+    "medqa:proxy(gsm8k):N50": 0.0994,
+    "boolq:proxy(gsm8k):N10": 0.0994,
+    "boolq:proxy(gsm8k):N20": 0.0994,
+    "boolq:proxy(gsm8k):N50": 0.0994,
+    "arc:proxy(gsm8k):N10": 0.0994,
+    "arc:proxy(gsm8k):N20": 0.0994,
+    "arc:proxy(gsm8k):N50": 0.0994
+  }
+}

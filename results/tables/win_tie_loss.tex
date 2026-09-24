@@ -1,0 +1,25 @@
+\begin{tabular}{llrrrr}
+\toprule
+ & verdict & Wins & Ties & Losses & Cells \\
+Study & Baseline &  &  &  &  \\
+\midrule
+\multirow[t]{5}{*}{E3 LLM deceivers} & AIP gated & 37 & 59 & 0 & 96 \\
+ & AIP soft gate (M1) & 28 & 68 & 0 & 96 \\
+ & Dawid–Skene (label-free) & 35 & 61 & 0 & 96 \\
+ & Majority vote & 37 & 59 & 0 & 96 \\
+ & Receiver alone & 59 & 37 & 0 & 96 \\
+\cline{1-6}
+\multirow[t]{5}{*}{E1 coherent sweep} & AIP gated & 20 & 38 & 2 & 60 \\
+ & AIP soft gate (M1) & 14 & 44 & 2 & 60 \\
+ & Dawid–Skene (label-free) & 31 & 26 & 3 & 60 \\
+ & Majority vote & 41 & 18 & 1 & 60 \\
+ & Receiver alone & 38 & 22 & 0 & 60 \\
+\cline{1-6}
+\multirow[t]{5}{*}{E2 attack zoo} & AIP gated & 100 & 147 & 5 & 252 \\
+ & AIP soft gate (M1) & 73 & 175 & 4 & 252 \\
+ & Dawid–Skene (label-free) & 87 & 157 & 8 & 252 \\
+ & Majority vote & 122 & 127 & 3 & 252 \\
+ & Receiver alone & 136 & 96 & 20 & 252 \\
+\cline{1-6}
+\bottomrule
+\end{tabular}

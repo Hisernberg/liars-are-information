@@ -1,0 +1,106 @@
+{
+  "run_id": "phase_a_dryrun-ec31ed29cdc6-20260902T105730Z-6864",
+  "phase": "phase_a_dryrun",
+  "config_hash": "ec31ed29cdc6",
+  "config": {
+    "phase": "phase_a",
+    "run_name": "phase_a_cache",
+    "seeds": {
+      "task_selection": 20250825,
+      "generation": 0
+    },
+    "benchmarks": [
+      {
+        "name": "gsm8k",
+        "n_tasks": 500
+      },
+      {
+        "name": "math500",
+        "n_tasks": 200
+      },
+      {
+        "name": "mmlu",
+        "n_tasks": 200
+      },
+      {
+        "name": "medqa",
+        "n_tasks": 200
+      },
+      {
+        "name": "boolq",
+        "n_tasks": 200
+      },
+      {
+        "name": "arc",
+        "n_tasks": 200
+      }
+    ],
+    "models": null,
+    "inference": {
+      "temperature": 0.0,
+      "elicit_self_reported_confidence": true,
+      "max_tokens_override": null,
+      "confidence_max_tokens_override": null,
+      "batch_size": null
+    },
+    "reproducibility": {
+      "note": "Cache is authoritative and internally consistent; bit-identical regeneration from scratch is not guaranteed for the ids listed here.",
+      "known_nonreproducing": []
+    },
+    "paths": {
+      "registry": "configs/models.yaml",
+      "task_lists": "configs/task_lists.json",
+      "task_cache": "data/benchmarks",
+      "prediction_cache": "data/cache",
+      "results": "results",
+      "logs": "results/logs"
+    },
+    "runtime": {
+      "dry_run_tasks": 5,
+      "resume": true,
+      "fail_on_budget_violation": true
+    }
+  },
+  "seeds": {
+    "task_selection": 20250825,
+    "generation": 0
+  },
+  "git_commit": "1deeae185960c55721f22d283b482a0707414787",
+  "started_at": "2026-09-02T10:57:30.620118+00:00",
+  "finished_at": "2026-09-02T10:59:00.875321+00:00",
+  "status": "ok",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-190-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu02",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA H100 NVL",
+      "memory_total_mib": 95830,
+      "driver": "570.195.03"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "5.16.1",
+    "vllm": "0.19.1"
+  },
+  "notes": {
+    "dry_run": true,
+    "models": [
+      "ministral3_14b"
+    ],
+    "sample_index": 0,
+    "temperature_override": null,
+    "batch_invariant": true,
+    "task_list_hash": "f20dc3815a41",
+    "known_nonreproducing_task_ids": [],
+    "reproducibility_note": "Cache is authoritative and internally consistent; bit-identical regeneration from scratch is not guaranteed for the ids listed here.",
+    "n_cells": 1
+  }
+}

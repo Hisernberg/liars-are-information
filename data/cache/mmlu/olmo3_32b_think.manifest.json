@@ -1,0 +1,21 @@
+{
+  "benchmark": "mmlu",
+  "model": "olmo3_32b_think",
+  "n_rows": 200,
+  "n_tasks": 200,
+  "updated_at": "2026-09-20T14:34:39.256819+00:00",
+  "prompt_template_hash": "bf465b1d542a",
+  "hf_id": "allenai/Olmo-3-32B-Think",
+  "dtype": "bfloat16",
+  "max_model_len": 4096,
+  "seed": 0,
+  "registry_hash": "9855995a45f5",
+  "batch_invariant": true,
+  "sample_index": 0,
+  "temperature": 0.0,
+  "run_id": "x3_repair-763f4fad0cf8-20260920T135651Z-a4be",
+  "x3_repaired_rows": 12,
+  "x3_budget": 3072,
+  "x3_control_drift": 8,
+  "x3_control_answer_drift": 0
+}

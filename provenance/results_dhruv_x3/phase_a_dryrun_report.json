@@ -1,0 +1,185 @@
+{
+  "cells": [
+    {
+      "model": "llama32_3b",
+      "benchmark": "gsm8k",
+      "n": 5,
+      "accuracy": 0.8,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.998446515209278,
+        0.9827740459675917
+      ],
+      "self_report_failures": [],
+      "determinism_ok": true,
+      "generate_seconds": 8.736133569851518,
+      "confidence_seconds": 0.1197798210196197,
+      "tasks_per_second": 0.5645945007947013,
+      "error": null
+    },
+    {
+      "model": "llama32_3b",
+      "benchmark": "math500",
+      "n": 5,
+      "accuracy": 0.4,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [
+        "math500-test/prealgebra/1251.json",
+        "math500-test/prealgebra/1353.json"
+      ],
+      "confidence_correct_incorrect": [
+        0.9495262204485011,
+        0.9918431196420726
+      ],
+      "self_report_failures": [],
+      "determinism_ok": false,
+      "generate_seconds": 17.61739066708833,
+      "confidence_seconds": 0.11586163891479373,
+      "tasks_per_second": 0.28195617553512065,
+      "error": null
+    },
+    {
+      "model": "llama32_3b",
+      "benchmark": "mmlu",
+      "n": 5,
+      "accuracy": 0.8,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.9951511532043629,
+        0.999315849415545
+      ],
+      "self_report_failures": [],
+      "determinism_ok": false,
+      "generate_seconds": 5.797239378094673,
+      "confidence_seconds": 0.09826828306540847,
+      "tasks_per_second": 0.8481033843684517,
+      "error": null
+    },
+    {
+      "model": "phi4_mini_reasoning",
+      "benchmark": "gsm8k",
+      "n": 5,
+      "accuracy": 1.0,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.9903731225213518,
+        null
+      ],
+      "self_report_failures": [],
+      "determinism_ok": true,
+      "generate_seconds": 33.33164535090327,
+      "confidence_seconds": 21.609571664128453,
+      "tasks_per_second": 0.09100635682373066,
+      "error": null
+    },
+    {
+      "model": "phi4_mini_reasoning",
+      "benchmark": "math500",
+      "n": 5,
+      "accuracy": 1.0,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.9767755732345644,
+        null
+      ],
+      "self_report_failures": [],
+      "determinism_ok": true,
+      "generate_seconds": 75.77268662583083,
+      "confidence_seconds": 21.67520905798301,
+      "tasks_per_second": 0.051309471229869806,
+      "error": null
+    },
+    {
+      "model": "phi4_mini_reasoning",
+      "benchmark": "mmlu",
+      "n": 5,
+      "accuracy": 1.0,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.9804562674983742,
+        null
+      ],
+      "self_report_failures": [],
+      "determinism_ok": true,
+      "generate_seconds": 53.99403127608821,
+      "confidence_seconds": 21.657547242939472,
+      "tasks_per_second": 0.06609247418072596,
+      "error": null
+    },
+    {
+      "model": "ministral_8b",
+      "benchmark": "gsm8k",
+      "n": 5,
+      "accuracy": 1.0,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.9996133845952075,
+        null
+      ],
+      "self_report_failures": [],
+      "determinism_ok": true,
+      "generate_seconds": 27.03135505411774,
+      "confidence_seconds": 0.3788431631401181,
+      "tasks_per_second": 0.1824138578046447,
+      "error": null
+    },
+    {
+      "model": "ministral_8b",
+      "benchmark": "math500",
+      "n": 5,
+      "accuracy": 0.4,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [
+        "math500-test/prealgebra/1251.json"
+      ],
+      "confidence_correct_incorrect": [
+        0.993840516387804,
+        0.9988168794790173
+      ],
+      "self_report_failures": [],
+      "determinism_ok": true,
+      "generate_seconds": 48.59025239618495,
+      "confidence_seconds": 0.3546800739131868,
+      "tasks_per_second": 0.10215562158666054,
+      "error": null
+    },
+    {
+      "model": "ministral_8b",
+      "benchmark": "mmlu",
+      "n": 5,
+      "accuracy": 0.8,
+      "extraction_rate": 1.0,
+      "extraction_failures": [],
+      "truncated": [],
+      "confidence_correct_incorrect": [
+        0.9746796984798908,
+        0.4409838945926115
+      ],
+      "self_report_failures": [],
+      "determinism_ok": true,
+      "generate_seconds": 0.4545997120440006,
+      "confidence_seconds": 0.3859123568981886,
+      "tasks_per_second": 5.948754556603401,
+      "error": null
+    }
+  ],
+  "load_times": {
+    "llama32_3b": 36.9630057211034,
+    "phi4_mini_reasoning": 71.83163560787216,
+    "ministral_8b": 82.84977156342939
+  }
+}

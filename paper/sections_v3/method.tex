@@ -1,0 +1,48 @@
+\section{Receiver-anchored channel estimation}\label{sec:method}
+
+\subsection{Model}
+For receiver $i$ and question $t$, let $\mathcal S_t$ be the candidate set: the label space for closed questions (C options), or the distinct answers heard on $t$ for open questions. Two open answers are merged when an equivalence checker says they denote the same value. This needs no gold (\cref{sec:protocol}). Let $K_t=|\mathcal S_t|$. \race\ fits the symmetric one-coin latent-truth model
+\begin{equation}
+Y_t\sim\mathrm{Unif}(\mathcal S_t),\qquad
+P(R_{tj}=Y_t)=a_j,\qquad P(R_{tj}=c\mid Y_t\neq c)=\frac{1-a_j}{K_t-1},
+\end{equation}
+with one accuracy $a_j$ per channel, including the receiver's own. Channels are conditionally independent given $Y_t$, up to the clone tempering described below. The posterior score of candidate $c$ is a \emph{signed} weighted vote:
+\begin{equation}\label{eq:score}
+s_t(c)=\sum_j w_{tj}\,\mathbf 1[R_{tj}=c]\,\lambda_{tj},\qquad
+\lambda_{tj}=\log\frac{(K_t-1)\,a_j}{1-a_j}.
+\end{equation}
+A report with $a_j>1/K_t$ is evidence \emph{for} the reported answer (TRUST). A report with $a_j<1/K_t$ is evidence \emph{against} it, spread over the alternatives (INVERT). $a_j=1/K_t$ contributes nothing (DISCARD). \aip's gate is a three-level quantisation of \cref{eq:score}. Unlike \aip, \race\ decides the sign from $a_j$, not from how coherent a channel is (\cref{prop:quantisation}).
+
+\subsection{Anchored EM}
+The parameters are fitted by EM~\citep{dempster1977} on the receiver's own unlabelled history. Label-free latent-class models are identified only up to a relabelling of the latent truth (\cref{prop:switching}). When a coherent bloc holds a plurality, the likelihood prefers the relabelling in which the liars are the experts. \race\ removes the ambiguity with the receiver's self-knowledge, in three ways:
+\begin{enumerate}
+\item \textbf{Anchor initialisation.} The first E-step puts posterior mass $0.75$ on the receiver's own answer, not on the plurality.
+\item \textbf{Anchor prior.} $a_i\sim\mathrm{Beta}$ with mean $0.75$ and strength $8$. Peers get a weak prior centred at chance (strength $2$), so an unfamiliar peer starts at DISCARD, not TRUST.
+\item \textbf{Anchor constraint.} After every M-step $a_i$ is projected to $\ge \bar{1/K}+0.05$, where $\bar{1/K}$ is the chance rate on the tasks the receiver answered.
+\end{enumerate}
+The M-step is the MAP update $a_j=(\sum_t \omega_t q_t(R_{tj}) + \kappa_j m_j)/(\sum_t \omega_t + \kappa_j)$, where $q_t$ is the current posterior and $\omega_t$ an optional task weight (exponential forgetting in the online variant). The E-step is \cref{eq:score} followed by a softmax. Accuracies are clipped to $[10^{-3},1-10^{-3}]$. At prediction time unseen agents carry zero weight, and ties go to the receiver's own answer.
+
+\subsection{Clone tempering}
+A swarm usually replicates models. A coordinated bloc is, by construction, many copies of one lie. Under conditional independence both are over-counted. \race\ groups channels and tempers each report by $w_{tj}=1/(\text{number of heard members of $j$'s group on $t$})$, so a group contributes one unit of evidence per question. Groups are complete-link clusters over two kinds of link:
+\begin{itemize}
+\item \textbf{Same-source links}: raw agreement $\ge 0.99$ over co-observed history, i.e.\ essentially identical answer streams. These are applied \emph{before} any fit, so a receiver's own replica can never be counted as independent confirmation of the receiver.
+\item \textbf{Dependent-error links}: agreement $\ge 0.95$ restricted to history tasks where at least one member is wrong relative to a first-stage truth estimate, with at least 8 such tasks.
+\end{itemize}
+Raw agreement is the wrong statistic for the second kind: two distinct but accurate models agree on almost every task simply because both are usually right (\cref{prop:clones}).
+
+\begin{algorithm}[t]
+\caption{\race\ fit for one receiver $i$ (history $\mathcal H$, no labels)}\label{alg:race}
+\begin{algorithmic}[1]
+\State Encode reports $R_{tj}$ over candidate sets $\mathcal S_t$; $K_t\gets|\mathcal S_t|$
+\State $G\gets$ complete-link groups of same-source links (raw agreement $\ge 0.99$)
+\State $(a,q)\gets\textsc{AnchoredEM}(R, G)$ \Comment{init at $i$'s answers; Beta prior; $a_i\ge\bar{1/K}+\delta$}
+\State $\hat y_t\gets\arg\max_c q_t(c)$
+\State $G\gets$ complete-link groups of same-source $\cup$ dependent-error links w.r.t.\ $\hat y$
+\State $(a,q)\gets\textsc{AnchoredEM}(R, G)$
+\State \Return $a$, $G$ \Comment{predict with \cref{eq:score}, tempering within $G$}
+\end{algorithmic}
+\end{algorithm}
+
+\paragraph{Cost.} One EM iteration is $O(|\mathcal H|\cdot N\cdot K)$. With 80 history tasks and 10 agents a fit converges in 10--20 iterations and takes a few milliseconds. The live-swarm run (\cref{sec:live}) spends about three orders of magnitude more time on generating answers than on aggregating them.
+
+\paragraph{Hyper-parameters.} All were fixed before any evaluation data were inspected and were never tuned: anchor mean $0.75$, anchor strength $8$, anchor margin $0.05$, peer strength $2$, thresholds $0.99/0.95$, minimum support $8$, clip $10^{-3}$. Two design decisions were revised after inspecting development data. Both revisions are recorded in \cref{app:devlog}, and the superseded variants appear in every table. The method was then frozen, and two confirmation sets that had not been inspected were evaluated (\cref{sec:llm,sec:live}).

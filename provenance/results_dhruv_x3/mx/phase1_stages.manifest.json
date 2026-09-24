@@ -1,0 +1,51 @@
+{
+  "run_id": "mx_phase1-641d825c8266-20260920T195454Z-895c",
+  "phase": "mx_phase1",
+  "config_hash": "641d825c8266",
+  "config": {
+    "n": 20,
+    "benchmark": "medqa",
+    "arms": [
+      "P0",
+      "P1",
+      "P2",
+      "P3",
+      "P4"
+    ],
+    "same_model": "ministral3_14b",
+    "cross_family": [
+      "ministral3_14b",
+      "phi4_mini_reasoning",
+      "llama32_3b"
+    ]
+  },
+  "seeds": {
+    "analysis": 20250825
+  },
+  "git_commit": "94e10f81106f3266bef79398a7c4e7b7e44e2c12-dirty",
+  "started_at": "2026-09-20T19:54:54.418392+00:00",
+  "finished_at": null,
+  "status": "running",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-190-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu02",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA H100 NVL",
+      "memory_total_mib": 95830,
+      "driver": "570.195.03"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "5.16.1",
+    "vllm": "0.19.1"
+  },
+  "notes": {}
+}

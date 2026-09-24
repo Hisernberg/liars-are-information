@@ -1,0 +1,19 @@
+{
+  "benchmark": "medqa",
+  "model": "llama32_3b",
+  "n_rows": 200,
+  "n_tasks": 200,
+  "updated_at": "2026-09-02T10:33:30.014945+00:00",
+  "prompt_template_hash": "87665e55ae54",
+  "hf_id": "unsloth/Llama-3.2-3B-Instruct",
+  "dtype": "bfloat16",
+  "max_model_len": 4096,
+  "seed": 0,
+  "registry_hash": "00a592e265bd",
+  "batch_invariant": true,
+  "sample_index": 0,
+  "temperature": 0.0,
+  "task_list_hash": "f20dc3815a41",
+  "run_id": "phase_a-ec31ed29cdc6-20260902T103205Z-5b20",
+  "dry_run": false
+}

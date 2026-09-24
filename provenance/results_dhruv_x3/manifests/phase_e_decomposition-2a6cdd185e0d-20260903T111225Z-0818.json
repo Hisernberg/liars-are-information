@@ -1,0 +1,44 @@
+{
+  "run_id": "phase_e_decomposition-2a6cdd185e0d-20260903T111225Z-0818",
+  "phase": "phase_e_decomposition",
+  "config_hash": "2a6cdd185e0d",
+  "config": {
+    "attacks": [
+      "semantic_negation",
+      "always_wrong",
+      "semantic_hallucination",
+      "rushing"
+    ]
+  },
+  "seeds": {
+    "sweep": 20250825
+  },
+  "git_commit": "15b1d80a7fbbdba7cb9ef0699219d44f7668931d-dirty",
+  "started_at": "2026-09-03T11:12:25.344536+00:00",
+  "finished_at": "2026-09-03T11:12:25.392591+00:00",
+  "status": "ok",
+  "python_version": "3.11.16",
+  "platform": "Linux-5.15.0-190-generic-x86_64-with-glibc2.35",
+  "hostname": "ib-bom-dev-gpu02",
+  "user": "ubuntu",
+  "gpus": [
+    {
+      "name": "NVIDIA H100 NVL",
+      "memory_total_mib": 95830,
+      "driver": "570.195.03"
+    }
+  ],
+  "package_versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "scipy": "1.17.1",
+    "sympy": "1.14.0",
+    "datasets": "5.0.1",
+    "transformers": "5.16.1",
+    "vllm": "0.19.1"
+  },
+  "notes": {
+    "inference_run": false
+  }
+}

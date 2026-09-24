@@ -1,0 +1,9 @@
+.venv
+__pycache__/
+*.py[cod]
+.pytest_cache/
+results/logs/model_download.log
+*.egg-info/
+# credentials never belong in the repository
+.env
+*token*
