@@ -216,3 +216,19 @@ def test_receiver_replica_cannot_confirm_the_receiver():
     race.fit(tasks)
     fit = race.fits[0]
     assert fit.groups[fit.agents.index(0)] == fit.groups[fit.agents.index(1)]
+
+
+@pytest.mark.parametrize("labels", [("A", "B"), LABELS, None])
+def test_evidence_decomposes_posterior(labels):
+    tasks, gold, _ = _swarm(160, labels or LABELS, [0.8, 0.7, 0.75], "coherent", 5, seed=4, p_obs=0.8)
+    race = RACEAggregator(labels)
+    race.fit(tasks[:100])
+    for (obs,) in tasks[100:130]:
+        post = race.posterior(obs.broadcasts, 0)
+        ev = race.evidence(obs.broadcasts, 0)
+        cands = list(post)
+        logits = np.zeros(len(cands))
+        for answer, weight in ev.values():
+            logits[cands.index(answer)] += weight
+        probs = np.exp(logits - logits.max())
+        np.testing.assert_allclose(probs / probs.sum(), [post[c] for c in cands], atol=1e-9)

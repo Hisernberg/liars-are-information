@@ -350,9 +350,6 @@ def main() -> None:
             print(render_live_debate(MEDIA, b))
 
 
-if __name__ == "__main__":
-    main()
-
 
 def render_live_debate(out_dir: Path, benchmark: str = "mmlu", n_steps: int = 60, fps: float = 2.0) -> Path | None:
     """Live six-model panel: independent answers, covert saboteurs, and the debate round."""
@@ -470,3 +467,7 @@ def render_live_debate(out_dir: Path, benchmark: str = "mmlu", n_steps: int = 60
     anim.save(out, writer=animation.FFMpegWriter(fps=fps, bitrate=1800, codec="libx264", extra_args=["-pix_fmt", "yuv420p"]))
     plt.close(fig)
     return out
+
+
+if __name__ == "__main__":
+    main()

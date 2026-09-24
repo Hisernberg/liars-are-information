@@ -8,6 +8,7 @@ the manuscript is taken from these tables.
 from __future__ import annotations
 
 import json
+import re
 import sys
 import warnings
 from pathlib import Path
@@ -468,6 +469,108 @@ def best_response(zoo: pd.DataFrame) -> None:
     viz.save(fig, FIG / "fig9_best_response")
 
 
+# ------------------------------------------------------------------ F12 information budget
+
+
+EXT_ROWS = [("independent", 1.0, "Independent wrong answers"), ("gate_aware", 0.0, "Gate-aware, q = 0"),
+            ("gate_aware", 0.5, "Gate-aware, q = 0.5"), ("gate_aware", 1.0, "Gate-aware, q = 1 (coherent)"),
+            ("attractor", 1.0, "Attractor"), ("partial", 0.8, "Partial liar, e = 0.8"),
+            ("partial", 0.5, "Partial liar, e = 0.5"), ("uninformative", 1.0, "Uninformative (silent)"),
+            ("llm:always_wrong", 1.0, "LLM: always wrong"), ("llm:rushing", 1.0, "LLM: rushing"),
+            ("llm:semantic_hallucination", 1.0, "LLM: hallucination"), ("llm:semantic_negation", 1.0, "LLM: negation"),
+            ("echo", 1.0, "Echo (copies an honest agent)"), ("camouflage", 0.9, "Camouflage, θ = 0.9"),
+            ("camouflage", 0.7, "Camouflage, θ = 0.7")]
+
+
+def fig_budget(ext: pd.DataFrame) -> None:
+    """How much information the liars carry, and how much of it RACE extracts.
+
+    Zero is an oracle that knows who the liars are, removes them and decodes the
+    honest agents with their true accuracies. The known-channel oracle keeps the
+    liars; its lead over zero is the information the liars carry (Theorem 1).
+    The sleeper is left out: a history-fitted oracle is invalid by construction."""
+    test = ext[ext.split == "test"]
+    cell = test.groupby(["attack", "param", "f", "benchmark", "seed", "method"]).accuracy.mean().unstack("method")
+    m = pct(cell.groupby(["attack", "param", "f"]).mean())
+    rel = m.sub(m.oracle_channel_honest, axis=0)
+    table = rel[["oracle_channel", "race", "race_d", "aip_gated", "majority", "self"]].round(1)
+    table.insert(0, "oracle_channel_honest", m.oracle_channel_honest.round(1))
+    write_table(table, "information_budget")
+    lines = [r"\begin{tabular}{@{}l" + "rr" * 3 + "@{}}", r"\toprule",
+             " & " + " & ".join(rf"\multicolumn{{2}}{{c}}{{$f={f:g}$}}" for f in (0.3, 0.5, 0.7)) + r"\\",
+             r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}",
+             "Attack & " + " & ".join([r"$B$ & $\Delta$"] * 3) + r"\\", r"\midrule"]
+    for atk, prm, lab in [*EXT_ROWS, ("sleeper", 1.0, "Sleeper (non-stationary)")]:
+        cells = []
+        for f in (0.3, 0.5, 0.7):
+            r = rel.loc[(atk, prm, f)]
+            cells += [f"{r.oracle_channel:+.1f}", f"{r.race:+.1f}"]
+        tex_label = re.sub(r"(q|e|θ) = ([0-9.]+)", lambda mt: f"${mt.group(1)}={mt.group(2)}$", lab).replace("θ", r"\theta")
+        lines.append(tex_label + " & " + " & ".join(cells) + r"\\")
+    lines += [r"\bottomrule", r"\end{tabular}"]
+    (TAB / "budget_compact.tex").write_text("\n".join(lines) + "\n")
+    fs = [0.3, 0.5, 0.7]
+    fig, axes = plt.subplots(1, 3, figsize=(11, 5.4), sharey=True)
+    ys = np.arange(len(EXT_ROWS))[::-1]
+    lim = (-16, 9)
+    for ax, f in zip(axes, fs, strict=True):
+        ax.axvline(0, color=viz.INK_2, lw=1)
+        ax.axvspan(0, lim[1], color=viz.SEQ_BLUE[0], alpha=0.35, lw=0)
+        for y, (atk, prm, _) in zip(ys, EXT_ROWS, strict=True):
+            r = rel.loc[(atk, prm, f)]
+            ax.plot([min(0, r.race), max(0, r.race)], [y, y], color=viz.GRID, lw=3, zorder=1, solid_capstyle="round")
+            ax.scatter(np.clip(r.oracle_channel, *lim), y, marker="*", s=70, color=viz.VIOLET, zorder=3,
+                       edgecolor=viz.SURFACE, lw=0.6)
+            ax.scatter(np.clip(r.race_d, *lim), y, marker="o", s=34, facecolor="none", edgecolor=viz.BLUE, lw=1.1, zorder=4)
+            ax.scatter(np.clip(r.race, *lim), y, marker="o", s=34, color=viz.BLUE, zorder=5, edgecolor=viz.SURFACE, lw=0.6)
+            if r.race < lim[0]:
+                ax.annotate(f"{r.race:.0f}", (lim[0], y), xytext=(3, 0), textcoords="offset points", fontsize=7,
+                            va="center", color=viz.INK_2)
+        ax.set_xlim(*lim)
+        ax.set_title(f"f = {f:g}  ({round(10 * f)} of 10 agents lie)", loc="left")
+        ax.set_xlabel("accuracy minus the liar-removal oracle (pp)")
+        ax.grid(axis="y", visible=False)
+    axes[0].set_yticks(ys, [lab for *_, lab in EXT_ROWS])
+    axes[0].set_ylim(-0.7, len(EXT_ROWS) - 0.3)
+    axes[0].text(lim[1] - 0.3, 0, "better than\nremoving\nevery liar", ha="right", va="center",
+                 fontsize=7.5, color=viz.BLUE)
+    handles = [plt.Line2D([], [], marker="o", ls="", color=viz.BLUE, label="RACE (label-free)"),
+               plt.Line2D([], [], marker="o", ls="", markerfacecolor="none", color=viz.BLUE, label="RACE-D (extension)"),
+               plt.Line2D([], [], marker="*", ls="", color=viz.VIOLET, markersize=9,
+                          label="Known-channel oracle: information the liars carry")]
+    fig.legend(handles=handles, loc="lower center", ncol=3, bbox_to_anchor=(0.5, -0.01))
+    fig.suptitle("What the liars are worth: accuracy relative to an oracle that knows who lies and removes them",
+                 x=0.01, ha="left", fontsize=11, fontweight="bold")
+    fig.tight_layout(rect=(0, 0.05, 1, 0.95))
+    viz.save(fig, FIG / "fig12_information_budget")
+    # RACE-D vs frozen RACE: paired per cell, Holm over all cells
+    c = compare(ext, "race_d", ["race"], ["benchmark", "f", "attack", "param"])
+    c.to_csv(TAB / "race_d_vs_race.csv", index=False)
+    write_table(c.groupby(["attack", "param"]).verdict.value_counts().unstack(fill_value=0), "race_d_vs_race_wtl", ".0f")
+    c = compare(ext, "race", ["oracle_channel_honest"], ["benchmark", "f", "attack", "param"])
+    c.to_csv(TAB / "race_vs_removal_oracle.csv", index=False)
+    write_table(c.groupby(["attack", "param"]).verdict.value_counts().unstack(fill_value=0), "race_vs_removal_oracle_wtl", ".0f")
+
+
+def per_agent_table() -> None:
+    """How much each honest agent gains by pooling, per model (E7 receiver-gain worlds, f >= 0.5)."""
+    p = RES / "extra" / "receiver_gain.parquet"
+    if not p.exists():
+        return
+    rg = pd.read_parquet(p)
+    rg = rg[rg.f >= 0.5]
+    rows = []
+    for family, sub in (("all seven attacks", rg), ("LLM deceivers", rg[rg.attack.str.startswith("llm:")]),
+                        ("camouflage", rg[rg.attack == "camouflage"])):
+        t = pct(sub.groupby("model")[["self_acc", "majority_acc", "aip_acc", "race_acc"]].mean())
+        t["gain"] = t.race_acc - t.self_acc
+        t["family"] = family
+        rows.append(t.reset_index())
+    out = pd.concat(rows).set_index(["family", "model"]).rename(columns={
+        "self_acc": "Alone", "majority_acc": "Majority vote", "aip_acc": "AIP", "race_acc": "RACE", "gain": "RACE gain"})
+    write_table(out.round(1), "per_agent_gain")
+
+
 # ------------------------------------------------------------------ comparisons
 
 
@@ -507,7 +610,7 @@ def comparisons(main, zoo, llm) -> None:
 def main() -> None:
     viz.setup()
     FIG.mkdir(exist_ok=True)
-    main_df, zoo, llm, hist, sw = (load(s) for s in ("main", "zoo", "llm", "history", "swarm"))
+    main_df, zoo, llm, hist, sw, ext = (load(s) for s in ("main", "zoo", "llm", "history", "swarm", "ext"))
     fig_concept()
     if main_df is not None:
         fig_main(main_df)
@@ -521,7 +624,10 @@ def main() -> None:
         fig_history(hist)
     if sw is not None:
         fig_swarm(sw)
+    if ext is not None:
+        fig_budget(ext)
     fig_channels()
+    per_agent_table()
     fig_online()
     fig_live()
     comparisons(main_df, zoo, llm)

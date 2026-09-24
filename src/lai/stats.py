@@ -98,9 +98,10 @@ def compare(
     out = pd.DataFrame(rows)
     if len(out):
         out["p_holm"] = holm(out["p"])
-        out["verdict"] = np.where(
-            out.p_holm < 0.05, np.where(out.delta > 0, "win", "loss"), "tie"
-        )
+        # A verdict needs both tests: the Holm-corrected signed-rank test (location)
+        # and the paired bootstrap CI of the mean (which the tables report).
+        significant = (out.p_holm < 0.05) & ((out.ci_low > 0) | (out.ci_high < 0))
+        out["verdict"] = np.where(significant, np.where(out.delta > 0, "win", "loss"), "tie")
     return out
 
 

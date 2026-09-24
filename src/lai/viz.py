@@ -43,6 +43,7 @@ LABEL = {k: v["label"] for k, v in METHOD_STYLE.items()} | {
     "aip_trust_only": "AIP trust-only", "aip_naive": "AIP naive", "sac": "SAC filter-refine",
     "confidence": "Confidence-weighted", "race_full": "RACE full-confusion",
     "race_rawclone": "RACE raw-agreement clones", "race_ms": "RACE multi-start",
+    "race_d": "RACE-D (disagreement-conditioned)", "oracle_channel_honest": "Liar-removal oracle",
 }
 
 BENCH_LABEL = {"mmlu": "MMLU", "medqa": "MedQA", "arc": "ARC", "boolq": "BoolQ (binary)",

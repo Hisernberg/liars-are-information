@@ -12,7 +12,14 @@ A change was admissible only if all three of the following held:
 \item \textbf{Rejected: multi-start MAP.} We ran EM from both the receiver's answers and the plurality and kept the higher log-posterior (\texttt{race\_ms}). Trigger: a near-chance MATH-500 receiver captured by a rushing liar. It did not help, because with a near-chance anchor the two labellings are likelihood-equivalent. It was harmful when replicated channels inflate the likelihood of the adversarial labelling. The anchor therefore acts through initialisation and constraint, not through a likelihood comparison.
 \item \textbf{Adopted: two-part clone rule.} Same-source links (raw agreement $\ge0.99$, applied before any fit) and dependent-error links (agreement $\ge0.95$ on tasks where a member errs). Trigger: GSM8K with uninformative/partial liars at $f=0.7$, where raw-agreement grouping merged distinct accurate models and collapsed honest evidence (\cref{prop:clones}).
 \end{enumerate}
-The method was then frozen, and every study was re-run from scratch. The replayed LLM deceivers (E3) and the live swarm (E8) had not been inspected at freeze time. On E3 the adopted rule outperforms both superseded variants at every $f\ge0.5$.
+The method was then frozen, and every study was re-run from scratch. One extension was added after the freeze, as a separate method that leaves \race\ unchanged: \raceD\ (\cref{sec:budget}), which fits channels on disagreement questions only. It was specified before E9 was run and is reported as a negative result. The replayed LLM deceivers (E3) and the live swarm (E8) had not been inspected at freeze time. On E3 the adopted rule outperforms both superseded variants at every $f\ge0.5$.
+
+\section{Information budget by attack}\label{app:budget}
+\begin{table}[h]
+\centering\small
+\caption{E9 by attack setting (means over six benchmarks and three seeds, TEST). $B$: information budget, the known-channel oracle minus the liar-removal oracle. $\Delta$: \race\ minus the liar-removal oracle. Liar-removal oracle: \removalThree\%, \removalFive\% and \removalSeven\% at $f=0.3,0.5,0.7$. Positive $\Delta$: \race\ does better than removing every liar. The two camouflage settings coincide at $f=0.7$: with three honest agents the plurality share is $1/3$, $2/3$ or $1$, so both thresholds trigger on the same questions.}\label{tab:budget}
+\input{tables/budget_compact.tex}
+\end{table}
 
 \section{Hyper-parameters and implementation}\label{app:hparams}
 \begin{center}\small

@@ -42,6 +42,11 @@ configs:
     data_files:
       - split: train
         path: "results/llm/per_task.parquet"
+  - config_name: results_budget
+    description: "E9 information budget: RACE, RACE-D, known-channel and liar-removal oracles, per task."
+    data_files:
+      - split: train
+        path: "results/ext/per_task.parquet"
   - config_name: channel_estimates
     description: "E7 label-free channel estimates vs evaluator-side truth, per receiver-peer channel."
     data_files:
@@ -62,11 +67,16 @@ Code, figures, videos and manuscript: see `README.md` in this release and the Gi
 | Coherent liars, f = 0.9 | 85.8 | 0.0 | 0.0 | **88.0** |
 | Gate-aware liars, f = 0.7 | 86.4 | 3.9 | 48.5 | **95.0** |
 | Real LLM deceivers, f = 0.7 | 85.8 | 29.4 | 70.8 | **89.8** |
+| Independent liars, f = 0.7 | 84.2 | 7.0 | 29.1 | **94.9** |
+
+Against independent liars at f = 0.7, RACE (94.9%) also beats an oracle that knows who lies and removes them (89.6%). The liars carry information, and RACE reads it without labels (study E9).
+
+**Videos.** `media/film_liars_are_information.mp4` is the explainer film. It shows agents broadcasting answers, each honest agent's trust links, the swarm's trust matrix learning over 90 unlabeled questions, and one decision in slow motion. `media/swarm_*.mp4` follow a single receiver in three attack scenarios.
 
 ## Provenance
 
 * Honest and adversarial caches: Dhruv Jyoti Das, [`Dhruv1000/Liars_Are_Information`](https://huggingface.co/datasets/Dhruv1000/Liars_Are_Information), post-X3 repair.
 * Fixed AIP code: the Sep-12 release in [`Nabidnur/Liars_Are_Information-bucket`](https://huggingface.co/buckets/Nabidnur/Liars_Are_Information-bucket).
-* v3 additions: RACE, the theory, the audit (`docs/AUDIT.md`), studies E1–E8 including the live swarm, figures, videos and manuscript.
+* v3 additions: RACE, the theory, the audit (`docs/AUDIT.md`), studies E1–E9 including the live swarm and the information budget, the TrustLayer API, figures, the explainer film, videos and the manuscript.
 
 Benchmark items and model outputs remain under their upstream licenses; ARC and BoolQ are CC BY-SA.

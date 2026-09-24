@@ -144,3 +144,17 @@ agreement-based effective size largely restated roster weakness.
 
 *Proof.* $P(R_1=R_2, \text{not both correct}) = P(\text{both wrong and equal}) =
 (1-a)(1-b)/(K-1)$ and $P(\text{not both correct}) = 1-ab$. $\square$
+
+## The information budget (an empirical companion to Theorem 1)
+
+Theorem 1 compares the Bayes receiver that sees the liars' reports $B$ with the one that sees only the honest reports $H$. Study E9 measures that comparison directly with two oracles fitted on labeled HISTORY questions:
+
+* the **liar-removal oracle** knows the Byzantine set, drops it, and decodes $H$ with the true one-coin accuracies and true source groups;
+* the **known-channel oracle** decodes $(H,B)$ with the true accuracies and source groups.
+
+The **information budget** of an attack is the known-channel accuracy minus the liar-removal accuracy. Both oracles use the same one-coin, conditionally independent decoder. So:
+
+* under the one-coin model with stationary channels, the budget is the finite-sample analogue of $\mathrm{acc}^*(\sigma)-\mathrm{acc}^*_H\ge 0$. It is zero for an uninformative attacker (the minimax attack of Theorem 1) and grows with $f$ for truth-dependent liars (E9: +1.9, +2.8, +5.7 points at $f=0.3,0.5,0.7$ for independent liars);
+* a **negative** budget cannot happen for the Bayes receiver. When the one-coin decoder shows one, the attack lies outside the one-coin conditionally independent stationary model. In E9 this happens for echo, camouflage and the sleeper, which are exactly RACE's failure modes.
+
+A rule that only filters suspected liars sees at most $H$, so in expectation it cannot beat the Bayes receiver on $H$. The liar-removal oracle is our proxy for that receiver. RACE is label-free and does not know the Byzantine set, yet it exceeds that bound in 17 of 54 pooled (attack, $f$) cells, all of them truth-dependent attacks.

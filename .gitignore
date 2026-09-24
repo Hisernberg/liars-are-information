@@ -7,3 +7,4 @@ results/logs/model_download.log
 # credentials never belong in the repository
 .env
 *token*
+media/film_parts/

@@ -47,19 +47,20 @@
   <h1>Liars are information</h1>
   <p class="lead">When some agents in a multi-agent LLM system lie, honest agents can still use what the liars say, as long as the lies depend on the truth. An agent that never tells the truth rules out one answer every time it speaks. <b>RACE</b> (Receiver-Anchored Channel Estimation) learns this from each honest agent's own unlabeled history, anchored on the one fact the agent knows: that it is itself honest.</p>
 
-  <h2>One honest receiver among seven liars</h2>
-  <video src="media/swarm_mmlu_gateaware_f07.mp4" controls muted playsinline preload="metadata"></video>
-  <p class="note">MMLU, 70% gate-aware liars (the attack that defeats the earlier AIP gate). Blue links: TRUST. Red links: INVERT. â is the receiver's label-free estimate of each peer's accuracy.</p>
+  <h2>The film: how the swarm works</h2>
+  <video src="media/film_liars_are_information.mp4" controls muted playsinline preload="metadata" poster="media/film_preview.gif"></video>
+  <p class="note">Ten agents on MMLU, five of them real LLMs prompted to mislead after seeing the honest answers. (1) Every agent answers, broadcasts, and each honest agent decides with its own learned trust links. (2) The swarm's trust matrix learning over 90 unlabeled questions. (3) One question in slow motion: counting votes vs. weighing evidence. (4) Results.</p>
 
   <div class="grid">
+    <figure><video src="media/swarm_mmlu_gateaware_f07.mp4" controls muted playsinline preload="metadata"></video>
+      <figcaption>One honest receiver among seven liars (MMLU, the gate-aware attack that defeats AIP). Blue: TRUST. Red: INVERT.</figcaption></figure>
     <figure><video src="media/swarm_boolq_coherent_f05.mp4" controls muted playsinline preload="metadata"></video>
       <figcaption>BoolQ with 50% coordinated liars: a bloc that always says the opposite, read backwards.</figcaption></figure>
     <figure><video src="media/swarm_medqa_rushing_llm_f05.mp4" controls muted playsinline preload="metadata"></video>
       <figcaption>MedQA with 50% real LLM deceivers that see the honest answers first.</figcaption></figure>
     <figure><video src="media/gate_aware_sweep.mp4" controls muted playsinline preload="metadata"></video>
       <figcaption>Coherence is tunable, truth-dependence is not: sweeping the attacker's coordination.</figcaption></figure>
-    <figure><video src="media/live_debate_mmlu.mp4" controls muted playsinline preload="metadata"></video>
-      <figcaption>Live six-model swarm: honest agents, covert saboteurs, and a debate round.</figcaption></figure>
+<!--LIVE-VIDEO-->
   </div>
 
   <h2>Headline results</h2>
@@ -71,10 +72,11 @@
       <tr><td>Gate-aware liars, f = 0.7</td><td>86.4</td><td>3.9</td><td>48.5</td><td class="race">95.0</td></tr>
       <tr><td>Real LLM deceivers, f = 0.5</td><td>85.7</td><td>75.9</td><td>83.0</td><td class="race">92.7</td></tr>
       <tr><td>Real LLM deceivers, f = 0.7</td><td>85.8</td><td>29.4</td><td>70.8</td><td class="race">89.8</td></tr>
+      <tr><td>Independent liars, f = 0.7 (vs. an oracle that removes every liar: 89.6)</td><td>84.2</td><td>7.0</td><td>29.1</td><td class="race">94.9</td></tr>
     </tbody>
   </table>
   </div>
-  <p class="note">Mean over six benchmarks. The LLM-deceiver rows are a confirmation set evaluated after the method was frozen. Failure modes (camouflage attackers, sleepers, near-chance receivers) are reported in the paper.</p>
+  <p class="note">Mean over six benchmarks. The LLM-deceiver rows are a confirmation set evaluated after the method was frozen (196 significant wins, 0 losses in 480 paired tests). Failure modes (camouflage attackers, sleepers, near-chance receivers) are reported as prominently in the paper and README.</p>
 
   <h2>Figures</h2>
   <div class="grid">
@@ -82,6 +84,8 @@
     <figure><img src="figures/fig2_attack_zoo.png" alt="Attack zoo heatmap" loading="lazy"><figcaption>Attack zoo: where pooling helps and where it hurts.</figcaption></figure>
     <figure><img src="figures/fig4_llm_liars.png" alt="Real LLM deceivers" loading="lazy"><figcaption>Real LLM deceivers (confirmation set).</figcaption></figure>
     <figure><img src="figures/fig5_channel_estimation.png" alt="Channel estimation" loading="lazy"><figcaption>Label-free channel estimates vs truth: r = 0.977.</figcaption></figure>
+    <figure><img src="figures/fig12_information_budget.png" alt="Information budget" loading="lazy"><figcaption>What the liars are worth: RACE beats an oracle that removes every liar when lies depend on the truth.</figcaption></figure>
+    <figure><img src="figures/fig7_swarm.png" alt="Swarm composition and size" loading="lazy"><figcaption>Replicated swarms and swarm size.</figcaption></figure>
   </div>
 
   <h2>Code, data and paper</h2>

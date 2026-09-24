@@ -77,11 +77,14 @@ The four prompt-injected attacks of the original study were written by real LLMs
 \subsection{E4: replication, composition and swarm size}
 \input{sections_v3/results_swarm}
 
+\subsection{E9: what are the liars worth?}\label{sec:budget}
+\input{sections_v3/results_budget}
+
 \subsection{E6: changing attackers}\label{sec:online}
 \input{sections_v3/results_online}
 
 \begin{table}[t]
 \centering\small
-\caption{Significant wins/ties/losses of \race\ against each baseline (Holm-corrected Wilcoxon signed-rank, $\alpha=0.05$, task as unit).}\label{tab:wtl}
+\caption{Significant wins/ties/losses of \race\ against each baseline (Holm-corrected Wilcoxon signed-rank and paired bootstrap interval must agree, $\alpha=0.05$, task as unit).}\label{tab:wtl}
 \input{tables/win_tie_loss.tex}
 \end{table}

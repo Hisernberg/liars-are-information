@@ -176,6 +176,59 @@ def extra_numbers() -> None:
             put(f"riskBelow{mt}", pct((below[col] < below.self_acc - 0.05).mean()))
 
 
+def ext_numbers(ext: pd.DataFrame) -> None:
+    """E9: information budget (known-channel vs liar-removal oracle) and RACE-D."""
+    test = ext[ext.split == "test"]
+    cell = test.groupby(["attack", "param", "f", "benchmark", "seed", "method"]).accuracy.mean().unstack("method")
+    m = cell.groupby(["attack", "param", "f"]).mean() * 100
+    llm = m[m.index.get_level_values("attack").str.startswith("llm:")].groupby(level="f").mean()
+    rows = {"Indep": ("independent", 1.0), "GateZero": ("gate_aware", 0.0), "Coh": ("gate_aware", 1.0),
+            "Attr": ("attractor", 1.0), "Uninf": ("uninformative", 1.0), "Camo": ("camouflage", 0.9),
+            "Echo": ("echo", 1.0), "Sleeper": ("sleeper", 1.0), "PartialHalf": ("partial", 0.5)}
+    for f, tag in ((0.3, "Three"), (0.5, "Five"), (0.7, "Seven")):
+        put(f"removal{tag}", m.xs(f, level="f").oracle_channel_honest.mean())
+        for rt, (atk, prm) in rows.items():
+            r = m.loc[(atk, prm, f)]
+            put(f"budget{rt}{tag}", r.oracle_channel - r.oracle_channel_honest, "{:+.1f}")
+            put(f"overRemoval{rt}{tag}", r.race - r.oracle_channel_honest, "{:+.1f}")
+            put(f"raceD{rt}{tag}", r.race_d - r.race, "{:+.1f}")
+            put(f"extRace{rt}{tag}", r.race)
+            put(f"extRemoval{rt}{tag}", r.oracle_channel_honest)
+        r = llm.loc[f]
+        put(f"budgetLlm{tag}", r.oracle_channel - r.oracle_channel_honest, "{:+.1f}")
+        put(f"overRemovalLlm{tag}", r.race - r.oracle_channel_honest, "{:+.1f}")
+        put(f"extLlmRace{tag}", r.race)
+        put(f"extLlmSelf{tag}", r.self)
+        put(f"extLlmMaj{tag}", r.majority)
+        put(f"recoveryLlm{tag}", 100 * (r.race - r.self) / (r.oracle_channel_honest - r.self), "{:.0f}")
+    # per-benchmark cells, Holm over all cells of the study
+    c = compare(ext, "race", ["oracle_channel_honest"], ["benchmark", "f", "attack", "param"])
+    llm_c = c[c.attack.str.startswith("llm:")]
+    put("removalLlmCells", len(llm_c), "{:d}")
+    put("removalLlmTies", int((llm_c.verdict == "tie").sum()), "{:d}")
+    put("removalLlmLosses", int((llm_c.verdict == "loss").sum()), "{:d}")
+    # pooled over benchmarks, per (attack, f)
+    pooled = compare(ext, "race", ["oracle_channel_honest"], ["attack", "param", "f"])
+    wins = pooled[pooled.verdict == "win"]
+    put("pooledRemovalCells", len(pooled), "{:d}")
+    put("pooledRemovalWins", len(wins), "{:d}")
+    put("pooledRemovalWinAttacks", len(set(zip(wins.attack, wins.param, strict=True))), "{:d}")
+    stationary = pooled[~pooled.attack.isin(["sleeper"])]
+    put("pooledRemovalLosses", int((stationary.verdict == "loss").sum()), "{:d}")
+    d = compare(ext, "race_d", ["race"], ["benchmark", "f", "attack", "param"])
+    put("raceDCells", len(d), "{:d}")
+    put("raceDWins", int((d.verdict == "win").sum()), "{:d}")
+    put("raceDLosses", int((d.verdict == "loss").sum()), "{:d}")
+    camo = d[d.attack == "camouflage"]
+    put("raceDCamoWins", int((camo.verdict == "win").sum()), "{:d}")
+    put("raceDCamoLosses", int((camo.verdict == "loss").sum()), "{:d}")
+    put("raceDCamoCells", len(camo), "{:d}")
+    other = d[~d.attack.isin(["camouflage", "echo", "sleeper"])]
+    put("raceDOtherNonTies", int((other.verdict != "tie").sum()), "{:d}")
+    put("raceDOtherCells", len(other), "{:d}")
+    put("nWorldsExt", json.loads((RES / "ext" / "run_manifest.json").read_text())["worlds"], "{:,}")
+
+
 def swarm_numbers(sw: pd.DataFrame) -> None:
     s = summary(sw[sw.n_agents == 10], ["composition", "f"])
     for comp, ct in (("hom_llama32_3b", "HomLlama"), ("hom_qwen38_27b", "HomQwen"), ("frozen+weak", "Weak")):
@@ -259,7 +312,7 @@ def world_counts() -> None:
 def main() -> None:
     world_counts()
     for name, fn in (("main", main_numbers), ("zoo", zoo_numbers), ("llm", llm_numbers), ("history", history_numbers),
-                     ("swarm", swarm_numbers)):
+                     ("swarm", swarm_numbers), ("ext", ext_numbers)):
         frame = load(name)
         if frame is not None:
             fn(frame)
@@ -271,13 +324,15 @@ def main() -> None:
     import re
 
     prefixes = ("main", "llm", "zoo", "br", "chan", "hist", "risk", "live", "on", "swarm", "size", "breakdown",
-                "gain", "worse", "nWorlds", "nLive")
+                "gain", "worse", "nWorlds", "nLive", "budget", "overRemoval", "raceD", "removal", "recovery",
+                "pooledRemoval", "extLlm")
     used = set()
     for tex in (ROOT / "paper").rglob("*.tex"):
         if tex.name == "numbers.tex":
             continue
         used |= set(re.findall(r"\\([A-Za-z]+)", tex.read_text()))
-    missing = sorted(u for u in used if u.startswith(prefixes) and u not in NUM)
+    defined = set(re.findall(r"\\newcommand\{\\([A-Za-z]+)\}", (ROOT / "paper" / "main.tex").read_text()))
+    missing = sorted(u for u in used if u.startswith(prefixes) and u not in NUM and u not in defined)
     for u in missing:
         NUM[u] = "??"
     if missing:

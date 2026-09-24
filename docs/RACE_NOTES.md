@@ -40,3 +40,28 @@ equivalent to the truth from that receiver's point of view. Strong receivers in
 the same swarm are unaffected (92.5% vs 71.9% mean in the diagnostic world).
 This is an identifiability limit, not an optimisation failure; the paper
 quantifies it as a function of receiver competence.
+
+## Post-freeze extension: RACE-D (negative result)
+
+RACE-D (`RACEAggregator(condition="disagreement")`, method key `race_d`) fits
+the channels only on history questions where the heard answers disagree,
+falling back to all questions if fewer than five qualify. It targets the
+camouflage attacker, which earns trust on unanimous questions. It was
+specified and implemented before study E9 (`results/ext`) was run, as a
+separate method; the frozen RACE code path is unchanged (`condition="all"`).
+
+E9 outcome (324 per-benchmark cells, Holm-corrected, test and bootstrap
+interval must agree): 14 wins, 31 losses. It never differs from RACE on the 14
+attack settings other than camouflage, echo and sleeper. Against camouflage it
+helps at f = 0.7 (+4.9 points) but hurts at f = 0.3 (−3.8); against echo it
+costs about 5 points. Dropping the unanimous questions removes exactly the
+evidence that pins down the honest peers' accuracies. RACE stays the method.
+
+## Verdict rule tightened (no effect on E1–E3)
+
+`lai.stats.compare` now requires the Holm-corrected Wilcoxon test *and* the
+paired bootstrap interval of the mean to agree before calling a win or loss.
+In the per-benchmark cells of E1–E3 the two criteria never disagree (checked
+on `results/tables/paired_comparisons.csv`); they can disagree when a cell
+pools heterogeneous benchmarks (E9's pooled comparison), where the signed-rank
+test measures location rather than the mean.

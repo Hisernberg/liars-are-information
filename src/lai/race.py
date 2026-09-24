@@ -688,6 +688,30 @@ class RACEAggregator(Aggregator):
         probs /= probs.sum()
         return dict(zip(cands, probs.tolist(), strict=True))
 
+    def evidence(self, observations: Sequence[Broadcast], self_id: int) -> dict[int, tuple[str, float]]:
+        """Per-agent signed log-odds added to its answer: ``w * lambda`` (one-coin model).
+
+        ``softmax`` of the per-candidate sums reproduces :meth:`posterior`; this is
+        the decomposition the explainer film and ``TrustLayer`` display."""
+        if self.model != "onecoin":
+            raise NotImplementedError("per-agent evidence is defined for the one-coin model")
+        row = {b.agent_id: b.answer for b in observations}
+        cands = self._candidates(row)
+        fit = self.fits.get(self_id)
+        if fit is None or len(cands) < 2:
+            return {}
+        k = len(cands)
+        cols = {a: fit.column(a) for a, ans in row.items() if ans in cands and fit.column(a) is not None}
+        group_count: dict[int, int] = {}
+        for col in cols.values():
+            group_count[int(fit.groups[col])] = group_count.get(int(fit.groups[col]), 0) + 1
+        out = {}
+        for agent, col in cols.items():
+            a = float(np.clip(fit.accuracy[col], self.eps, 1 - self.eps))
+            lam = np.log(a) + np.log(k - 1) - np.log1p(-a)
+            out[agent] = (row[agent], float(lam / group_count[int(fit.groups[col])]))
+        return out
+
     def aggregate(self, observations: Sequence[Broadcast], self_id: int) -> str | None:
         post = self.posterior(observations, self_id)
         if not post:
