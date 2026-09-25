@@ -71,6 +71,8 @@ Code, figures, videos and manuscript: see `README.md` in this release and the Gi
 
 Against independent liars at f = 0.7, RACE (94.9%) also beats an oracle that knows who lies and removes them (89.6%). The liars carry information, and RACE reads it without labels (study E9).
 
+**Live swarm (E8).** Six small open models answered 240 MMLU and BoolQ questions live on a CPU, as honest agents, covert saboteurs and debaters (2,880 answers, `data/live_cache/`). On MMLU, RACE lifts every honest agent by 5.6–27.9 points. On binary BoolQ it falls below the receiver alone, because small models answer with an option bias that a symmetric channel model cannot represent. The class-conditional variant recovers it. Both results are reported.
+
 **Videos.** `media/film_liars_are_information.mp4` is the explainer film. It shows agents broadcasting answers, each honest agent's trust links, the swarm's trust matrix learning over 90 unlabeled questions, and one decision in slow motion. `media/swarm_*.mp4` follow a single receiver in three attack scenarios.
 
 ## Provenance

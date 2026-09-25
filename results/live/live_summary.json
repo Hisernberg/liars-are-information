@@ -1,0 +1,51 @@
+{
+  "models": [
+    "qwen25_1p5b",
+    "smollm2_1p7b",
+    "granite33_2b",
+    "olmo2_1b",
+    "llama32_1b",
+    "gemma3_1b"
+  ],
+  "honest_accuracy": {
+    "boolq": 0.6764,
+    "mmlu": 0.4611
+  },
+  "liar_accuracy_by_role": {
+    "rushing": {
+      "boolq": 0.5736,
+      "mmlu": 0.2486
+    },
+    "solo": {
+      "boolq": 0.5861,
+      "mmlu": 0.2903
+    }
+  },
+  "share_of_liars_below_chance": 0.25,
+  "contagion_mean": {
+    "acc_independent": 0.5688,
+    "acc_after_debate": 0.5569,
+    "switch_rate": 0.1604,
+    "switch_to_liar_plurality": 0.0368
+  },
+  "race_vs_baselines_verdicts": {
+    "loss": {
+      "aip_gated": 0,
+      "ds_onecoin": 3,
+      "majority": 0,
+      "self": 0
+    },
+    "tie": {
+      "aip_gated": 25,
+      "ds_onecoin": 23,
+      "majority": 25,
+      "self": 27
+    },
+    "win": {
+      "aip_gated": 7,
+      "ds_onecoin": 6,
+      "majority": 7,
+      "self": 5
+    }
+  }
+}

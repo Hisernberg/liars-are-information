@@ -1,0 +1,11 @@
+{
+  "model": "llama32_1b",
+  "hub_id": "unsloth/Llama-3.2-1B-Instruct",
+  "lab": "Meta (mirror)",
+  "load_seconds": 5.1,
+  "elapsed_seconds": 504.4,
+  "threads": 4,
+  "torch": "2.14.0+cpu",
+  "dtype": "float32",
+  "n_params": 1235814400
+}

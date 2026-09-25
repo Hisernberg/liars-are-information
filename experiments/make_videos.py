@@ -65,15 +65,16 @@ def _questions(benchmark: str) -> dict[str, dict]:
     return {it["task_id"]: it for it in json.loads(path.read_text())}
 
 
-def simulate(world: World, n_steps: int, receiver_rank: int = 1) -> dict:
+def simulate(world: World, n_steps: int, receiver_rank: int | None = None) -> dict:
     """Online replay for one honest receiver; returns per-step frame data."""
     bw = build_world(world)
     b = world.benchmark
     labels = list(bw.data.label_space) if bw.data.label_space else None
-    # A mid-competence receiver: sort honest receivers by accuracy, take rank.
+    # The median-accuracy honest receiver (fixed rule, not chosen by outcome).
     accs = {r: np.mean([score(b, bw.data.honest[bw.models[r]][t], bw.data.gold[t]) for t in range(len(bw.data.task_ids))])
             for r in bw.honest}
-    receiver = sorted(bw.honest, key=lambda r: -accs[r])[min(receiver_rank, len(bw.honest) - 1)]
+    rank = len(bw.honest) // 2 if receiver_rank is None else receiver_rank
+    receiver = sorted(bw.honest, key=lambda r: -accs[r])[min(rank, len(bw.honest) - 1)]
     order = sorted(range(len(bw.data.task_ids)), key=lambda t: stable_seed("video", world.seed, bw.data.task_ids[t]))
     order = order[:n_steps]
     thresholds = InversionThresholds.load(THRESHOLDS_PATH)
@@ -174,7 +175,8 @@ def render_swarm(name: str, spec: dict, n_steps: int, fps: float, out_dir: Path)
         ax_g.add_patch(Circle((0, 0), 0.19, facecolor=viz.BLUE, edgecolor=viz.SURFACE, lw=3, zorder=3))
         ax_g.text(0, 0.02, fr["answers"][receiver] or "–", ha="center", va="center", color="white", fontsize=18,
                   fontweight="bold", zorder=4)
-        ax_g.text(0, -0.23, f"receiver: {sim['models'][receiver].replace('_', '-')}", ha="center", va="top", fontsize=9,
+        ax_g.text(0, -0.23, f"receiver: {sim['models'][receiver].replace('_', '-')} (median honest agent)", ha="center",
+                  va="top", fontsize=9,
                   color=viz.INK, fontweight="bold", zorder=6,
                   bbox=dict(boxstyle="round,pad=0.25", fc="white", ec=viz.GRID, alpha=0.95))
         legend = [("TRUST", viz.BLUE), ("DISCARD", "#a9a8a3"), ("INVERT", viz.RED)]
@@ -355,7 +357,7 @@ def main() -> None:
 
 
 
-def render_live_debate(out_dir: Path, benchmark: str = "mmlu", n_steps: int = 60, fps: float = 2.0) -> Path | None:
+def render_live_debate(out_dir: Path, benchmark: str = "mmlu", n_steps: int = 120, fps: float = 4.0) -> Path | None:
     """Live six-model panel: independent answers, covert saboteurs, and the debate round."""
     from lai.data import LIVE_MODELS
 
@@ -369,44 +371,57 @@ def render_live_debate(out_dir: Path, benchmark: str = "mmlu", n_steps: int = 60
     questions = _questions(benchmark)
     tasks = sorted(piv.index, key=lambda t: stable_seed("live-video", t))[:n_steps]
     labels = ["A", "B"] if benchmark == "boolq" else ["A", "B", "C", "D"]
-    # Receiver = the most accurate honest model; RACE is refit online on earlier questions only.
+    # Every honest model runs its own RACE, refit online on earlier questions only. The curves
+    # average over all six receivers (no receiver is singled out); the cards show one receiver's
+    # trust decisions, the most accurate honest model's.
     acc = {m: np.mean(piv[("honest", m)].loc[tasks] == gold.loc[tasks]) for m in LIVE_MODELS}
     receiver_model = max(acc, key=acc.get)
     agents = [("honest", m) for m in LIVE_MODELS] + [("solo", m) for m in LIVE_MODELS]
-    rid = agents.index(("honest", receiver_model))
+    rids = [agents.index(("honest", m)) for m in LIVE_MODELS]
+    shown = agents.index(("honest", receiver_model))
     from aip.types import Broadcast, Observation
 
-    def obs_for(t):
+    def obs_for(t, rid):
         row = tuple(Broadcast(j, t, piv[a].get(t), 0.5, 0.5, False) for j, a in enumerate(agents))
         return Observation(rid, t, row)
 
-    frames, seen = [], []
-    tallies = {k: [] for k in ("debate_majority", "majority_all", "race", "self")}
+    frames, seen = [], {rid: [] for rid in rids}
+    tallies = {k: [] for k in ("debate_majority", "majority_all", "race", "race_full", "self")}
     for t in tasks:
-        obs = obs_for(t)
-        race = RACEAggregator(labels)
-        if seen:
-            race.fit([(o,) for o in seen])
-        preds = {
-            "race": race.aggregate(obs.broadcasts, rid) if seen else obs.own.answer,
-            "majority_all": MajorityVote().aggregate(obs.broadcasts, rid),
-            "debate_majority": MajorityVote().aggregate(
-                tuple(Broadcast(j, t, piv[("debate", m)].get(t), 0.5, 0.5, False) for j, m in enumerate(LIVE_MODELS)), 0),
-            "self": obs.own.answer,
-        }
-        for k, v in preds.items():
-            tallies[k].append(float(v == gold[t]))
-        ch = race.diagnostics.channels.get(rid, {}) if seen else {}
-        frames.append(dict(task=t, gold=gold[t], preds=preds, curve={k: np.cumsum(v) / np.arange(1, len(v) + 1) for k, v in tallies.items()},
+        per = {k: [] for k in tallies}
+        shown_preds, ch = {}, {}
+        for rid in rids:
+            obs = obs_for(t, rid)
+            preds = {"self": obs.own.answer, "majority_all": MajorityVote().aggregate(obs.broadcasts, rid)}
+            for key, model in (("race", "onecoin"), ("race_full", "full")):
+                if seen[rid]:
+                    agg = RACEAggregator(labels, model=model)
+                    agg.fit([(o,) for o in seen[rid]])
+                    preds[key] = agg.aggregate(obs.broadcasts, rid)
+                    if key == "race" and rid == shown:
+                        ch = agg.diagnostics.channels.get(rid, {})
+                else:
+                    preds[key] = obs.own.answer
+            preds["debate_majority"] = MajorityVote().aggregate(
+                tuple(Broadcast(j, t, piv[("debate", m)].get(t), 0.5, 0.5, False) for j, m in enumerate(LIVE_MODELS)), 0)
+            for k, v in preds.items():
+                per[k].append(float(v == gold[t]))
+            if rid == shown:
+                shown_preds = preds
+            seen[rid].append(obs)
+        for k in tallies:
+            tallies[k].append(float(np.mean(per[k])))
+        frames.append(dict(task=t, gold=gold[t], preds=shown_preds,
+                           curve={k: np.cumsum(v) / np.arange(1, len(v) + 1) for k, v in tallies.items()},
                            honest={m: piv[("honest", m)].get(t) for m in LIVE_MODELS},
                            solo={m: piv[("solo", m)].get(t) for m in LIVE_MODELS},
                            debate={m: piv[("debate", m)].get(t) for m in LIVE_MODELS},
-                           decisions={agents[j][1] + "|" + agents[j][0]: c.decision for j, c in ch.items() if j != rid}))
-        seen.append(obs)
+                           decisions={agents[j][1] + "|" + agents[j][0]: c.decision for j, c in ch.items() if j != shown}))
     viz.setup()
     fig = plt.figure(figsize=(16, 9), dpi=100)
-    names = {"debate_majority": ("Debate, then majority", viz.ORANGE), "majority_all": ("Majority incl. liars", viz.AQUA),
-             "race": ("RACE on independent answers", viz.BLUE), "self": ("Receiver alone", viz.MUTED)}
+    names = {"debate_majority": ("Debate, then majority of honest agents", viz.ORANGE), "majority_all": ("Majority incl. liars", viz.AQUA),
+             "race": ("RACE on independent answers", viz.BLUE),
+             "race_full": ("RACE, class-conditional (ablation)", viz.VIOLET), "self": ("Receiver alone", viz.MUTED)}
 
     def card(ax, x, y, title, ans, gold_, color_edge, note=None):
         ok = ans == gold_
@@ -430,6 +445,8 @@ def render_live_debate(out_dir: Path, benchmark: str = "mmlu", n_steps: int = 60
         ax.axis("off")
         item = questions.get(fr["task"])
         q = textwrap.shorten(item["question"], 150) if item else fr["task"]
+        if benchmark == "boolq" and item:
+            q = q[0].upper() + q[1:] + "?"
         ax.text(0.0, 0.97, q, fontsize=11, va="top", wrap=True)
         ax.text(0.0, 0.9, f"truth (hidden from agents): {fr['gold']}", fontsize=10, color=viz.GREEN, fontweight="bold")
         rows = (("Round 1 — honest agents answer independently", fr["honest"], viz.INK, 0.62),
@@ -455,18 +472,19 @@ def render_live_debate(out_dir: Path, benchmark: str = "mmlu", n_steps: int = 60
             ax2.plot(np.arange(1, len(c) + 1), 100 * c, color=col, lw=2.2 if k == "race" else 1.6, label=lab)
         ax2.set_xlim(1, len(frames))
         ax2.set_ylim(0, 100)
-        ax2.set_title("running accuracy", loc="left")
+        ax2.set_title("running accuracy, mean over all six honest agents\n(each runs its own RACE on earlier questions only)",
+                      loc="left", fontsize=9.5)
         ax2.legend(fontsize=8, loc="lower left")
         ax3 = fig.add_axes([0.69, 0.08, 0.29, 0.3])
         ax3.axis("off")
-        ax3.text(0, 1.0, "This question", fontsize=11, fontweight="bold", va="top")
+        ax3.text(0, 1.0, f"This question, for {receiver_model.replace('_', '-')}", fontsize=11, fontweight="bold", va="top")
         for n, (k, (lab, col)) in enumerate(names.items()):
             p = fr["preds"][k]
-            ax3.text(0, 0.8 - 0.17 * n, f"{lab}:", fontsize=10.5, color=viz.INK_2, va="top")
-            ax3.text(0.78, 0.8 - 0.17 * n, f"{p or '–'} {'✓' if p == fr['gold'] else '✗'}", fontsize=12,
+            ax3.text(0, 0.82 - 0.15 * n, f"{lab}:", fontsize=10.5, color=viz.INK_2, va="top")
+            ax3.text(0.9, 0.82 - 0.15 * n, f"{p or '–'} {'✓' if p == fr['gold'] else '✗'}", fontsize=12,
                      color=viz.GREEN if p == fr["gold"] else viz.RED, fontweight="bold", va="top")
 
-    anim = animation.FuncAnimation(fig, draw, frames=len(frames) + 6, interval=1000 / fps)
+    anim = animation.FuncAnimation(fig, draw, frames=len(frames) + int(4 * fps), interval=1000 / fps)
     out = out_dir / f"live_debate_{benchmark}.mp4"
     anim.save(out, writer=animation.FFMpegWriter(fps=fps, bitrate=1800, codec="libx264", extra_args=["-pix_fmt", "yuv420p"]))
     plt.close(fig)

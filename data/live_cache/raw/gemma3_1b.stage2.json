@@ -1,0 +1,11 @@
+{
+  "model": "gemma3_1b",
+  "hub_id": "unsloth/gemma-3-1b-it",
+  "lab": "Google (mirror)",
+  "load_seconds": 5.7,
+  "elapsed_seconds": 549.7,
+  "threads": 4,
+  "torch": "2.14.0+cpu",
+  "dtype": "float32",
+  "n_params": 999885952
+}

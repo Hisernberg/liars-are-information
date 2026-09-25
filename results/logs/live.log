@@ -5,3 +5,108 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
   smollm2_1p7b mmlu 25/120 88s
   smollm2_1p7b mmlu 50/120 157s
   smollm2_1p7b mmlu 75/120 226s
+  smollm2_1p7b mmlu 100/120 308s
+  smollm2_1p7b boolq 25/120 491s
+  smollm2_1p7b boolq 50/120 632s
+  smollm2_1p7b boolq 75/120 717s
+  smollm2_1p7b boolq 100/120 796s
+stage1 granite33_2b
+Loading weights:   0%|          | 0/362 [00:00<?, ?it/s]Loading weights:   0%|          | 1/362 [00:00<01:57,  3.06it/s]Loading weights:   6%|▌         | 21/362 [00:00<00:05, 62.75it/s]Loading weights:  11%|█         | 39/362 [00:00<00:03, 87.43it/s]Loading weights:  16%|█▋        | 59/362 [00:00<00:02, 115.39it/s]Loading weights:  21%|██        | 76/362 [00:00<00:02, 121.03it/s]Loading weights:  26%|██▌       | 94/362 [00:00<00:02, 129.26it/s]Loading weights:  31%|███       | 112/362 [00:01<00:01, 139.98it/s]Loading weights:  35%|███▌      | 128/362 [00:01<00:02, 80.60it/s] Loading weights:  39%|███▊      | 140/362 [00:02<00:05, 43.21it/s]Loading weights:  43%|████▎     | 157/362 [00:02<00:03, 54.83it/s]Loading weights:  46%|████▌     | 167/362 [00:02<00:04, 41.41it/s]Loading weights:  48%|████▊     | 175/362 [00:03<00:05, 33.34it/s]Loading weights:  51%|█████     | 184/362 [00:03<00:04, 38.44it/s]Loading weights:  53%|█████▎    | 191/362 [00:03<00:04, 35.55it/s]Loading weights:  54%|█████▍    | 197/362 [00:03<00:04, 35.49it/s]Loading weights:  56%|█████▌    | 202/362 [00:04<00:06, 25.80it/s]Loading weights:  58%|█████▊    | 210/362 [00:04<00:05, 28.93it/s]Loading weights:  61%|██████    | 220/362 [00:04<00:03, 36.38it/s]Loading weights:  63%|██████▎   | 228/362 [00:04<00:03, 41.57it/s]Loading weights:  65%|██████▍   | 234/362 [00:04<00:03, 35.69it/s]Loading weights:  66%|██████▌   | 239/362 [00:05<00:04, 29.89it/s]Loading weights:  69%|██████▊   | 248/362 [00:05<00:03, 34.51it/s]Loading weights:  71%|███████   | 257/362 [00:05<00:02, 36.52it/s]Loading weights:  73%|███████▎  | 265/362 [00:05<00:02, 36.47it/s]Loading weights:  76%|███████▌  | 274/362 [00:05<00:02, 37.83it/s]Loading weights:  78%|███████▊  | 283/362 [00:06<00:01, 39.84it/s]Loading weights:  81%|████████  | 292/362 [00:06<00:01, 37.55it/s]Loading weights:  83%|████████▎ | 301/362 [00:06<00:01, 36.87it/s]Loading weights:  86%|████████▌ | 310/362 [00:06<00:01, 43.59it/s]Loading weights:  87%|████████▋ | 315/362 [00:06<00:01, 41.88it/s]Loading weights:  88%|████████▊ | 320/362 [00:07<00:01, 32.83it/s]Loading weights:  91%|█████████ | 328/362 [00:07<00:01, 29.80it/s]Loading weights:  93%|█████████▎| 338/362 [00:07<00:00, 37.09it/s]Loading weights:  96%|█████████▌| 346/362 [00:07<00:00, 39.57it/s]Loading weights:  98%|█████████▊| 354/362 [00:08<00:00, 39.00it/s]Loading weights: 100%|██████████| 362/362 [00:08<00:00, 44.92it/s]
+  granite33_2b mmlu 25/120 410s
+  granite33_2b mmlu 50/120 728s
+  granite33_2b mmlu 75/120 1081s
+  granite33_2b mmlu 100/120 1220s
+  granite33_2b boolq 25/120 2162s
+  granite33_2b boolq 50/120 2646s
+  granite33_2b boolq 75/120 2785s
+  granite33_2b boolq 100/120 2918s
+stage1 olmo2_1b
+Loading weights:   0%|          | 0/179 [00:00<?, ?it/s]Loading weights:   1%|          | 1/179 [00:00<00:42,  4.21it/s]Loading weights:  14%|█▍        | 25/179 [00:00<00:01, 79.96it/s]Loading weights:  32%|███▏      | 58/179 [00:00<00:00, 140.52it/s]Loading weights:  49%|████▊     | 87/179 [00:00<00:00, 178.07it/s]Loading weights:  63%|██████▎   | 112/179 [00:00<00:00, 191.42it/s]Loading weights:  74%|███████▍  | 133/179 [00:00<00:00, 173.60it/s]Loading weights:  85%|████████▍ | 152/179 [00:01<00:00, 71.47it/s] Loading weights:  93%|█████████▎| 166/179 [00:02<00:00, 46.48it/s]Loading weights:  98%|█████████▊| 176/179 [00:02<00:00, 38.46it/s]Loading weights: 100%|██████████| 179/179 [00:02<00:00, 66.95it/s]
+  olmo2_1b mmlu 25/120 47s
+  olmo2_1b mmlu 50/120 91s
+  olmo2_1b mmlu 75/120 136s
+  olmo2_1b mmlu 100/120 191s
+  olmo2_1b boolq 25/120 284s
+  olmo2_1b boolq 50/120 336s
+  olmo2_1b boolq 75/120 392s
+  olmo2_1b boolq 100/120 446s
+stage1 llama32_1b
+Loading weights:   0%|          | 0/146 [00:00<?, ?it/s]Loading weights:   1%|          | 1/146 [00:00<00:48,  2.99it/s]Loading weights:  34%|███▍      | 50/146 [00:00<00:00, 139.23it/s]Loading weights:  52%|█████▏    | 76/146 [00:00<00:00, 156.07it/s]Loading weights:  67%|██████▋   | 98/146 [00:00<00:00, 108.12it/s]Loading weights:  78%|███████▊  | 114/146 [00:01<00:00, 45.26it/s]Loading weights:  86%|████████▌ | 125/146 [00:02<00:00, 41.77it/s]Loading weights:  92%|█████████▏| 134/146 [00:02<00:00, 45.34it/s]Loading weights:  97%|█████████▋| 142/146 [00:02<00:00, 41.10it/s]Loading weights: 100%|██████████| 146/146 [00:02<00:00, 56.27it/s]
+  llama32_1b mmlu 25/120 50s
+  llama32_1b mmlu 50/120 98s
+  llama32_1b mmlu 75/120 145s
+  llama32_1b mmlu 100/120 199s
+  llama32_1b boolq 25/120 292s
+  llama32_1b boolq 50/120 347s
+  llama32_1b boolq 75/120 404s
+  llama32_1b boolq 100/120 458s
+stage1 gemma3_1b
+Loading weights:   0%|          | 0/340 [00:00<?, ?it/s]Loading weights:   0%|          | 1/340 [00:02<14:25,  2.55s/it]Loading weights:  96%|█████████▋| 328/340 [00:02<00:00, 169.68it/s]Loading weights: 100%|██████████| 340/340 [00:02<00:00, 124.43it/s]
+  gemma3_1b mmlu 25/120 49s
+  gemma3_1b mmlu 50/120 93s
+  gemma3_1b mmlu 75/120 139s
+  gemma3_1b mmlu 100/120 190s
+  gemma3_1b boolq 25/120 276s
+  gemma3_1b boolq 50/120 324s
+  gemma3_1b boolq 75/120 374s
+  gemma3_1b boolq 100/120 422s
+stage2 qwen25_1p5b
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   0%|          | 1/338 [00:00<02:57,  1.90it/s]Loading weights:  33%|███▎      | 111/338 [00:00<00:00, 235.89it/s]Loading weights:  52%|█████▏    | 176/338 [00:01<00:01, 141.39it/s]Loading weights:  64%|██████▍   | 216/338 [00:01<00:00, 137.46it/s]Loading weights:  72%|███████▏  | 245/338 [00:02<00:00, 95.01it/s] Loading weights:  79%|███████▊  | 266/338 [00:02<00:00, 104.63it/s]Loading weights:  85%|████████▍ | 286/338 [00:02<00:00, 78.67it/s] Loading weights:  89%|████████▉ | 301/338 [00:03<00:00, 79.29it/s]Loading weights:  93%|█████████▎| 314/338 [00:03<00:00, 80.35it/s]Loading weights:  97%|█████████▋| 328/338 [00:03<00:00, 82.84it/s]Loading weights: 100%|██████████| 338/338 [00:03<00:00, 101.25it/s]
+  qwen25_1p5b mmlu 25/120 75s
+  qwen25_1p5b mmlu 50/120 148s
+  qwen25_1p5b mmlu 75/120 220s
+  qwen25_1p5b mmlu 100/120 304s
+  qwen25_1p5b boolq 25/120 441s
+  qwen25_1p5b boolq 50/120 520s
+  qwen25_1p5b boolq 75/120 602s
+  qwen25_1p5b boolq 100/120 681s
+stage2 smollm2_1p7b
+Loading weights:   0%|          | 0/218 [00:00<?, ?it/s]Loading weights:   6%|▌         | 13/218 [00:00<00:01, 121.65it/s]Loading weights:  14%|█▍        | 30/218 [00:00<00:01, 126.40it/s]Loading weights:  22%|██▏       | 48/218 [00:00<00:01, 140.25it/s]Loading weights:  29%|██▉       | 63/218 [00:00<00:01, 137.44it/s]Loading weights:  35%|███▌      | 77/218 [00:00<00:01, 117.47it/s]Loading weights:  43%|████▎     | 94/218 [00:00<00:00, 130.10it/s]Loading weights:  50%|████▉     | 108/218 [00:01<00:01, 62.38it/s]Loading weights:  54%|█████▍    | 118/218 [00:01<00:02, 42.29it/s]Loading weights:  58%|█████▊    | 126/218 [00:01<00:02, 45.36it/s]Loading weights:  64%|██████▍   | 139/218 [00:01<00:01, 54.10it/s]Loading weights:  67%|██████▋   | 147/218 [00:02<00:01, 54.73it/s]Loading weights:  72%|███████▏  | 157/218 [00:02<00:01, 46.75it/s]Loading weights:  76%|███████▌  | 166/218 [00:02<00:00, 53.05it/s]Loading weights:  80%|████████  | 175/218 [00:02<00:00, 49.36it/s]Loading weights:  84%|████████▍ | 184/218 [00:02<00:00, 49.46it/s]Loading weights:  91%|█████████▏| 199/218 [00:03<00:00, 67.60it/s]Loading weights:  95%|█████████▌| 208/218 [00:03<00:00, 69.10it/s]Loading weights: 100%|██████████| 218/218 [00:03<00:00, 68.61it/s]
+  smollm2_1p7b mmlu 25/120 82s
+  smollm2_1p7b mmlu 50/120 162s
+  smollm2_1p7b mmlu 75/120 244s
+  smollm2_1p7b mmlu 100/120 339s
+  smollm2_1p7b boolq 25/120 497s
+  smollm2_1p7b boolq 50/120 586s
+  smollm2_1p7b boolq 75/120 679s
+  smollm2_1p7b boolq 100/120 768s
+stage2 granite33_2b
+Loading weights:   0%|          | 0/362 [00:00<?, ?it/s]Loading weights:   0%|          | 1/362 [00:00<00:41,  8.70it/s]Loading weights:   8%|▊         | 30/362 [00:00<00:02, 161.01it/s]Loading weights:  14%|█▎        | 49/362 [00:00<00:01, 168.33it/s]Loading weights:  19%|█▊        | 67/362 [00:00<00:02, 103.70it/s]Loading weights:  26%|██▌       | 94/362 [00:00<00:02, 132.68it/s]Loading weights:  31%|███       | 113/362 [00:00<00:01, 143.01it/s]Loading weights:  36%|███▌      | 130/362 [00:01<00:03, 68.18it/s] Loading weights:  39%|███▉      | 142/362 [00:01<00:04, 49.93it/s]Loading weights:  42%|████▏     | 151/362 [00:02<00:04, 48.31it/s]Loading weights:  46%|████▌     | 166/362 [00:02<00:03, 58.46it/s]Loading weights:  51%|█████     | 184/362 [00:02<00:02, 70.91it/s]Loading weights:  55%|█████▍    | 198/362 [00:02<00:01, 82.28it/s]Loading weights:  58%|█████▊    | 211/362 [00:02<00:01, 75.98it/s]Loading weights:  61%|██████    | 221/362 [00:02<00:01, 80.34it/s]Loading weights:  64%|██████▍   | 231/362 [00:03<00:02, 62.10it/s]Loading weights:  68%|██████▊   | 247/362 [00:03<00:01, 67.48it/s]Loading weights:  70%|███████   | 255/362 [00:03<00:01, 67.54it/s]Loading weights:  73%|███████▎  | 263/362 [00:03<00:02, 48.00it/s]Loading weights:  74%|███████▍  | 269/362 [00:03<00:02, 43.75it/s]Loading weights:  76%|███████▌  | 275/362 [00:04<00:02, 34.08it/s]Loading weights:  78%|███████▊  | 284/362 [00:04<00:02, 37.80it/s]Loading weights:  81%|████████  | 292/362 [00:04<00:01, 44.37it/s]Loading weights:  82%|████████▏ | 298/362 [00:04<00:01, 46.04it/s]Loading weights:  84%|████████▍ | 304/362 [00:04<00:01, 37.71it/s]Loading weights:  86%|████████▌ | 311/362 [00:05<00:01, 35.20it/s]Loading weights:  88%|████████▊ | 320/362 [00:05<00:01, 40.24it/s]Loading weights:  91%|█████████ | 329/362 [00:05<00:00, 42.62it/s]Loading weights:  93%|█████████▎| 338/362 [00:05<00:00, 45.52it/s]Loading weights:  96%|█████████▌| 346/362 [00:05<00:00, 47.61it/s]Loading weights:  98%|█████████▊| 354/362 [00:06<00:00, 41.77it/s]Loading weights: 100%|██████████| 362/362 [00:06<00:00, 60.17it/s]
+  granite33_2b mmlu 25/120 140s
+  granite33_2b mmlu 50/120 284s
+  granite33_2b mmlu 75/120 426s
+  granite33_2b mmlu 100/120 589s
+  granite33_2b boolq 25/120 853s
+  granite33_2b boolq 50/120 1002s
+  granite33_2b boolq 75/120 1155s
+  granite33_2b boolq 100/120 1307s
+stage2 olmo2_1b
+Loading weights:   0%|          | 0/179 [00:00<?, ?it/s]Loading weights:   1%|          | 1/179 [00:00<02:40,  1.11it/s]Loading weights:  27%|██▋       | 48/179 [00:01<00:02, 57.31it/s]Loading weights:  38%|███▊      | 68/179 [00:01<00:01, 77.55it/s]Loading weights:  47%|████▋     | 85/179 [00:01<00:01, 85.57it/s]Loading weights:  58%|█████▊    | 103/179 [00:01<00:00, 98.45it/s]Loading weights:  66%|██████▌   | 118/179 [00:01<00:00, 105.08it/s]Loading weights:  81%|████████  | 145/179 [00:01<00:00, 140.64it/s]Loading weights:  92%|█████████▏| 164/179 [00:01<00:00, 122.58it/s]Loading weights: 100%|██████████| 179/179 [00:01<00:00, 91.11it/s] 
+  olmo2_1b mmlu 25/120 57s
+  olmo2_1b mmlu 50/120 115s
+  olmo2_1b mmlu 75/120 174s
+  olmo2_1b mmlu 100/120 242s
+  olmo2_1b boolq 25/120 355s
+  olmo2_1b boolq 50/120 419s
+  olmo2_1b boolq 75/120 486s
+  olmo2_1b boolq 100/120 550s
+stage2 llama32_1b
+Loading weights:   0%|          | 0/146 [00:00<?, ?it/s]Loading weights:   1%|          | 1/146 [00:00<01:54,  1.27it/s]Loading weights:  30%|███       | 44/146 [00:00<00:01, 66.35it/s]Loading weights:  47%|████▋     | 69/146 [00:01<00:01, 73.43it/s]Loading weights:  59%|█████▉    | 86/146 [00:01<00:00, 75.18it/s]Loading weights:  68%|██████▊   | 100/146 [00:01<00:00, 81.92it/s]Loading weights:  77%|███████▋  | 113/146 [00:01<00:00, 75.91it/s]Loading weights:  85%|████████▍ | 124/146 [00:01<00:00, 71.39it/s]Loading weights:  95%|█████████▍| 138/146 [00:02<00:00, 75.72it/s]Loading weights: 100%|██████████| 146/146 [00:02<00:00, 69.84it/s]
+  llama32_1b mmlu 25/120 64s
+  llama32_1b mmlu 50/120 125s
+  llama32_1b mmlu 75/120 187s
+  llama32_1b mmlu 100/120 257s
+  llama32_1b boolq 25/120 377s
+  llama32_1b boolq 50/120 444s
+  llama32_1b boolq 75/120 512s
+  llama32_1b boolq 100/120 579s
+stage2 gemma3_1b
+Loading weights:   0%|          | 0/340 [00:00<?, ?it/s]Loading weights:   0%|          | 1/340 [00:00<04:11,  1.35it/s]Loading weights:  35%|███▌      | 120/340 [00:00<00:01, 190.73it/s]Loading weights:  55%|█████▍    | 186/340 [00:01<00:01, 142.53it/s]Loading weights:  67%|██████▋   | 227/340 [00:01<00:00, 151.81it/s]Loading weights:  76%|███████▌  | 259/340 [00:01<00:00, 169.92it/s]Loading weights:  85%|████████▌ | 290/340 [00:01<00:00, 177.34it/s]Loading weights:  97%|█████████▋| 329/340 [00:02<00:00, 212.17it/s]Loading weights: 100%|██████████| 340/340 [00:02<00:00, 165.11it/s]
+  gemma3_1b mmlu 25/120 58s
+  gemma3_1b mmlu 50/120 110s
+  gemma3_1b mmlu 75/120 162s
+  gemma3_1b mmlu 100/120 221s
+  gemma3_1b boolq 25/120 325s
+  gemma3_1b boolq 50/120 384s
+  gemma3_1b boolq 75/120 445s
+  gemma3_1b boolq 100/120 503s

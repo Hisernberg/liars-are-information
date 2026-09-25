@@ -285,30 +285,75 @@ def live_numbers() -> None:
     if not p.exists():
         return
     rs = pd.read_csv(p)
-    for b, bt in (("mmlu", "Mmlu"), ("boolq", "Boolq")):
+    bench = (("mmlu", "Mmlu"), ("boolq", "Boolq"))
+    for b, bt in bench:
         g = rs[rs.benchmark == b]
         for role, rt in (("honest", "Honest"), ("solo", "Solo"), ("rushing", "Rushing"), ("debate", "Debate")):
             put(f"live{bt}{rt}", pct(g[g.role == role].accuracy.mean()))
+        h = g[g.role == "honest"].set_index("model").accuracy
+        put(f"live{bt}HonestMin", pct(h.min()))
+        put(f"live{bt}HonestMax", pct(h.max()))
+    liars = rs[rs.role.isin(["solo", "rushing"])]
+    put("liveBelowChance", pct((liars.truth_dependence < 0).mean()), "{:.0f}")
+    put("liveMmluBelowChance", pct((liars[liars.benchmark == "mmlu"].truth_dependence < 0).mean()), "{:.0f}")
+    put("liveBoolqBelowChance", pct((liars[liars.benchmark == "boolq"].truth_dependence < 0).mean()), "{:.0f}")
+    ab = pd.read_csv(RES / "live" / "answer_bias.csv")
+    bq = ab[(ab.benchmark == "boolq") & (ab.role == "honest")].set_index("model")
+    put("liveBoolqGoldYes", pct(bq.gold_share_A.iloc[0]))
+    put("liveSmolYes", pct(bq.loc["smollm2_1p7b", "share_A"]))
+    put("liveSmolAccYes", pct(bq.loc["smollm2_1p7b", "acc_given_A"]))
+    put("liveSmolAccNo", pct(bq.loc["smollm2_1p7b", "acc_given_B"]))
+    lie = ab[(ab.benchmark == "boolq") & (ab.role == "solo")].set_index("model")
+    put("liveGraniteLieYes", pct(lie.loc["granite33_2b", "share_A"]))
     ct = pd.read_csv(RES / "live" / "contagion.csv")
     put("liveSwitch", pct(ct.switch_rate.mean()))
     put("liveSwitchToLie", pct(ct.switch_to_liar_plurality.mean()))
     put("liveRightToWrong", pct(ct.right_to_wrong.mean()))
     put("liveWrongToRight", pct(ct.wrong_to_right.mean()))
+    put("liveAccIndependent", pct(ct.acc_independent.mean()))
+    put("liveAccDebate", pct(ct.acc_after_debate.mean()))
     live = load("live")
-    if live is not None:
-        s = summary(live, ["source", "f"])
-        for src, st in (("live", "Ind"), ("live_debate", "Deb")):
-            for f, tag in ((0.5, "Five"), (0.7, "Seven"), (0.3, "Three")):
-                if (src, f) in s.index:
-                    for m, mt in (("race", "Race"), ("aip_gated", "Aip"), ("majority", "Maj"), ("self", "Self"),
-                                  ("ds_onecoin", "Ds"), ("oracle_channel", "Oracle")):
-                        put(f"live{st}{mt}{tag}", pct(s.loc[(src, f), m]))
-        c = compare(live[live.source == "live"], "race", ["self", "majority", "aip_gated", "ds_onecoin"],
-                    ["benchmark", "attack", "f"])
-        put("liveCells", int(len(c)), "{:d}")
-        put("liveWins", int((c.verdict == "win").sum()), "{:d}")
-        put("liveLosses", int((c.verdict == "loss").sum()), "{:d}")
-    put("nLiveTasks", "240")
+    if live is None:
+        return
+    test = live[live.split == "test"]
+    ind = test[test.source == "live"].assign(fam=lambda d: np.where(d.attack == "coherent", "Coh", "Llm"))
+    methods = (("race", "Race"), ("race_full", "Full"), ("majority", "Maj"), ("self", "Self"), ("aip_gated", "Aip"),
+               ("ds_onecoin", "Ds"), ("oracle_channel", "Oracle"))
+    fs = ((0.1, "One"), (0.3, "Three"), (0.5, "Five"), (0.7, "Seven"))
+    t = ind.groupby(["benchmark", "fam", "f", "method"]).accuracy.mean()
+    for b, bt in bench:
+        for fam in ("Coh", "Llm"):
+            for f, ft in fs:
+                for m, mt in methods:
+                    if (b, fam, f, m) in t.index:
+                        put(f"live{bt}{fam}{mt}{ft}", pct(t[(b, fam, f, m)]))
+    # debate vs independent on the matched attacks (f = 0.5, solo + collude)
+    matched = test[(test.f == 0.5) & test.attack.isin(["llm:solo", "llm:collude"])]
+    md = matched.groupby(["source", "benchmark", "method"]).accuracy.mean()
+    for b, bt in bench:
+        for m, mt in methods:
+            for src, st in (("live", "Ind"), ("live_debate", "Deb")):
+                if (src, b, m) in md.index:
+                    put(f"live{st}{bt}{mt}", pct(md[(src, b, m)]))
+    c = pd.read_csv(RES / "live" / "paired_comparisons.csv")
+    put("liveCellsPerBaseline", int(c.groupby("baseline").size().iloc[0]), "{:d}")
+    for base, bt in (("self", "Self"), ("majority", "Maj"), ("aip_gated", "Aip"), ("ds_onecoin", "Ds")):
+        cb = c[c.baseline == base]
+        put(f"liveWins{bt}", int((cb.verdict == "win").sum()), "{:d}")
+        put(f"liveLosses{bt}", int((cb.verdict == "loss").sum()), "{:d}")
+    put("liveCells", len(c), "{:d}")
+    put("liveWins", int((c.verdict == "win").sum()), "{:d}")
+    put("liveLosses", int((c.verdict == "loss").sum()), "{:d}")
+    rec = pd.read_csv(RES / "live" / "receivers.csv").set_index(["benchmark", "model"])
+    for b, bt in bench:
+        r = rec.loc[b]
+        gain = r.race - r.self
+        put(f"live{bt}GainMin", pct(gain.min()))
+        put(f"live{bt}GainMax", pct(gain.max()))
+    put("liveGraniteSelf", pct(rec.loc[("boolq", "granite33_2b"), "self"]))
+    put("liveGraniteRace", pct(rec.loc[("boolq", "granite33_2b"), "race"]))
+    put("liveGraniteFull", pct(rec.loc[("boolq", "granite33_2b"), "race_full"]))
+    put("nLiveTestTasks", int(test[test.source == "live"].groupby("world_id").task.nunique().median()), "{:d}")
 
 
 def world_counts() -> None:

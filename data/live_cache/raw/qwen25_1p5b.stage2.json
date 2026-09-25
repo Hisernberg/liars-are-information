@@ -1,0 +1,11 @@
+{
+  "model": "qwen25_1p5b",
+  "hub_id": "Qwen/Qwen2.5-1.5B-Instruct",
+  "lab": "Alibaba",
+  "load_seconds": 4.9,
+  "elapsed_seconds": 745.1,
+  "threads": 4,
+  "torch": "2.14.0+cpu",
+  "dtype": "float32",
+  "n_params": 1543714304
+}

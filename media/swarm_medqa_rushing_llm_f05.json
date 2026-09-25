@@ -1,5 +1,5 @@
 {
-  "receiver": 3,
+  "receiver": 0,
   "byzantine": [
     1,
     2,
@@ -20,10 +20,10 @@
     "None"
   ],
   "final_running_accuracy": {
-    "race": 0.7583333333333333,
-    "aip_gated": 0.425,
+    "race": 0.75,
+    "aip_gated": 0.5666666666666667,
     "majority": 0.625,
-    "self": 0.775
+    "self": 0.675
   },
   "steps": 120,
   "world": {

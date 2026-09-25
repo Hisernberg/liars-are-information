@@ -1,0 +1,11 @@
+{
+  "model": "olmo2_1b",
+  "hub_id": "allenai/OLMo-2-0425-1B-Instruct",
+  "lab": "AI2",
+  "load_seconds": 4.9,
+  "elapsed_seconds": 489.6,
+  "threads": 4,
+  "torch": "2.14.0+cpu",
+  "dtype": "float32",
+  "n_params": 1484916736
+}

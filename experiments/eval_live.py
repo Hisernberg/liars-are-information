@@ -10,6 +10,8 @@ Outputs in ``results/live/``:
 * ``per_task.parquet`` -- aggregation results with the same harness and methods as
   the replay studies, for independent (``live``) and post-debate
   (``live_debate``) honest answers;
+* ``answer_bias.csv`` -- option bias per model and role (share of "A", accuracy given each gold option);
+* ``receivers.csv`` -- RACE, full-confusion RACE, majority and the receiver alone, per honest receiver model;
 * ``live_summary.json`` -- headline numbers.
 """
 
@@ -71,6 +73,49 @@ def contagion() -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def answer_bias() -> pd.DataFrame:
+    """Per model x benchmark x role: share of each option and accuracy conditional on the gold option.
+
+    Small models are strongly option-biased on BoolQ, which the symmetric one-coin
+    channel model cannot represent (see the paper's E8 discussion)."""
+    raw = pd.concat([pd.read_parquet(p) for p in (LIVE / "raw").glob("stage*/*/*.parquet")], ignore_index=True)
+    rows = []
+    for (m, b, role), g in raw.groupby(["model", "benchmark", "role"]):
+        row = dict(model=m, benchmark=b, role=role, share_A=float((g.extracted_answer == "A").mean()),
+                   gold_share_A=float((g.gold_answer == "A").mean()))
+        for opt, gg in g.groupby("gold_answer"):
+            row[f"acc_given_{opt}"] = float(gg.is_correct.mean())
+        rows.append(row)
+    return pd.DataFrame(rows)
+
+
+def receiver_breakdown() -> pd.DataFrame:
+    """RACE vs the receiver alone, per honest receiver model (independent answers, LLM saboteurs)."""
+    from aip.aggregation.baselines import MajorityVote
+    from lai.data import score
+    from lai.race import RACEAggregator
+    from lai.sim import build_world
+
+    rows = []
+    for b, atk, f, seed in itertools.product(("mmlu", "boolq"), ("llm:solo", "llm:rushing", "llm:collude"),
+                                             (0.3, 0.5, 0.7), range(5)):
+        bw = build_world(World(b, f, atk, 1.0, 1.0, seed, composition="live", study="live", source="live"))
+        for r in bw.honest:
+            fits = {}
+            for model in ("onecoin", "full"):
+                agg = RACEAggregator(bw.data.label_space, model=model)
+                agg.fit([(bw.defense[t][r],) for t in bw.splits["history"]])
+                fits[model] = agg
+            for t in bw.splits["test"]:
+                o, g = bw.defense[t][r], bw.data.gold[t]
+                rows.append(dict(benchmark=b, attack=atk, f=f, seed=seed, model=bw.models[r],
+                                 self=score(b, o.own.answer, g), race=score(b, fits["onecoin"].aggregate(o.broadcasts, r), g),
+                                 race_full=score(b, fits["full"].aggregate(o.broadcasts, r), g),
+                                 majority=score(b, MajorityVote().aggregate(o.broadcasts, r), g)))
+    d = pd.DataFrame(rows)
+    return d.groupby(["benchmark", "model"])[["self", "majority", "race", "race_full"]].mean().reset_index()
+
+
 def worlds() -> list[World]:
     out = []
     for b, f, a, s in itertools.product(("mmlu", "boolq"), (0.1, 0.3, 0.5, 0.7),
@@ -87,6 +132,8 @@ def main() -> None:
     rs.to_csv(OUT / "role_stats.csv", index=False)
     ct = contagion()
     ct.to_csv(OUT / "contagion.csv", index=False)
+    answer_bias().to_csv(OUT / "answer_bias.csv", index=False)
+    receiver_breakdown().to_csv(OUT / "receivers.csv", index=False)
     frame, _, _ = run_worlds(worlds(), CORE_METHODS, OUT, processes=4)
     s = summary(frame, ["source", "benchmark", "attack", "f"])
     s.to_csv(OUT / "summary.csv")

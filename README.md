@@ -15,6 +15,7 @@ When some agents in a multi-agent LLM system lie, the usual defence is to find t
 | Liars that defeat the prior method (gate-aware), f = 0.7 | **95.0%** with RACE; 48.5% for AIP |
 | Against an oracle that *knows who lies and removes them* (independent liars, f = 0.7) | **94.9%** with RACE vs **89.6%** for the oracle |
 | Weakest honest agent (Llama-3.2-3B), liars in the majority | 73.5% alone → **89.6%** with RACE |
+| Live six-model swarm (fresh inference), MMLU | every honest agent gains **5.6–27.9 points**; on binary BoolQ RACE fails (reported, with the fix) |
 | Label-free trust estimates vs. the truth | correlation **r = 0.977** over 27,216 agent pairs |
 | Confirmation set (evaluated after the method was frozen) | **196 significant wins, 0 losses** in 480 paired tests |
 
@@ -224,6 +225,18 @@ Zero on this plot is an oracle that knows who lies, removes them, and decodes th
 
 Predict-then-commit streams of 200 questions (4 benchmarks × 3 values of f × 5 schedules × 2 seeds). A **sleeper** answers honestly for 100 questions and then lies coherently. Over the last 60 questions, a RACE fit frozen at warm-up scores 42.9%. With exponential forgetting (γ = 0.97), RACE recovers to **88.3%**, above the receiver alone (79.8%), a windowed AIP (69.4%) and majority vote (43.6%). At f = 0.7 the frozen fit and majority both score 0.0%, while forgetting scores **86.4%**. On a stationary schedule forgetting costs nothing (88.9% vs 88.6% cumulative), so `TrustLayer(forgetting=0.97)` is a safe default.
 
+### A live multi-agent LLM swarm (E8)
+
+<p align="center"><img src="figures/fig13_live_swarm.png" width="900" alt="Top: accuracy of six live models in honest, saboteur and debate roles. Bottom: pooled accuracy against LLM saboteurs on MMLU and BoolQ."></p>
+
+Six small open models (Qwen2.5-1.5B, SmolLM2-1.7B, Granite-3.3-2B, OLMo-2-1B, Llama-3.2-1B, Gemma-3-1B) answered 240 MMLU and BoolQ questions live on a CPU. Each model answered four times: as an honest agent, as a covert saboteur, as a saboteur that first sees the honest votes, and as an honest agent after a debate round where half the panel's votes were lies. That is 2,880 fresh answers, evaluated after RACE was frozen ([`results/live/`](results/live)).
+
+* **What the agents did.** Small models are weak honest agents: 32.5–60.8% on MMLU, 49.2–85.8% on BoolQ. They are also unreliable liars. On MMLU half the saboteur channels are below chance; on binary BoolQ *none* are. There the models fall back on a fixed option: as an honest agent, SmolLM2 says "yes" on 89.2% of questions. Debate changed 16.0% of honest answers, but only 3.7% moved to the saboteurs' answer.
+* **MMLU: RACE lifts every honest agent** by 5.6–27.9 points. At f = 0.5 with LLM saboteurs, RACE scores 54.2%, against 43.4% alone, 46.0% for majority vote and 41.8% for AIP. That matches the known-channel oracle (53.9%).
+* **BoolQ: a failure the live data exposed, reported as prominently.** Against LLM saboteurs, RACE falls *below* the receiver alone (56.2% vs 60.1% at f = 0.5; majority vote: 69.3%). The strongest receiver loses most, so this is not the weak-anchor failure. The cause is option bias: a channel that says "yes" regardless of the truth carries its information in its asymmetry, which RACE's symmetric one-coin model discards. The class-conditional variant, part of the frozen ablations, recovers it (69.5%) and does not hurt on the replayed BoolQ worlds. On 4-option MMLU with short histories that variant is over-parameterised (45.7%), so the right default depends on the answer space. We report this as a post-hoc observation and did not change the frozen method.
+* **Debate removes information that pooling needs.** On MMLU, a debate round before pooling lowers RACE from 56.0% to 49.6%, while individual accuracy barely moves (43.4% → 41.6%). Collect independent answers first, then pool.
+* Over 32 cells per baseline (48 test questions per world), RACE never loses significantly to the receiver alone, majority vote or AIP. It loses 3 cells to label-free Dawid–Skene, all on BoolQ with LLM saboteurs.
+
 ---
 
 ## 6. Where RACE fails
@@ -235,6 +248,7 @@ Predict-then-commit streams of 200 questions (4 benchmarks × 3 values of f × 5
 | **Weak receiver** (≤ 50% accurate on open answers) | 24% of such receivers end > 5 points worse than alone | Provably unidentifiable (Prop. 2): a near-chance anchor cannot anchor |
 | **MATH-500, f ≤ 0.3** | Trails AIP and majority by up to 10 points | The weak-anchor case above |
 | **Strongest agents** (≥ 93% alone) | −0.3 to −1.5 points on average | Pooling with a mostly weaker crowd; worst under camouflage |
+| **Option-biased binary answers** (live BoolQ, small models) | 56.2% vs 60.1% for the receiver alone at f = 0.5 | A symmetric channel cannot represent "always yes"; the class-conditional ablation recovers 69.5% |
 
 ---
 
@@ -265,10 +279,11 @@ PYTHONPATH=src python examples/trust_layer_demo.py  # MedQA stream with LLM sabo
 | Video | What it shows |
 |---|---|
 | [**Explainer film**](media/film_liars_are_information.mp4) | The whole system. Agents think, broadcast packets, and each honest agent decides with its trust links. Then the swarm's trust matrix learning over 90 questions, one question in slow motion (raw votes vs. signed evidence, agent by agent), and the results |
-| [MMLU, 70% gate-aware liars](media/swarm_mmlu_gateaware_f07.mp4) | One honest receiver learning to trust 3 peers and invert 7 liars, using the attack that defeats AIP |
+| [MMLU, 70% gate-aware liars](media/swarm_mmlu_gateaware_f07.mp4) | The median honest agent learning to trust its 2 honest peers and invert 7 liars, using the attack that defeats AIP |
 | [BoolQ, 50% coordinated liars](media/swarm_boolq_coherent_f05.mp4) | A bloc that always says the opposite, read backwards. Binary questions are where inversion matters most |
 | [MedQA, real LLM deceivers](media/swarm_medqa_rushing_llm_f05.mp4) | LLMs that see the honest answers before lying |
 | [The gate-aware sweep](media/gate_aware_sweep.mp4) | The attacker tunes coherence from 1/(K−1) to 1. AIP's gate is fooled in a band, while RACE's weight does not move |
+| [Live swarm, MMLU](media/live_debate_mmlu.mp4) · [BoolQ](media/live_debate_boolq.mp4) | Six live models answer as honest agents, as covert saboteurs, and again after a debate round. Running accuracy of RACE, the class-conditional variant, majority vote, debate-then-majority and the receiver alone |
 
 | | |
 |---|---|
@@ -282,6 +297,8 @@ PYTHONPATH=src python examples/trust_layer_demo.py  # MedQA stream with LLM sabo
 | **E5**: how much history the agents need | Who gains, and who risks losing, by pooling |
 | ![](figures/fig7_swarm.png) | ![](figures/fig9_best_response.png) |
 | **E4**: replicas, composition, swarm size | Best-response adaptive attacker |
+| ![](figures/fig12_information_budget.png) | ![](figures/fig13_live_swarm.png) |
+| **E9**: what the liars are worth | **E8**: the live six-model swarm |
 
 ---
 

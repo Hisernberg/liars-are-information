@@ -430,15 +430,64 @@ def fig_concept() -> None:
 
 
 def fig_live() -> None:
+    """E8: what the live agents did in each role, and what pooling made of it."""
     path = RES / "live" / "per_task.parquet"
     if not path.exists():
         return
     live = pd.read_parquet(path)
-    s = summary(live, ["benchmark", "attack", "f"])
+    s = summary(live, ["source", "benchmark", "attack", "f"])
     write_table(pct(s), "live_accuracy")
     meta_path = RES / "live" / "live_summary.json"
     if meta_path.exists():
         (TAB / "live_summary.json").write_text(meta_path.read_text())
+    roles = pd.read_csv(RES / "live" / "role_stats.csv")
+    from lai.data import LIVE_MODELS
+    names = {"qwen25_1p5b": "Qwen2.5-1.5B", "smollm2_1p7b": "SmolLM2-1.7B", "granite33_2b": "Granite-3.3-2B",
+             "olmo2_1b": "OLMo-2-1B", "llama32_1b": "Llama-3.2-1B", "gemma3_1b": "Gemma-3-1B"}
+    fig, axes = plt.subplots(2, 2, figsize=(10.5, 7.4))
+    role_style = {"honest": dict(color=viz.INK, marker="o", label="honest"),
+                  "debate": dict(color=viz.BLUE, marker="D", label="honest after debate"),
+                  "solo": dict(color=viz.RED, marker="v", label="saboteur (solo)"),
+                  "rushing": dict(color=viz.ORANGE, marker="^", label="saboteur (sees honest votes)")}
+    for ax, b in zip(axes[0], ("mmlu", "boolq"), strict=True):
+        g = roles[roles.benchmark == b]
+        ys = np.arange(len(LIVE_MODELS))[::-1]
+        for y, m in zip(ys, LIVE_MODELS, strict=True):
+            vals = g[g.model == m].set_index("role").accuracy
+            ax.plot([pct(vals.min()), pct(vals.max())], [y, y], color=viz.GRID, lw=3, zorder=1, solid_capstyle="round")
+            for role, st in role_style.items():
+                if role in vals:
+                    ax.scatter(pct(vals[role]), y, s=42, zorder=3, edgecolor=viz.SURFACE, lw=0.6,
+                               **{k: v for k, v in st.items() if k != "label"})
+        chance = 50 if b == "boolq" else 25
+        ax.axvline(chance, color=viz.INK_2, lw=0.8, ls="--")
+        ax.text(chance + 1, -0.45, "chance", fontsize=7.5, color=viz.INK_2, va="center")
+        ax.set_ylim(-0.7, len(LIVE_MODELS) - 0.4)
+        ax.set_yticks(ys, [names[m] for m in LIVE_MODELS])
+        ax.set_xlim(0, 100)
+        ax.set_xlabel("accuracy of the agent's answers (%)")
+        ax.set_title(f"{viz.BENCH_LABEL[b]}: what each live agent did", loc="left")
+        ax.grid(axis="y", visible=False)
+    axes[0][0].legend(handles=[plt.Line2D([], [], ls="", markersize=6, **st) for st in role_style.values()],
+                      fontsize=7.5, loc="lower right")
+    ind = live[(live.source == "live") & (live.split == "test")]
+    ind = ind.assign(fam=np.where(ind.attack == "coherent", "coherent", "llm"))
+    for ax, b in zip(axes[1], ("mmlu", "boolq"), strict=True):
+        sub = ind[(ind.benchmark == b) & (ind.fam == "llm")]
+        t = sub.groupby(["f", "method"]).accuracy.mean().unstack()
+        for m in ("self", "majority", "ds_onecoin", "aip_gated", "race"):
+            viz.line(ax, t.index, pct(t[m]), m)
+        viz.line(ax, t.index, pct(t["race_full"]), "race", color=viz.BLUE, ls="--", marker="s", alpha=0.8,
+                 label="RACE full-confusion (ablation)", lw=1.4)
+        ax.set_xlabel("Byzantine fraction f (LLM saboteurs: solo, rushing, colluding)")
+        ax.set_ylim(*((40, 90) if b == "boolq" else (20, 70)))
+        ax.set_title(f"{viz.BENCH_LABEL[b]}: honest-agent accuracy after pooling", loc="left")
+    axes[1][0].set_ylabel("accuracy (%)")
+    axes[1][0].legend(fontsize=7.5, loc="lower left", ncol=2)
+    fig.suptitle("E8: a live six-model swarm (fresh CPU inference, evaluated after the method was frozen)",
+                 x=0.01, ha="left", fontsize=11, fontweight="bold")
+    fig.tight_layout(rect=(0, 0, 1, 0.96))
+    viz.save(fig, FIG / "fig13_live_swarm")
 
 
 # ------------------------------------------------------------------ best response

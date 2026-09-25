@@ -65,3 +65,22 @@ In the per-benchmark cells of E1–E3 the two criteria never disagree (checked
 on `results/tables/paired_comparisons.csv`); they can disagree when a cell
 pools heterogeneous benchmarks (E9's pooled comparison), where the signed-rank
 test measures location rather than the mean.
+
+## Confirmation set 2 (live swarm, E8): an observation, not a change
+
+The live six-model swarm (`results/live/`) was evaluated with the frozen code.
+On MMLU, RACE lifts every honest receiver (+5.6 to +27.9 points). On binary
+BoolQ with LLM saboteurs it falls below the receiver alone (56.2% vs 60.1% at
+f = 0.5). The per-receiver breakdown (`results/live/receivers.csv`) shows that
+the strongest receiver loses most, which rules out weak-anchor capture. The
+answer-bias table (`results/live/answer_bias.csv`) shows the cause: small
+models answer binary questions with a fixed option bias (SmolLM2 says "yes"
+89% of the time as an honest agent; Granite's "lies" are "no" 98% of the time).
+A symmetric one-coin channel cannot represent that asymmetry. The full-confusion
+ablation (`race_full`, frozen before the run) recovers 69.5%, and it is not
+worse than RACE on the replayed BoolQ worlds. With four options and 48 history
+questions it is over-parameterised (45.7% on MMLU).
+
+A defensible amendment is class-conditional channels for binary answer spaces
+and the one-coin model otherwise. Because this was found on a confirmation set,
+it is reported as a post-hoc observation, and the frozen method is unchanged.
