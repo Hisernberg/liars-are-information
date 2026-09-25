@@ -609,6 +609,193 @@ def fig_budget(ext: pd.DataFrame) -> None:
     write_table(c.groupby(["attack", "param"]).verdict.value_counts().unstack(fill_value=0), "race_vs_removal_oracle_wtl", ".0f")
 
 
+CROWD_ROWS = ("oracle_channel", "race", "aip_gated", "iwmv", "mace", "glad", "kos", "ds_onecoin", "ds_full",
+              "majority", "self")
+CLASSICAL = ("iwmv", "mace", "glad", "ds_onecoin")
+
+
+def fig_crowd(crowd: pd.DataFrame) -> None:
+    """E11: classical crowdsourcing estimators have no anchor, so a liar majority flips them."""
+    test = crowd[crowd.split == "test"]
+    cell = test.groupby(["benchmark", "attack", "param", "f", "seed", "method"]).accuracy.mean().unstack("method")
+    by_f = pct(cell.groupby("f").mean())
+    by_bf = pct(cell.groupby(["benchmark", "f"]).mean())
+    table = by_f[[m for m in CROWD_ROWS if m != "kos"]].T.rename(index=viz.LABEL)
+    table.columns = [f"f={f:g}" for f in table.columns]
+    write_table(table.round(1), "crowd_baselines_by_f")
+    per_bench = by_bf.xs(0.7, level="f")[list(CROWD_ROWS)].T
+    write_table(per_bench.rename(index=viz.LABEL).round(1), "crowd_baselines_f07")
+    c = pd.read_csv(RES / "tables" / "race_vs_crowd.csv") if (RES / "tables" / "race_vs_crowd.csv").exists() else None
+    if c is not None:
+        wtl = c.groupby(["baseline", "f"]).verdict.value_counts().unstack(fill_value=0)
+        write_table(wtl.rename(index=viz.LABEL, level=0), "race_vs_crowd_wtl", ".0f")
+
+    fig = plt.figure(figsize=(11.2, 4.6))
+    gs = fig.add_gridspec(1, 2, width_ratios=[1.0, 1.25], wspace=0.62)
+    ax = fig.add_subplot(gs[0])
+    fs = by_f.index.to_numpy()
+    lo, hi = by_f[list(CLASSICAL)].min(axis=1), by_f[list(CLASSICAL)].max(axis=1)
+    ax.fill_between(fs, lo, hi, color=viz.YELLOW, alpha=0.22, lw=0, zorder=1)
+    ax.plot(fs, hi, color=viz.YELLOW, lw=1.6, ls="--", marker="v", markeredgecolor=viz.SURFACE, zorder=3,
+            label="Best classical crowd estimator\n(band: IWMV, MACE, GLAD, Dawid–Skene)")
+    for m in ("oracle_channel", "race", "aip_gated", "majority", "self"):
+        viz.line(ax, fs, by_f[m], m)
+    ax.axvline(0.5, color=viz.GRID, lw=1.0, zorder=0)
+    ax.text(0.505, 8, "liars become\nthe majority", fontsize=7.5, color=viz.INK_2, va="bottom")
+    for m, dy in (("race", -7), ("oracle_channel", 5), ("self", -9)):
+        ax.annotate(f"{by_f[m].iloc[-1]:.1f}", (fs[-1], by_f[m].iloc[-1]), xytext=(5, dy), textcoords="offset points",
+                    fontsize=7.5, color=viz.INK_2, va="center")
+    ax.annotate(f"{hi.iloc[-1]:.1f}", (fs[-1], hi.iloc[-1]), xytext=(5, 0), textcoords="offset points", fontsize=7.5,
+                color=viz.INK_2, va="center")
+    ax.set_xticks(fs, [f"{f:g}" for f in fs])
+    ax.set_xlim(fs[0] - 0.03, fs[-1] + 0.09)
+    ax.set_ylim(0, 102)
+    ax.set_xlabel("f: fraction of the 10 agents that lie")
+    ax.set_ylabel("honest-agent accuracy (%)")
+    ax.set_title("(a) Accuracy as the liar share grows", loc="left")
+    ax.legend(loc="lower left", fontsize=7.2)
+
+    ax = fig.add_subplot(gs[1])
+    cols = [b for b in BENCHES if b in per_bench.columns]
+    grid = per_bench[cols].copy()
+    # a mean over fewer benchmarks is not comparable, so only methods defined everywhere get one
+    grid["mean"] = by_f.loc[0.7, list(CROWD_ROWS)].where(grid[cols].notna().all(axis=1))
+    vals = grid.to_numpy(dtype=float)
+    cmap = LinearSegmentedColormap.from_list("seq", viz.SEQ_BLUE)
+    shown = np.where(np.isfinite(vals), vals, np.nan)
+    ax.imshow(np.ma.masked_invalid(shown), cmap=cmap, vmin=0, vmax=100, aspect="auto")
+    for i in range(vals.shape[0]):
+        for j in range(vals.shape[1]):
+            v = vals[i, j]
+            if np.isfinite(v):
+                ax.text(j, i, f"{v:.0f}", ha="center", va="center", fontsize=7.5,
+                        color="white" if v > 62 else viz.INK, fontweight="bold" if grid.index[i] == "race" else None)
+            else:
+                ax.add_patch(plt.Rectangle((j - 0.5, i - 0.5), 1, 1, color=viz.GRID, lw=0))
+                ax.text(j, i, "n/a", ha="center", va="center", fontsize=6.5, color=viz.MUTED)
+    ax.set_xticks(range(len(grid.columns)), [viz.BENCH_LABEL.get(b, b).split(" (")[0].replace("-", "-\n") for b in cols]
+                  + ["Mean"])
+    ax.set_yticks(range(len(grid.index)), [viz.LABEL.get(m, m) for m in grid.index])
+    ax.tick_params(length=0)
+    ax.grid(False)
+    for sp in ax.spines.values():
+        sp.set_visible(False)
+    ax.axhline(1.5, color=viz.SURFACE, lw=3)
+    ax.axvline(len(cols) - 0.5, color=viz.SURFACE, lw=3)
+    ax.set_title("(b) Per benchmark at f = 0.7 (7 of 10 agents lie)", loc="left")
+    fig.suptitle("E11. Classical crowdsourcing estimators collapse when liars are the majority; the anchor does not",
+                 x=0.01, ha="left", fontsize=11, fontweight="bold")
+    fig.text(0.01, -0.02, "Means over six benchmarks, six attack settings (coherent, gate-aware p = 0.25, four LLM prompts) "
+             "and three seeds, TEST split. KOS is defined for binary questions only; full-confusion Dawid–Skene is not "
+             "run on open-answer benchmarks (n/a).", fontsize=7, color=viz.INK_2)
+    viz.save(fig, FIG / "fig14_crowd_baselines")
+
+
+# (label, headline prefix pattern, f tag, oracle kind); the order is the paper's
+OVERVIEW_ROWS = (
+    ("E1  Coherent liar bloc", dict(race="mainRaceSeven", self="mainSelfSeven", oracle="mainOracleSeven",
+                                    aip="mainAipSeven", maj="mainMajSeven", ds="mainDsSeven")),
+    ("E2  Gate-aware adversary (built against AIP)", dict(race="zooGateRaceSeven", self="zooGateSelfSeven",
+                                                          oracle="zooGateOracleSeven", aip="zooGateAipSeven",
+                                                          maj="zooGateMajSeven", ds="zooGateDsSeven")),
+    ("E2  Camouflage (built against RACE)", dict(race="zooCamoRaceSeven", self="zooCamoSelfSeven",
+                                                 oracle="zooCamoOracleSeven", aip="zooCamoAipSeven",
+                                                 maj="zooCamoMajSeven", ds="zooCamoDsSeven")),
+    ("E3  LLMs prompted to deceive", dict(race="llmRaceSeven", self="llmSelfSeven", oracle="llmOracleSeven",
+                                          aip="llmAipSeven", maj="llmMajSeven", ds="llmDsSeven")),
+    ("E9  Independent liars", dict(race="extRaceIndepSeven", self="extSelfIndepSeven",
+                                   removal="extRemovalIndepSeven", aip="extAipIndepSeven", maj="extMajIndepSeven")),
+    ("E11 vs classical crowdsourcing", dict(race="crowdRaceSeven", self="crowdSelfSeven", oracle="crowdOracleSeven",
+                                            aip="crowdAipSeven", maj="crowdMajSeven", ds="crowdBestClassicalSeven")),
+    ("E8  Live swarm, MMLU (f = 0.5)", dict(race="liveMmluLlmRaceFive", self="liveMmluLlmSelfFive",
+                                            oracle="liveMmluLlmOracleFive", aip="liveMmluLlmAipFive",
+                                            maj="liveMmluLlmMajFive", ds="liveMmluLlmDsFive")),
+    ("E8  Live swarm, BoolQ (f = 0.5)", dict(race="liveBoolqLlmRaceFive", self="liveBoolqLlmSelfFive",
+                                             oracle="liveBoolqLlmOracleFive", aip="liveBoolqLlmAipFive",
+                                             maj="liveBoolqLlmMajFive", ds="liveBoolqLlmDsFive")),
+    ("E10 Fresh live run, ARC (f = 0.5)", dict(race="liveTwoArcLlmRaceFive", self="liveTwoArcLlmSelfFive",
+                                               oracle="liveTwoArcLlmOracleFive", aip="liveTwoArcLlmAipFive",
+                                               maj="liveTwoArcLlmMajFive", ds="liveTwoArcLlmDsFive")),
+    ("E10 Fresh live run, BoolQ (f = 0.5)", dict(race="liveTwoBoolqLlmRaceFive", self="liveTwoBoolqLlmSelfFive",
+                                                 oracle="liveTwoBoolqLlmOracleFive", aip="liveTwoBoolqLlmAipFive",
+                                                 maj="liveTwoBoolqLlmMajFive", ds="liveTwoBoolqLlmDsFive")),
+)
+
+
+def fig_overview() -> None:
+    """One row per study: RACE against every deployable baseline, the receiver alone and the oracle."""
+    path = RES / "tables" / "headline.json"
+    if not path.exists():
+        return
+    h = json.loads(path.read_text())
+
+    def val(key):
+        v = h.get(key.replace("Two", "Two"))
+        try:
+            return float(str(v).replace(",", ""))
+        except (TypeError, ValueError):
+            return np.nan
+
+    rows = [(lab, {k: val(v) for k, v in keys.items()}) for lab, keys in OVERVIEW_ROWS]
+    rows = [(lab, r) for lab, r in rows if np.isfinite(r["race"])]
+    table = pd.DataFrame({lab: r for lab, r in rows}).T
+    table = table.rename(columns={"race": "RACE", "self": "Receiver alone", "oracle": "Known-channel oracle",
+                                  "removal": "Liar-removal oracle", "aip": "AIP gated", "maj": "Majority vote",
+                                  "ds": "Dawid–Skene / best classical"})
+    base_cols = ["AIP gated", "Majority vote", "Dawid–Skene / best classical"]
+    table["RACE − receiver"] = table["RACE"] - table["Receiver alone"]
+    table["RACE − best baseline"] = table["RACE"] - table[base_cols].max(axis=1)
+    write_table(table.round(1), "overview")
+
+    fig, ax = plt.subplots(figsize=(10.5, 0.52 * len(rows) + 1.6))
+    ys = np.arange(len(rows))[::-1]
+    for y, (lab, r) in zip(ys, rows, strict=True):
+        if y % 2 == 0:
+            ax.axhspan(y - 0.5, y + 0.5, color=viz.GRID, alpha=0.35, lw=0, zorder=0)
+        pts = [r[k] for k in ("race", "self", "aip", "maj", "ds", "oracle", "removal") if np.isfinite(r.get(k, np.nan))]
+        ax.plot([min(pts), max(pts)], [y, y], color=viz.GRID, lw=1.2, zorder=1)
+        ax.plot([r["self"]] * 2, [y - 0.28, y + 0.28], color=viz.MUTED, lw=2.4, zorder=2, solid_capstyle="butt")
+        for k, style in (("aip", "aip_gated"), ("maj", "majority"), ("ds", "ds_onecoin")):
+            if np.isfinite(r.get(k, np.nan)):
+                st = viz.METHOD_STYLE[style]
+                ax.scatter(r[k], y, marker=st["marker"], s=46, color=st["color"], zorder=3, edgecolor=viz.SURFACE,
+                           lw=0.7)
+        if np.isfinite(r.get("oracle", np.nan)):
+            ax.scatter(r["oracle"], y, marker="*", s=95, color=viz.VIOLET, zorder=4, edgecolor=viz.SURFACE, lw=0.6)
+        if np.isfinite(r.get("removal", np.nan)):
+            ax.scatter(r["removal"], y, marker="*", s=95, facecolor="none", edgecolor=viz.VIOLET, lw=1.1, zorder=4)
+        ax.scatter(r["race"], y, marker="o", s=80, color=viz.BLUE, zorder=6, edgecolor=viz.SURFACE, lw=0.9)
+        d_self = r["race"] - r["self"]
+        d_base = r["race"] - max(r.get(k, -np.inf) for k in ("aip", "maj", "ds") if np.isfinite(r.get(k, np.nan)))
+        ax.text(101.5, y, f"{d_self:+.1f}", va="center", ha="left", fontsize=8,
+                color=viz.INK if d_self >= 0 else viz.RED, fontweight="bold")
+        ax.text(111.5, y, f"{d_base:+.1f}", va="center", ha="left", fontsize=8,
+                color=viz.INK if d_base >= 0 else viz.RED, fontweight="bold")
+    ax.text(101.5, len(rows) - 0.35, "vs receiver\nalone", fontsize=7, color=viz.INK_2, va="bottom")
+    ax.text(111.5, len(rows) - 0.35, "vs best\nbaseline", fontsize=7, color=viz.INK_2, va="bottom")
+    ax.set_yticks(ys, [lab for lab, _ in rows])
+    ax.set_xlim(-2, 121)
+    ax.set_xticks(range(0, 101, 20))
+    ax.set_ylim(-0.6, len(rows) - 0.4)
+    ax.grid(axis="y", visible=False)
+    ax.spines["left"].set_visible(False)
+    ax.tick_params(axis="y", length=0)
+    ax.set_xlabel("honest-agent accuracy (%), f = 0.7 unless stated (7 of 10 agents lie)")
+    handles = [plt.Line2D([], [], marker="o", ls="", color=viz.BLUE, markersize=8, label="RACE (ours)"),
+               plt.Line2D([], [], marker="s", ls="", color=viz.ORANGE, label="AIP gated (prior work)"),
+               plt.Line2D([], [], marker="^", ls="", color=viz.AQUA, label="Majority vote"),
+               plt.Line2D([], [], marker="v", ls="", color=viz.YELLOW, label="Dawid–Skene / best classical"),
+               plt.Line2D([], [], marker="|", ls="", color=viz.MUTED, markersize=10, markeredgewidth=2.4,
+                          label="Receiver alone"),
+               plt.Line2D([], [], marker="*", ls="", color=viz.VIOLET, markersize=10, label="Known-channel oracle"),
+               plt.Line2D([], [], marker="*", ls="", markerfacecolor="none", color=viz.VIOLET, markersize=10,
+                          label="Liar-removal oracle")]
+    ax.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.42, -0.08 - 0.45 / len(rows)), ncol=4, fontsize=7.5)
+    ax.set_title("Every study at a glance: RACE against every deployable baseline", loc="left", fontsize=11)
+    fig.tight_layout()
+    viz.save(fig, FIG / "fig0_overview")
+
+
 def per_agent_table() -> None:
     """How much each honest agent gains by pooling, per model (E7 receiver-gain worlds, f >= 0.5)."""
     p = RES / "extra" / "receiver_gain.parquet"
@@ -665,9 +852,22 @@ def comparisons(main, zoo, llm) -> None:
 
 
 def main() -> None:
+    import argparse
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--late", action="store_true",
+                    help="only the figures that read generated numbers (run after make_numbers.py)")
+    args = ap.parse_args()
     viz.setup()
     FIG.mkdir(exist_ok=True)
-    main_df, zoo, llm, hist, sw, ext = (load(s) for s in ("main", "zoo", "llm", "history", "swarm", "ext"))
+    if args.late:
+        fig_overview()
+        crowd = load("crowd")
+        if crowd is not None:
+            fig_crowd(crowd)
+        return
+    main_df, zoo, llm, hist, sw, ext, crowd = (load(s) for s in ("main", "zoo", "llm", "history", "swarm", "ext",
+                                                                 "crowd"))
     fig_concept()
     if main_df is not None:
         fig_main(main_df)
@@ -683,11 +883,14 @@ def main() -> None:
         fig_swarm(sw)
     if ext is not None:
         fig_budget(ext)
+    if crowd is not None:
+        fig_crowd(crowd)
     fig_channels()
     per_agent_table()
     fig_online()
     fig_live()
     comparisons(main_df, zoo, llm)
+    fig_overview()
     print(json.dumps(sorted(p.name for p in FIG.glob("*.png")), indent=1))
 
 

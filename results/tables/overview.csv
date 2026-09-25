@@ -1,0 +1,9 @@
+,RACE,Receiver alone,Known-channel oracle,AIP gated,Majority vote,Dawid–Skene / best classical,Liar-removal oracle,RACE − receiver,RACE − best baseline
+E1  Coherent liar bloc,89.3,84.0,92.0,72.9,0.0,0.0,,5.3,16.4
+E2  Gate-aware adversary (built against AIP),94.9,86.4,95.2,48.5,3.9,0.0,,8.5,46.4
+E2  Camouflage (built against RACE),80.1,86.4,87.4,72.6,78.0,78.0,,-6.3,2.1
+E3  LLMs prompted to deceive,89.8,85.8,91.1,70.8,29.4,22.7,,4.0,19.0
+E9  Independent liars,94.8,84.2,,29.1,7.0,,89.7,10.6,65.7
+E11 vs classical crowdsourcing,89.5,84.2,90.7,60.9,22.8,17.6,,5.3,28.6
+"E8  Live swarm, MMLU (f = 0.5)",54.2,43.4,53.9,41.8,46.0,44.9,,10.8,8.2
+"E8  Live swarm, BoolQ (f = 0.5)",69.5,60.1,74.0,62.4,69.3,58.5,,9.4,0.2

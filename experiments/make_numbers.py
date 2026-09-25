@@ -87,6 +87,9 @@ def zoo_numbers(zoo: pd.DataFrame) -> None:
     put("zooGateAipSeven", pct(low["aip_gated"]))
     put("zooGateSoftSeven", pct(low["aip_soft"]))
     put("zooGateMajSeven", pct(low["majority"]))
+    put("zooGateSelfSeven", pct(low["self"]))
+    put("zooGateDsSeven", pct(low["ds_onecoin"]))
+    put("zooGateOracleSeven", pct(low["oracle_channel"]))
     for f, tag in ((0.5, "Five"), (0.7, "Seven")):
         ind = s.loc[(f, "independent", 1.0)]
         put(f"zooIndepRace{tag}", pct(ind["race"]))
@@ -96,6 +99,9 @@ def zoo_numbers(zoo: pd.DataFrame) -> None:
         put(f"zooCamoCap{tag}", pct(camo["race_capself"]))
         put(f"zooCamoSelf{tag}", pct(camo["self"]))
         put(f"zooCamoAip{tag}", pct(camo["aip_gated"]))
+        put(f"zooCamoMaj{tag}", pct(camo["majority"]))
+        put(f"zooCamoDs{tag}", pct(camo["ds_onecoin"]))
+        put(f"zooCamoOracle{tag}", pct(camo["oracle_channel"]))
         sl = s.loc[(f, "sleeper", 1.0)]
         put(f"zooSleeperRace{tag}", pct(sl["race"]))
         put(f"zooSleeperCap{tag}", pct(sl["race_capself"]))
@@ -291,6 +297,47 @@ def ext_numbers(ext: pd.DataFrame) -> None:
     put("nWorldsExt", json.loads((RES / "ext" / "run_manifest.json").read_text())["worlds"], "{:,}")
 
 
+CROWD_METHODS = (("iwmv", "Iwmv"), ("mace", "Mace"), ("glad", "Glad"), ("kos", "Kos"), ("ds_onecoin", "Ds"),
+                 ("ds_full", "DsFull"), ("majority", "Maj"), ("self", "Self"), ("aip_gated", "Aip"), ("race", "Race"),
+                 ("oracle_channel", "Oracle"))
+CLASSICAL = ("iwmv", "mace", "glad", "ds_onecoin")  # label-free crowd estimators defined on every benchmark
+
+
+def crowd_numbers(crowd: pd.DataFrame) -> None:
+    """E11: RACE against classical crowdsourcing estimators (IWMV, MACE, GLAD, KOS, Dawid-Skene)."""
+    test = crowd[crowd.split == "test"]
+    cell = test.groupby(["benchmark", "attack", "param", "f", "seed", "method"]).accuracy.mean().unstack("method")
+    by_f = cell.groupby("f").mean() * 100
+    boolq = cell.xs("boolq", level="benchmark").groupby("f").mean() * 100
+    for f, tag in ((0.1, "One"), (0.3, "Three"), (0.5, "Five"), (0.7, "Seven")):
+        for m, mt in CROWD_METHODS:
+            if m != "kos":
+                put(f"crowd{mt}{tag}", by_f.loc[f, m])
+            put(f"crowdBoolq{mt}{tag}", boolq.loc[f, m])
+        best = by_f.loc[f, list(CLASSICAL)]
+        put(f"crowdBestClassical{tag}", best.max())
+        # every classical estimator, each averaged over the benchmarks where it is defined
+        everything = [by_f.loc[f, m] for m in (*CLASSICAL, "ds_full")] + [boolq.loc[f, "kos"]]
+        put(f"crowdClassicalMax{tag}", max(everything))
+    c = compare(crowd, "race", [m for m, _ in CROWD_METHODS if m not in ("race", "oracle_channel")],
+                ["benchmark", "f", "attack", "param"])
+    (RES / "tables").mkdir(parents=True, exist_ok=True)
+    c.to_csv(RES / "tables" / "race_vs_crowd.csv", index=False)
+    classical = c[c.baseline.isin([*CLASSICAL, "kos", "ds_full"])]
+    put("crowdCells", len(c), "{:d}")
+    put("crowdClassicalCells", len(classical), "{:d}")
+    put("crowdClassicalWins", int((classical.verdict == "win").sum()), "{:d}")
+    put("crowdClassicalLosses", int((classical.verdict == "loss").sum()), "{:d}")
+    for lo, hi, tag in ((0.0, 0.35, "Low"), (0.45, 1.0, "High")):
+        part = classical[(classical.f > lo) & (classical.f < hi)]
+        put(f"crowdClassicalCells{tag}", len(part), "{:d}")
+        put(f"crowdClassicalWins{tag}", int((part.verdict == "win").sum()), "{:d}")
+        put(f"crowdClassicalTies{tag}", int((part.verdict == "tie").sum()), "{:d}")
+    put("crowdWins", int((c.verdict == "win").sum()), "{:d}")
+    put("crowdLosses", int((c.verdict == "loss").sum()), "{:d}")
+    put("nWorldsCrowd", json.loads((RES / "crowd" / "run_manifest.json").read_text())["worlds"], "{:,}")
+
+
 def swarm_numbers(sw: pd.DataFrame) -> None:
     s = summary(sw[sw.n_agents == 10], ["composition", "f"])
     for comp, ct in (("hom_llama32_3b", "HomLlama"), ("hom_qwen38_27b", "HomQwen"), ("frozen+weak", "Weak")):
@@ -424,10 +471,37 @@ def live_numbers() -> None:
     put("nLiveTestTasks", int(test[test.source == "live"].groupby("world_id").task.nunique().median()), "{:d}")
 
 
+def compute_numbers() -> None:
+    """Wall-clock compute from the run manifests and the live-run metadata (CPU only)."""
+    total = 0.0
+    for st in ("main", "zoo", "llm", "history", "swarm", "ext", "crowd", "online"):
+        p = RES / st / "run_manifest.json"
+        if p.exists():
+            total += json.loads(p.read_text()).get("elapsed_seconds", 0.0)
+    put("computeReplayMinutes", total / 60, "{:.0f}")
+    for root, tag in (("live_cache", "Live"), ("live_cache_v2", "LiveTwo")):
+        metas = list((ROOT / "data" / root / "raw").glob("*.json"))
+        if metas:
+            secs = sum(json.loads(m.read_text()).get("elapsed_seconds", 0.0) for m in metas)
+            put(f"compute{tag}Hours", secs / 3600, "{:.1f}")
+
+
+def test_count() -> None:
+    """Number of unit and property tests in the default (offline) suite."""
+    import os
+    import subprocess
+
+    env = os.environ | {"PYTHONPATH": str(ROOT / "src")}
+    out = subprocess.run([sys.executable, "-m", "pytest", "--collect-only", "-q", "-o", "addopts=", "-m", "not slow"],
+                         cwd=ROOT, env=env, capture_output=True, text=True).stdout
+    n = sum(1 for line in out.splitlines() if "::" in line)
+    put("nTests", n if n else None, "{:d}")
+
+
 def world_counts() -> None:
     put("nLiveTasks", "240")
     total = 0
-    for st in ("main", "zoo", "llm", "history", "swarm", "ext"):
+    for st in ("main", "zoo", "llm", "history", "swarm", "ext", "crowd"):
         p = RES / st / "run_manifest.json"
         if p.exists():
             total += json.loads(p.read_text())["worlds"]
@@ -436,8 +510,10 @@ def world_counts() -> None:
 
 def main() -> None:
     world_counts()
+    test_count()
+    compute_numbers()
     for name, fn in (("main", main_numbers), ("zoo", zoo_numbers), ("llm", llm_numbers), ("history", history_numbers),
-                     ("swarm", swarm_numbers), ("ext", ext_numbers)):
+                     ("swarm", swarm_numbers), ("ext", ext_numbers), ("crowd", crowd_numbers)):
         frame = load(name)
         if frame is not None:
             fn(frame)
@@ -452,7 +528,8 @@ def main() -> None:
 
     prefixes = ("main", "llm", "zoo", "br", "chan", "hist", "risk", "live", "on", "swarm", "size", "breakdown",
                 "gain", "worse", "nWorlds", "nLive", "budget", "overRemoval", "raceD", "removal", "recovery",
-                "pooledRemoval", "extLlm", "binary", "agent", "extRace", "extRemoval", "extSelf", "extMaj", "extAip")
+                "pooledRemoval", "extLlm", "binary", "agent", "extRace", "extRemoval", "extSelf", "extMaj", "extAip",
+                "compute", "crowd", "liveTwo", "informed")
     used = set()
     for tex in (ROOT / "paper").rglob("*.tex"):
         if tex.name == "numbers.tex":
@@ -464,6 +541,7 @@ def main() -> None:
         NUM[u] = "??"
     if missing:
         print("WARNING undefined result macros:", ", ".join(missing))
+    NUM["nNumbers"] = f"{len(NUM) + 1:,}"
     lines = ["% GENERATED by experiments/make_numbers.py -- do not edit by hand."]
     for k, v in sorted(NUM.items()):
         lines.append(f"\\newcommand{{\\{k}}}{{{v}}}")

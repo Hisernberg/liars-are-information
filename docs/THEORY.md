@@ -158,3 +158,26 @@ The **information budget** of an attack is the known-channel accuracy minus the 
 * a **negative** budget cannot happen for the Bayes receiver. When the one-coin decoder shows one, the attack lies outside the one-coin conditionally independent stationary model. In E9 this happens for echo, camouflage and the sleeper, which are exactly RACE's failure modes.
 
 A rule that only filters suspected liars sees at most $H$, so in expectation it cannot beat the Bayes receiver on $H$. The liar-removal oracle is our proxy for that receiver. RACE is label-free and does not know the Byzantine set, yet it exceeds that bound in 17 of 54 pooled (attack, $f$) cells, all of them truth-dependent attacks.
+
+## Theorem 2 (anchored estimation is identified and consistent)
+
+**Setting.** The class-conditional (Dawid–Skene) model: questions are i.i.d., the class prior ρ has full support on K classes, and G ≥ 3 channel groups are conditionally independent given Y, each group counted once after clone tempering.
+
+**Assumptions.**
+- Three of the groups have *invertible* confusion matrices. For a one-coin channel this means accuracy a ≠ 1/K, so a consistent liar counts as informative.
+- The receiver's confusion matrix is row-diagonally dominant with margin δ > 0.
+
+**Conclusions.**
+- (a) The parameters are identified *exactly*, not only up to a relabelling of the classes, within the set Θ_δ where the receiver is δ-dominant.
+- (b) The maximum-likelihood estimator over Θ_δ, with entries clipped to [ε, 1−ε], is strongly consistent as the history length T → ∞. So is the anchored MAP estimator, whose fixed-strength priors are O(1/T).
+- (c) The plug-in decision converges to the known-channel receiver's decision. RACE's accuracy therefore converges to acc* of Theorem 1 under the model.
+
+**Proof.**
+- (a) The three groups' joint law is a three-way array Σ_y ρ_y π₁[y,·]⊗π₂[y,·]⊗π₃[y,·] whose factor matrices have full Kruskal rank K, and 3K ≥ 2K + 2. Kruskal's theorem (Kruskal, 1977; Allman et al., 2009 for latent-class models) identifies ρ and the three matrices up to one simultaneous permutation τ; row-stochasticity fixes the scales. Each further group g follows from π₁ᵀ diag(ρ) π_g, because π₁ and diag(ρ) are invertible. Proposition 2(c) leaves only τ = id.
+- (b) Θ_δ is compact, the log-likelihood is continuous, and by (a) the truth is its unique maximiser in expectation; the standard consistency argument for maximum likelihood applies.
+- (c) The posterior is continuous in the parameters.
+
+**Consequences.**
+- *Three informative groups are needed.* With the receiver and only one informative peer, the binary class-conditional model is not identified, even with the anchor. `tests/test_race.py::test_binary_identification_needs_three_informative_channels` shows exactly this: the peer's confusion matrix is recovered to within 0.1 with three informative channels, and is not recovered with two.
+- *Misspecification.* A misspecified model converges to the KL projection of the truth. This is the one-coin model on option-biased live BoolQ answers, and it is why v3.1 uses class-conditional channels on binary questions.
+- *The algorithm.* EM converges to a stationary point. The anchor initialisation places it in the basin of the dominant solution; the theorem is about the estimator, not about EM.

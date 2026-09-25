@@ -1,0 +1,28 @@
+{
+  "study": "crowd",
+  "worlds": 342,
+  "methods": [
+    "self",
+    "majority",
+    "ds_onecoin",
+    "ds_full",
+    "aip_gated",
+    "iwmv",
+    "mace",
+    "glad",
+    "kos",
+    "race",
+    "oracle_channel"
+  ],
+  "rows": 495900,
+  "elapsed_seconds": 303.97,
+  "peak_rss_mib_parent": 344.6,
+  "peak_rss_mib_children": 240.0,
+  "processes": 2,
+  "python": "3.11.15",
+  "machine": "x86_64",
+  "cpu_count": 4,
+  "gpu_inference": false,
+  "inputs_sha256": "eff90400e30aa91e2157b05b8b3c08bcb9884a4a4171780e458df7d19a208ba4",
+  "code_sha256": "088266a6bcd476ec6ba2006471e55492c24787bd2c1c50a01c43cfe9be6b69ba"
+}

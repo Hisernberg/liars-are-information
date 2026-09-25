@@ -27,9 +27,25 @@ TARGETS = [  # (template, output)
 ]
 
 
+TABLES = ROOT / "results" / "tables"
+EXTRA = (TABLES / "claims.json",     # written by experiments/verify_claims.py
+         TABLES / "switching.json")  # written by experiments/make_switching.py
+
+
+def include_table(match: re.Match) -> str:
+    """``{{table:name}}`` -> the Markdown table ``results/tables/name.md`` (NaN shown as a dash)."""
+    path = TABLES / f"{match.group(1)}.md"
+    if not path.exists():
+        sys.exit(f"missing table {path.relative_to(ROOT)}")
+    return re.sub(r"(?<=\|)\s*nan\s*(?=\|)", " — ", path.read_text().strip())
+
+
 def render(template: Path) -> str:
     numbers = json.loads(HEADLINE.read_text())
-    text = template.read_text()
+    for extra in EXTRA:
+        if extra.exists():
+            numbers |= json.loads(extra.read_text())
+    text = re.sub(r"\{\{table:([A-Za-z0-9_]+)\}\}", include_table, template.read_text())
     missing: list[str] = []
 
     def fill(match: re.Match) -> str:

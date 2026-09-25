@@ -60,3 +60,22 @@ Online forgetting (E6) & $\gamma=0.97$, refit every 8 tasks\\
 \begin{sloppypar}
 All code, data, results, figures, videos and this manuscript are in the accompanying repository and Hugging Face release. One command, \texttt{experiments/\allowbreak reproduce\_all.sh}, regenerates everything on a 4-core CPU without a GPU in about an hour: E1--E7 and E9 from the cached answers, the E8 evaluation from the live-swarm cache, every figure, table and number, the videos, the repository README and this PDF. It finishes by re-checking every qualitative claim in the text against the results (\texttt{experiments/\allowbreak verify\_claims.py}). \texttt{experiments/\allowbreak live\_swarm.py} regenerates the live answers themselves. The numbers in this paper are macros written by \texttt{experiments/\allowbreak make\_numbers.py}. Each study directory holds a \texttt{run\_manifest.json} with the input and code hashes, wall time and peak memory. The repository's test suite covers \race's identification, invariance, clone-grouping, class-conditional and causality properties.
 \end{sloppypar}
+
+\section{Compute resources}\label{app:compute}
+Everything ran on one 4-core x86-64 CPU with 15\,GB of memory and no GPU. The replayed studies (E1--E7, E9, E11 and the E6 streams) took \computeReplayMinutes\ minutes of wall-clock time in total, as recorded in each study's run manifest. The live swarm E8 took \computeLiveHours\ CPU hours of inference for six models in float32. The per-study times, code hashes and input hashes are listed in the repository's evidence ledger (\texttt{docs/EVIDENCE.md}).
+
+\section{Reproducibility checklist}\label{app:checklist}
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item \textbf{Code and data.} All code, cached model answers, live-swarm answers, per-task results, figures and videos are released under MIT; benchmark items keep their upstream licenses.
+\item \textbf{One command.} \texttt{experiments/reproduce\_all.sh} regenerates every study, number, table, figure, video, the README and this PDF, then re-checks every qualitative claim.
+\item \textbf{Randomness.} All seeds derive from SHA-256 of the world specification; runs are bit-reproducible across processes.
+\item \textbf{Splits.} HISTORY/\allowbreak VALIDATION/\allowbreak TEST are fixed by a hash of the question identifier. Methods never see labels; attacks are chosen on VALIDATION; everything is scored on TEST.
+\item \textbf{Hyper-parameters.} Fixed before evaluation and never tuned (\cref{app:hparams}). Every post-hoc change is logged with its trigger (\cref{app:devlog}), and superseded variants are reported.
+\item \textbf{Statistics.} Paired bootstrap intervals (2{,}000 resamples) and Wilcoxon signed-rank tests, Holm-corrected within each study. A verdict requires both to agree, and the unit is the question.
+\item \textbf{Confirmation.} Two confirmation sets were not inspected during the design of v3.0. A third (E10) was pre-registered before any of its answers existed.
+\item \textbf{Claims.} Every number in the text is a generated macro, and every qualitative sentence is re-derived by \texttt{experiments/verify\_claims.py}.
+\item \textbf{Tests.} The test suite covers identification, invariance, clone grouping, the binary rule, the classical baselines, causality of the online protocol and the evidence decomposition.
+\end{itemize}
+
+\section{Ethics and broader impact}\label{app:ethics}
+The deceptive answers we study come from language models that were explicitly prompted to mislead. They are used to evaluate defences, and no deceptive content was shown to people. No human subjects or personal data are involved. The work has a dual use. The information budget and the camouflage attack show an adversary what \race\ can and cannot see, and the same knowledge that makes the defence auditable helps an attacker design around it. We report the failure modes prominently for this reason. A deployed system should combine receiver-local pooling with the online forgetting variant and with independent-answer protocols, and it should treat a negative information budget as an alarm. \race\ decides from agreement patterns alone. It is a statistical defence and not a guarantee, and it should not be the only safeguard in high-stakes settings.

@@ -100,8 +100,21 @@ def study_ext() -> list[World]:
     return zoo + llm
 
 
+def study_crowd() -> list[World]:
+    """E11: RACE against the classical crowdsourcing estimators (MACE, GLAD, IWMV, KOS)."""
+    coh = [World(b, f, "coherent", 1.0, 1.0, s, study="crowd")
+           for b, f, s in itertools.product(BENCHMARKS, (0.1, 0.3, 0.5, 0.7), SEEDS3)]
+    gate = [World(b, f, "gate_aware", 0.25, 1.0, s, study="crowd")
+            for b, f, s in itertools.product(BENCHMARKS, (0.3, 0.5, 0.7), SEEDS3)]
+    llm = [World(b, f, f"llm:{a}", 1.0, 1.0, s, study="crowd")
+           for b, f, a, s in itertools.product(BENCHMARKS, (0.3, 0.5, 0.7), ATTACK_PROMPTS, SEEDS3)]
+    return coh + gate + llm
+
+
 STUDIES = {"main": study_main, "zoo": study_zoo, "llm": study_llm, "swarm": study_swarm, "history": study_history,
-           "ext": study_ext}
+           "ext": study_ext, "crowd": study_crowd}
+CROWD_METHODS = ("self", "majority", "ds_onecoin", "ds_full", "aip_gated", "iwmv", "mace", "glad", "kos", "race",
+                 "oracle_channel")
 EXT_METHODS = ("self", "majority", "aip_gated", "race", "race_onecoin", "race_d", "oracle_channel", "oracle_channel_honest")
 # The expensive AIP variants are kept wherever they are the comparison of record.
 LIGHT = tuple(m for m in CORE_METHODS if m not in ("aip_naive", "sac", "confidence"))
@@ -117,7 +130,8 @@ def main() -> None:
     worlds = STUDIES[args.study]()
     if args.limit:
         worlds = worlds[: args.limit]
-    methods = CORE_METHODS if args.study in ("main", "llm") else EXT_METHODS if args.study == "ext" else LIGHT
+    methods = (CORE_METHODS if args.study in ("main", "llm") else EXT_METHODS if args.study == "ext"
+               else CROWD_METHODS if args.study == "crowd" else LIGHT)
     out = args.out or ROOT / "results" / args.study
     started = time.monotonic()
     frame, _, _ = run_worlds(worlds, methods, out, processes=args.processes)

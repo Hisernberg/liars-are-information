@@ -266,3 +266,31 @@ def test_binary_rule_reads_option_biased_peers():
     assert _accuracy(auto, tasks[300:], gold[300:]) > _accuracy(onecoin, tasks[300:], gold[300:]) + 0.03
     # an "always yes" channel carries almost no weight under the class-conditional model
     assert abs(auto.diagnostics.channels[0][3].weight_at_chance_k) < 0.5
+
+
+def test_binary_identification_needs_three_informative_channels():
+    """Theorem 2: with the receiver and one informative peer (plus an uninformative
+    "always yes" peer) the class-conditional model is not identified; adding two
+    informative peers makes the fitted confusion matrix of the peer converge to the truth."""
+    flip = {"A": "B", "B": "A"}
+
+    def run(extra_honest: int, seed: int = 7):
+        rng = np.random.default_rng(seed)
+        tasks = []
+        for t in range(1500):
+            g = "AB"[int(rng.integers(2))]
+            row = [g if rng.random() < 0.7 else flip[g]]                       # receiver
+            row.append("A" if rng.random() < 0.9 else "B")                     # uninformative
+            row.append("B" if (g == "B" and rng.random() < 0.9) else "A")      # informative, says B only if true
+            row += [g if rng.random() < 0.7 else flip[g] for _ in range(extra_honest)]
+            heard = tuple(Broadcast(j, f"t{t}", a, 0.9, 0.9, False) for j, a in enumerate(row))
+            tasks.append((Observation(0, f"t{t}", heard),))
+        race = RACEAggregator(("A", "B"))
+        race.fit(tasks)
+        est = race.fits[0].confusion[race.fits[0].column(2)]
+        truth = np.array([[1.0, 0.0], [0.1, 0.9]])
+        return float(np.abs(est - truth).max())
+
+    err_two, err_three = run(0), run(2)
+    assert err_three < 0.1
+    assert err_two > 2 * err_three

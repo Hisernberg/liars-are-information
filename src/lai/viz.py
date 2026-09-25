@@ -39,6 +39,11 @@ METHOD_STYLE = {
     "race_capself": dict(color=BLUE, marker="h", label="RACE + self cap", lw=1.0, zorder=3, alpha=0.6),
     "race_onecoin": dict(color=BLUE, marker="o", label="RACE v3.0 (one-coin everywhere)", lw=1.2, zorder=4, alpha=0.55,
                          ls="--"),
+    # classical crowdsourcing estimators (E11)
+    "iwmv": dict(color=MAGENTA, marker="<", label="IWMV", lw=1.2, zorder=3),
+    "mace": dict(color=GREEN, marker=">", label="MACE", lw=1.2, zorder=3),
+    "glad": dict(color=RED, marker="d", label="GLAD", lw=1.2, zorder=3),
+    "kos": dict(color=INK_2, marker="X", label="KOS (binary only)", lw=1.2, zorder=3),
 }
 
 LABEL = {k: v["label"] for k, v in METHOD_STYLE.items()} | {

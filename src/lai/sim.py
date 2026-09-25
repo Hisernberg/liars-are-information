@@ -351,9 +351,16 @@ def method_factories(built: BuiltWorld, methods: Iterable[str]) -> dict[str, Cal
         "oracle_channel": lambda r: oracle_channel(built, r),
         "oracle_channel_honest": lambda r: HonestOnly(oracle_channel(built, r), built.honest, "oracle_channel_honest"),
     }
+    from lai.crowd import GLAD, IWMV, KOS, MACE
+
+    table["iwmv"] = lambda r: IWMV(labels)
+    table["mace"] = lambda r: MACE(labels)
+    table["glad"] = lambda r: GLAD(labels)
     if labels:
         table["ds_full"] = lambda r: DawidSkeneFullAggregator(labels, max_iter=60)
         table["race_full"] = lambda r: RACEAggregator(labels, model="full")
+        if len(set(labels)) == 2:
+            table["kos"] = lambda r: KOS(labels)
     return {m: table[m] for m in methods if m in table}
 
 

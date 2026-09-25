@@ -34,6 +34,9 @@ JOBS = [
     ("gate_aware_sweep.mp4", "gate_aware_sweep", 0, None, 6, 760),
     ("live_debate_mmlu.mp4", "live_debate_mmlu", 0, None, 4, 760),
     ("live_debate_boolq.mp4", "live_debate_boolq", 0, None, 4, 760),
+    ("label_switching.mp4", "label_switching", 0, None, 6, 800),
+    ("live_informed_arc.mp4", "live_informed_arc", 0, None, 4, 760),
+    ("live_informed_boolq.mp4", "live_informed_boolq", 0, None, 4, 760),
 ]
 
 
