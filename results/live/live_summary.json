@@ -29,15 +29,9 @@
     "switch_to_liar_plurality": 0.0368
   },
   "race_vs_baselines_verdicts": {
-    "loss": {
-      "aip_gated": 0,
-      "ds_onecoin": 3,
-      "majority": 0,
-      "self": 0
-    },
     "tie": {
       "aip_gated": 25,
-      "ds_onecoin": 23,
+      "ds_onecoin": 26,
       "majority": 25,
       "self": 27
     },

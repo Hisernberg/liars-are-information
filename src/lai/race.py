@@ -263,9 +263,13 @@ class RACEAggregator(Aggregator):
         Closed label set, or ``None`` for open answers (the candidate set is then
         the distinct answers observed on each task).
     model:
-        ``"onecoin"`` (symmetric, one accuracy per channel; the default) or
+        ``"auto"`` (the default, RACE v3.1): class-conditional channels for
+        binary label spaces and the symmetric one-coin model otherwise.
+        ``"onecoin"`` (one accuracy per channel; RACE v3.0 everywhere) or
         ``"full"`` (one class-conditional confusion matrix per channel; closed
-        label spaces only).
+        label spaces only). Binary questions get two parameters per channel,
+        which short histories identify, and small LLMs answer them with an
+        option bias ("always yes") that a symmetric channel cannot represent.
     anchored:
         ``True`` is RACE. ``False`` is the ablation: identical model, but EM is
         initialised from the plurality and the receiver gets the same prior as
@@ -285,7 +289,7 @@ class RACEAggregator(Aggregator):
         self,
         label_space: Sequence[str] | None = None,
         *,
-        model: str = "onecoin",
+        model: str = "auto",
         anchored: bool = True,
         clone_aware: bool = True,
         clone_mode: str = "error",
@@ -305,10 +309,13 @@ class RACEAggregator(Aggregator):
         condition: str = "all",
         name: str | None = None,
     ) -> None:
-        if model not in ("onecoin", "full"):
+        if model not in ("auto", "onecoin", "full"):
             raise ValueError(f"unknown model {model!r}")
         if model == "full" and not label_space:
             raise ValueError("the full-confusion model needs a closed label space")
+        self.model_rule = model
+        if model == "auto":
+            model = "full" if label_space and len(set(label_space)) == 2 else "onecoin"
         if cap not in (None, "self"):
             raise ValueError(f"unknown cap {cap!r}")
         self.label_space = tuple(sorted(label_space)) if label_space else None
@@ -346,8 +353,8 @@ class RACEAggregator(Aggregator):
         self.condition = condition
         if name is None:
             name = "race" if self.anchored else "ds_onecoin"
-            if self.model == "full":
-                name += "_full"
+            if self.model_rule != "auto" and self.anchored:
+                name += f"_{self.model_rule}"
             if not self.clone_aware:
                 name += "_noclone"
             elif self.clone_mode == "raw":
@@ -628,9 +635,17 @@ class RACEAggregator(Aggregator):
     def _describe(self, fit: ReceiverFit, own: int) -> dict[int, ChannelEstimate]:
         out: dict[int, ChannelEstimate] = {}
         k = max(fit.mean_k, 2.0)
+        binary_full = fit.confusion is not None and fit.confusion.shape[1] == 2
         for j, agent in enumerate(fit.agents):
             a = float(np.clip(fit.accuracy[j], self.eps, 1 - self.eps))
-            lam = float(np.log(a * (k - 1) / (1 - a)))
+            if binary_full:
+                # Class-conditional channel: its weight is half the log diagnostic odds
+                # ratio, i.e. the mean log-likelihood ratio a report adds for the answer
+                # it names. It is ~0 for "always yes" and negative for an inverter.
+                p = np.clip(fit.confusion[j], self.eps, 1.0)
+                lam = float(0.5 * (np.log(p[0, 0]) + np.log(p[1, 1]) - np.log(p[0, 1]) - np.log(p[1, 0])))
+            else:
+                lam = float(np.log(a * (k - 1) / (1 - a)))
             if j == own:
                 decision = TRUST
             elif fit.n_observed[j] == 0:
@@ -693,13 +708,15 @@ class RACEAggregator(Aggregator):
 
         ``softmax`` of the per-candidate sums reproduces :meth:`posterior`; this is
         the decomposition the explainer film and ``TrustLayer`` display."""
-        if self.model != "onecoin":
-            raise NotImplementedError("per-agent evidence is defined for the one-coin model")
         row = {b.agent_id: b.answer for b in observations}
         cands = self._candidates(row)
         fit = self.fits.get(self_id)
         if fit is None or len(cands) < 2:
             return {}
+        if self.model == "full":
+            if len(cands) != 2 or fit.confusion is None:
+                raise NotImplementedError("per-agent evidence of the full model is defined for binary questions")
+            return self._evidence_binary(row, cands, fit)
         k = len(cands)
         cols = {a: fit.column(a) for a, ans in row.items() if ans in cands and fit.column(a) is not None}
         group_count: dict[int, int] = {}
@@ -710,6 +727,25 @@ class RACEAggregator(Aggregator):
             a = float(np.clip(fit.accuracy[col], self.eps, 1 - self.eps))
             lam = np.log(a) + np.log(k - 1) - np.log1p(-a)
             out[agent] = (row[agent], float(lam / group_count[int(fit.groups[col])]))
+        return out
+
+    def _evidence_binary(self, row, cands, fit) -> dict[int, tuple[str, float]]:
+        """Binary class-conditional decomposition. Each report adds
+        ``w * log(pi[r, r] / pi[other, r])`` to the answer it names; key ``-1`` is
+        the class prior's log-odds, credited to the more frequent class."""
+        index = {c: i for i, c in enumerate(cands)}
+        cols = {a: fit.column(a) for a, ans in row.items() if ans in index and fit.column(a) is not None}
+        group_count: dict[int, int] = {}
+        for col in cols.values():
+            group_count[int(fit.groups[col])] = group_count.get(int(fit.groups[col]), 0) + 1
+        out: dict[int, tuple[str, float]] = {}
+        for agent, col in cols.items():
+            r = index[row[agent]]
+            conf = fit.confusion[col]
+            out[agent] = (row[agent], float((np.log(conf[r, r]) - np.log(conf[1 - r, r])) / group_count[int(fit.groups[col])]))
+        prior = np.log(fit.class_prior)
+        top = int(np.argmax(prior))
+        out[-1] = (cands[top], float(prior[top] - prior[1 - top]))
         return out
 
     def aggregate(self, observations: Sequence[Broadcast], self_id: int) -> str | None:

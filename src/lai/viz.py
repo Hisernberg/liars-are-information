@@ -37,6 +37,8 @@ METHOD_STYLE = {
     "oracle_honest_majority": dict(color=VIOLET, marker="x", label="Honest-only oracle", lw=1.0, zorder=3),
     "race_noclone": dict(color=BLUE, marker="o", label="RACE w/o clone tempering", lw=1.0, zorder=3, alpha=0.6),
     "race_capself": dict(color=BLUE, marker="h", label="RACE + self cap", lw=1.0, zorder=3, alpha=0.6),
+    "race_onecoin": dict(color=BLUE, marker="o", label="RACE v3.0 (one-coin everywhere)", lw=1.2, zorder=4, alpha=0.55,
+                         ls="--"),
 }
 
 LABEL = {k: v["label"] for k, v in METHOD_STYLE.items()} | {

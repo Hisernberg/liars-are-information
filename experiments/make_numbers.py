@@ -132,6 +132,65 @@ def llm_numbers(llm: pd.DataFrame) -> None:
     for b, bt in (("aip_gated", "Aip"), ("majority", "Maj"), ("self", "Self")):
         put(f"llmWins{bt}", int(((c.baseline == b) & (c.verdict == "win")).sum()), "{:d}")
     put("llmCellsPerBaseline", int((c.baseline == "self").sum()), "{:d}")
+    if "race_onecoin" in set(llm.method):
+        for f, tag in ((0.5, "Five"), (0.7, "Seven"), (0.3, "Three")):
+            put(f"llmVthree{tag}", pct(s.loc[f, "race_onecoin"]))
+        c0 = compare(llm, "race_onecoin", ["self", "majority", "aip_gated", "aip_soft", "ds_onecoin"],
+                     ["benchmark", "f", "attack"])
+        put("llmWinsVthree", int((c0.verdict == "win").sum()), "{:d}")
+        put("llmLossesVthree", int((c0.verdict == "loss").sum()), "{:d}")
+
+
+def binary_numbers() -> None:
+    """RACE v3.1 (class-conditional channels on binary questions) vs v3.0 (one-coin) on BoolQ."""
+    for st, tag in (("main", "Main"), ("zoo", "Zoo"), ("llm", "Llm"), ("ext", "Ext"), ("live", "Live")):
+        d = load(st)
+        if d is None or "race_onecoin" not in set(d.method):
+            continue
+        d = d[(d.split == "test") & (d.benchmark == "boolq")]
+        if st == "live":
+            d = d[(d.source == "live") & d.attack.str.startswith("llm:")]
+        m = d.groupby("method").accuracy.mean()
+        put(f"binary{tag}Race", pct(m["race"]))
+        put(f"binary{tag}Vthree", pct(m["race_onecoin"]))
+        put(f"binary{tag}Self", pct(m["self"]))
+        put(f"binary{tag}Delta", pct(m["race"] - m["race_onecoin"]), "{:+.1f}")
+    cells = nonties = wins = losses = 0
+    for st, by in (("main", ["f", "p_obs"]), ("zoo", ["f", "attack", "param"]), ("llm", ["f", "attack"])):
+        d = load(st)
+        if d is None or "race_onecoin" not in set(d.method):
+            continue
+        c = compare(d[d.benchmark == "boolq"], "race", ["race_onecoin"], by)
+        cells += len(c)
+        nonties += int((c.verdict != "tie").sum())
+        wins += int((c.verdict == "win").sum())
+        losses += int((c.verdict == "loss").sum())
+    put("binaryReplayCells", cells, "{:d}")
+    put("binaryReplayNonTies", nonties, "{:d}")
+    put("binaryReplayWins", wins, "{:d}")
+    put("binaryReplayLosses", losses, "{:d}")
+
+
+def agent_numbers() -> None:
+    """Per honest model: accuracy alone vs pooled (E7 receiver-gain worlds, f >= 0.5)."""
+    p = RES / "extra" / "receiver_gain.parquet"
+    if not p.exists():
+        return
+    rg = pd.read_parquet(p)
+    rg = rg[rg.f >= 0.5]
+    t = rg.groupby("model")[["self_acc", "majority_acc", "aip_acc", "race_acc"]].mean()
+    names = {"llama32_3b": "Llama", "phi4_mini_reasoning": "Phi", "granite42_30b": "Granite",
+             "olmo3_32b_think": "Olmo", "ministral3_14b": "Ministral", "gemma4_31b": "Gemma", "qwen38_27b": "Qwen"}
+    for m, nt in names.items():
+        if m in t.index:
+            row = t.loc[m]
+            put(f"agent{nt}Self", pct(row.self_acc))
+            put(f"agent{nt}Maj", pct(row.majority_acc))
+            put(f"agent{nt}Aip", pct(row.aip_acc))
+            put(f"agent{nt}Race", pct(row.race_acc))
+            put(f"agent{nt}Gain", pct(row.race_acc - row.self_acc), "{:+.1f}")
+    put("agentSpreadSelf", pct(t.self_acc.max() - t.self_acc.min()))
+    put("agentSpreadRace", pct(t.race_acc.max() - t.race_acc.min()))
 
 
 def history_numbers(h: pd.DataFrame) -> None:
@@ -193,6 +252,9 @@ def ext_numbers(ext: pd.DataFrame) -> None:
             put(f"overRemoval{rt}{tag}", r.race - r.oracle_channel_honest, "{:+.1f}")
             put(f"raceD{rt}{tag}", r.race_d - r.race, "{:+.1f}")
             put(f"extRace{rt}{tag}", r.race)
+            put(f"extSelf{rt}{tag}", r.self)
+            put(f"extMaj{rt}{tag}", r.majority)
+            put(f"extAip{rt}{tag}", r.aip_gated)
             put(f"extRemoval{rt}{tag}", r.oracle_channel_honest)
         r = llm.loc[f]
         put(f"budgetLlm{tag}", r.oracle_channel - r.oracle_channel_honest, "{:+.1f}")
@@ -317,8 +379,8 @@ def live_numbers() -> None:
         return
     test = live[live.split == "test"]
     ind = test[test.source == "live"].assign(fam=lambda d: np.where(d.attack == "coherent", "Coh", "Llm"))
-    methods = (("race", "Race"), ("race_full", "Full"), ("majority", "Maj"), ("self", "Self"), ("aip_gated", "Aip"),
-               ("ds_onecoin", "Ds"), ("oracle_channel", "Oracle"))
+    methods = (("race", "Race"), ("race_onecoin", "Vthree"), ("race_full", "Full"), ("majority", "Maj"), ("self", "Self"),
+               ("aip_gated", "Aip"), ("ds_onecoin", "Ds"), ("oracle_channel", "Oracle"))
     fs = ((0.1, "One"), (0.3, "Three"), (0.5, "Five"), (0.7, "Seven"))
     t = ind.groupby(["benchmark", "fam", "f", "method"]).accuracy.mean()
     for b, bt in bench:
@@ -353,6 +415,12 @@ def live_numbers() -> None:
     put("liveGraniteSelf", pct(rec.loc[("boolq", "granite33_2b"), "self"]))
     put("liveGraniteRace", pct(rec.loc[("boolq", "granite33_2b"), "race"]))
     put("liveGraniteFull", pct(rec.loc[("boolq", "granite33_2b"), "race_full"]))
+    if "race_onecoin" in rec.columns:
+        put("liveGraniteVthree", pct(rec.loc[("boolq", "granite33_2b"), "race_onecoin"]))
+        for b, bt in bench:
+            gain0 = rec.loc[b].race_onecoin - rec.loc[b].self
+            put(f"live{bt}VthreeGainMin", pct(gain0.min()))
+            put(f"live{bt}VthreeGainMax", pct(gain0.max()))
     put("nLiveTestTasks", int(test[test.source == "live"].groupby("world_id").task.nunique().median()), "{:d}")
 
 
@@ -374,6 +442,8 @@ def main() -> None:
         if frame is not None:
             fn(frame)
     extra_numbers()
+    binary_numbers()
+    agent_numbers()
     online_numbers()
     live_numbers()
     # Every result macro the manuscript uses must exist: undefined ones become a
@@ -382,7 +452,7 @@ def main() -> None:
 
     prefixes = ("main", "llm", "zoo", "br", "chan", "hist", "risk", "live", "on", "swarm", "size", "breakdown",
                 "gain", "worse", "nWorlds", "nLive", "budget", "overRemoval", "raceD", "removal", "recovery",
-                "pooledRemoval", "extLlm")
+                "pooledRemoval", "extLlm", "binary", "agent", "extRace", "extRemoval", "extSelf", "extMaj", "extAip")
     used = set()
     for tex in (ROOT / "paper").rglob("*.tex"):
         if tex.name == "numbers.tex":

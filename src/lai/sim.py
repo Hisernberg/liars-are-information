@@ -241,8 +241,29 @@ def oracle_channel(built: BuiltWorld, receiver: int) -> RACEAggregator:
             first = next(i for i in agents if built.models[i] == m)
             groups[j] = groups[first]
     k = float(len(built.data.label_space)) if built.data.label_space else 3.0
+    confusion = prior = None
+    if agg.model == "full":
+        # Binary questions: the same channel family RACE fits (class-conditional),
+        # measured against gold on HISTORY with add-one-half smoothing.
+        labels = list(agg.label_space)
+        index = {c: i for i, c in enumerate(labels)}
+        counts = np.full((len(agents), 2, 2), 0.5)
+        gold_counts = np.full(2, 0.5)
+        for t in hist:
+            g = index.get(built.data.gold[t])
+            if g is None:
+                continue
+            gold_counts[g] += 1
+            heard = {x.agent_id for x in built.defense[t][receiver].broadcasts}
+            for j in agents:
+                a = built.raw[t][j].answer
+                if j in heard and a in index:
+                    counts[j, g, index[a]] += 1
+        confusion = counts / counts.sum(axis=2, keepdims=True)
+        prior = gold_counts / gold_counts.sum()
+        acc = [float(prior @ np.diag(confusion[j])) for j in agents]
     agg.fits[receiver] = ReceiverFit(
-        agents, np.array(acc), groups, np.array(n_obs), k, 0, True, 0.0
+        agents, np.array(acc), groups, np.array(n_obs), k, 0, True, 0.0, confusion=confusion, class_prior=prior
     )
     return agg
 
@@ -286,6 +307,7 @@ CORE_METHODS = (
     "race_rawclone",
     "race_ms",
     "race",
+    "race_onecoin",
     "race_full",
     "race_capself",
     "oracle_honest_majority",
@@ -307,12 +329,13 @@ def method_factories(built: BuiltWorld, methods: Iterable[str]) -> dict[str, Cal
         "aip_trust_only": lambda r: AIPAggregator(b, "trust_only", thresholds, parity, labels),
         "aip_naive": lambda r: AIPAggregator(b, "naive", thresholds, parity, labels),
         "aip_soft": lambda r: AIPAggregator(b, "gated", thresholds, parity, labels, soft_gate=6.0),
-        "ds_onecoin": lambda r: RACEAggregator(labels, anchored=False, clone_aware=False),
+        "ds_onecoin": lambda r: RACEAggregator(labels, model="onecoin", anchored=False, clone_aware=False),
         "race_noclone": lambda r: RACEAggregator(labels, clone_aware=False),
         "race_rawclone": lambda r: RACEAggregator(labels, clone_mode="raw"),
         "race_ms": lambda r: RACEAggregator(labels, multistart=True),
         "race_d": lambda r: RACEAggregator(labels, condition="disagreement"),
         "race": lambda r: RACEAggregator(labels),
+        "race_onecoin": lambda r: RACEAggregator(labels, model="onecoin"),
         "race_capself": lambda r: RACEAggregator(labels, cap="self"),
         "oracle_honest_majority": lambda r: OracleHonestMajority(built.honest),
         "oracle_channel": lambda r: oracle_channel(built, r),

@@ -5,7 +5,7 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":0,
+  "seed":1,
   "n_agents":10,
   "composition":"frozen",
   "history_n":5,
@@ -15,15 +15,15 @@
   "n_honest":7,
   "honest_models":[
    "granite42_30b",
+   "ministral3_14b",
+   "qwen38_27b",
    "llama32_3b",
    "qwen38_27b",
-   "qwen38_27b",
-   "ministral3_14b",
-   "phi4_mini_reasoning",
-   "gemma4_31b"
+   "gemma4_31b",
+   "phi4_mini_reasoning"
   ],
   "byz_pair_coincidence_test":1.0,
-  "world_id":92810315489
+  "world_id":844528830780
  },
  {
   "benchmark":"mmlu",
@@ -57,7 +57,7 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":1,
+  "seed":0,
   "n_agents":10,
   "composition":"frozen",
   "history_n":5,
@@ -67,15 +67,15 @@
   "n_honest":7,
   "honest_models":[
    "granite42_30b",
-   "ministral3_14b",
-   "qwen38_27b",
    "llama32_3b",
    "qwen38_27b",
-   "gemma4_31b",
-   "phi4_mini_reasoning"
+   "qwen38_27b",
+   "ministral3_14b",
+   "phi4_mini_reasoning",
+   "gemma4_31b"
   ],
   "byz_pair_coincidence_test":1.0,
-  "world_id":844528830780
+  "world_id":92810315489
  },
  {
   "benchmark":"mmlu",
@@ -109,32 +109,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":10,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":3,
-  "n_honest":7,
-  "honest_models":[
-   "phi4_mini_reasoning",
-   "olmo3_32b_think",
-   "qwen38_27b",
-   "phi4_mini_reasoning",
-   "gemma4_31b",
-   "ministral3_14b",
-   "llama32_3b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":996545626469
- },
- {
-  "benchmark":"mmlu",
-  "f":0.3,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":1,
   "n_agents":10,
   "composition":"frozen",
@@ -154,6 +128,32 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":695089126421
+ },
+ {
+  "benchmark":"mmlu",
+  "f":0.3,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":10,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":3,
+  "n_honest":7,
+  "honest_models":[
+   "phi4_mini_reasoning",
+   "olmo3_32b_think",
+   "qwen38_27b",
+   "phi4_mini_reasoning",
+   "gemma4_31b",
+   "ministral3_14b",
+   "llama32_3b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":996545626469
  },
  {
   "benchmark":"mmlu",
@@ -239,32 +239,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":40,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":3,
-  "n_honest":7,
-  "honest_models":[
-   "granite42_30b",
-   "ministral3_14b",
-   "qwen38_27b",
-   "llama32_3b",
-   "qwen38_27b",
-   "gemma4_31b",
-   "phi4_mini_reasoning"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":367711881497
- },
- {
-  "benchmark":"mmlu",
-  "f":0.3,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
@@ -284,6 +258,32 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":827784325890
+ },
+ {
+  "benchmark":"mmlu",
+  "f":0.3,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":1,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":40,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":3,
+  "n_honest":7,
+  "honest_models":[
+   "granite42_30b",
+   "ministral3_14b",
+   "qwen38_27b",
+   "llama32_3b",
+   "qwen38_27b",
+   "gemma4_31b",
+   "phi4_mini_reasoning"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":367711881497
  },
  {
   "benchmark":"mmlu",
@@ -551,32 +551,6 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":20,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":3,
-  "n_honest":7,
-  "honest_models":[
-   "granite42_30b",
-   "ministral3_14b",
-   "qwen38_27b",
-   "llama32_3b",
-   "qwen38_27b",
-   "gemma4_31b",
-   "phi4_mini_reasoning"
-  ],
-  "byz_pair_coincidence_test":0.375,
-  "world_id":328294402215
- },
- {
-  "benchmark":"mmlu",
-  "f":0.3,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
@@ -622,6 +596,32 @@
   ],
   "byz_pair_coincidence_test":0.375,
   "world_id":812515873506
+ },
+ {
+  "benchmark":"mmlu",
+  "f":0.3,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":1,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":20,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":3,
+  "n_honest":7,
+  "honest_models":[
+   "granite42_30b",
+   "ministral3_14b",
+   "qwen38_27b",
+   "llama32_3b",
+   "qwen38_27b",
+   "gemma4_31b",
+   "phi4_mini_reasoning"
+  ],
+  "byz_pair_coincidence_test":0.375,
+  "world_id":328294402215
  },
  {
   "benchmark":"mmlu",
@@ -753,6 +753,30 @@
  },
  {
   "benchmark":"mmlu",
+  "f":0.5,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":1,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":5,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "granite42_30b",
+   "ministral3_14b",
+   "qwen38_27b",
+   "llama32_3b",
+   "gemma4_31b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":527530234470
+ },
+ {
+  "benchmark":"mmlu",
   "f":0.3,
   "attack":"gate_aware",
   "param":0.25,
@@ -776,30 +800,6 @@
   ],
   "byz_pair_coincidence_test":0.375,
   "world_id":613053304929
- },
- {
-  "benchmark":"mmlu",
-  "f":0.5,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":5,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
-  "honest_models":[
-   "granite42_30b",
-   "ministral3_14b",
-   "qwen38_27b",
-   "llama32_3b",
-   "gemma4_31b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":527530234470
  },
  {
   "benchmark":"mmlu",
@@ -833,30 +833,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":0,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":10,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
-  "honest_models":[
-   "granite42_30b",
-   "llama32_3b",
-   "qwen38_27b",
-   "ministral3_14b",
-   "phi4_mini_reasoning"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":21355032814
- },
- {
-  "benchmark":"mmlu",
-  "f":0.5,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":2,
   "n_agents":10,
   "composition":"frozen",
@@ -874,6 +850,30 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":778681518346
+ },
+ {
+  "benchmark":"mmlu",
+  "f":0.5,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":0,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":10,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "granite42_30b",
+   "llama32_3b",
+   "qwen38_27b",
+   "ministral3_14b",
+   "phi4_mini_reasoning"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":21355032814
  },
  {
   "benchmark":"mmlu",
@@ -977,30 +977,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":0,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":40,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
-  "honest_models":[
-   "granite42_30b",
-   "llama32_3b",
-   "qwen38_27b",
-   "ministral3_14b",
-   "phi4_mini_reasoning"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":408714535416
- },
- {
-  "benchmark":"mmlu",
-  "f":0.5,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":2,
   "n_agents":10,
   "composition":"frozen",
@@ -1028,7 +1004,7 @@
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
-  "history_n":80,
+  "history_n":40,
   "study":"history",
   "source":"artifact",
   "n_byzantine":5,
@@ -1041,7 +1017,7 @@
    "phi4_mini_reasoning"
   ],
   "byz_pair_coincidence_test":1.0,
-  "world_id":529020644858
+  "world_id":408714535416
  },
  {
   "benchmark":"mmlu",
@@ -1097,6 +1073,30 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
+  "seed":0,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":80,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "granite42_30b",
+   "llama32_3b",
+   "qwen38_27b",
+   "ministral3_14b",
+   "phi4_mini_reasoning"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":529020644858
+ },
+ {
+  "benchmark":"mmlu",
+  "f":0.5,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
   "seed":1,
   "n_agents":10,
   "composition":"frozen",
@@ -1114,30 +1114,6 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":453114104450
- },
- {
-  "benchmark":"mmlu",
-  "f":0.5,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":80,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
-  "honest_models":[
-   "qwen38_27b",
-   "phi4_mini_reasoning",
-   "gemma4_31b",
-   "ministral3_14b",
-   "llama32_3b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":563910790379
  },
  {
   "benchmark":"mmlu",
@@ -1162,6 +1138,30 @@
   ],
   "byz_pair_coincidence_test":0.355,
   "world_id":47197960400
+ },
+ {
+  "benchmark":"mmlu",
+  "f":0.5,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":80,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "qwen38_27b",
+   "phi4_mini_reasoning",
+   "gemma4_31b",
+   "ministral3_14b",
+   "llama32_3b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":563910790379
  },
  {
   "benchmark":"mmlu",
@@ -1241,30 +1241,6 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":0,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":20,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
-  "honest_models":[
-   "granite42_30b",
-   "llama32_3b",
-   "qwen38_27b",
-   "ministral3_14b",
-   "phi4_mini_reasoning"
-  ],
-  "byz_pair_coincidence_test":0.355,
-  "world_id":98574030136
- },
- {
-  "benchmark":"mmlu",
-  "f":0.5,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
   "seed":1,
   "n_agents":10,
   "composition":"frozen",
@@ -1306,6 +1282,30 @@
   ],
   "byz_pair_coincidence_test":0.3775,
   "world_id":758299812739
+ },
+ {
+  "benchmark":"mmlu",
+  "f":0.5,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":0,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":20,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "granite42_30b",
+   "llama32_3b",
+   "qwen38_27b",
+   "ministral3_14b",
+   "phi4_mini_reasoning"
+  ],
+  "byz_pair_coincidence_test":0.355,
+  "world_id":98574030136
  },
  {
   "benchmark":"mmlu",
@@ -1433,54 +1433,6 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":80,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
-  "honest_models":[
-   "granite42_30b",
-   "ministral3_14b",
-   "qwen38_27b",
-   "llama32_3b",
-   "gemma4_31b"
-  ],
-  "byz_pair_coincidence_test":0.40625,
-  "world_id":793951231093
- },
- {
-  "benchmark":"mmlu",
-  "f":0.5,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":80,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
-  "honest_models":[
-   "qwen38_27b",
-   "phi4_mini_reasoning",
-   "gemma4_31b",
-   "ministral3_14b",
-   "llama32_3b"
-  ],
-  "byz_pair_coincidence_test":0.3775,
-  "world_id":353943571147
- },
- {
-  "benchmark":"mmlu",
-  "f":0.5,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
@@ -1498,6 +1450,30 @@
   ],
   "byz_pair_coincidence_test":0.355,
   "world_id":877805150710
+ },
+ {
+  "benchmark":"mmlu",
+  "f":0.5,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":1,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":80,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "granite42_30b",
+   "ministral3_14b",
+   "qwen38_27b",
+   "llama32_3b",
+   "gemma4_31b"
+  ],
+  "byz_pair_coincidence_test":0.40625,
+  "world_id":793951231093
  },
  {
   "benchmark":"mmlu",
@@ -1567,6 +1543,30 @@
  },
  {
   "benchmark":"mmlu",
+  "f":0.5,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":80,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "qwen38_27b",
+   "phi4_mini_reasoning",
+   "gemma4_31b",
+   "ministral3_14b",
+   "llama32_3b"
+  ],
+  "byz_pair_coincidence_test":0.3775,
+  "world_id":353943571147
+ },
+ {
+  "benchmark":"mmlu",
   "f":0.7,
   "attack":"coherent",
   "param":1.0,
@@ -1593,28 +1593,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":10,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "ministral3_14b",
-   "llama32_3b",
-   "gemma4_31b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":69785438451
- },
- {
-  "benchmark":"mmlu",
-  "f":0.7,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":2,
   "n_agents":10,
   "composition":"frozen",
@@ -1630,6 +1608,28 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":937564544301
+ },
+ {
+  "benchmark":"mmlu",
+  "f":0.7,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":1,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":10,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "ministral3_14b",
+   "llama32_3b",
+   "gemma4_31b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":69785438451
  },
  {
   "benchmark":"mmlu",
@@ -1725,28 +1725,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":40,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "qwen38_27b",
-   "phi4_mini_reasoning",
-   "gemma4_31b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":356542732659
- },
- {
-  "benchmark":"mmlu",
-  "f":0.7,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":1,
   "n_agents":10,
   "composition":"frozen",
@@ -1762,6 +1740,28 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":133838330465
+ },
+ {
+  "benchmark":"mmlu",
+  "f":0.7,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":40,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "qwen38_27b",
+   "phi4_mini_reasoning",
+   "gemma4_31b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":356542732659
  },
  {
   "benchmark":"mmlu",
@@ -1788,24 +1788,24 @@
  {
   "benchmark":"mmlu",
   "f":0.7,
-  "attack":"gate_aware",
-  "param":0.25,
+  "attack":"coherent",
+  "param":1.0,
   "p_obs":1.0,
-  "seed":0,
+  "seed":2,
   "n_agents":10,
   "composition":"frozen",
-  "history_n":5,
+  "history_n":80,
   "study":"history",
   "source":"artifact",
   "n_byzantine":7,
   "n_honest":3,
   "honest_models":[
-   "llama32_3b",
    "qwen38_27b",
-   "phi4_mini_reasoning"
+   "phi4_mini_reasoning",
+   "gemma4_31b"
   ],
-  "byz_pair_coincidence_test":0.3547619048,
-  "world_id":979606267528
+  "byz_pair_coincidence_test":1.0,
+  "world_id":517947476076
  },
  {
   "benchmark":"mmlu",
@@ -1832,24 +1832,24 @@
  {
   "benchmark":"mmlu",
   "f":0.7,
-  "attack":"coherent",
-  "param":1.0,
+  "attack":"gate_aware",
+  "param":0.25,
   "p_obs":1.0,
-  "seed":2,
+  "seed":0,
   "n_agents":10,
   "composition":"frozen",
-  "history_n":80,
+  "history_n":5,
   "study":"history",
   "source":"artifact",
   "n_byzantine":7,
   "n_honest":3,
   "honest_models":[
+   "llama32_3b",
    "qwen38_27b",
-   "phi4_mini_reasoning",
-   "gemma4_31b"
+   "phi4_mini_reasoning"
   ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":517947476076
+  "byz_pair_coincidence_test":0.3547619048,
+  "world_id":979606267528
  },
  {
   "benchmark":"mmlu",
@@ -1879,28 +1879,6 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":5,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "qwen38_27b",
-   "phi4_mini_reasoning",
-   "gemma4_31b"
-  ],
-  "byz_pair_coincidence_test":0.3738095238,
-  "world_id":517628145038
- },
- {
-  "benchmark":"mmlu",
-  "f":0.7,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
@@ -1916,6 +1894,28 @@
   ],
   "byz_pair_coincidence_test":0.3547619048,
   "world_id":992807888759
+ },
+ {
+  "benchmark":"mmlu",
+  "f":0.7,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":5,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "qwen38_27b",
+   "phi4_mini_reasoning",
+   "gemma4_31b"
+  ],
+  "byz_pair_coincidence_test":0.3738095238,
+  "world_id":517628145038
  },
  {
   "benchmark":"mmlu",
@@ -1945,28 +1945,6 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":0,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":20,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "llama32_3b",
-   "qwen38_27b",
-   "phi4_mini_reasoning"
-  ],
-  "byz_pair_coincidence_test":0.3547619048,
-  "world_id":332136417395
- },
- {
-  "benchmark":"mmlu",
-  "f":0.7,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
   "seed":2,
   "n_agents":10,
   "composition":"frozen",
@@ -1982,28 +1960,6 @@
   ],
   "byz_pair_coincidence_test":0.3738095238,
   "world_id":938265469647
- },
- {
-  "benchmark":"mmlu",
-  "f":0.7,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":20,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "qwen38_27b",
-   "phi4_mini_reasoning",
-   "gemma4_31b"
-  ],
-  "byz_pair_coincidence_test":0.3738095238,
-  "world_id":28645401357
  },
  {
   "benchmark":"mmlu",
@@ -2036,6 +1992,50 @@
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
+  "history_n":20,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "llama32_3b",
+   "qwen38_27b",
+   "phi4_mini_reasoning"
+  ],
+  "byz_pair_coincidence_test":0.3547619048,
+  "world_id":332136417395
+ },
+ {
+  "benchmark":"mmlu",
+  "f":0.7,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":20,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "qwen38_27b",
+   "phi4_mini_reasoning",
+   "gemma4_31b"
+  ],
+  "byz_pair_coincidence_test":0.3738095238,
+  "world_id":28645401357
+ },
+ {
+  "benchmark":"mmlu",
+  "f":0.7,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":0,
+  "n_agents":10,
+  "composition":"frozen",
   "history_n":40,
   "study":"history",
   "source":"artifact",
@@ -2048,28 +2048,6 @@
   ],
   "byz_pair_coincidence_test":0.3547619048,
   "world_id":790452561981
- },
- {
-  "benchmark":"mmlu",
-  "f":0.7,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":40,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "ministral3_14b",
-   "llama32_3b",
-   "gemma4_31b"
-  ],
-  "byz_pair_coincidence_test":0.3732142857,
-  "world_id":829400007162
  },
  {
   "benchmark":"mmlu",
@@ -2092,6 +2070,28 @@
   ],
   "byz_pair_coincidence_test":0.3738095238,
   "world_id":714544227720
+ },
+ {
+  "benchmark":"mmlu",
+  "f":0.7,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":1,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":40,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "ministral3_14b",
+   "llama32_3b",
+   "gemma4_31b"
+  ],
+  "byz_pair_coincidence_test":0.3732142857,
+  "world_id":829400007162
  },
  {
   "benchmark":"mmlu",
@@ -2165,32 +2165,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":5,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":3,
-  "n_honest":7,
-  "honest_models":[
-   "granite42_30b",
-   "gemma4_31b",
-   "olmo3_32b_think",
-   "phi4_mini_reasoning",
-   "llama32_3b",
-   "ministral3_14b",
-   "granite42_30b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":741104441061
- },
- {
-  "benchmark":"medqa",
-  "f":0.3,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
@@ -2236,6 +2210,32 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":976360968771
+ },
+ {
+  "benchmark":"medqa",
+  "f":0.3,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":5,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":3,
+  "n_honest":7,
+  "honest_models":[
+   "granite42_30b",
+   "gemma4_31b",
+   "olmo3_32b_think",
+   "phi4_mini_reasoning",
+   "llama32_3b",
+   "ministral3_14b",
+   "granite42_30b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":741104441061
  },
  {
   "benchmark":"medqa",
@@ -2939,30 +2939,6 @@
  },
  {
   "benchmark":"medqa",
-  "f":0.5,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":5,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
-  "honest_models":[
-   "olmo3_32b_think",
-   "llama32_3b",
-   "qwen38_27b",
-   "gemma4_31b",
-   "ministral3_14b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":705694483674
- },
- {
-  "benchmark":"medqa",
   "f":0.3,
   "attack":"gate_aware",
   "param":0.25,
@@ -2986,6 +2962,30 @@
   ],
   "byz_pair_coincidence_test":0.3916666667,
   "world_id":591255454570
+ },
+ {
+  "benchmark":"medqa",
+  "f":0.5,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":1,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":5,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "olmo3_32b_think",
+   "llama32_3b",
+   "qwen38_27b",
+   "gemma4_31b",
+   "ministral3_14b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":705694483674
  },
  {
   "benchmark":"medqa",
@@ -3089,30 +3089,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":0,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":20,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
-  "honest_models":[
-   "ministral3_14b",
-   "gemma4_31b",
-   "granite42_30b",
-   "ministral3_14b",
-   "olmo3_32b_think"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":838627292699
- },
- {
-  "benchmark":"medqa",
-  "f":0.5,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":1,
   "n_agents":10,
   "composition":"frozen",
@@ -3130,6 +3106,30 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":941795999373
+ },
+ {
+  "benchmark":"medqa",
+  "f":0.5,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":0,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":20,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "ministral3_14b",
+   "gemma4_31b",
+   "granite42_30b",
+   "ministral3_14b",
+   "olmo3_32b_think"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":838627292699
  },
  {
   "benchmark":"medqa",
@@ -3278,30 +3278,6 @@
  {
   "benchmark":"medqa",
   "f":0.5,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":80,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
-  "honest_models":[
-   "granite42_30b",
-   "olmo3_32b_think",
-   "phi4_mini_reasoning",
-   "llama32_3b",
-   "ministral3_14b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":19560131419
- },
- {
-  "benchmark":"medqa",
-  "f":0.5,
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
@@ -3322,6 +3298,30 @@
   ],
   "byz_pair_coincidence_test":0.38375,
   "world_id":952602424908
+ },
+ {
+  "benchmark":"medqa",
+  "f":0.5,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":80,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "granite42_30b",
+   "olmo3_32b_think",
+   "phi4_mini_reasoning",
+   "llama32_3b",
+   "ministral3_14b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":19560131419
  },
  {
   "benchmark":"medqa",
@@ -3377,30 +3377,6 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":0,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":10,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
-  "honest_models":[
-   "ministral3_14b",
-   "gemma4_31b",
-   "granite42_30b",
-   "ministral3_14b",
-   "olmo3_32b_think"
-  ],
-  "byz_pair_coincidence_test":0.38375,
-  "world_id":439534392596
- },
- {
-  "benchmark":"medqa",
-  "f":0.5,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
   "seed":1,
   "n_agents":10,
   "composition":"frozen",
@@ -3418,6 +3394,30 @@
   ],
   "byz_pair_coincidence_test":0.355,
   "world_id":112244838600
+ },
+ {
+  "benchmark":"medqa",
+  "f":0.5,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":0,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":10,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "ministral3_14b",
+   "gemma4_31b",
+   "granite42_30b",
+   "ministral3_14b",
+   "olmo3_32b_think"
+  ],
+  "byz_pair_coincidence_test":0.38375,
+  "world_id":439534392596
  },
  {
   "benchmark":"medqa",
@@ -3659,6 +3659,28 @@
  },
  {
   "benchmark":"medqa",
+  "f":0.7,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":1,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":5,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "olmo3_32b_think",
+   "gemma4_31b",
+   "ministral3_14b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":475089618244
+ },
+ {
+  "benchmark":"medqa",
   "f":0.5,
   "attack":"gate_aware",
   "param":0.25,
@@ -3680,28 +3702,6 @@
   ],
   "byz_pair_coincidence_test":0.37625,
   "world_id":944065975664
- },
- {
-  "benchmark":"medqa",
-  "f":0.7,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":5,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "olmo3_32b_think",
-   "gemma4_31b",
-   "ministral3_14b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":475089618244
  },
  {
   "benchmark":"medqa",
@@ -3863,28 +3863,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":40,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "olmo3_32b_think",
-   "gemma4_31b",
-   "ministral3_14b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":597959798680
- },
- {
-  "benchmark":"medqa",
-  "f":0.7,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
@@ -3900,6 +3878,28 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":699428558475
+ },
+ {
+  "benchmark":"medqa",
+  "f":0.7,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":1,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":40,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "olmo3_32b_think",
+   "gemma4_31b",
+   "ministral3_14b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":597959798680
  },
  {
   "benchmark":"medqa",
@@ -3929,28 +3929,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":80,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "olmo3_32b_think",
-   "gemma4_31b",
-   "ministral3_14b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":974438496984
- },
- {
-  "benchmark":"medqa",
-  "f":0.7,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
@@ -3966,6 +3944,28 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":418025932923
+ },
+ {
+  "benchmark":"medqa",
+  "f":0.7,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":1,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":80,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "olmo3_32b_think",
+   "gemma4_31b",
+   "ministral3_14b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":974438496984
  },
  {
   "benchmark":"medqa",
@@ -4017,28 +4017,6 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":5,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "granite42_30b",
-   "olmo3_32b_think",
-   "ministral3_14b"
-  ],
-  "byz_pair_coincidence_test":0.3666666667,
-  "world_id":379222737405
- },
- {
-  "benchmark":"medqa",
-  "f":0.7,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
   "seed":1,
   "n_agents":10,
   "composition":"frozen",
@@ -4054,6 +4032,28 @@
   ],
   "byz_pair_coincidence_test":0.3601190476,
   "world_id":928525174988
+ },
+ {
+  "benchmark":"medqa",
+  "f":0.7,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":5,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "granite42_30b",
+   "olmo3_32b_think",
+   "ministral3_14b"
+  ],
+  "byz_pair_coincidence_test":0.3666666667,
+  "world_id":379222737405
  },
  {
   "benchmark":"medqa",
@@ -4149,28 +4149,6 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":20,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "olmo3_32b_think",
-   "gemma4_31b",
-   "ministral3_14b"
-  ],
-  "byz_pair_coincidence_test":0.3601190476,
-  "world_id":608552829498
- },
- {
-  "benchmark":"medqa",
-  "f":0.7,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
   "seed":2,
   "n_agents":10,
   "composition":"frozen",
@@ -4193,21 +4171,21 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":2,
+  "seed":1,
   "n_agents":10,
   "composition":"frozen",
-  "history_n":40,
+  "history_n":20,
   "study":"history",
   "source":"artifact",
   "n_byzantine":7,
   "n_honest":3,
   "honest_models":[
-   "granite42_30b",
    "olmo3_32b_think",
+   "gemma4_31b",
    "ministral3_14b"
   ],
-  "byz_pair_coincidence_test":0.3666666667,
-  "world_id":326645581411
+  "byz_pair_coincidence_test":0.3601190476,
+  "world_id":608552829498
  },
  {
   "benchmark":"medqa",
@@ -4259,6 +4237,28 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":40,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "granite42_30b",
+   "olmo3_32b_think",
+   "ministral3_14b"
+  ],
+  "byz_pair_coincidence_test":0.3666666667,
+  "world_id":326645581411
+ },
+ {
+  "benchmark":"medqa",
+  "f":0.7,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
@@ -4281,28 +4281,6 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":80,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "granite42_30b",
-   "olmo3_32b_think",
-   "ministral3_14b"
-  ],
-  "byz_pair_coincidence_test":0.3666666667,
-  "world_id":461135285001
- },
- {
-  "benchmark":"medqa",
-  "f":0.7,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
   "seed":1,
   "n_agents":10,
   "composition":"frozen",
@@ -4318,6 +4296,28 @@
   ],
   "byz_pair_coincidence_test":0.3601190476,
   "world_id":879609103322
+ },
+ {
+  "benchmark":"medqa",
+  "f":0.7,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":80,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "granite42_30b",
+   "olmo3_32b_think",
+   "ministral3_14b"
+  ],
+  "byz_pair_coincidence_test":0.3666666667,
+  "world_id":461135285001
  },
  {
   "benchmark":"boolq",
@@ -4351,32 +4351,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":5,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":3,
-  "n_honest":7,
-  "honest_models":[
-   "phi4_mini_reasoning",
-   "llama32_3b",
-   "ministral3_14b",
-   "olmo3_32b_think",
-   "ministral3_14b",
-   "granite42_30b",
-   "olmo3_32b_think"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":401956837124
- },
- {
-  "benchmark":"boolq",
-  "f":0.3,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":1,
   "n_agents":10,
   "composition":"frozen",
@@ -4396,6 +4370,32 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":232010548135
+ },
+ {
+  "benchmark":"boolq",
+  "f":0.3,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":5,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":3,
+  "n_honest":7,
+  "honest_models":[
+   "phi4_mini_reasoning",
+   "llama32_3b",
+   "ministral3_14b",
+   "olmo3_32b_think",
+   "ministral3_14b",
+   "granite42_30b",
+   "olmo3_32b_think"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":401956837124
  },
  {
   "benchmark":"boolq",
@@ -4481,32 +4481,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":20,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":3,
-  "n_honest":7,
-  "honest_models":[
-   "llama32_3b",
-   "ministral3_14b",
-   "gemma4_31b",
-   "gemma4_31b",
-   "phi4_mini_reasoning",
-   "granite42_30b",
-   "qwen38_27b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":223694310633
- },
- {
-  "benchmark":"boolq",
-  "f":0.3,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
@@ -4526,6 +4500,32 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":963631450797
+ },
+ {
+  "benchmark":"boolq",
+  "f":0.3,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":1,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":20,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":3,
+  "n_honest":7,
+  "honest_models":[
+   "llama32_3b",
+   "ministral3_14b",
+   "gemma4_31b",
+   "gemma4_31b",
+   "phi4_mini_reasoning",
+   "granite42_30b",
+   "qwen38_27b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":223694310633
  },
  {
   "benchmark":"boolq",
@@ -4585,32 +4585,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":40,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":3,
-  "n_honest":7,
-  "honest_models":[
-   "phi4_mini_reasoning",
-   "llama32_3b",
-   "ministral3_14b",
-   "olmo3_32b_think",
-   "ministral3_14b",
-   "granite42_30b",
-   "olmo3_32b_think"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":509526425456
- },
- {
-  "benchmark":"boolq",
-  "f":0.3,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":1,
   "n_agents":10,
   "composition":"frozen",
@@ -4637,6 +4611,32 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":40,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":3,
+  "n_honest":7,
+  "honest_models":[
+   "phi4_mini_reasoning",
+   "llama32_3b",
+   "ministral3_14b",
+   "olmo3_32b_think",
+   "ministral3_14b",
+   "granite42_30b",
+   "olmo3_32b_think"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":509526425456
+ },
+ {
+  "benchmark":"boolq",
+  "f":0.3,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
@@ -4656,6 +4656,32 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":821571820773
+ },
+ {
+  "benchmark":"boolq",
+  "f":0.3,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":80,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":3,
+  "n_honest":7,
+  "honest_models":[
+   "phi4_mini_reasoning",
+   "llama32_3b",
+   "ministral3_14b",
+   "olmo3_32b_think",
+   "ministral3_14b",
+   "granite42_30b",
+   "olmo3_32b_think"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":480152251799
  },
  {
   "benchmark":"boolq",
@@ -4708,32 +4734,6 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":57721427943
- },
- {
-  "benchmark":"boolq",
-  "f":0.3,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":80,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":3,
-  "n_honest":7,
-  "honest_models":[
-   "phi4_mini_reasoning",
-   "llama32_3b",
-   "ministral3_14b",
-   "olmo3_32b_think",
-   "ministral3_14b",
-   "granite42_30b",
-   "olmo3_32b_think"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":480152251799
  },
  {
   "benchmark":"boolq",
@@ -5049,32 +5049,6 @@
  },
  {
   "benchmark":"boolq",
-  "f":0.3,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":80,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":3,
-  "n_honest":7,
-  "honest_models":[
-   "llama32_3b",
-   "ministral3_14b",
-   "gemma4_31b",
-   "gemma4_31b",
-   "phi4_mini_reasoning",
-   "granite42_30b",
-   "qwen38_27b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":611392768865
- },
- {
-  "benchmark":"boolq",
   "f":0.5,
   "attack":"coherent",
   "param":1.0,
@@ -5125,27 +5099,29 @@
  },
  {
   "benchmark":"boolq",
-  "f":0.5,
-  "attack":"coherent",
-  "param":1.0,
+  "f":0.3,
+  "attack":"gate_aware",
+  "param":0.25,
   "p_obs":1.0,
   "seed":1,
   "n_agents":10,
   "composition":"frozen",
-  "history_n":5,
+  "history_n":80,
   "study":"history",
   "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
+  "n_byzantine":3,
+  "n_honest":7,
   "honest_models":[
    "llama32_3b",
    "ministral3_14b",
    "gemma4_31b",
+   "gemma4_31b",
    "phi4_mini_reasoning",
-   "granite42_30b"
+   "granite42_30b",
+   "qwen38_27b"
   ],
   "byz_pair_coincidence_test":1.0,
-  "world_id":624740602470
+  "world_id":611392768865
  },
  {
   "benchmark":"boolq",
@@ -5170,6 +5146,30 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":20571841875
+ },
+ {
+  "benchmark":"boolq",
+  "f":0.5,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":1,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":5,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "llama32_3b",
+   "ministral3_14b",
+   "gemma4_31b",
+   "phi4_mini_reasoning",
+   "granite42_30b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":624740602470
  },
  {
   "benchmark":"boolq",
@@ -5438,30 +5438,6 @@
  {
   "benchmark":"boolq",
   "f":0.5,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":80,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
-  "honest_models":[
-   "phi4_mini_reasoning",
-   "llama32_3b",
-   "ministral3_14b",
-   "olmo3_32b_think",
-   "granite42_30b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":776200896741
- },
- {
-  "benchmark":"boolq",
-  "f":0.5,
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
@@ -5482,6 +5458,30 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":993677892343
+ },
+ {
+  "benchmark":"boolq",
+  "f":0.5,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":80,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "phi4_mini_reasoning",
+   "llama32_3b",
+   "ministral3_14b",
+   "olmo3_32b_think",
+   "granite42_30b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":776200896741
  },
  {
   "benchmark":"boolq",
@@ -5513,30 +5513,6 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":0,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":10,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
-  "honest_models":[
-   "phi4_mini_reasoning",
-   "gemma4_31b",
-   "olmo3_32b_think",
-   "granite42_30b",
-   "ministral3_14b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":262628182252
- },
- {
-  "benchmark":"boolq",
-  "f":0.5,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
   "seed":2,
   "n_agents":10,
   "composition":"frozen",
@@ -5561,7 +5537,7 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":2,
+  "seed":0,
   "n_agents":10,
   "composition":"frozen",
   "history_n":10,
@@ -5571,13 +5547,13 @@
   "n_honest":5,
   "honest_models":[
    "phi4_mini_reasoning",
-   "llama32_3b",
-   "ministral3_14b",
+   "gemma4_31b",
    "olmo3_32b_think",
-   "granite42_30b"
+   "granite42_30b",
+   "ministral3_14b"
   ],
   "byz_pair_coincidence_test":1.0,
-  "world_id":485735394128
+  "world_id":262628182252
  },
  {
   "benchmark":"boolq",
@@ -5602,6 +5578,30 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":459399925864
+ },
+ {
+  "benchmark":"boolq",
+  "f":0.5,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":10,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "phi4_mini_reasoning",
+   "llama32_3b",
+   "ministral3_14b",
+   "olmo3_32b_think",
+   "granite42_30b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":485735394128
  },
  {
   "benchmark":"boolq",
@@ -5869,28 +5869,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":0,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":10,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "phi4_mini_reasoning",
-   "olmo3_32b_think",
-   "granite42_30b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":156408806223
- },
- {
-  "benchmark":"boolq",
-  "f":0.7,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":2,
   "n_agents":10,
   "composition":"frozen",
@@ -5906,6 +5884,28 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":986238374195
+ },
+ {
+  "benchmark":"boolq",
+  "f":0.7,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":0,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":10,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "phi4_mini_reasoning",
+   "olmo3_32b_think",
+   "granite42_30b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":156408806223
  },
  {
   "benchmark":"boolq",
@@ -6045,28 +6045,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":40,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "llama32_3b",
-   "ministral3_14b",
-   "gemma4_31b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":661067545022
- },
- {
-  "benchmark":"boolq",
-  "f":0.7,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":2,
   "n_agents":10,
   "composition":"frozen",
@@ -6089,21 +6067,21 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":0,
+  "seed":1,
   "n_agents":10,
   "composition":"frozen",
-  "history_n":80,
+  "history_n":40,
   "study":"history",
   "source":"artifact",
   "n_byzantine":7,
   "n_honest":3,
   "honest_models":[
-   "phi4_mini_reasoning",
-   "olmo3_32b_think",
-   "granite42_30b"
+   "llama32_3b",
+   "ministral3_14b",
+   "gemma4_31b"
   ],
   "byz_pair_coincidence_test":1.0,
-  "world_id":104361130962
+  "world_id":661067545022
  },
  {
   "benchmark":"boolq",
@@ -6133,7 +6111,7 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":2,
+  "seed":0,
   "n_agents":10,
   "composition":"frozen",
   "history_n":80,
@@ -6142,12 +6120,12 @@
   "n_byzantine":7,
   "n_honest":3,
   "honest_models":[
-   "llama32_3b",
-   "ministral3_14b",
+   "phi4_mini_reasoning",
+   "olmo3_32b_think",
    "granite42_30b"
   ],
   "byz_pair_coincidence_test":1.0,
-  "world_id":293356172042
+  "world_id":104361130962
  },
  {
   "benchmark":"boolq",
@@ -6174,13 +6152,13 @@
  {
   "benchmark":"boolq",
   "f":0.7,
-  "attack":"gate_aware",
-  "param":0.25,
+  "attack":"coherent",
+  "param":1.0,
   "p_obs":1.0,
   "seed":2,
   "n_agents":10,
   "composition":"frozen",
-  "history_n":5,
+  "history_n":80,
   "study":"history",
   "source":"artifact",
   "n_byzantine":7,
@@ -6191,7 +6169,7 @@
    "granite42_30b"
   ],
   "byz_pair_coincidence_test":1.0,
-  "world_id":319351044732
+  "world_id":293356172042
  },
  {
   "benchmark":"boolq",
@@ -6214,6 +6192,28 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":633963236556
+ },
+ {
+  "benchmark":"boolq",
+  "f":0.7,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":5,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "llama32_3b",
+   "ministral3_14b",
+   "granite42_30b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":319351044732
  },
  {
   "benchmark":"boolq",
@@ -6265,28 +6265,6 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":10,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "llama32_3b",
-   "ministral3_14b",
-   "granite42_30b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":545319951969
- },
- {
-  "benchmark":"boolq",
-  "f":0.7,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
@@ -6302,6 +6280,28 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":567067351378
+ },
+ {
+  "benchmark":"boolq",
+  "f":0.7,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":10,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "llama32_3b",
+   "ministral3_14b",
+   "granite42_30b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":545319951969
  },
  {
   "benchmark":"boolq",
@@ -6353,28 +6353,6 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":40,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "llama32_3b",
-   "ministral3_14b",
-   "gemma4_31b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":34777251455
- },
- {
-  "benchmark":"boolq",
-  "f":0.7,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
@@ -6390,6 +6368,28 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":468600473139
+ },
+ {
+  "benchmark":"boolq",
+  "f":0.7,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":1,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":40,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "llama32_3b",
+   "ministral3_14b",
+   "gemma4_31b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":34777251455
  },
  {
   "benchmark":"boolq",
@@ -6441,28 +6441,6 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":80,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "llama32_3b",
-   "ministral3_14b",
-   "granite42_30b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":654860951468
- },
- {
-  "benchmark":"boolq",
-  "f":0.7,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
   "seed":1,
   "n_agents":10,
   "composition":"frozen",
@@ -6478,6 +6456,28 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":547001644763
+ },
+ {
+  "benchmark":"boolq",
+  "f":0.7,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":80,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "llama32_3b",
+   "ministral3_14b",
+   "granite42_30b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":654860951468
  },
  {
   "benchmark":"math500",
@@ -6846,32 +6846,6 @@
  {
   "benchmark":"math500",
   "f":0.3,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
-  "seed":0,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":5,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":3,
-  "n_honest":7,
-  "honest_models":[
-   "gemma4_31b",
-   "phi4_mini_reasoning",
-   "phi4_mini_reasoning",
-   "ministral3_14b",
-   "qwen38_27b",
-   "gemma4_31b",
-   "granite42_30b"
-  ],
-  "byz_pair_coincidence_test":0.8416666667,
-  "world_id":571015144338
- },
- {
-  "benchmark":"math500",
-  "f":0.3,
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
@@ -6901,7 +6875,7 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":2,
+  "seed":0,
   "n_agents":10,
   "composition":"frozen",
   "history_n":5,
@@ -6911,15 +6885,15 @@
   "n_honest":7,
   "honest_models":[
    "gemma4_31b",
-   "gemma4_31b",
-   "granite42_30b",
-   "olmo3_32b_think",
+   "phi4_mini_reasoning",
+   "phi4_mini_reasoning",
    "ministral3_14b",
    "qwen38_27b",
-   "qwen38_27b"
+   "gemma4_31b",
+   "granite42_30b"
   ],
-  "byz_pair_coincidence_test":0.8333333333,
-  "world_id":242925661346
+  "byz_pair_coincidence_test":0.8416666667,
+  "world_id":571015144338
  },
  {
   "benchmark":"math500",
@@ -6953,6 +6927,32 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":5,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":3,
+  "n_honest":7,
+  "honest_models":[
+   "gemma4_31b",
+   "gemma4_31b",
+   "granite42_30b",
+   "olmo3_32b_think",
+   "ministral3_14b",
+   "qwen38_27b",
+   "qwen38_27b"
+  ],
+  "byz_pair_coincidence_test":0.8333333333,
+  "world_id":242925661346
+ },
+ {
+  "benchmark":"math500",
+  "f":0.3,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
@@ -6972,32 +6972,6 @@
   ],
   "byz_pair_coincidence_test":0.8416666667,
   "world_id":494766374642
- },
- {
-  "benchmark":"math500",
-  "f":0.3,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":10,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":3,
-  "n_honest":7,
-  "honest_models":[
-   "gemma4_31b",
-   "gemma4_31b",
-   "granite42_30b",
-   "olmo3_32b_think",
-   "ministral3_14b",
-   "qwen38_27b",
-   "qwen38_27b"
-  ],
-  "byz_pair_coincidence_test":0.8333333333,
-  "world_id":330757546508
  },
  {
   "benchmark":"math500",
@@ -7031,6 +7005,32 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":10,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":3,
+  "n_honest":7,
+  "honest_models":[
+   "gemma4_31b",
+   "gemma4_31b",
+   "granite42_30b",
+   "olmo3_32b_think",
+   "ministral3_14b",
+   "qwen38_27b",
+   "qwen38_27b"
+  ],
+  "byz_pair_coincidence_test":0.8333333333,
+  "world_id":330757546508
+ },
+ {
+  "benchmark":"math500",
+  "f":0.3,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
@@ -7057,32 +7057,6 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":20,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":3,
-  "n_honest":7,
-  "honest_models":[
-   "granite42_30b",
-   "olmo3_32b_think",
-   "llama32_3b",
-   "gemma4_31b",
-   "granite42_30b",
-   "phi4_mini_reasoning",
-   "llama32_3b"
-  ],
-  "byz_pair_coincidence_test":0.7666666667,
-  "world_id":955749625058
- },
- {
-  "benchmark":"math500",
-  "f":0.3,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
   "seed":2,
   "n_agents":10,
   "composition":"frozen",
@@ -7102,6 +7076,32 @@
   ],
   "byz_pair_coincidence_test":0.8333333333,
   "world_id":419699865554
+ },
+ {
+  "benchmark":"math500",
+  "f":0.3,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":1,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":20,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":3,
+  "n_honest":7,
+  "honest_models":[
+   "granite42_30b",
+   "olmo3_32b_think",
+   "llama32_3b",
+   "gemma4_31b",
+   "granite42_30b",
+   "phi4_mini_reasoning",
+   "llama32_3b"
+  ],
+  "byz_pair_coincidence_test":0.7666666667,
+  "world_id":955749625058
  },
  {
   "benchmark":"math500",
@@ -7235,6 +7235,30 @@
  },
  {
   "benchmark":"math500",
+  "f":0.5,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":0,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":5,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "phi4_mini_reasoning",
+   "phi4_mini_reasoning",
+   "ministral3_14b",
+   "qwen38_27b",
+   "granite42_30b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":456403858627
+ },
+ {
+  "benchmark":"math500",
   "f":0.3,
   "attack":"gate_aware",
   "param":0.25,
@@ -7265,30 +7289,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":0,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":5,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
-  "honest_models":[
-   "phi4_mini_reasoning",
-   "phi4_mini_reasoning",
-   "ministral3_14b",
-   "qwen38_27b",
-   "granite42_30b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":456403858627
- },
- {
-  "benchmark":"math500",
-  "f":0.5,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":1,
   "n_agents":10,
   "composition":"frozen",
@@ -7306,30 +7306,6 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":400019073744
- },
- {
-  "benchmark":"math500",
-  "f":0.5,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":5,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
-  "honest_models":[
-   "gemma4_31b",
-   "gemma4_31b",
-   "granite42_30b",
-   "olmo3_32b_think",
-   "ministral3_14b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":480792301623
  },
  {
   "benchmark":"math500",
@@ -7364,7 +7340,7 @@
   "seed":2,
   "n_agents":10,
   "composition":"frozen",
-  "history_n":10,
+  "history_n":5,
   "study":"history",
   "source":"artifact",
   "n_byzantine":5,
@@ -7377,7 +7353,7 @@
    "ministral3_14b"
   ],
   "byz_pair_coincidence_test":1.0,
-  "world_id":553670677947
+  "world_id":480792301623
  },
  {
   "benchmark":"math500",
@@ -7409,7 +7385,31 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":10,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "gemma4_31b",
+   "gemma4_31b",
+   "granite42_30b",
+   "olmo3_32b_think",
+   "ministral3_14b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":553670677947
+ },
+ {
+  "benchmark":"math500",
+  "f":0.5,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":2,
   "n_agents":10,
   "composition":"frozen",
   "history_n":20,
@@ -7418,14 +7418,14 @@
   "n_byzantine":5,
   "n_honest":5,
   "honest_models":[
-   "phi4_mini_reasoning",
-   "phi4_mini_reasoning",
-   "ministral3_14b",
-   "qwen38_27b",
-   "granite42_30b"
+   "gemma4_31b",
+   "gemma4_31b",
+   "granite42_30b",
+   "olmo3_32b_think",
+   "ministral3_14b"
   ],
   "byz_pair_coincidence_test":1.0,
-  "world_id":758094386107
+  "world_id":331621121957
  },
  {
   "benchmark":"math500",
@@ -7457,7 +7457,7 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":2,
+  "seed":0,
   "n_agents":10,
   "composition":"frozen",
   "history_n":20,
@@ -7466,14 +7466,14 @@
   "n_byzantine":5,
   "n_honest":5,
   "honest_models":[
-   "gemma4_31b",
-   "gemma4_31b",
-   "granite42_30b",
-   "olmo3_32b_think",
-   "ministral3_14b"
+   "phi4_mini_reasoning",
+   "phi4_mini_reasoning",
+   "ministral3_14b",
+   "qwen38_27b",
+   "granite42_30b"
   ],
   "byz_pair_coincidence_test":1.0,
-  "world_id":331621121957
+  "world_id":758094386107
  },
  {
   "benchmark":"math500",
@@ -7598,26 +7598,26 @@
  {
   "benchmark":"math500",
   "f":0.5,
-  "attack":"coherent",
-  "param":1.0,
+  "attack":"gate_aware",
+  "param":0.25,
   "p_obs":1.0,
-  "seed":2,
+  "seed":0,
   "n_agents":10,
   "composition":"frozen",
-  "history_n":80,
+  "history_n":5,
   "study":"history",
   "source":"artifact",
   "n_byzantine":5,
   "n_honest":5,
   "honest_models":[
-   "gemma4_31b",
-   "gemma4_31b",
-   "granite42_30b",
-   "olmo3_32b_think",
-   "ministral3_14b"
+   "phi4_mini_reasoning",
+   "phi4_mini_reasoning",
+   "ministral3_14b",
+   "qwen38_27b",
+   "granite42_30b"
   ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":321101561316
+  "byz_pair_coincidence_test":0.8475,
+  "world_id":148397295587
  },
  {
   "benchmark":"math500",
@@ -7646,26 +7646,26 @@
  {
   "benchmark":"math500",
   "f":0.5,
-  "attack":"gate_aware",
-  "param":0.25,
+  "attack":"coherent",
+  "param":1.0,
   "p_obs":1.0,
-  "seed":0,
+  "seed":2,
   "n_agents":10,
   "composition":"frozen",
-  "history_n":5,
+  "history_n":80,
   "study":"history",
   "source":"artifact",
   "n_byzantine":5,
   "n_honest":5,
   "honest_models":[
-   "phi4_mini_reasoning",
-   "phi4_mini_reasoning",
-   "ministral3_14b",
-   "qwen38_27b",
-   "granite42_30b"
+   "gemma4_31b",
+   "gemma4_31b",
+   "granite42_30b",
+   "olmo3_32b_think",
+   "ministral3_14b"
   ],
-  "byz_pair_coincidence_test":0.8475,
-  "world_id":148397295587
+  "byz_pair_coincidence_test":1.0,
+  "world_id":321101561316
  },
  {
   "benchmark":"math500",
@@ -7721,6 +7721,30 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":10,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":5,
+  "n_honest":5,
+  "honest_models":[
+   "gemma4_31b",
+   "gemma4_31b",
+   "granite42_30b",
+   "olmo3_32b_think",
+   "ministral3_14b"
+  ],
+  "byz_pair_coincidence_test":0.8525,
+  "world_id":855074640819
+ },
+ {
+  "benchmark":"math500",
+  "f":0.5,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
   "seed":1,
   "n_agents":10,
   "composition":"frozen",
@@ -7762,30 +7786,6 @@
   ],
   "byz_pair_coincidence_test":0.8475,
   "world_id":940497915590
- },
- {
-  "benchmark":"math500",
-  "f":0.5,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":10,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":5,
-  "n_honest":5,
-  "honest_models":[
-   "gemma4_31b",
-   "gemma4_31b",
-   "granite42_30b",
-   "olmo3_32b_think",
-   "ministral3_14b"
-  ],
-  "byz_pair_coincidence_test":0.8525,
-  "world_id":855074640819
  },
  {
   "benchmark":"math500",
@@ -7985,28 +7985,6 @@
   "attack":"coherent",
   "param":1.0,
   "p_obs":1.0,
-  "seed":0,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":5,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "phi4_mini_reasoning",
-   "qwen38_27b",
-   "granite42_30b"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":830312744303
- },
- {
-  "benchmark":"math500",
-  "f":0.7,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
   "seed":1,
   "n_agents":10,
   "composition":"frozen",
@@ -8022,6 +8000,28 @@
   ],
   "byz_pair_coincidence_test":1.0,
   "world_id":335024191727
+ },
+ {
+  "benchmark":"math500",
+  "f":0.7,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":0,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":5,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "phi4_mini_reasoning",
+   "qwen38_27b",
+   "granite42_30b"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":830312744303
  },
  {
   "benchmark":"math500",
@@ -8290,28 +8290,6 @@
  {
   "benchmark":"math500",
   "f":0.7,
-  "attack":"coherent",
-  "param":1.0,
-  "p_obs":1.0,
-  "seed":2,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":80,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "gemma4_31b",
-   "granite42_30b",
-   "olmo3_32b_think"
-  ],
-  "byz_pair_coincidence_test":1.0,
-  "world_id":80096232294
- },
- {
-  "benchmark":"math500",
-  "f":0.7,
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
@@ -8330,6 +8308,28 @@
   ],
   "byz_pair_coincidence_test":0.8672619048,
   "world_id":656081935482
+ },
+ {
+  "benchmark":"math500",
+  "f":0.7,
+  "attack":"coherent",
+  "param":1.0,
+  "p_obs":1.0,
+  "seed":2,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":80,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "gemma4_31b",
+   "granite42_30b",
+   "olmo3_32b_think"
+  ],
+  "byz_pair_coincidence_test":1.0,
+  "world_id":80096232294
  },
  {
   "benchmark":"math500",
@@ -8381,28 +8381,6 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":1,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":10,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "granite42_30b",
-   "llama32_3b",
-   "granite42_30b"
-  ],
-  "byz_pair_coincidence_test":0.8773809524,
-  "world_id":566982786628
- },
- {
-  "benchmark":"math500",
-  "f":0.7,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
   "seed":0,
   "n_agents":10,
   "composition":"frozen",
@@ -8418,6 +8396,28 @@
   ],
   "byz_pair_coincidence_test":0.8672619048,
   "world_id":474335707348
+ },
+ {
+  "benchmark":"math500",
+  "f":0.7,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":1,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":10,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "granite42_30b",
+   "llama32_3b",
+   "granite42_30b"
+  ],
+  "byz_pair_coincidence_test":0.8773809524,
+  "world_id":566982786628
  },
  {
   "benchmark":"math500",
@@ -8557,28 +8557,6 @@
   "attack":"gate_aware",
   "param":0.25,
   "p_obs":1.0,
-  "seed":0,
-  "n_agents":10,
-  "composition":"frozen",
-  "history_n":80,
-  "study":"history",
-  "source":"artifact",
-  "n_byzantine":7,
-  "n_honest":3,
-  "honest_models":[
-   "phi4_mini_reasoning",
-   "qwen38_27b",
-   "granite42_30b"
-  ],
-  "byz_pair_coincidence_test":0.8672619048,
-  "world_id":746104131634
- },
- {
-  "benchmark":"math500",
-  "f":0.7,
-  "attack":"gate_aware",
-  "param":0.25,
-  "p_obs":1.0,
   "seed":2,
   "n_agents":10,
   "composition":"frozen",
@@ -8594,6 +8572,28 @@
   ],
   "byz_pair_coincidence_test":0.8839285714,
   "world_id":938058748879
+ },
+ {
+  "benchmark":"math500",
+  "f":0.7,
+  "attack":"gate_aware",
+  "param":0.25,
+  "p_obs":1.0,
+  "seed":0,
+  "n_agents":10,
+  "composition":"frozen",
+  "history_n":80,
+  "study":"history",
+  "source":"artifact",
+  "n_byzantine":7,
+  "n_honest":3,
+  "honest_models":[
+   "phi4_mini_reasoning",
+   "qwen38_27b",
+   "granite42_30b"
+  ],
+  "byz_pair_coincidence_test":0.8672619048,
+  "world_id":746104131634
  },
  {
   "benchmark":"math500",

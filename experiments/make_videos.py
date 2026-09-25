@@ -260,15 +260,8 @@ def render_swarm(name: str, spec: dict, n_steps: int, fps: float, out_dir: Path)
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / f"swarm_{name}.mp4"
     anim.save(path, writer=animation.FFMpegWriter(fps=fps, bitrate=2400, codec="libx264",
-                                                  extra_args=["-pix_fmt", "yuv420p"]))
-    # GIF preview: every other frame, small.
-    fig.set_size_inches(8, 4.5)
-    fig.set_dpi(80)
-    gif = out_dir / f"swarm_{name}.gif"
-    sel = list(range(intro, intro + len(frames), 2)) + [intro + len(frames) - 1] * 6
-    anim2 = animation.FuncAnimation(fig, draw, frames=sel, interval=1000 / fps * 2)
-    anim2.save(gif, writer=animation.PillowWriter(fps=fps / 2))
-    plt.close(fig)
+                                                  extra_args=["-pix_fmt", "yuv420p", "-movflags", "+faststart"]))
+    plt.close(fig)  # README GIF previews are made by experiments/make_gifs.py
     (out_dir / f"swarm_{name}.json").write_text(json.dumps(
         {"receiver": sim["receiver"], "byzantine": sim["byzantine"], "models": sim["models"],
          "final_running_accuracy": frames[-1]["running"], "steps": len(frames), "world": vars(spec["world"])},
@@ -333,7 +326,7 @@ def render_gate_sweep(out_dir: Path, fps: float = 8) -> Path | None:
     frames = list(range(len(ps))) + [len(ps) - 1] * 40
     anim = animation.FuncAnimation(fig, draw, frames=frames, interval=1000 / fps)
     out = out_dir / "gate_aware_sweep.mp4"
-    anim.save(out, writer=animation.FFMpegWriter(fps=fps, bitrate=1800, codec="libx264", extra_args=["-pix_fmt", "yuv420p"]))
+    anim.save(out, writer=animation.FFMpegWriter(fps=fps, bitrate=1800, codec="libx264", extra_args=["-pix_fmt", "yuv420p", "-movflags", "+faststart"]))
     plt.close(fig)
     return out
 
@@ -386,14 +379,14 @@ def render_live_debate(out_dir: Path, benchmark: str = "mmlu", n_steps: int = 12
         return Observation(rid, t, row)
 
     frames, seen = [], {rid: [] for rid in rids}
-    tallies = {k: [] for k in ("debate_majority", "majority_all", "race", "race_full", "self")}
+    tallies = {k: [] for k in ("debate_majority", "majority_all", "race", "race_onecoin", "self")}
     for t in tasks:
         per = {k: [] for k in tallies}
         shown_preds, ch = {}, {}
         for rid in rids:
             obs = obs_for(t, rid)
             preds = {"self": obs.own.answer, "majority_all": MajorityVote().aggregate(obs.broadcasts, rid)}
-            for key, model in (("race", "onecoin"), ("race_full", "full")):
+            for key, model in (("race", "auto"), ("race_onecoin", "onecoin")):
                 if seen[rid]:
                     agg = RACEAggregator(labels, model=model)
                     agg.fit([(o,) for o in seen[rid]])
@@ -421,7 +414,7 @@ def render_live_debate(out_dir: Path, benchmark: str = "mmlu", n_steps: int = 12
     fig = plt.figure(figsize=(16, 9), dpi=100)
     names = {"debate_majority": ("Debate, then majority of honest agents", viz.ORANGE), "majority_all": ("Majority incl. liars", viz.AQUA),
              "race": ("RACE on independent answers", viz.BLUE),
-             "race_full": ("RACE, class-conditional (ablation)", viz.VIOLET), "self": ("Receiver alone", viz.MUTED)}
+             "race_onecoin": ("RACE v3.0 (one-coin everywhere)", viz.VIOLET), "self": ("Receiver alone", viz.MUTED)}
 
     def card(ax, x, y, title, ans, gold_, color_edge, note=None):
         ok = ans == gold_
@@ -486,7 +479,7 @@ def render_live_debate(out_dir: Path, benchmark: str = "mmlu", n_steps: int = 12
 
     anim = animation.FuncAnimation(fig, draw, frames=len(frames) + int(4 * fps), interval=1000 / fps)
     out = out_dir / f"live_debate_{benchmark}.mp4"
-    anim.save(out, writer=animation.FFMpegWriter(fps=fps, bitrate=1800, codec="libx264", extra_args=["-pix_fmt", "yuv420p"]))
+    anim.save(out, writer=animation.FFMpegWriter(fps=fps, bitrate=1800, codec="libx264", extra_args=["-pix_fmt", "yuv420p", "-movflags", "+faststart"]))
     plt.close(fig)
     return out
 

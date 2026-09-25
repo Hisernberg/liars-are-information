@@ -13,7 +13,9 @@ confidences or identities are ever needed, only who said what.
         print(decision.answer, decision.explain())
 
 Decisions are strictly causal: ``decide`` only uses questions previously passed
-to ``observe``. ``forgetting`` (0 < gamma < 1) down-weights old questions so
+to ``observe``. With a two-option ``label_space`` (yes/no) the layer uses
+class-conditional channels, so option-biased peers ("always yes") are modelled
+correctly; otherwise it uses the one-coin model (RACE v3.1). ``forgetting`` (0 < gamma < 1) down-weights old questions so
 the layer tracks attackers that change behaviour (sleepers); ``None`` keeps the
 full history.
 """

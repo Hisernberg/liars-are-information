@@ -11,7 +11,8 @@ Outputs in ``results/live/``:
   the replay studies, for independent (``live``) and post-debate
   (``live_debate``) honest answers;
 * ``answer_bias.csv`` -- option bias per model and role (share of "A", accuracy given each gold option);
-* ``receivers.csv`` -- RACE, full-confusion RACE, majority and the receiver alone, per honest receiver model;
+* ``receivers.csv`` -- RACE (v3.1), RACE v3.0 (one-coin), full-confusion RACE, majority and the receiver
+  alone, per honest receiver model;
 * ``live_summary.json`` -- headline numbers.
 """
 
@@ -102,18 +103,19 @@ def receiver_breakdown() -> pd.DataFrame:
         bw = build_world(World(b, f, atk, 1.0, 1.0, seed, composition="live", study="live", source="live"))
         for r in bw.honest:
             fits = {}
-            for model in ("onecoin", "full"):
+            for key, model in (("race", "auto"), ("race_onecoin", "onecoin"), ("race_full", "full")):
                 agg = RACEAggregator(bw.data.label_space, model=model)
                 agg.fit([(bw.defense[t][r],) for t in bw.splits["history"]])
-                fits[model] = agg
+                fits[key] = agg
             for t in bw.splits["test"]:
                 o, g = bw.defense[t][r], bw.data.gold[t]
                 rows.append(dict(benchmark=b, attack=atk, f=f, seed=seed, model=bw.models[r],
-                                 self=score(b, o.own.answer, g), race=score(b, fits["onecoin"].aggregate(o.broadcasts, r), g),
-                                 race_full=score(b, fits["full"].aggregate(o.broadcasts, r), g),
+                                 self=score(b, o.own.answer, g), race=score(b, fits["race"].aggregate(o.broadcasts, r), g),
+                                 race_onecoin=score(b, fits["race_onecoin"].aggregate(o.broadcasts, r), g),
+                                 race_full=score(b, fits["race_full"].aggregate(o.broadcasts, r), g),
                                  majority=score(b, MajorityVote().aggregate(o.broadcasts, r), g)))
     d = pd.DataFrame(rows)
-    return d.groupby(["benchmark", "model"])[["self", "majority", "race", "race_full"]].mean().reset_index()
+    return d.groupby(["benchmark", "model"])[["self", "majority", "race", "race_onecoin", "race_full"]].mean().reset_index()
 
 
 def worlds() -> list[World]:

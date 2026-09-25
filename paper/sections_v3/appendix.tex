@@ -12,13 +12,30 @@ A change was admissible only if all three of the following held:
 \item \textbf{Rejected: multi-start MAP.} We ran EM from both the receiver's answers and the plurality and kept the higher log-posterior (\texttt{race\_ms}). Trigger: a near-chance MATH-500 receiver captured by a rushing liar. It did not help, because with a near-chance anchor the two labellings are likelihood-equivalent. It was harmful when replicated channels inflate the likelihood of the adversarial labelling. The anchor therefore acts through initialisation and constraint, not through a likelihood comparison.
 \item \textbf{Adopted: two-part clone rule.} Same-source links (raw agreement $\ge0.99$, applied before any fit) and dependent-error links (agreement $\ge0.95$ on tasks where a member errs). Trigger: GSM8K with uninformative/partial liars at $f=0.7$, where raw-agreement grouping merged distinct accurate models and collapsed honest evidence (\cref{prop:clones}).
 \end{enumerate}
-The method was then frozen, and every study was re-run from scratch. One extension was added after the freeze, as a separate method that leaves \race\ unchanged: \raceD\ (\cref{sec:budget}), which fits channels on disagreement questions only. It was specified before E9 was run and is reported as a negative result. The replayed LLM deceivers (E3) and the live swarm (E8) had not been inspected at freeze time. On E3 the adopted rule outperforms both superseded variants at every $f\ge0.5$.
+The method was then frozen, and every study was re-run from scratch. One extension was added after the freeze, as a separate method that leaves \race\ unchanged: \raceD\ (\cref{sec:budget}), which fits channels on disagreement questions only. It was specified before E9 was run and is reported as a negative result. A second post-freeze change is the binary rule of \cref{sec:binary} (v3.1), adopted after the live swarm (E8) exposed option-biased channels; every study was re-run with it, and v3.0 is reported alongside (\cref{app:binary}). The replayed LLM deceivers (E3) and the live swarm (E8) had not been inspected at freeze time. On E3 the adopted rule outperforms both superseded variants at every $f\ge0.5$.
 
 \section{Information budget by attack}\label{app:budget}
-\begin{table}[h]
+\begin{table}[H]
 \centering\small
 \caption{E9 by attack setting (means over six benchmarks and three seeds, TEST). $B$: information budget, the known-channel oracle minus the liar-removal oracle. $\Delta$: \race\ minus the liar-removal oracle. Liar-removal oracle: \removalThree\%, \removalFive\% and \removalSeven\% at $f=0.3,0.5,0.7$. Positive $\Delta$: \race\ does better than removing every liar. The two camouflage settings coincide at $f=0.7$: with three honest agents the plurality share is $1/3$, $2/3$ or $1$, so both thresholds trigger on the same questions.}\label{tab:budget}
 \input{tables/budget_compact.tex}
+\end{table}
+
+\section{RACE v3.1 versus v3.0 on binary questions}\label{app:binary}
+\begin{table}[H]
+\centering\small
+\caption{Mean BoolQ accuracy (\%, TEST) of the receiver alone, the frozen v3.0 (one-coin channels everywhere) and v3.1 (class-conditional channels on binary questions). On the other benchmarks the two versions coincide by construction. Replayed BoolQ cells of E1--E3 with a significant v3.1--v3.0 difference: \binaryReplayNonTies\ of \binaryReplayCells.}\label{tab:binary}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Study & Receiver alone & v3.0 & v3.1 & Change\\
+\midrule
+E1 coherent sweep & \binaryMainSelf & \binaryMainVthree & \binaryMainRace & $\binaryMainDelta$\\
+E2 attack zoo & \binaryZooSelf & \binaryZooVthree & \binaryZooRace & $\binaryZooDelta$\\
+E3 LLM deceivers & \binaryLlmSelf & \binaryLlmVthree & \binaryLlmRace & $\binaryLlmDelta$\\
+E9 information budget & \binaryExtSelf & \binaryExtVthree & \binaryExtRace & $\binaryExtDelta$\\
+E8 live swarm (LLM saboteurs) & \binaryLiveSelf & \binaryLiveVthree & \binaryLiveRace & $\binaryLiveDelta$\\
+\bottomrule
+\end{tabular}
 \end{table}
 
 \section{Hyper-parameters and implementation}\label{app:hparams}
@@ -41,5 +58,5 @@ Online forgetting (E6) & $\gamma=0.97$, refit every 8 tasks\\
 
 \section{Reproducibility}\label{app:repro}
 \begin{sloppypar}
-All code, data, results, figures, videos and this manuscript are in the accompanying repository and Hugging Face release. \texttt{experiments/\allowbreak run\_all.sh} runs E1--E6 on a 4-core CPU without a GPU. \texttt{experiments/\allowbreak live\_swarm.py} regenerates E8. \texttt{experiments/\allowbreak make\_figures.py} and \texttt{make\_numbers.py} regenerate every figure, table and number in the text: the numbers in this paper are macros written by that script. Each study directory holds a \texttt{run\_manifest.json} with the input and code hashes, wall time and peak memory. The repository's test suite covers RACE's identification, invariance, clone-grouping and causality properties.
+All code, data, results, figures, videos and this manuscript are in the accompanying repository and Hugging Face release. One command, \texttt{experiments/\allowbreak reproduce\_all.sh}, regenerates everything on a 4-core CPU without a GPU in about an hour: E1--E7 and E9 from the cached answers, the E8 evaluation from the live-swarm cache, every figure, table and number, the videos, the repository README and this PDF. It finishes by re-checking every qualitative claim in the text against the results (\texttt{experiments/\allowbreak verify\_claims.py}). \texttt{experiments/\allowbreak live\_swarm.py} regenerates the live answers themselves. The numbers in this paper are macros written by \texttt{experiments/\allowbreak make\_numbers.py}. Each study directory holds a \texttt{run\_manifest.json} with the input and code hashes, wall time and peak memory. The repository's test suite covers \race's identification, invariance, clone-grouping, class-conditional and causality properties.
 \end{sloppypar}

@@ -1,7 +1,7 @@
 {
   "worlds": 120,
   "rows": 1081600,
-  "elapsed_seconds": 352.0,
+  "elapsed_seconds": 264.4,
   "schedules": [
     "sleeper",
     "coherent_to_independent",

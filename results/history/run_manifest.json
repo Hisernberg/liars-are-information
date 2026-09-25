@@ -13,20 +13,21 @@
     "race_rawclone",
     "race_ms",
     "race",
+    "race_onecoin",
     "race_full",
     "race_capself",
     "oracle_honest_majority",
     "oracle_channel"
   ],
-  "rows": 626400,
-  "elapsed_seconds": 248.66,
-  "peak_rss_mib_parent": 392.0,
-  "peak_rss_mib_children": 233.4,
+  "rows": 669600,
+  "elapsed_seconds": 153.71,
+  "peak_rss_mib_parent": 399.6,
+  "peak_rss_mib_children": 231.3,
   "processes": 4,
   "python": "3.11.15",
   "machine": "x86_64",
   "cpu_count": 4,
   "gpu_inference": false,
   "inputs_sha256": "eff90400e30aa91e2157b05b8b3c08bcb9884a4a4171780e458df7d19a208ba4",
-  "code_sha256": "2ce4a027c6610089c29b2d37d689e2577eb335fd9f48094f243970cf53b726c7"
+  "code_sha256": "7e4320508c304e114d7b254e4d19d1b61d8b8fd60457d6ca47889dd3582eac16"
 }

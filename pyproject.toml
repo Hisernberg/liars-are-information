@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "liars-are-information"
-version = "3.0.0"
+version = "3.1.0"
 description = "Receiver-anchored channel estimation (RACE) and adversarial informativeness pooling (AIP) for Byzantine-robust multi-agent LLM aggregation"
 readme = "README.md"
 requires-python = ">=3.11"

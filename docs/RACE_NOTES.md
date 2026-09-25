@@ -84,3 +84,24 @@ questions it is over-parameterised (45.7% on MMLU).
 A defensible amendment is class-conditional channels for binary answer spaces
 and the one-coin model otherwise. Because this was found on a confirmation set,
 it is reported as a post-hoc observation, and the frozen method is unchanged.
+
+## v3.1: class-conditional channels on binary questions (adopted after E8)
+
+Decision: `RACEAggregator(model="auto")` is now the default. Binary label
+spaces get class-conditional (2x2 confusion) channels with the same anchor:
+a Dirichlet prior on the receiver's diagonal (mean 0.75, strength 8), and each
+diagonal entry kept >= 0.55. Everything else uses the one-coin model, as in
+v3.0. The rule was adopted on the owner's decision after the live-BoolQ
+observation above. v3.0 is kept in every study as `race_onecoin`, and every
+study was re-run from scratch.
+
+Consequences we state openly:
+- The live BoolQ result for v3.1 is not a confirmation. It is the observation
+  that motivated the rule.
+- The replayed BoolQ cells of E1–E3 were already known when the rule was
+  adopted, so they cannot confirm it either. They only show that it does no harm
+  there: the macro `binaryReplayNonTies` counts the cells with a significant
+  v3.1–v3.0 difference.
+- A fresh confirmation set is needed before the rule is claimed as validated.
+- The known-channel oracle now uses the same channel family (class-conditional
+  on binary questions), so it stays a fair ceiling for v3.1.

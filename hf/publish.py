@@ -29,11 +29,12 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-RELEASE = "lai-v3-race-20260924"
+RELEASE = "lai-v3.1-race"
 INCLUDE = ["README.md", "LICENSE", "CITATION.cff", "pyproject.toml", "src", "tests", "experiments", "configs", "docs",
            "data/cache", "data/cache_adversarial", "data/cache_t07", "data/live_cache", "data/derived",
            "results", "figures", "media", "paper", "hf", "provenance"]
-EXCLUDE_PARTS = {"__pycache__", ".pytest_cache", ".venv", ".git"}
+EXCLUDE_PARTS = {"__pycache__", ".pytest_cache", ".venv", ".git", "film_parts"}
+SPACE_ASSETS = ["media/*.mp4", "media/gif/*.gif", "media/*.gif", "figures/*.png"]
 
 
 def files() -> list[Path]:
@@ -81,6 +82,11 @@ def main() -> None:
         for p in paths[:25]:
             print("  ", p.relative_to(ROOT))
         print("   ...")
+        if args.space_repo:
+            import fnmatch
+            assets = [f for f in paths if any(fnmatch.fnmatch(str(f.relative_to(ROOT)), pat) for pat in SPACE_ASSETS)]
+            print(f"space: page from hf/space/ + {len(assets)} assets "
+                  f"({sum(a.stat().st_size for a in assets) / 1e6:.1f} MB)")
         return
     from huggingface_hub import HfApi
 
@@ -112,13 +118,11 @@ def main() -> None:
         print(f"done: https://huggingface.co/datasets/{args.dataset_repo}")
     if args.space_repo:
         api.create_repo(args.space_repo, repo_type="space", space_sdk="static", exist_ok=True)
+        # The page, then every video (MP4, played by the page), GIF and figure, each as a single commit.
         api.upload_folder(folder_path=str(ROOT / "hf" / "space"), repo_id=args.space_repo, repo_type="space",
-                          commit_message=f"{args.release}: demo page")
-        media = [p for p in (ROOT / "media").glob("*") if p.suffix in (".mp4", ".gif")]
-        figs = sorted((ROOT / "figures").glob("*.png"))
-        for p in media + figs:
-            api.upload_file(path_or_fileobj=str(p), path_in_repo=f"{p.parent.name}/{p.name}", repo_id=args.space_repo,
-                            repo_type="space", commit_message=f"add {p.name}")
+                          ignore_patterns=["*.template.*"], commit_message=f"{args.release}: demo page")
+        api.upload_folder(folder_path=str(ROOT), repo_id=args.space_repo, repo_type="space",
+                          allow_patterns=SPACE_ASSETS, commit_message=f"{args.release}: videos and figures")
         print(f"done: https://huggingface.co/spaces/{args.space_repo}")
 
 

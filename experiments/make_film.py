@@ -60,7 +60,7 @@ DIV = LinearSegmentedColormap.from_list("div", viz.DIVERGING)
 
 
 def writer():
-    return animation.FFMpegWriter(fps=FPS, bitrate=2600, codec="libx264", extra_args=["-pix_fmt", "yuv420p"])
+    return animation.FFMpegWriter(fps=FPS, bitrate=2600, codec="libx264", extra_args=["-pix_fmt", "yuv420p", "-movflags", "+faststart"])
 
 
 def header(fig, title: str, sub: str) -> None:
@@ -508,7 +508,7 @@ def main() -> None:
     listing = parts / "concat.txt"
     listing.write_text("".join(f"file '{p.name}'\n" for p in sorted(parts.glob("[0-9]_*.mp4"))))
     out = MEDIA / "film_liars_are_information.mp4"
-    subprocess.run([FF, "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", str(listing), "-c", "copy", str(out)],
+    subprocess.run([FF, "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", str(listing), "-c", "copy", "-movflags", "+faststart", str(out)],
                    check=True, cwd=parts)
     print(out)
 

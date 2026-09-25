@@ -232,3 +232,37 @@ def test_evidence_decomposes_posterior(labels):
             logits[cands.index(answer)] += weight
         probs = np.exp(logits - logits.max())
         np.testing.assert_allclose(probs / probs.sum(), [post[c] for c in cands], atol=1e-9)
+
+
+def test_auto_rule_picks_class_conditional_channels_for_binary_only():
+    assert RACEAggregator(("A", "B")).model == "full"
+    assert RACEAggregator(LABELS).model == "onecoin"
+    assert RACEAggregator(None).model == "onecoin"
+    assert RACEAggregator(("A", "B")).name == "race"
+    assert RACEAggregator(("A", "B"), model="onecoin").name == "race_onecoin"
+
+
+def test_binary_rule_reads_option_biased_peers():
+    """Live-BoolQ-like swarm: the receiver and two honest peers (70%, symmetric),
+    two peers that say "yes" 90% of the time regardless of the truth, and three
+    yes-biased but informative peers (right on 97% of yes-questions, 35% of
+    no-questions). A symmetric one-coin channel cannot represent the bias; the
+    class-conditional channels RACE uses for binary questions can."""
+    rng = np.random.default_rng(7)
+    tasks, gold = [], []
+    flip = {"A": "B", "B": "A"}
+    for t in range(600):
+        g = "AB"[int(rng.integers(2))]
+        row = [g if rng.random() < 0.7 else flip[g] for _ in range(3)]
+        row += ["A" if rng.random() < 0.9 else "B" for _ in range(2)]
+        row += [("A" if rng.random() < 0.97 else "B") if g == "A" else ("B" if rng.random() < 0.35 else "A")
+                for _ in range(3)]
+        heard = tuple(Broadcast(j, f"t{t}", a, 0.9, 0.9, False) for j, a in enumerate(row))
+        tasks.append((Observation(0, f"t{t}", heard),))
+        gold.append(g)
+    auto, onecoin = RACEAggregator(("A", "B")), RACEAggregator(("A", "B"), model="onecoin")
+    auto.fit(tasks[:300])
+    onecoin.fit(tasks[:300])
+    assert _accuracy(auto, tasks[300:], gold[300:]) > _accuracy(onecoin, tasks[300:], gold[300:]) + 0.03
+    # an "always yes" channel carries almost no weight under the class-conditional model
+    assert abs(auto.diagnostics.channels[0][3].weight_at_chance_k) < 0.5

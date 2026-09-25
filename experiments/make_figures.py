@@ -477,14 +477,14 @@ def fig_live() -> None:
         t = sub.groupby(["f", "method"]).accuracy.mean().unstack()
         for m in ("self", "majority", "ds_onecoin", "aip_gated", "race"):
             viz.line(ax, t.index, pct(t[m]), m)
-        viz.line(ax, t.index, pct(t["race_full"]), "race", color=viz.BLUE, ls="--", marker="s", alpha=0.8,
-                 label="RACE full-confusion (ablation)", lw=1.4)
+        viz.line(ax, t.index, pct(t["race_onecoin"]), "race_onecoin")
         ax.set_xlabel("Byzantine fraction f (LLM saboteurs: solo, rushing, colluding)")
         ax.set_ylim(*((40, 90) if b == "boolq" else (20, 70)))
         ax.set_title(f"{viz.BENCH_LABEL[b]}: honest-agent accuracy after pooling", loc="left")
     axes[1][0].set_ylabel("accuracy (%)")
     axes[1][0].legend(fontsize=7.5, loc="lower left", ncol=2)
-    fig.suptitle("E8: a live six-model swarm (fresh CPU inference, evaluated after the method was frozen)",
+    fig.suptitle("E8: a live six-model swarm (fresh CPU inference). RACE v3.0 was frozen before this run; "
+                 "v3.1's binary rule was adopted after it",
                  x=0.01, ha="left", fontsize=11, fontweight="bold")
     fig.tight_layout(rect=(0, 0, 1, 0.96))
     viz.save(fig, FIG / "fig13_live_swarm")
@@ -529,8 +529,8 @@ def best_response(zoo: pd.DataFrame) -> None:
 # ------------------------------------------------------------------ F12 information budget
 
 
-EXT_ROWS = [("independent", 1.0, "Independent wrong answers"), ("gate_aware", 0.0, "Gate-aware, q = 0"),
-            ("gate_aware", 0.5, "Gate-aware, q = 0.5"), ("gate_aware", 1.0, "Gate-aware, q = 1 (coherent)"),
+EXT_ROWS = [("independent", 1.0, "Independent wrong answers"), ("gate_aware", 0.0, "Gate-aware, p = 0"),
+            ("gate_aware", 0.5, "Gate-aware, p = 0.5"), ("gate_aware", 1.0, "Gate-aware, p = 1 (coherent)"),
             ("attractor", 1.0, "Attractor"), ("partial", 0.8, "Partial liar, e = 0.8"),
             ("partial", 0.5, "Partial liar, e = 0.5"), ("uninformative", 1.0, "Uninformative (silent)"),
             ("llm:always_wrong", 1.0, "LLM: always wrong"), ("llm:rushing", 1.0, "LLM: rushing"),
@@ -562,7 +562,7 @@ def fig_budget(ext: pd.DataFrame) -> None:
         for f in (0.3, 0.5, 0.7):
             r = rel.loc[(atk, prm, f)]
             cells += [f"${r.oracle_channel:+.1f}$", f"${r.race:+.1f}$"]
-        tex_label = re.sub(r"(q|e|θ) = ([0-9.]+)", lambda mt: f"${mt.group(1)}={mt.group(2)}$", lab).replace("θ", r"\theta")
+        tex_label = re.sub(r"(p|e|θ) = ([0-9.]+)", lambda mt: f"${mt.group(1)}={mt.group(2)}$", lab).replace("θ", r"\theta")
         lines.append(tex_label + " & " + " & ".join(cells) + r"\\")
     lines += [r"\bottomrule", r"\end{tabular}"]
     (TAB / "budget_compact.tex").write_text("\n".join(lines) + "\n")

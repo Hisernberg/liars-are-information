@@ -6,19 +6,20 @@
     "majority",
     "aip_gated",
     "race",
+    "race_onecoin",
     "race_d",
     "oracle_channel",
     "oracle_channel_honest"
   ],
-  "rows": 1020600,
-  "elapsed_seconds": 312.32,
-  "peak_rss_mib_parent": 527.4,
-  "peak_rss_mib_children": 242.1,
-  "processes": 3,
+  "rows": 1166400,
+  "elapsed_seconds": 274.5,
+  "peak_rss_mib_parent": 561.5,
+  "peak_rss_mib_children": 240.0,
+  "processes": 4,
   "python": "3.11.15",
   "machine": "x86_64",
   "cpu_count": 4,
   "gpu_inference": false,
   "inputs_sha256": "eff90400e30aa91e2157b05b8b3c08bcb9884a4a4171780e458df7d19a208ba4",
-  "code_sha256": "111eaa333e1fcc86ee6c067106b7d1efbad17ee0ba48637ecceb3d3b51f70349"
+  "code_sha256": "7e4320508c304e114d7b254e4d19d1b61d8b8fd60457d6ca47889dd3582eac16"
 }

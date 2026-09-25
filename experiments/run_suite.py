@@ -102,7 +102,7 @@ def study_ext() -> list[World]:
 
 STUDIES = {"main": study_main, "zoo": study_zoo, "llm": study_llm, "swarm": study_swarm, "history": study_history,
            "ext": study_ext}
-EXT_METHODS = ("self", "majority", "aip_gated", "race", "race_d", "oracle_channel", "oracle_channel_honest")
+EXT_METHODS = ("self", "majority", "aip_gated", "race", "race_onecoin", "race_d", "oracle_channel", "oracle_channel_honest")
 # The expensive AIP variants are kept wherever they are the comparison of record.
 LIGHT = tuple(m for m in CORE_METHODS if m not in ("aip_naive", "sac", "confidence"))
 
