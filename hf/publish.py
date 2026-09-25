@@ -29,7 +29,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-RELEASE = "lai-v3.1-race"
+RELEASE = "lai-v3.1-race-e10-e11"
 INCLUDE = ["README.md", "LICENSE", "CITATION.cff", "pyproject.toml", "src", "tests", "experiments", "configs", "docs",
            "data/cache", "data/cache_adversarial", "data/cache_t07", "data/live_cache", "data/derived",
            "results", "figures", "media", "paper", "hf", "provenance"]

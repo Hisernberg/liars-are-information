@@ -184,6 +184,27 @@ check("E11: at f=0.7 every classical estimator is at least 50 points below the r
 check("E11: at f=0.7 RACE is within 2 points of the known-channel oracle",
       num("crowdOracleSeven") - num("crowdRaceSeven") <= 2.0)
 check("E11: KOS on BoolQ at f=0.7 far below RACE", num("crowdBoolqKosSeven") < num("crowdBoolqRaceSeven") - 50)
+# ---------------------------------------------------------------- E10 (pre-registered)
+if "hypTotal" in H:
+    check("E10: every pre-registered hypothesis supported", num("hypSupported") == num("hypTotal"),
+          f'{H["hypSupported"]}/{H["hypTotal"]}')
+    check("E10: v3.0 below the receiver alone on fresh BoolQ at f=0.5, v3.1 above it",
+          num("liveTwoBoolqLlmVthreeFive") < num("liveTwoBoolqLlmSelfFive") < num("liveTwoBoolqLlmRaceFive"))
+    check("E10: MACE is the best classical estimator on ARC at f=0.5",
+          num("liveTwoArcLlmMaceFive") == max(num(f"liveTwoArcLlm{m}Five") for m in ("Iwmv", "Mace", "Glad", "Ds")))
+    check("E10: plain debate helped pooling on ARC and hurt it on BoolQ",
+          num("liveTwoDebArcRace") > num("liveTwoIndArcRace") and num("liveTwoDebBoolqRace") < num("liveTwoIndBoolqRace"))
+    check("E10: informed debate significant on ARC, not on BoolQ",
+          num("informedArcCiLow") > 0 and num("informedBoolqCiLow") < 0 < num("informedBoolqCiHigh"))
+    check("E10: informed debaters follow the suggestion almost as often when it is wrong (within 5 points)",
+          num("deferFollowWhenRight") - num("deferFollowWhenWrong") < 5)
+    check("E10: informed debaters are less accurate than the suggestion they were given",
+          num("deferInformedRight") < num("deferFavRight"))
+    check("E10: four of six receivers gain on each benchmark",
+          num("liveTwoArcGainersCount") == 4 and num("liveTwoBoolqGainersCount") == 4)
+    check("E10: RACE within 4 points of the known-channel oracle on ARC at f=0.5",
+          num("liveTwoArcLlmOracleFive") - num("liveTwoArcLlmRaceFive") <= 4)
+    check("E10: BoolQ saboteurs are right more often than chance on average", num("liveTwoBoolqSolo") > 50)
 
 fails = [r for r in results if not r[1]]
 for claim, ok, detail in results:

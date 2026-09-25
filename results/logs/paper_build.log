@@ -1,38 +1,41 @@
-901 numbers written
+1140 numbers written
 note: "version 2" Tectonic command-line interface activated
 note: Running TeX ...
 warning: algorithm.sty:11: 
 Invalid UTF-8 byte or sequence at line 11 replaced by U+FFFD.
-note: downloading SHA256SUM
-note: downloading longtable.sty
-note: downloading ltcaption.sty
+warning: tables/e10_hypotheses_compact.tex:6: Underfull \hbox (badness 1466) in paragraph at lines 6--6
 note: Running BibTeX on main.aux ...
 note: Rerunning TeX because bibtex was run ...
 warning: algorithm.sty:11: 
 Invalid UTF-8 byte or sequence at line 11 replaced by U+FFFD.
+warning: tables/e10_hypotheses_compact.tex:6: Underfull \hbox (badness 1466) in paragraph at lines 6--6
+note: Rerunning TeX because "main.aux" changed ...
+warning: algorithm.sty:11: 
+Invalid UTF-8 byte or sequence at line 11 replaced by U+FFFD.
+warning: tables/e10_hypotheses_compact.tex:6: Underfull \hbox (badness 1466) in paragraph at lines 6--6
 warning: internal consistency problem when checking if main.bbl changed
 note: Rerunning TeX because "main.bbl" changed ...
 warning: algorithm.sty:11: 
 Invalid UTF-8 byte or sequence at line 11 replaced by U+FFFD.
+warning: tables/e10_hypotheses_compact.tex:6: Underfull \hbox (badness 1466) in paragraph at lines 6--6
 warning: internal consistency problem when checking if main.bbl changed
 note: Rerunning TeX because "main.bbl" changed ...
 warning: algorithm.sty:11: 
 Invalid UTF-8 byte or sequence at line 11 replaced by U+FFFD.
+warning: tables/e10_hypotheses_compact.tex:6: Underfull \hbox (badness 1466) in paragraph at lines 6--6
 warning: internal consistency problem when checking if main.bbl changed
 note: Rerunning TeX because "main.bbl" changed ...
 warning: algorithm.sty:11: 
 Invalid UTF-8 byte or sequence at line 11 replaced by U+FFFD.
+warning: tables/e10_hypotheses_compact.tex:6: Underfull \hbox (badness 1466) in paragraph at lines 6--6
 warning: internal consistency problem when checking if main.bbl changed
 note: Rerunning TeX because "main.bbl" changed ...
 warning: algorithm.sty:11: 
 Invalid UTF-8 byte or sequence at line 11 replaced by U+FFFD.
-warning: internal consistency problem when checking if main.bbl changed
-note: Rerunning TeX because "main.bbl" changed ...
-warning: algorithm.sty:11: 
-Invalid UTF-8 byte or sequence at line 11 replaced by U+FFFD.
+warning: tables/e10_hypotheses_compact.tex:6: Underfull \hbox (badness 1466) in paragraph at lines 6--6
 warning: internal consistency problem when checking if main.bbl changed
 warning: TeX rerun seems needed, but stopping at 6 passes
 warning: warnings were issued by the TeX engine; use --print and/or --keep-logs for details.
 note: Running xdvipdfmx ...
-note: Writing `main.pdf` (766.86 KiB)
+note: Writing `main.pdf` (817.97 KiB)
 note: Skipped writing 3 intermediate files (use --keep-intermediates to keep them)

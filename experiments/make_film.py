@@ -451,9 +451,10 @@ def scene_elimination(sim: dict, path: Path) -> None:
 def scene_results(path: Path, seconds: float = 9.0) -> None:
     head = json.loads((ROOT / "results/tables/headline.json").read_text())
     rows = [("Coherent liars, 90% of the swarm", "mainSelfNine", "mainMajNine", "mainAipNine", "mainRaceNine"),
-            ("Gate-aware liars (the attack that beat AIP), 70%", "zooCamoSelfSeven", "zooGateMajSeven", "zooGateAipSeven", "zooGateRaceSeven"),
+            ("Gate-aware liars (the attack that beat AIP), 70%", "zooGateSelfSeven", "zooGateMajSeven", "zooGateAipSeven", "zooGateRaceSeven"),
             ("Real LLM deceivers, 50%", "llmSelfFive", "llmMajFive", "llmAipFive", "llmRaceFive"),
-            ("Real LLM deceivers, 70%", "llmSelfSeven", "llmMajSeven", "llmAipSeven", "llmRaceSeven")]
+            ("Real LLM deceivers, 70%", "llmSelfSeven", "llmMajSeven", "llmAipSeven", "llmRaceSeven"),
+            ("Attack mix vs crowdsourcing baselines, 70%", "crowdSelfSeven", "crowdMajSeven", "crowdAipSeven", "crowdRaceSeven")]
     viz.setup()
     fig = plt.figure(figsize=(W, H), dpi=100)
 
@@ -466,18 +467,26 @@ def scene_results(path: Path, seconds: float = 9.0) -> None:
         for c_i, c in enumerate(cols):
             fig.text(0.47 + 0.13 * c_i, 0.74, c, ha="center", fontsize=13, color=viz.INK_2, alpha=a)
         for r_i, (lab, *keys) in enumerate(rows):
-            y = 0.66 - 0.1 * r_i
+            y = 0.66 - 0.085 * r_i
             fig.text(0.05, y, lab, fontsize=13.5, alpha=a, va="center")
             for c_i, k in enumerate(keys):
                 v = head.get(k, "??")
                 fig.text(0.47 + 0.13 * c_i, y, f"{v}%", ha="center", va="center", alpha=a,
                          fontsize=20 if c_i == 3 else 16, fontweight="bold" if c_i == 3 else None,
                          color=viz.BLUE if c_i == 3 else viz.INK)
-        fig.text(0.05, 0.2, f"Liars are information: with 7 of 10 agents lying independently, RACE reaches "
-                            f"{head.get('extRaceIndepSeven', '??')}%, more than an oracle that knows who lies and removes "
-                            f"them ({head.get('extRemovalIndepSeven', '??')}%).", fontsize=13, color=viz.INK, alpha=a)
-        fig.text(0.05, 0.1, "Where RACE fails, reported as prominently: camouflage attackers, sleepers, and receivers at chance.\n"
-                            "Code, data, paper: github.com/Hisernberg/liars-are-information", fontsize=12, color=viz.INK_2, alpha=a)
+        fig.text(0.05, 0.24, f"Liars are information: with 7 of 10 agents lying independently, RACE reaches "
+                             f"{head.get('extRaceIndepSeven', '??')}%, more than an oracle that knows who lies and removes "
+                             f"them ({head.get('extRemovalIndepSeven', '??')}%).", fontsize=13, color=viz.INK, alpha=a)
+        fig.text(0.05, 0.185, f"Classical crowdsourcing estimators (IWMV, MACE, GLAD, KOS, Dawid–Skene) fall to at most "
+                              f"{head.get('crowdClassicalMaxSeven', '??')}% when 7 of 10 lie: the anchor is what matters.",
+                 fontsize=13, color=viz.INK, alpha=a)
+        fig.text(0.05, 0.13, f"Pre-registered fresh live run: {head.get('hypSupported', '??')} of {head.get('hypTotal', '??')} "
+                             f"hypotheses supported (v3.1 {head.get('hypHOneATarget', '??')}% vs v3.0 "
+                             f"{head.get('hypHOneABase', '??')}% on unseen yes/no questions).", fontsize=13, color=viz.INK,
+                 alpha=a)
+        fig.text(0.05, 0.05, "Where RACE fails, reported as prominently: camouflage attackers, sleepers, and receivers at chance.\n"
+                             "Code, data, paper: github.com/Hisernberg/liars-are-information", fontsize=12, color=viz.INK_2,
+                 alpha=a)
 
     animation.FuncAnimation(fig, draw, frames=int(seconds * FPS)).save(path, writer=writer())
     plt.close(fig)

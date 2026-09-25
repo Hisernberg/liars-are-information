@@ -1,0 +1,6 @@
+hypothesis,statement,target,baseline,target_acc,baseline_acc,delta,cells,wins,ties,losses,verdict,p_pooled
+H1a,BoolQ: RACE v3.1 > RACE v3.0,race,race_onecoin,81.85218253968253,69.10780423280424,12.74437830687829,12,7,5,0,supported,
+H1b,BoolQ: RACE v3.1 >= receiver alone,race,self,81.85218253968253,74.01339285714285,7.838789682539682,12,2,10,0,supported,
+H2a,"ARC, f>=0.5: RACE >= majority vote",race,majority,58.19444444444445,41.041666666666664,17.152777777777782,6,2,4,0,supported,
+H2b,"ARC, f>=0.5: RACE >= receiver alone",race,self,58.19444444444445,49.666666666666664,8.527777777777784,6,3,3,0,supported,
+H3,Individual accuracy: informed debate > plain debate,informed,debate,68.16666666666666,61.66666666666667,6.5,2,1,1,0,supported,9.87288649628203e-07

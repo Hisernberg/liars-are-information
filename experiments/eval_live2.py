@@ -15,6 +15,7 @@ honest, solo, rushing, debate and RACE-informed debate roles) and writes ``resul
   reversal (Holm-corrected Wilcoxon and paired bootstrap interval agree), *contradicted*
   if the ordering is reversed in the mean, otherwise *inconclusive*;
 * ``h3_individual.csv`` -- informed vs plain debate, paired over (model, question);
+* ``deference.csv`` -- exploratory: whether informed debaters follow RACE's suggested option, and whether it is right;
 * ``run_manifest.json``.
 """
 
@@ -60,18 +61,24 @@ def contagion(raw: pd.DataFrame) -> pd.DataFrame:
     piv = raw.pivot_table(index=["benchmark", "task_id", "model"], columns="role", values="extracted_answer",
                           aggfunc="first")
     gold = raw.drop_duplicates(["benchmark", "task_id"]).set_index(["benchmark", "task_id"]).gold_answer
+    solo = raw[raw.role == "solo"].pivot_table(index=["benchmark", "task_id"], columns="model", values="extracted_answer",
+                                                aggfunc="first")
+    top_lie = solo.mode(axis=1)[0]  # the saboteurs' most common answer on each question
     rows = []
     for (b, m), g in piv.groupby(level=["benchmark", "model"]):
         for cond in ("debate", "informed"):
             if cond not in g:
                 continue
             h = g.dropna(subset=["honest", cond])
-            gg = gold.loc[[(b, t) for t in h.index.get_level_values("task_id")]].to_numpy()
+            keys = [(b, t) for t in h.index.get_level_values("task_id")]
+            gg = gold.loc[keys].to_numpy()
+            lie = top_lie.reindex(keys).to_numpy()
             before, after = h.honest.to_numpy(), h[cond].to_numpy()
             rows.append(dict(benchmark=b, model=m, condition=cond, n=len(h), acc_independent=np.mean(before == gg),
                              acc_after=np.mean(after == gg), switch_rate=np.mean(before != after),
                              right_to_wrong=np.mean((before == gg) & (after != gg)),
-                             wrong_to_right=np.mean((before != gg) & (after == gg))))
+                             wrong_to_right=np.mean((before != gg) & (after == gg)),
+                             switch_to_liar_plurality=np.mean((before != after) & (after == lie) & (after != gg))))
     return pd.DataFrame(rows)
 
 
@@ -94,6 +101,46 @@ def h3_individual(raw: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     out = pd.DataFrame(rows)
     per_model = piv.groupby(["benchmark", "model"])[["honest", "debate", "informed"]].mean().reset_index()
     return out, per_model
+
+
+def deference(raw: pd.DataFrame) -> pd.DataFrame:
+    """Exploratory (not pre-registered): does an informed debater evaluate RACE's suggestion or defer to it?
+
+    For every honest model and question after the warm-up, recompute the option its own
+    prompt said the reliability-weighted evidence favours (the same causal RACE fit as
+    ``live_swarm.informed_suffixes``), and record whether that option was right and whether
+    the model's plain-debate and informed-debate answers match it."""
+    import json
+
+    from aip.types import Broadcast
+
+    from lai.data import LIVE_MODELS
+    from lai.race import RACEAggregator
+
+    names = [("honest", m) for m in LIVE_MODELS] + [("solo", m) for m in LIVE_MODELS]
+    rows_out = []
+    for b in BENCHES:
+        items = {it["task_id"]: it for it in json.loads((ROOT / "data" / "benchmarks" / f"{b}_cached_items.json").read_text())}
+        r = raw[raw.benchmark == b]
+        piv = r.pivot_table(index="task_id", columns=["role", "model"], values="extracted_answer", aggfunc="first")
+        gold = r.drop_duplicates("task_id").set_index("task_id").gold_answer
+        order = list(pd.unique(r[r.role == "informed"].task_id))
+        for m in LIVE_MODELS:
+            me, history = names.index(("honest", m)), []
+            for i, t in enumerate(order):
+                votes = [piv[(ro, mm)].get(t) for ro, mm in names]
+                if i >= 8:
+                    race = RACEAggregator([chr(65 + k) for k in range(len(items[t]["choices"]))])
+                    race.fit_receiver(me, history)
+                    post = race.posterior(tuple(Broadcast(j, "q", v, 0.5, 0.5, False) for j, v in enumerate(votes)), me)
+                    fav = max(post, key=post.get) if post else None
+                    own, deb, inf = piv[("honest", m)].get(t), piv[("debate", m)].get(t), piv[("informed", m)].get(t)
+                    rows_out.append(dict(benchmark=b, model=m, task_id=t, favoured=fav, favoured_right=fav == gold[t],
+                                         own_right=own == gold[t], debate_right=deb == gold[t],
+                                         informed_right=inf == gold[t], informed_follows=inf == fav,
+                                         debate_matches=deb == fav, favoured_differs_from_own=fav != own))
+                history.append({j: v for j, v in enumerate(votes)})
+    return pd.DataFrame(rows_out)
 
 
 def receivers() -> pd.DataFrame:
@@ -197,6 +244,7 @@ def main() -> None:
     h3.to_csv(OUT / "h3_individual.csv", index=False)
     per_model.to_csv(OUT / "h3_per_model.csv", index=False)
     receivers().to_csv(OUT / "receivers.csv", index=False)
+    deference(raw).to_csv(OUT / "deference.csv", index=False)
     ws = worlds()
     frame, _, _ = run_worlds(ws, METHODS, OUT, processes=4)
     summary(frame, ["source", "benchmark", "attack", "f"]).to_csv(OUT / "summary.csv")

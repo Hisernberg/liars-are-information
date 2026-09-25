@@ -1,0 +1,55 @@
+PASS E1: never loses to the receiver alone
+PASS E1: every significant loss is on MATH-500 at f<=0.3
+PASS E1: mean over benchmarks, RACE above the receiver alone at every f
+PASS E1: no breakdown point (README/abstract)
+PASS E1: no-clone variant higher at f=0.5 against a perfect bloc
+PASS E1 caption: RACE below the receiver only on MATH-500 at small f
+PASS E2: uninformative, RACE above the receiver alone at f=0.7
+PASS E2: camouflage is the only stationary attack with RACE below the receiver at f=0.7
+PASS Limitations: no deployable method beats the receiver alone under camouflage at f=0.7
+PASS E2: RACE nearly flat in p at f=0.7 (range < 4 points)
+PASS E3: RACE above every non-RACE method at every f, and within 0.1 of its best variant
+PASS E3: RACE above the honest-only oracle at f=0.7
+PASS E3: both superseded clone rules lower at f=0.7
+PASS Appendix: on E3 the adopted rule beats both superseded variants at every f>=0.5
+PASS Method: full confusion never >0.1 points better than RACE on 4-option benchmarks, per study
+PASS Conclusion: significant losses to self only under camouflage, sleeper, and one open-answer cell
+PASS E9: pooled wins over the removal oracle are all truth-dependent attacks
+PASS E9: gate-aware with p<1 wins at every f
+PASS E9: RACE-D never differs significantly on the other 14 settings
+PASS E9: RACE-D helps camouflage at f=0.7, hurts at f=0.3
+PASS E9: RACE-D hurts echo at f=0.7 and sleeper at f=0.3
+PASS E9: independent budget positive and growing with f
+PASS E9: echo, camouflage, sleeper budgets negative
+PASS E9: LLM budgets near zero (|b| < 1.5)
+PASS E9: uninformative budget ~0 and RACE pays a small cost
+PASS E6: forgetting and window above the receiver alone after the sleeper switch
+PASS E6: forgetting costs nothing measurable on a stationary schedule
+PASS E8: every MMLU receiver gains
+PASS E8: MMLU f=0.5 RACE above self, majority, AIP, DS
+PASS E8: v3.0 fell below the receiver alone on BoolQ at f=0.5
+PASS E8: v3.1 at or above the receiver alone on BoolQ at f=0.5
+PASS E8: strongest BoolQ receiver still loses with v3.1
+PASS E8: debate lowers RACE on MMLU
+PASS E8: debate helps RACE on BoolQ
+PASS E8: debate helps majority slightly on BoolQ
+PASS README: weakest agents gain most, strongest lose a little
+PASS Binary rule: never significantly worse than v3.0 on replayed BoolQ
+PASS README: v3.1 equals or beats v3.0 on replayed BoolQ in every study
+PASS E11: with a liar minority (f<=0.3) the best classical estimator is within 1 point of RACE
+PASS E11: RACE never significantly loses to a classical estimator
+PASS E11: at f=0.7 every classical estimator is at least 50 points below the receiver alone
+PASS E11: at f=0.7 RACE is within 2 points of the known-channel oracle
+PASS E11: KOS on BoolQ at f=0.7 far below RACE
+PASS E10: every pre-registered hypothesis supported
+PASS E10: v3.0 below the receiver alone on fresh BoolQ at f=0.5, v3.1 above it
+PASS E10: MACE is the best classical estimator on ARC at f=0.5
+PASS E10: plain debate helped pooling on ARC and hurt it on BoolQ
+PASS E10: informed debate significant on ARC, not on BoolQ
+PASS E10: informed debaters follow the suggestion almost as often when it is wrong (within 5 points)
+PASS E10: informed debaters are less accurate than the suggestion they were given
+PASS E10: four of six receivers gain on each benchmark
+PASS E10: RACE within 4 points of the known-channel oracle on ARC at f=0.5
+PASS E10: BoolQ saboteurs are right more often than chance on average
+
+53/53 claims hold

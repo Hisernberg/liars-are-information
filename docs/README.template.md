@@ -5,6 +5,11 @@
 When some agents in a multi-agent LLM system lie, the usual defence is to find the liars and throw their answers away. That defence breaks once liars are half the group, and it wastes information: an agent that never tells the truth still rules out one answer every time it speaks. **RACE** (Receiver-Anchored Channel Estimation) lets every honest agent learn, from its own unlabeled history, how much each peer's answers depend on the truth. It then weighs every answer by that dependence. The weight is negative for liars, so their answers count as evidence *against* what they say. The estimate is anchored on the one fact each honest agent knows for certain: that it is honest itself.
 
 <p align="center">
+  <a href="media/multi_agent_showcase.mp4"><img src="media/gif/showcase_architecture.gif" width="880" alt="The architecture, animated: a question stream, twelve live agents (six honest, six saboteurs), a broadcast channel, and the RACE trust layer inside every honest agent"></a><br>
+  <sub><b>▶ The flagship video</b> (<a href="media/multi_agent_showcase.mp4">MP4, 2 min</a>; plays on the <a href="https://huggingface.co/spaces/Nabidnur/liars-are-information-demo">Hugging Face Space</a>). A live team of six LLM agents and six saboteurs solves {{showBench}} questions from the pre-registered run. It shows the architecture, one question end to end, what happens inside one honest agent's RACE layer, plain vs RACE-informed debate, the whole question stream, and the interaction analysis. Every frame is real data.</sub>
+</p>
+
+<p align="center">
   <img src="media/gif/film_1_protocol.gif" width="880" alt="Ten agents answer an MMLU question; five are LLMs prompted to mislead. Coloured packets carry every answer to every honest agent, and each honest agent decides with its own learned trust links: blue = trust, red = invert."><br>
   <sub><b>How the swarm works</b> (scene 1 of the <a href="media/film_liars_are_information.mp4">explainer film</a>). Ten agents answer an MMLU question; five are real LLMs prompted to mislead after seeing the honest answers. Every answer travels to every honest agent (coloured packets). Each honest agent then decides using its own learned trust links: blue = trust, red = invert. In the last round shown, only 2 of the 5 honest agents know the answer and majority vote picks the liars' answer, yet <b>all five honest agents land on the truth</b>.</sub>
 </p>
@@ -17,6 +22,7 @@ When some agents in a multi-agent LLM system lie, the usual defence is to find t
 | Classical crowdsourcing estimators (IWMV, MACE, GLAD, KOS, Dawid–Skene), 7 of 10 agents lie | at most {{crowdClassicalMaxSeven}}%, against **{{crowdRaceSeven}}%** with RACE (no significant loss in {{crowdClassicalCells}} paired comparisons) |
 | Weakest honest agent (Llama-3.2-3B), liars in the majority | {{agentLlamaSelf}}% alone → **{{agentLlamaRace}}%** with RACE |
 | Label-free trust estimates vs. the truth | correlation **r = {{chanCorr}}** over {{chanN}} agent pairs |
+| **Pre-registered** fresh live run (E10): hypotheses supported | **{{hypSupported}} / {{hypTotal}}**: v3.1 {{hypHOneATarget}}% vs v3.0 {{hypHOneABase}}% on unseen BoolQ items; RACE {{hypHTwoATarget}}% vs majority {{hypHTwoABase}}% on ARC; RACE-informed debate {{informedDelta}} points over plain debate |
 | Live six-model swarm (fresh inference): every honest agent's gain | MMLU **+{{liveMmluGainMin}} to +{{liveMmluGainMax}}** points; BoolQ {{liveBoolqGainMin}} to +{{liveBoolqGainMax}} points |
 | Scale of the evaluation | {{nWorldsReplay}} simulated swarms, 6 benchmarks, 9 models, 18 attack settings, 14 baselines and oracles, two live six-model swarms (one pre-registered), 120 online streams |
 | Proof that the text matches the data | **{{claimsHold}} / {{claimsTotal}}** prose claims re-derived from the raw results on every run ([evidence ledger](docs/EVIDENCE.md)); every number is generated; {{nTests}} unit tests |
@@ -434,6 +440,29 @@ answer 'B' after 56 unlabeled questions; posterior B=0.68, D=0.28, C=0.04; trust
 
 RACE **levels the swarm**: the spread between the weakest and strongest honest agent shrinks from {{agentSpreadSelf}} points to {{agentSpreadRace}} points. The strongest agents pay a small price on average (more under camouflage, §11). That is the cost of listening to a crowd that is mostly worse than they are.
 
+### How the agents interact, and what the architecture changes (live, {{showSource}})
+
+<p align="center"><a href="media/multi_agent_showcase.mp4"><img src="media/gif/showcase_inside.gif" width="820" alt="Inside one honest agent: learned reliability of every panelist next to the truth, and the twelve votes added up as signed evidence"></a><br><sub>From the flagship video: what one honest agent ({{showReceiver}}) learned about the eleven other agents without labels (bars) against the truth (ticks), and how the twelve votes add up as signed evidence. Red = read backwards.</sub></p>
+
+The table covers all {{showQuestions}} {{showBench}} questions of the live run, six honest models and six saboteurs (the same models told to mislead). It is recomputed by [`experiments/make_showcase.py`](experiments/make_showcase.py).
+
+| What happened | Value | Which part of the architecture it concerns |
+|---|---:|---|
+| Honest agent alone | {{showAlone}}% | — |
+| Saboteur answers that are right (chance {{showChance}}%) | {{showSabAcc}}% | Saboteurs lie only partly … |
+| Saboteur repeats its own honest answer | {{showSabRepeats}}% | … and often fail to lie at all |
+| Majority of the 12 votes | {{showMajority}}% | No anchor: counts the lies |
+| **RACE on the round-1 votes (after the 8-question warm-up)** | **{{showRaceLate}}%** (alone {{showAloneLate}}%, majority {{showMajLate}}%) | Anchor + signed weights |
+| RACE's final view of saboteur links: INVERT / DISCARD / TRUST | {{showSabInvert}}% / {{showSabDiscard}}% / {{showSabTrust}}% | Signed weights; the trusted "saboteurs" really are better than chance |
+| RACE's final view of honest links: TRUST | {{showHonestTrust}}% | — |
+| Gain over alone, per model | {{showGainMin}} to {{showGainMax}} points | Each agent learns on its own, online |
+| Plain debate: answers changed / right→wrong / wrong→right / moved to the saboteurs' favourite lie | {{showPlainSwitch}}% / {{showPlainRW}}% / {{showPlainWR}}% / {{showPlainToLie}}% | No trust information in the conversation |
+| RACE-informed debate: the same four rates | {{showInfSwitch}}% / {{showInfRW}}% / {{showInfWR}}% / {{showInfToLie}}% | Reliability notes in the prompt |
+| Individual accuracy after plain / informed debate | {{showDebate}}% / **{{showInformed}}%** | — |
+| Informed debaters adopting RACE's suggestion (when it is wrong) | {{showFollow}}% ({{showFollowWrong}}%) | They defer rather than deliberate |
+
+**In one sentence:** the anchor stops the honest agents from siding with the majority, the signed weights let them use saboteurs that are informative (read backwards or, when a "saboteur" is actually right, trusted), and feeding RACE's estimates into a debate helps individual agents. Pooling the independent answers directly is still the best protocol, because debaters defer rather than deliberate.
+
 **The agents learn the right picture of each other.** RACE never sees a label, yet its estimate of each peer's accuracy correlates **r = {{chanCorr}}** with the truth (mean absolute error {{chanMae}}, {{chanN}} receiver–peer pairs). It inverts **{{chanByzInvRace}}%** of liar channels (AIP: {{chanByzInvAip}}%) and wrongly inverts only **{{chanHonInvRace}}%** of honest ones.
 
 ---
@@ -586,7 +615,33 @@ Mean BoolQ accuracy (%) per study, TEST split:
 
 On the other five benchmarks v3.1 and v3.0 are identical by construction. On the {{binaryReplayCells}} replayed BoolQ cells of E1–E3, v3.1 is never significantly worse than v3.0 ({{binaryReplayWins}} significant gain, against the sleeper at f = 0.5; {{binaryReplayLosses}} losses).
 
-<!--E10SECTION-->
+### 10.11 E10: a pre-registered fresh live run (confirmation of v3.1, and RACE-informed debate)
+<img src="figures/fig15_live_confirmation.png" width="900" alt="E10: v3.1 vs v3.0 on unseen BoolQ items, RACE on ARC, and individual accuracy after plain vs RACE-informed debate">
+
+v3.1's binary rule was adopted after E8, so E8 cannot confirm it. E10 is a new live run. Its hypotheses, analysis and decision rule were committed publicly ([`docs/PREREGISTRATION_E10.md`](docs/PREREGISTRATION_E10.md), commit `494aa28`) **before any answer existed**. Setup:
+- **Questions:** ARC-Challenge items 0–119 (a benchmark the live swarm had never seen) and BoolQ items 120–199 (disjoint from E8).
+- **Models and roles:** the same six models and roles as E8, plus one new role, **RACE-informed debate**. Each debater sees the half-liar panel with its *own* RACE reliability notes and the option the weighted evidence favours. No answer key is used.
+- **Compute:** {{computeLiveTwoHours}} CPU hours.
+
+**All {{hypSupported}} of {{hypTotal}} pre-registered hypotheses are supported:**
+
+{{table:e10_hypotheses}}
+
+- **H1, the binary rule on fresh answers.** v3.1 scores {{hypHOneATarget}}% and v3.0 {{hypHOneABase}}%. The E8 failure replicates on answers generated after the fix: at f = 0.5, v3.0 scores {{liveTwoBoolqLlmVthreeFive}}%, below the agent alone ({{liveTwoBoolqLlmSelfFive}}%), and v3.1 repairs it ({{liveTwoBoolqLlmRaceFive}}%).
+- **H2, a new benchmark.** On ARC at f = 0.5, RACE scores {{liveTwoArcLlmRaceFive}}%, close to the known-channel oracle ({{liveTwoArcLlmOracleFive}}%). Majority vote scores {{liveTwoArcLlmMajFive}}%, AIP {{liveTwoArcLlmAipFive}}% and the best classical estimator (MACE) {{liveTwoArcLlmMaceFive}}%.
+- **H3, RACE-informed debate.** Individual post-debate accuracy goes from {{informedPlain}}% to **{{informedInformed}}%**, a gain of {{informedDelta}} points (95% CI [{{informedCiLow}}, {{informedCiHigh}}], p {{informedP}}). The gain is significant on ARC ({{informedArcDelta}}) and not on BoolQ ({{informedBoolqDelta}}, CI [{{informedBoolqCiLow}}, {{informedBoolqCiHigh}}]).
+- **Exploratory, not pre-registered: the agents mostly defer.**
+  - Informed debaters adopt RACE's suggested option {{deferFollow}}% of the time, and almost as often when it is wrong ({{deferFollowWhenWrong}}%) as when it is right ({{deferFollowWhenRight}}%).
+  - The suggestion itself is right {{deferFavRight}}% of the time; the informed debaters are right {{deferInformedRight}}%.
+  - So the gain comes from deference, not from better deliberation. Pooling the independent answers with RACE remains the strongest protocol.
+- **H4, exploratory.** At f = 0.5, pooling with RACE gives:
+  - ARC: {{liveTwoIndArcRace}}% on independent answers, {{liveTwoDebArcRace}}% after plain debate, {{liveTwoInfArcRace}}% after informed debate.
+  - BoolQ: {{liveTwoIndBoolqRace}}%, {{liveTwoDebBoolqRace}}% and {{liveTwoInfBoolqRace}}% for the same three.
+
+  Debate helped pooling on ARC and hurt it on BoolQ, the opposite of E8. Its effect is not stable.
+- **Who gains.** Four of six receivers gain on each benchmark: on ARC by up to {{liveTwoArcGainMax}} points, on BoolQ by up to {{liveTwoBoolqGainMax}}. The strongest ARC agent (Granite-3.3-2B) changes by {{liveTwoArcGainMin}}: its own accuracy is far above the panel's.
+
+<!--E10SECTION-DONE-->
 
 ### 10.12 E11: would any classical crowdsourcing estimator do?
 <img src="figures/fig14_crowd_baselines.png" width="900" alt="Classical crowdsourcing estimators against RACE: accuracy versus liar share, and a per-benchmark heatmap at f = 0.7">
@@ -618,7 +673,7 @@ Every table below is regenerated from `results/` by `experiments/make_figures.py
 | [`live_accuracy.md`](results/tables/live_accuracy.md) | E8 live swarm |
 | [`information_budget.md`](results/tables/information_budget.md), [`race_vs_removal_oracle_wtl.md`](results/tables/race_vs_removal_oracle_wtl.md), [`race_d_vs_race_wtl.md`](results/tables/race_d_vs_race_wtl.md) | E9 information budget, oracles and RACE-D |
 | [`crowd_baselines_by_f.md`](results/tables/crowd_baselines_by_f.md), [`crowd_baselines_f07.md`](results/tables/crowd_baselines_f07.md), [`race_vs_crowd_wtl.md`](results/tables/race_vs_crowd_wtl.md) | E11 classical crowdsourcing estimators |
-<!--E10TABLES-->
+| [`e10_hypotheses.md`](results/tables/e10_hypotheses.md), [`e10_accuracy.md`](results/tables/e10_accuracy.md), [`e10_informed_per_model.md`](results/tables/e10_informed_per_model.md) | E10 pre-registered hypotheses; accuracy per method and f; round 1 / plain / informed debate per model |
 
 **Significant wins, ties and losses of RACE against each baseline (E1–E3, Holm-corrected, test and interval must agree):**
 
@@ -673,6 +728,9 @@ GitHub does not play MP4 files in a README, so every video has an animated GIF b
 
 | Preview | What it shows |
 |---|---|
+| <a href="media/multi_agent_showcase.mp4"><img src="media/gif/showcase_debate.gif" width="420"></a> | **▶ The flagship video (2 min):** a live team of LLM agents solving questions with saboteurs among them. Seven scenes: the architecture; round 1; inside one honest agent's RACE (learned trust against the truth, votes as signed evidence); plain vs RACE-informed debate; the whole question stream; the interaction analysis; credits. Real data from the pre-registered live run ([MP4](media/multi_agent_showcase.mp4)) |
+| <a href="media/live_informed_arc.mp4"><img src="media/gif/live_informed_arc.gif" width="420"></a> | **E10, ARC, question by question:** the half-liar panel as one agent sees it, with its RACE reliability notes; each honest model's answer after plain and after informed debate; running individual accuracy ([MP4](media/live_informed_arc.mp4)) |
+| <a href="media/live_informed_boolq.mp4"><img src="media/gif/live_informed_boolq.gif" width="420"></a> | **E10, BoolQ:** the same on unseen binary questions ([MP4](media/live_informed_boolq.mp4)) |
 | <a href="media/label_switching.mp4"><img src="media/gif/label_switching.gif" width="420"></a> | **Label switching, animated (new):** the same EM run twice on one honest agent's unlabelled history, with 7 of 10 agents a liar bloc. Dawid–Skene starts from the majority, trusts the bloc and inverts the honest agents ({{switchDs}}% on its test questions). RACE starts from its own answers and does the opposite ({{switchRace}}%; {{switchSelf}}% alone) ([MP4](media/label_switching.mp4)) |
 | <a href="media/film_liars_are_information.mp4"><img src="media/gif/film_1_protocol.gif" width="420"></a> | **Explainer film, scene 1:** agents think, broadcast answer packets, and each honest agent decides with its trust links. [MP4 of the full film](media/film_liars_are_information.mp4) |
 | <a href="media/film_liars_are_information.mp4"><img src="media/gif/film_2_learning.gif" width="420"></a> | **Scene 2:** the swarm's trust matrix learning over 90 unlabeled questions, next to running accuracy |
@@ -692,33 +750,41 @@ This is our own critical assessment, written the way a reviewer would read the w
 
 ### 14.1 Rating
 
-| Criterion | Rating | Why |
-|---|:-:|---|
-| **Originality** | ★★★☆☆ | The anchor idea is simple and well motivated, and the information budget is new. But weighted voting and Dawid–Skene EM are classical, and "trusted worker" and semi-supervised crowdsourcing are close relatives. The paper must position itself carefully against them. |
-| **Technical soundness** | ★★★★☆ | The theory is correct but mostly elementary (Jensen, relabelling, Hoeffding). There is no consistency guarantee for anchored EM. The estimator's assumptions (conditional independence, stationarity) are stated and their violations are shown. |
-| **Empirical breadth** | ★★★★★ | 9 studies, {{nWorldsReplay}} simulated swarms, adaptive and best-response attackers, LLM-written deception, online sleepers, oracles, and a live swarm with debate. |
-| **Statistical rigour and reproducibility** | ★★★★★ | Paired tests, Holm correction, confidence intervals, one-command reproduction, manifests with hashes, and every number generated from data. |
-| **Honesty about limits** | ★★★★★ | Camouflage, sleepers, weak anchors, the RACE-D negative result, and the post-hoc binary rule are all reported with numbers. |
-| **Realism of the multi-agent setting** | ★★☆☆☆ | The agents exchange final answers to closed or short-answer questions. There is no open-ended generation, no tool use and no multi-turn reasoning, except a small debate round with 1–2B models. |
-| **Clarity** | ★★★★☆ | Dense; the conference versions need to be shortened. |
-| **Overall** | **≈ 7 / 10** | Publishable at a good journal or a strong specialised venue now. A top-tier ML main track is borderline without the upgrades in 13.3. |
+The full referee-style review, with strengths, objections, our answers and residual risks, is in [`docs/ASSESSMENT.md`](docs/ASSESSMENT.md). Summary:
+
+| Criterion | Before this round | **Now** | What moved it |
+|---|:-:|:-:|---|
+| **Originality** | ★★★☆☆ | ★★★½ | E11 shows that the anchor, not the latent-class model, is what matters; RACE-informed debate feeds the estimates back into the interaction. Weighted voting and Dawid–Skene EM remain classical. |
+| **Technical soundness** | ★★★★☆ | ★★★★½ | Theorem 2 (identification and consistency of anchored estimation) closes the gap the earlier release had. There are still no finite-sample rates. |
+| **Baselines** | ★★★☆☆ | ★★★★½ | IWMV, MACE, GLAD and KOS under the identical protocol: {{crowdClassicalLosses}} losses in {{crowdClassicalCells}} paired comparisons. |
+| **Empirical breadth** | ★★★★★ | ★★★★★ | 11 studies, {{nWorldsReplay}} replayed swarms and two live swarms. |
+| **Rigour and reproducibility** | ★★★★★ | ★★★★★ | New: pre-registration (E10), a {{claimsTotal}}-claim ledger in the paper, and {{nTests}} tests. |
+| **Honesty about limits** | ★★★★★ | ★★★★★ | Every E10 outcome is reported whatever its direction; camouflage, sleepers and weak anchors are reported with numbers. |
+| **Realism of the multi-agent setting** | ★★☆☆☆ | ★★½ | A second live swarm on a new benchmark, with a debate protocol driven by RACE. Still 1–2B models and closed-form answers. |
+| **Clarity** | ★★★★☆ | ★★★★☆ | Dense; a conference version must be cut to 8–9 pages. |
+| **Overall** | **≈ 7 / 10** | **≈ 8 / 10** | For TMLR, JAAMAS and AAMAS. For NeurIPS, ICML or ICLR main tracks it is ≈ 6.5–7 / 10 until the realism gap closes (§14.3). |
 
 ### 14.2 What reviewers will ask (and our current answer)
 
-1. *"Isn't this just Dawid–Skene with one trusted worker?"* Partly, and the paper should say so. What is new is the adversarial, label-free setting in which *every* receiver anchors on itself, the proof that the anchor is what breaks label switching under a liar majority, the analysis relative to AIP's impossibility result, clone tempering by dependent errors, and the information budget.
-2. *"The binary rule was chosen after seeing the live data."* Yes, and we say so. The fix needs a *new* confirmation set (13.3, step 1).
-3. *"Replayed answers are not a real multi-agent system."* The live swarm is real but small: 6 models of 1–2B parameters, 240 questions and 48 test questions per world. A larger GPU run would strengthen this considerably.
-4. *"An adaptive attacker who knows RACE wins."* Camouflage does, and we show it. Under a best-response attacker that picks, per defender, the stationary attack that hurts it most, RACE scores {{brRaceSeven}}% at f = 0.7, against {{brSelfSeven}}% for the receiver alone. A formal game-theoretic treatment is future work.
-5. *"Missing crowdsourcing baselines."* We compare with Dawid–Skene (one-coin and full), AIP, SAC and majority. GLAD, MACE, Karger–Oh–Shah iterative inference and spectral initialisation (Zhang et al., 2016) should be added.
+1. *"Isn't this just Dawid–Skene with one trusted worker?"* Partly, and the paper says so. What is new:
+   - the adversarial, label-free setting in which *every* receiver anchors on itself and no agent trusts another;
+   - the proof that the anchor is what breaks label switching under a liar majority;
+   - E11, which shows six classical estimators collapsing where RACE does not;
+   - clone tempering by dependent errors;
+   - the information budget.
+2. *"The binary rule was chosen after seeing the live data."* Disclosed, and now tested on fresh data under a pre-registered rule (E10, §10.11). H1a is **{{hypHOneAVerdict}}** and H1b is **{{hypHOneBVerdict}}**.
+3. *"Replayed answers are not a real multi-agent system."* Two live swarms now exist: 6 models of 1–2B parameters, {{nLiveTasks}} + 200 questions, and debate rounds. It is still small. A GPU run with 7–14B models is the largest remaining gap.
+4. *"An adaptive attacker who knows RACE wins."* Camouflage does, and we show it. Under a best-response attacker over the stationary zoo, RACE scores {{brRaceSeven}}% at f = 0.7, against {{brSelfSeven}}% for the receiver alone.
+5. *"Does RACE improve the interaction itself, not just the final vote?"* That is E10's H3: RACE-informed debate changes individual post-debate accuracy by **{{informedDelta}}** points (95% CI [{{informedCiLow}}, {{informedCiHigh}}]). Verdict: **{{hypHThreeVerdict}}**.
 
-### 14.3 What to do before submitting (in priority order)
+### 14.3 What would move it from 8 to 9 / 10 (in priority order)
 
-1. **A fresh confirmation set for v3.1.** Freeze v3.1 now, then run a new live swarm with different models and at least one new benchmark (for example ARC, CommonsenseQA, TruthfulQA or StrategyQA), and evaluate it once.
-2. **A larger live swarm on a GPU:** 7–14B models, ≥ 500 questions, several debate rounds. This fixes the power problem (48 test questions per world) and makes the "multi-agent" claim realistic.
-3. **Open-ended tasks:** free-form QA with an LLM or equivalence judge, code with unit tests, or tool-use tasks. Aggregation would then happen over clustered answers.
-4. **More baselines:** GLAD, MACE, Karger–Oh–Shah, spectral Dawid–Skene, weighted-majority learning, and robust-aggregation rules adapted to categorical answers (trimmed/median-style).
-5. **Theory:** consistency of anchored EM under row-diagonal dominance; sample complexity of the binary class-conditional model; a bound on what a camouflage attacker can extract.
-6. **Writing:** a 9-page conference version (method, E1–E3, E8, E9, limitations) with everything else in the appendix; a related-work section on semi-supervised and trusted-worker crowdsourcing; an ethics statement on deception prompts.
+1. ✅ ~~A fresh confirmation set for v3.1~~: E10, pre-registered.
+2. ✅ ~~More baselines~~: IWMV, MACE, GLAD and KOS (E11). Spectral Dawid–Skene and categorical robust-aggregation rules are still open.
+3. ✅ ~~Consistency theory~~: Theorem 2. Finite-sample rates and a camouflage bound are still open.
+4. **A larger live swarm on a GPU:** 7–14B models, ≥ 500 questions and several debate rounds. This fixes the power problem and makes the "multi-agent" claim realistic.
+5. **Open-ended tasks:** free-form QA with an equivalence judge, or code with unit tests; aggregation over clustered answers.
+6. **Writing:** a 9-page conference version (method, E1–E3, E8–E11, limitations) with everything else in the appendix.
 7. **Authorship and credit:** agree authorship with the authors of the prior AIP work and the bucket release (Dhruv Jyoti Das; Nabidnur) before submission, since the paper builds on and audits their artifact.
 
 ### 14.4 Where to submit
@@ -749,14 +815,14 @@ We recommend **one journal track and one conference track in parallel**, beginni
 | **UAI / AISTATS** | ★★★★☆ | The probabilistic-modelling framing (anchored latent-class models, identifiability). |
 | **COLM** (Conference on Language Modeling) | ★★★★☆ | LLM-specific; stronger with the larger live swarm and open-ended tasks. |
 | **ACL / EMNLP / NAACL** (via ACL Rolling Review) | ★★★☆☆ | Only if framed around LLM multi-agent debate and deception, with more NLP-realistic tasks. |
-| **NeurIPS / ICML / ICLR** (main track) | ★★★☆☆ | The highest visibility, but borderline today. Realistic after steps 1–4 of 13.3. |
+| **NeurIPS / ICML / ICLR** (main track) | ★★★☆☆ | The highest visibility, but borderline today. Realistic after steps 4–5 of §14.3. |
 | **Workshops** at NeurIPS / ICML / ICLR / AAMAS on multi-agent LLMs, agent safety, trustworthy ML or red-teaming | ★★★★★ | Fast feedback and visibility. Submit a 4-page version while the journal or conference version is prepared. |
 
 **A concrete plan:**
 1. Post an arXiv preprint.
 2. Submit a workshop version.
-3. In parallel, prepare the fresh confirmation set (13.3 step 1). Then submit the full paper to **TMLR** (or **JAAMAS**) as the journal track, or a focused version to **AAMAS / AAAI** as the conference track.
-4. Aim for NeurIPS, ICML or ICLR only after the GPU live swarm and open-ended tasks are in.
+3. Submit the full paper to **TMLR** (or **JAAMAS**) as the journal track, and a focused version to **AAMAS** as the conference track.
+4. Aim for NeurIPS, ICML or ICLR only after the GPU live swarm and open-ended tasks are in (§14.3, steps 4–5).
 
 ---
 

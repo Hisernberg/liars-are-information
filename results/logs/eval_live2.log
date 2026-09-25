@@ -1,0 +1,33 @@
+[10/200] 12s
+[20/200] 21s
+[30/200] 31s
+[40/200] 38s
+[50/200] 44s
+[60/200] 49s
+[70/200] 53s
+[80/200] 56s
+[90/200] 65s
+[100/200] 71s
+[110/200] 77s
+[120/200] 82s
+[130/200] 87s
+[140/200] 90s
+[150/200] 94s
+[160/200] 96s
+[170/200] 102s
+[180/200] 106s
+[190/200] 112s
+[200/200] 116s
+  hypothesis                                            statement    target      baseline  target_acc  baseline_acc      delta  cells  wins  ties  losses    verdict      p_pooled
+0        H1a                         BoolQ: RACE v3.1 > RACE v3.0      race  race_onecoin   81.852183     69.107804  12.744378     12     7     5       0  supported           NaN
+1        H1b                   BoolQ: RACE v3.1 >= receiver alone      race          self   81.852183     74.013393   7.838790     12     2    10       0  supported           NaN
+2        H2a                   ARC, f>=0.5: RACE >= majority vote      race      majority   58.194444     41.041667  17.152778      6     2     4       0  supported           NaN
+3        H2b                  ARC, f>=0.5: RACE >= receiver alone      race          self   58.194444     49.666667   8.527778      6     3     3       0  supported           NaN
+4         H3  Individual accuracy: informed debate > plain debate  informed        debate   68.166667     61.666667   6.500000      2     1     1       0  supported  9.872886e-07
+    scope        subset  n_pairs  acc_plain  acc_informed     delta    ci_low   ci_high             p
+0  pooled           all     1200   0.616667      0.681667  0.065000  0.039167  0.090833  9.872886e-07
+1  pooled  after_warmup     1104   0.612319      0.684783  0.072464  0.045290  0.100543  3.031546e-07
+2     arc           all      720   0.551389      0.643056  0.091667  0.059722  0.123611  8.636119e-08
+3     arc  after_warmup      672   0.550595      0.651786  0.101190  0.068415  0.135417  1.826071e-08
+4   boolq           all      480   0.714583      0.739583  0.025000 -0.016667  0.066667  2.347637e-01
+5   boolq  after_warmup      432   0.708333      0.736111  0.027778 -0.016204  0.074074  2.254423e-01

@@ -24,12 +24,14 @@ TARGETS = [  # (template, output)
     (ROOT / "docs" / "README.template.md", ROOT / "README.md"),
     (ROOT / "hf" / "space" / "index.template.html", ROOT / "hf" / "space" / "index.html"),
     (ROOT / "hf" / "DATASET_CARD.template.md", ROOT / "hf" / "DATASET_CARD.md"),
+    (ROOT / "docs" / "ASSESSMENT.template.md", ROOT / "docs" / "ASSESSMENT.md"),
 ]
 
 
 TABLES = ROOT / "results" / "tables"
 EXTRA = (TABLES / "claims.json",     # written by experiments/verify_claims.py
-         TABLES / "switching.json")  # written by experiments/make_switching.py
+         TABLES / "switching.json",  # written by experiments/make_switching.py
+         TABLES / "showcase_macros.json")  # written by experiments/make_showcase.py
 
 
 def include_table(match: re.Match) -> str:

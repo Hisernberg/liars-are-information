@@ -1,0 +1,82 @@
+{
+ "source": "live_cache_v2",
+ "benchmark": "arc",
+ "receiver": "llama32_1b",
+ "task": "arc-test-Mercury_407664",
+ "question_index": 67,
+ "timing": {
+  "title": [
+   0.0,
+   5.0
+  ],
+  "architecture": [
+   5.0,
+   25.0
+  ],
+  "round1": [
+   30.0,
+   15.0
+  ],
+  "inside": [
+   45.0,
+   21.0
+  ],
+  "debate": [
+   66.0,
+   17.0
+  ],
+  "stream": [
+   83.0,
+   16.0
+  ],
+  "analysis": [
+   99.0,
+   17.0
+  ],
+  "credits": [
+   116.0,
+   5.0
+  ]
+ },
+ "numbers": {
+  "n_questions": 120.0,
+  "alone": 0.5388888888888889,
+  "majority": 0.6513888888888889,
+  "race": 0.6916666666666667,
+  "race_after_warmup": 0.7038690476190477,
+  "alone_after_warmup": 0.5401785714285714,
+  "majority_after_warmup": 0.6532738095238095,
+  "debate": 0.5513888888888889,
+  "informed": 0.6430555555555556,
+  "saboteur_acc": 0.3402777777777778,
+  "chance": 0.25,
+  "saboteurs_below_chance": 0.5,
+  "sab_repeats_honest": 0.4152777777777778,
+  "follow": 0.8735119047619048,
+  "follow_when_wrong": 0.8341708542713567,
+  "favoured_right": 0.7038690476190477,
+  "sab_trusted_true": 1.0,
+  "saboteur_trust": 0.5,
+  "saboteur_discard": 0.3333333333333333,
+  "saboteur_invert": 0.16666666666666666,
+  "honest_trust": 1.0,
+  "honest_discard": 0.0,
+  "honest_invert": 0.0,
+  "plain_switch": 0.1597222222222222,
+  "plain_right_to_wrong": 0.043055555555555555,
+  "plain_wrong_to_right": 0.05555555555555555,
+  "plain_to_lie": 0.025,
+  "informed_switch": 0.30694444444444446,
+  "informed_right_to_wrong": 0.059722222222222225,
+  "informed_wrong_to_right": 0.1638888888888889,
+  "informed_to_lie": 0.03888888888888889,
+  "per_model_gain": {
+   "qwen25_1p5b": 0.0357142857142857,
+   "smollm2_1p7b": 0.1964285714285714,
+   "granite33_2b": -0.017857142857142905,
+   "olmo2_1b": 0.32142857142857145,
+   "llama32_1b": 0.1964285714285714,
+   "gemma3_1b": 0.25000000000000006
+  }
+ }
+}

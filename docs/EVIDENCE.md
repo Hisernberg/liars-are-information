@@ -16,10 +16,11 @@ that is not already a generated number, re-derived from the per-task results.
 | ext | 972 | 1,166,400 | 4.6 min | 4 | no | `eff90400e30a` | `7e4320508c30` |
 | crowd | 342 | 495,900 | 5.1 min | 2 | no | `eff90400e30a` | `088266a6bcd4` |
 | online | 120 | 1,081,600 | 4.4 min | — | no | `` | `` |
+| live2 | 200 | 268,800 | 2.8 min | 4 | no | `c888be2919b1` | `04beaf1ca204` |
 
 ## Claims
 
-43 of 43 claims hold.
+53 of 53 claims hold.
 
 | # | Claim | Status | Evidence (study) |
 |---:|---|:-:|---|
@@ -66,6 +67,16 @@ that is not already a generated number, re-derived from the per-task results.
 | 41 | E11: at f=0.7 every classical estimator is at least 50 points below the receiver alone | ✅ | `results/crowd` |
 | 42 | E11: at f=0.7 RACE is within 2 points of the known-channel oracle | ✅ | `results/crowd` |
 | 43 | E11: KOS on BoolQ at f=0.7 far below RACE | ✅ | `results/crowd` |
+| 44 | E10: every pre-registered hypothesis supported | ✅ | `results/live2` |
+| 45 | E10: v3.0 below the receiver alone on fresh BoolQ at f=0.5, v3.1 above it | ✅ | `results/live2` |
+| 46 | E10: MACE is the best classical estimator on ARC at f=0.5 | ✅ | `results/live2` |
+| 47 | E10: plain debate helped pooling on ARC and hurt it on BoolQ | ✅ | `results/live2` |
+| 48 | E10: informed debate significant on ARC, not on BoolQ | ✅ | `results/live2` |
+| 49 | E10: informed debaters follow the suggestion almost as often when it is wrong (within 5 points) | ✅ | `results/live2` |
+| 50 | E10: informed debaters are less accurate than the suggestion they were given | ✅ | `results/live2` |
+| 51 | E10: four of six receivers gain on each benchmark | ✅ | `results/live2` |
+| 52 | E10: RACE within 4 points of the known-channel oracle on ARC at f=0.5 | ✅ | `results/live2` |
+| 53 | E10: BoolQ saboteurs are right more often than chance on average | ✅ | `results/live2` |
 
 ## Pre-registration
 

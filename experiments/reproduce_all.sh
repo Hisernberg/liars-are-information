@@ -28,6 +28,7 @@ stamp "late figures";       $PY experiments/make_figures.py --late >> results/lo
 stamp "film";               $PY experiments/make_film.py > results/logs/film.log 2>&1
 stamp "videos";             $PY experiments/make_videos.py > results/logs/videos.log 2>&1
 stamp "label switching";    $PY experiments/make_switching.py > results/logs/switching.log 2>&1
+stamp "showcase video";     $PY experiments/make_showcase.py > results/logs/showcase.log 2>&1
 stamp "gifs";               $PY experiments/make_gifs.py > results/logs/gifs.log 2>&1
 stamp "claims";             $PY experiments/verify_claims.py > results/logs/claims.log 2>&1 || \
   { stamp "a prose claim no longer holds: see results/logs/claims.log"; exit 1; }

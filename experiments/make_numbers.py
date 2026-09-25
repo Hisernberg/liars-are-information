@@ -519,6 +519,8 @@ def live2_numbers() -> None:
         put(f"liveTwoSwitch{ctag}", pct(c.switch_rate.mean()))
         put(f"liveTwoRightToWrong{ctag}", pct(c.right_to_wrong.mean()))
         put(f"liveTwoWrongToRight{ctag}", pct(c.wrong_to_right.mean()))
+        put(f"liveTwoToLie{ctag}", pct(c.switch_to_liar_plurality.mean()))
+        put(f"liveTwoAfter{ctag}", pct(c.acc_after.mean()))
     d = pd.read_parquet(base / "per_task.parquet")
     test = d[d.split == "test"]
     ind = test[(test.source == "live2") & test.attack.str.startswith("llm:")]
@@ -547,6 +549,33 @@ def live2_numbers() -> None:
     put("nLiveTwoTestTasks", int(test[test.source == "live2"].groupby(["benchmark", "world_id"]).task.nunique()
                                  .groupby("benchmark").median().min()), "{:d}")
     put("nWorldsLiveTwo", json.loads((base / "run_manifest.json").read_text())["worlds"], "{:d}")
+    ab = pd.read_csv(base / "answer_bias.csv")
+    bq = ab[(ab.benchmark == "boolq") & (ab.role == "honest")].set_index("model")
+    put("liveTwoBoolqGoldYes", pct(bq.gold_share_A.iloc[0]))
+    put("liveTwoSmolYes", pct(bq.loc["smollm2_1p7b", "share_A"]))
+    raw = pd.concat([pd.read_parquet(p) for p in (ROOT / "data" / "live_cache_v2" / "raw").glob("stage1/*/*.parquet")])
+    piv = raw.pivot_table(index=["benchmark", "task_id"], columns=["role", "model"], values="extracted_answer",
+                          aggfunc="first")
+    for b, bt in (("arc", "Arc"), ("boolq", "Boolq")):
+        g = piv.xs(b, level="benchmark")
+        rep = [(g[("honest", m)] == g[("solo", m)]).mean() for m in g["honest"].columns]
+        put(f"liveTwo{bt}Repeat", pct(np.mean(rep)))
+        put(f"liveTwo{bt}RepeatMin", pct(min(rep)), "{:.0f}")
+        put(f"liveTwo{bt}RepeatMax", pct(max(rep)), "{:.0f}")
+    dp = base / "deference.csv"
+    if dp.exists():  # exploratory: do informed debaters evaluate RACE's suggestion or defer to it?
+        df = pd.read_csv(dp)
+        for b, bt in (("arc", "Arc"), ("boolq", "Boolq"), (None, "")):
+            g = df if b is None else df[df.benchmark == b]
+            put(f"deferFavRight{bt}", pct(g.favoured_right.mean()))
+            put(f"deferFollow{bt}", pct(g.informed_follows.mean()))
+            put(f"deferInformedRight{bt}", pct(g.informed_right.mean()))
+            put(f"deferDebateRight{bt}", pct(g.debate_right.mean()))
+        put("deferFollowWhenWrong", pct(df[~df.favoured_right].informed_follows.mean()))
+        put("deferFollowWhenRight", pct(df[df.favoured_right].informed_follows.mean()))
+        diff = df[df.favoured_differs_from_own]
+        put("deferFollowWhenDiffers", pct(diff.informed_follows.mean()))
+        put("deferDebMatchWhenDiffers", pct(diff.debate_matches.mean()))
 
 
 def compute_numbers() -> None:
@@ -608,7 +637,7 @@ def main() -> None:
     prefixes = ("main", "llm", "zoo", "br", "chan", "hist", "risk", "live", "on", "swarm", "size", "breakdown",
                 "gain", "worse", "nWorlds", "nLive", "budget", "overRemoval", "raceD", "removal", "recovery",
                 "pooledRemoval", "extLlm", "binary", "agent", "extRace", "extRemoval", "extSelf", "extMaj", "extAip",
-                "compute", "crowd", "liveTwo", "informed", "hyp")
+                "compute", "crowd", "liveTwo", "informed", "hyp", "defer")
     used = set()
     for tex in (ROOT / "paper").rglob("*.tex"):
         if tex.name == "numbers.tex":

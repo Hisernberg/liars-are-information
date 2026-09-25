@@ -124,3 +124,18 @@ Registered in `docs/PREREGISTRATION_E10.md` (commit 494aa28) before any answer
 existed. The evaluation code (`experiments/eval_live2.py`) implements the
 registered decision rule and was written while the run was in progress, before
 any E10 answer was inspected. RACE v3.1 is evaluated exactly as frozen.
+
+Outcome (analysis run once, exactly as registered; `results/live2/hypotheses.csv`):
+all 5 of 5 hypotheses supported.
+- H1a v3.1 > v3.0 on unseen BoolQ: 81.9% vs 69.1% (7 wins, 0 losses in 12 cells).
+- H1b v3.1 >= receiver alone: 81.9% vs 74.0%.
+- H2a/H2b ARC, f >= 0.5: RACE 58.2% vs majority 41.0% and alone 49.7%.
+- H3 informed vs plain debate, individual accuracy: 68.2% vs 61.7%
+  (+6.5 points, 95% CI [+3.9, +9.1]).
+Exploratory (not registered, reported as such): informed debaters adopt RACE's
+suggested option 87.6% of the time (84.5% when it is wrong), and are
+less accurate (68.5%) than the suggestion itself (74.4%), so the gain is
+deference, not deliberation. Two draft sentences were corrected against the data
+before publication: clone tempering does not merge a saboteur with its honest
+twin (0 of 36 pairs; their answers agree 16-81% of the time), and the effect of
+debate on pooling reversed between ARC and BoolQ.

@@ -1,0 +1,42 @@
+{
+ "source": "live_cache_v2",
+ "benchmark": "arc",
+ "receiver": "llama32_1b",
+ "task": "arc-test-Mercury_407664",
+ "question_index": 67,
+ "timing": {
+  "title": [
+   0.0,
+   5.0
+  ],
+  "architecture": [
+   5.0,
+   25.0
+  ],
+  "round1": [
+   30.0,
+   15.0
+  ],
+  "inside": [
+   45.0,
+   21.0
+  ],
+  "debate": [
+   66.0,
+   17.0
+  ],
+  "stream": [
+   83.0,
+   16.0
+  ],
+  "analysis": [
+   99.0,
+   17.0
+  ],
+  "credits": [
+   116.0,
+   5.0
+  ]
+ }
+}
+/home/user/liars-are-information/media/multi_agent_showcase.mp4

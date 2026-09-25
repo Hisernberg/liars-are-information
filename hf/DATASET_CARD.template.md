@@ -82,6 +82,8 @@ Code, figures, videos and manuscript: see `README.md` in this release and the Gi
 
 Against independent liars at f = 0.7, RACE ({{extRaceIndepSeven}}%) also beats an oracle that knows who lies and removes them ({{extRemovalIndepSeven}}%). The liars carry information, and RACE reads it without labels (study E9).
 
+**Pre-registered fresh live run (E10).** Registered before any answer existed. All {{hypSupported}} of {{hypTotal}} hypotheses are supported: RACE v3.1 scores {{hypHOneATarget}}% vs {{hypHOneABase}}% for the frozen v3.0 on unseen BoolQ items, and {{hypHTwoATarget}}% vs {{hypHTwoABase}}% for majority vote on ARC. RACE-informed debate adds {{informedDelta}} points of individual accuracy over plain debate (`data/live_cache_v2/`, `results/live2/`).
+
 **Classical crowdsourcing baselines (E11).** IWMV, MACE, GLAD, KOS and Dawid–Skene, run under RACE's protocol on {{nWorldsCrowd}} worlds, match RACE when liars are a minority but reach at most {{crowdClassicalMaxSeven}}% at f = 0.7, where RACE scores {{crowdRaceSeven}}%. RACE loses none of {{crowdClassicalCells}} paired comparisons against them.
 
 **Evidence.** Every number is generated from `results/`; {{claimsHold}} of {{claimsTotal}} prose claims are re-derived on every run (`docs/EVIDENCE.md`); every study ships a manifest with input and code hashes.
@@ -90,7 +92,7 @@ Against independent liars at f = 0.7, RACE ({{extRaceIndepSeven}}%) also beats a
 
 <p align="center"><img src="media/gif/film_1_protocol.gif" width="760" alt="Agents broadcast answers; each honest agent decides with learned trust links"></p>
 
-**Videos.** `media/film_liars_are_information.mp4` is the explainer film. It shows agents broadcasting answers, each honest agent's trust links, the swarm's trust matrix learning over 90 unlabeled questions, and one decision in slow motion. `media/swarm_*.mp4` follow a single receiver in three attack scenarios. `media/label_switching.mp4` shows EM with and without the anchor on the same history.
+**Videos.** `media/film_liars_are_information.mp4` is the explainer film. It shows agents broadcasting answers, each honest agent's trust links, the swarm's trust matrix learning over 90 unlabeled questions, and one decision in slow motion. `media/swarm_*.mp4` follow a single receiver in three attack scenarios. `media/label_switching.mp4` shows EM with and without the anchor on the same history. `media/multi_agent_showcase.mp4` is the flagship video: a live team of LLM agents with saboteurs, the architecture, one question end to end, plain vs RACE-informed debate, and the interaction analysis.
 
 ## Provenance
 

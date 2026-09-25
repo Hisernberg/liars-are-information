@@ -805,7 +805,7 @@ def fig_live2() -> None:
     t = hyp[["hypothesis", "statement", "target_acc", "baseline_acc", "delta", "wins", "ties", "losses", "verdict"]].copy()
     t.columns = ["Hypothesis", "Statement", "Target (%)", "Baseline (%)", "Δ (points)", "Wins", "Ties", "Losses", "Verdict"]
     write_table(t.set_index("Hypothesis"), "e10_hypotheses")
-    lines = [r"\begin{tabular}{@{}llrrrcl@{}}", r"\toprule",
+    lines = [r"\begin{tabular}{@{}lp{5.2cm}rrrcl@{}}", r"\toprule",
              r"& Pre-registered ordering & Target & Baseline & $\Delta$ & W/T/L & Verdict\\", r"\midrule"]
     for _, r in hyp.iterrows():
         stmt = (r.statement.replace(">=", r"$\ge$").replace(">", "$>$").replace("f$>$=0.5", r"$f\ge0.5$")
@@ -836,26 +836,34 @@ def fig_live2() -> None:
         ax.set_ylabel("honest-agent accuracy (%)")
         ax.set_title(title, loc="left", fontsize=10)
         ax.legend(fontsize=7.2, loc="lower left")
+    pretty = {"qwen25_1p5b": "Qwen2.5-1.5B", "smollm2_1p7b": "SmolLM2-1.7B", "granite33_2b": "Granite-3.3-2B",
+              "olmo2_1b": "OLMo-2-1B", "llama32_1b": "Llama-3.2-1B", "gemma3_1b": "Gemma-3-1B"}
+    dfr = pd.read_csv(base / "deference.csv") if (base / "deference.csv").exists() else None
     for ax, b, title in ((axes[1, 0], "arc", "(c) H3 · ARC"), (axes[1, 1], "boolq", "(d) H3 · BoolQ")):
         g = pm[pm.benchmark == b].sort_values("honest")
         ys = np.arange(len(g))
+        for y, (_, r) in zip(ys, g.iterrows(), strict=True):
+            ax.plot([pct(r.debate), pct(r.informed)], [y, y], color=viz.GRID, lw=2.5, zorder=1)
+        if dfr is not None:
+            fav = dfr[dfr.benchmark == b].groupby("model").favoured_right.mean()
+            ax.scatter(pct(fav.reindex(g.model)), ys, marker="D", s=34, facecolor="none", edgecolor=viz.VIOLET, lw=1.3,
+                       zorder=2, label="RACE's suggested option (in the informed prompt)")
         for col, color, marker, lab in (("honest", viz.MUTED, "|", "round 1 (independent)"),
                                         ("debate", viz.ORANGE, "s", "after plain debate"),
                                         ("informed", viz.BLUE, "o", "after RACE-informed debate")):
             ax.scatter(pct(g[col]), ys, color=color, marker=marker, s=60 if marker != "|" else 140, zorder=3,
                        lw=2 if marker == "|" else 0.6, edgecolor=viz.SURFACE if marker != "|" else None, label=lab)
-        for y, (_, r) in zip(ys, g.iterrows(), strict=True):
-            ax.plot([pct(r.debate), pct(r.informed)], [y, y], color=viz.GRID, lw=2.5, zorder=1)
-        ax.set_yticks(ys, [mm.replace("_", "-") for mm in g.model])
+        ax.set_yticks(ys, [pretty.get(mm, mm) for mm in g.model])
         ax.set_xlabel("individual accuracy of the honest model (%)")
         r = h3.loc[(b, "all")]
         ax.set_title(f"{title}: informed − plain = {pct(r.delta):+.1f} points "
                      f"[{pct(r.ci_low):+.1f}, {pct(r.ci_high):+.1f}]", loc="left", fontsize=10)
         ax.grid(axis="y", visible=False)
-        ax.legend(fontsize=7.2, loc="lower right")
+    handles, labels = axes[1, 0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=4, fontsize=8.5, bbox_to_anchor=(0.5, -0.005))
     fig.suptitle("E10 (pre-registered). Fresh live answers: RACE v3.1, and debate with RACE's reliability notes",
                  x=0.01, ha="left", fontsize=11.5, fontweight="bold")
-    fig.tight_layout(rect=(0, 0, 1, 0.96))
+    fig.tight_layout(rect=(0, 0.035, 1, 0.96))
     viz.save(fig, FIG / "fig15_live_confirmation")
 
 

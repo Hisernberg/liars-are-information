@@ -1,0 +1,42 @@
+\section{E10: a pre-registered fresh live run}\label{sec:live2}
+
+The binary rule of \race\ v3.1 was adopted after E8 (\cref{sec:binary}), so E8 cannot confirm it. E10 is a new live run whose answers did not exist when the rule was adopted. Its hypotheses, analysis and decision rule were committed to the public repository (commit \texttt{494aa28}, 2026-09-25 09:51~UTC) before the first answer was generated. The run itself started six minutes later from that commit and took \computeLiveTwoHours\ CPU hours. \race\ v3.1 is evaluated exactly as frozen.
+
+\paragraph{Design.} The six models, decoding and roles are those of E8. The questions are new to the live models. \emph{ARC-Challenge} items 0--119 form a four-option benchmark the live swarm had never seen. \emph{BoolQ} items 120--199 are binary questions disjoint from E8's items 0--119. One role is new: \emph{RACE-informed debate}. An informed debater sees the same twelve round-1 votes as a plain debater, anonymised and shuffled. Each vote carries a reliability note (``reliable'', ``no better than chance'', or ``usually wrong: its answer is probably incorrect''), followed by one line naming the option the reliability-weighted evidence favours. The notes come from the debater's \emph{own} \race\ fit on the panel's round-1 answers to earlier questions. No gold answer is used, and the first eight questions say ``no track record yet''. The harness and statistics are those of E8: \nWorldsLiveTwo\ worlds, 5 seeds, and \nLiveTwoTestTasks\ test questions per BoolQ world. A hypothesis is \emph{supported} if its ordering holds in the mean and no cell shows a significant reversal. It is \emph{contradicted} if the mean is reversed, and \emph{inconclusive} otherwise.
+
+\begin{table}[t]
+\centering\small
+\caption{\textbf{E10.} The pre-registered hypotheses and their outcomes. Target and baseline are mean honest-agent accuracy (\%) over the registered cells. W/T/L: significant wins, ties and losses of the target over the cells (Holm-corrected Wilcoxon test and paired bootstrap interval must agree). H3 is paired over (model, question), with the two benchmarks as its cells.}\label{tab:e10}
+\input{tables/e10_hypotheses_compact.tex}
+\end{table}
+
+\paragraph{All \hypSupported\ of \hypTotal\ pre-registered hypotheses are supported (\cref{tab:e10}).}
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item \textbf{H1: the binary rule, on fresh BoolQ answers.} v3.1 scores \hypHOneATarget\% against \hypHOneABase\% for v3.0 (\hypHOneADelta\ points, \hypHOneAWins\ significant wins and \hypHOneALosses\ losses in \hypHOneACells\ cells). The receiver alone scores \hypHOneBBase\%. The small models are again option-biased: SmolLM2-1.7B, for example, answers ``yes'' to \liveTwoSmolYes\% of the questions, while \liveTwoBoolqGoldYes\% of the gold answers are ``yes''. The symmetric one-coin channel of v3.0 again falls below the receiver alone (\liveTwoBoolqLlmVthreeFive\% vs \liveTwoBoolqLlmSelfFive\% at $f=0.5$), and the class-conditional channel of v3.1 again repairs it (\liveTwoBoolqLlmRaceFive\%). The E8 observation that motivated the amendment therefore replicates on answers generated after it.
+\item \textbf{H2: a new four-option benchmark.} On ARC at $f\ge0.5$, \race\ scores \hypHTwoATarget\% against \hypHTwoABase\% for majority vote and \hypHTwoBBase\% for the receiver alone. At $f=0.5$ it scores \liveTwoArcLlmRaceFive\%, close to the known-channel oracle (\liveTwoArcLlmOracleFive\%). Majority vote scores \liveTwoArcLlmMajFive\%, \aip\ \liveTwoArcLlmAipFive\%, and the best classical crowdsourcing estimator (MACE) \liveTwoArcLlmMaceFive\%.
+\item \textbf{H3: RACE-informed debate.} Individual post-debate accuracy rises from \informedPlain\% after a plain debate to \informedInformed\% after an informed one. The effect is \informedDelta\ points, 95\% CI [\informedCiLow, \informedCiHigh], Wilcoxon $p$ \informedP, over \informedPairs\ (model, question) pairs. It is significant on ARC (\informedArcDelta\ points, [\informedArcCiLow, \informedArcCiHigh]). It is not significant on BoolQ (\informedBoolqDelta, [\informedBoolqCiLow, \informedBoolqCiHigh]).
+\end{itemize}
+
+\paragraph{H4 (exploratory): pooling after debate.} We pool the six honest models' answers with \race\ at $f=0.5$ against solo and colluding saboteurs.
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item \textbf{ARC.} Pooling independent answers gives \liveTwoIndArcRace\%, plain-debate answers \liveTwoDebArcRace\% and informed-debate answers \liveTwoInfArcRace\%.
+\item \textbf{BoolQ.} The same three give \liveTwoIndBoolqRace\%, \liveTwoDebBoolqRace\% and \liveTwoInfBoolqRace\%.
+\end{itemize}
+Plain debate helped pooling on ARC and hurt it on BoolQ. In E8 it was the other way round: it hurt on MMLU and helped on BoolQ. The effect of a debate round on pooling is therefore not stable across tasks and runs, and cannot be relied on.
+
+\paragraph{Exploratory: the informed debaters mostly defer.} Did the agents weigh the notes, or copy the suggestion? We recomputed, for every model and question after the warm-up, the option its own informed prompt said the evidence favours.
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+\item The informed debaters adopt that option \deferFollow\% of the time.
+\item They adopt it almost as often when it is wrong (\deferFollowWhenWrong\%) as when it is right (\deferFollowWhenRight\%).
+\item When it differs from the agent's own round-1 answer, informed debaters switch to it \deferFollowWhenDiffers\% of the time. Plain debaters land on the same option only \deferDebMatchWhenDiffers\% of the time.
+\item The suggestion itself is right \deferFavRight\% of the time. The informed debaters' answers are right \deferInformedRight\%, and plain debaters' \deferDebateRight\%.
+\end{itemize}
+The gain of informed debate therefore comes from deference to the receiver-anchored estimate, not from better deliberation. An agent that simply adopted its own \race\ output would do better than one that debated with it. The practical protocol that follows is the one E8 suggested: record independent answers before any discussion, and pool them with \race. If a debate round is wanted, feeding it \race's reliability estimates is safer than a plain debate. Under plain debate, \liveTwoRightToWrongDebate\% of honest answers went from right to wrong and \liveTwoWrongToRightDebate\% from wrong to right. Under informed debate the figures were \liveTwoRightToWrongInformed\% and \liveTwoWrongToRightInformed\%.
+
+\paragraph{What the agents did, and who gains.} Saboteurs again lie only partly: they are right \liveTwoArcSolo\% of the time on ARC (chance 25\%) and \liveTwoBoolqSolo\% on BoolQ (chance 50\%). Small models often fail to lie and repeat their own honest answer: a saboteur matches its honest twin on \liveTwoArcRepeat\% of ARC questions (\liveTwoArcRepeatMin--\liveTwoArcRepeatMax\% across models) and \liveTwoBoolqRepeat\% of BoolQ questions. \race\ then trusts such saboteurs, which is correct, because they are better than chance. Their answers are far from identical to their twins', so clone tempering (links at $\ge$95\% agreement) correctly leaves them separate. As in E8, the weakest receivers gain most and the strongest can lose. On ARC, four of six receivers gain, by up to \liveTwoArcGainMax\ points. The strongest, Granite-3.3-2B, changes by \liveTwoArcGainMin\ points, because its own accuracy is far above the panel's. On BoolQ, four of six gain, by up to \liveTwoBoolqGainMax\ points, and the largest loss is \liveTwoBoolqGainMin.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/fig15_live_confirmation.pdf}
+\caption{\textbf{E10 (pre-registered).} (a)~H1: BoolQ items never shown to the live models; v3.1 (solid) against v3.0 (dashed), majority vote, the receiver alone and the known-channel oracle. (b)~H2: ARC, a benchmark new to the live swarm. (c, d)~H3: individual accuracy of each honest model in round~1 (bar), after a plain debate (square) and after a RACE-informed debate (dot); diamonds give the accuracy of the option the informed prompt suggested (after the warm-up). LLM saboteurs (solo, rushing, colluding), five seeds, TEST split.}\label{fig:live2}
+\end{figure}

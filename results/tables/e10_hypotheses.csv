@@ -1,0 +1,6 @@
+Hypothesis,Statement,Target (%),Baseline (%),Δ (points),Wins,Ties,Losses,Verdict
+H1a,BoolQ: RACE v3.1 > RACE v3.0,81.85218253968253,69.10780423280424,12.74437830687829,7,5,0,supported
+H1b,BoolQ: RACE v3.1 >= receiver alone,81.85218253968253,74.01339285714285,7.838789682539682,2,10,0,supported
+H2a,"ARC, f>=0.5: RACE >= majority vote",58.19444444444445,41.04166666666666,17.152777777777782,2,4,0,supported
+H2b,"ARC, f>=0.5: RACE >= receiver alone",58.19444444444445,49.66666666666666,8.527777777777784,3,3,0,supported
+H3,Individual accuracy: informed debate > plain debate,68.16666666666666,61.66666666666667,6.5,1,1,0,supported

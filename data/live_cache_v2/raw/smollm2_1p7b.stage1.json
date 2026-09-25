@@ -1,0 +1,11 @@
+{
+  "model": "smollm2_1p7b",
+  "hub_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+  "lab": "Hugging Face",
+  "load_seconds": 288.9,
+  "elapsed_seconds": 1775.8,
+  "threads": 4,
+  "torch": "2.14.0+cpu",
+  "dtype": "float32",
+  "n_params": 1711376384
+}

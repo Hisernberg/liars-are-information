@@ -48,6 +48,14 @@
   <h1>Liars are information</h1>
   <p class="lead">When some agents in a multi-agent LLM system lie, honest agents can still use what the liars say, as long as the lies depend on the truth. An agent that never tells the truth rules out one answer every time it speaks. <b>RACE</b> (Receiver-Anchored Channel Estimation) learns this from each honest agent's own unlabeled history, anchored on the one fact the agent knows: that it is itself honest.</p>
 
+  <h2>The flagship video: a team of LLM agents solving questions with saboteurs among them</h2>
+  <video src="media/multi_agent_showcase.mp4" controls muted playsinline preload="metadata" poster="media/gif/showcase_architecture.gif"></video>
+  <p class="note">Real answers from six live open models and six saboteurs (the same models told to mislead), from the pre-registered live run. (1) The architecture: where RACE sits inside every honest agent. (2) Round 1 on one question: majority vote picks a lie. (3) Inside one honest agent: what it learned about every other agent without labels, and how the twelve votes add up as signed evidence. (4) Plain versus RACE-informed debate. (5) The whole question stream. (6) The interaction analysis: honest agents alone 53.9%, majority 65.1%, RACE 70.4% after warm-up; informed debate 64.3% vs plain 55.1%, but agents adopt RACE's suggestion 87% of the time.</p>
+
+  <h2>Pre-registered confirmation (E10)</h2>
+  <p>All 5 of 5 hypotheses registered before the run are supported. On BoolQ questions the live models had never seen, RACE v3.1 scores 81.9% against 69.1% for the frozen v3.0 and 74.0% for the agent alone. On ARC, a benchmark new to the swarm, RACE scores 58.2% against 41.0% for majority vote. RACE-informed debate raises individual accuracy by +6.5 points over plain debate (95% CI [+3.9, +9.1]).</p>
+  <figure><img src="figures/fig15_live_confirmation.png" alt="E10 pre-registered live run" loading="lazy"><figcaption>E10: v3.1 vs v3.0 on unseen BoolQ items, RACE on ARC, and each model's accuracy after plain and after RACE-informed debate.</figcaption></figure>
+
   <h2>The film: how the swarm works</h2>
   <video src="media/film_liars_are_information.mp4" controls muted playsinline preload="metadata" poster="media/gif/film_1_protocol.gif"></video>
   <p class="note">Ten agents on MMLU, five of them real LLMs prompted to mislead after seeing the honest answers. (1) Every agent answers, broadcasts, and each honest agent decides with its own learned trust links. (2) The swarm's trust matrix learning over 90 unlabeled questions. (3) One question in slow motion: counting votes vs. weighing evidence. (4) Results.</p>
@@ -67,6 +75,10 @@
       <figcaption>Live six-model swarm on MMLU: honest agents, covert saboteurs and a debate round. RACE lifts every honest agent.</figcaption></figure>
     <figure><video src="media/live_debate_boolq.mp4" controls muted playsinline preload="metadata"></video>
       <figcaption>Live swarm on BoolQ: option-biased small models break RACE's symmetric channel model; the class-conditional variant recovers.</figcaption></figure>
+    <figure><video src="media/live_informed_arc.mp4" controls muted playsinline preload="metadata"></video>
+      <figcaption>E10 on ARC, question by question: plain debate against RACE-informed debate on the same half-liar panel.</figcaption></figure>
+    <figure><video src="media/live_informed_boolq.mp4" controls muted playsinline preload="metadata"></video>
+      <figcaption>E10 on unseen BoolQ items: the same comparison on binary questions.</figcaption></figure>
   </div>
 
   <h2>Headline results</h2>

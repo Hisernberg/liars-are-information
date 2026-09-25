@@ -83,15 +83,17 @@ Code, figures, videos and manuscript: see `README.md` in this release and the Gi
 
 Against independent liars at f = 0.7, RACE (94.8%) also beats an oracle that knows who lies and removes them (89.7%). The liars carry information, and RACE reads it without labels (study E9).
 
+**Pre-registered fresh live run (E10).** Registered before any answer existed. All 5 of 5 hypotheses are supported: RACE v3.1 scores 81.9% vs 69.1% for the frozen v3.0 on unseen BoolQ items, and 58.2% vs 41.0% for majority vote on ARC. RACE-informed debate adds +6.5 points of individual accuracy over plain debate (`data/live_cache_v2/`, `results/live2/`).
+
 **Classical crowdsourcing baselines (E11).** IWMV, MACE, GLAD, KOS and Dawid–Skene, run under RACE's protocol on 342 worlds, match RACE when liars are a minority but reach at most 25.3% at f = 0.7, where RACE scores 89.5%. RACE loses none of 551 paired comparisons against them.
 
-**Evidence.** Every number is generated from `results/`; 43 of 43 prose claims are re-derived on every run (`docs/EVIDENCE.md`); every study ships a manifest with input and code hashes.
+**Evidence.** Every number is generated from `results/`; 53 of 53 prose claims are re-derived on every run (`docs/EVIDENCE.md`); every study ships a manifest with input and code hashes.
 
 **Live swarm (E8).** Six small open models answered 240 MMLU and BoolQ questions live on a CPU, as honest agents, covert saboteurs and debaters (2,880 answers, `data/live_cache/`). On MMLU, RACE lifts every honest agent by 5.6–27.9 points. On binary BoolQ the frozen v3.0 fell below the receiver alone (56.2% vs 60.1% at f = 0.5), because small models answer yes/no questions with an option bias that a symmetric channel cannot represent. RACE v3.1 uses class-conditional channels on binary questions and scores 69.5%. It was adopted after this observation, and both versions are reported.
 
 <p align="center"><img src="media/gif/film_1_protocol.gif" width="760" alt="Agents broadcast answers; each honest agent decides with learned trust links"></p>
 
-**Videos.** `media/film_liars_are_information.mp4` is the explainer film. It shows agents broadcasting answers, each honest agent's trust links, the swarm's trust matrix learning over 90 unlabeled questions, and one decision in slow motion. `media/swarm_*.mp4` follow a single receiver in three attack scenarios. `media/label_switching.mp4` shows EM with and without the anchor on the same history.
+**Videos.** `media/film_liars_are_information.mp4` is the explainer film. It shows agents broadcasting answers, each honest agent's trust links, the swarm's trust matrix learning over 90 unlabeled questions, and one decision in slow motion. `media/swarm_*.mp4` follow a single receiver in three attack scenarios. `media/label_switching.mp4` shows EM with and without the anchor on the same history. `media/multi_agent_showcase.mp4` is the flagship video: a live team of LLM agents with saboteurs, the architecture, one question end to end, plain vs RACE-informed debate, and the interaction analysis.
 
 ## Provenance
 
