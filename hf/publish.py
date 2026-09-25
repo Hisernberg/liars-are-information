@@ -33,6 +33,8 @@ RELEASE = "lai-v3.1-race"
 INCLUDE = ["README.md", "LICENSE", "CITATION.cff", "pyproject.toml", "src", "tests", "experiments", "configs", "docs",
            "data/cache", "data/cache_adversarial", "data/cache_t07", "data/live_cache", "data/derived",
            "results", "figures", "media", "paper", "hf", "provenance"]
+if (ROOT / "data" / "live_cache_v2" / "cache").exists():  # E10 answers, once the run has been exported
+    INCLUDE.append("data/live_cache_v2")
 EXCLUDE_PARTS = {"__pycache__", ".pytest_cache", ".venv", ".git", "film_parts"}
 SPACE_ASSETS = ["media/*.mp4", "media/gif/*.gif", "media/*.gif", "figures/*.png"]
 

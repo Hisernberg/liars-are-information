@@ -796,6 +796,69 @@ def fig_overview() -> None:
     viz.save(fig, FIG / "fig0_overview")
 
 
+def fig_live2() -> None:
+    """E10 (pre-registered): v3.1 on fresh answers (H1, H2) and RACE-informed debate (H3)."""
+    base = RES / "live2"
+    if not (base / "hypotheses.csv").exists():
+        return
+    hyp = pd.read_csv(base / "hypotheses.csv")
+    t = hyp[["hypothesis", "statement", "target_acc", "baseline_acc", "delta", "wins", "ties", "losses", "verdict"]].copy()
+    t.columns = ["Hypothesis", "Statement", "Target (%)", "Baseline (%)", "Δ (points)", "Wins", "Ties", "Losses", "Verdict"]
+    write_table(t.set_index("Hypothesis"), "e10_hypotheses")
+    lines = [r"\begin{tabular}{@{}llrrrcl@{}}", r"\toprule",
+             r"& Pre-registered ordering & Target & Baseline & $\Delta$ & W/T/L & Verdict\\", r"\midrule"]
+    for _, r in hyp.iterrows():
+        stmt = (r.statement.replace(">=", r"$\ge$").replace(">", "$>$").replace("f$>$=0.5", r"$f\ge0.5$")
+                .replace("f>=0.5", r"$f\ge0.5$"))
+        lines.append(f"{r.hypothesis} & {stmt} & {r.target_acc:.1f} & {r.baseline_acc:.1f} & ${r.delta:+.1f}$ & "
+                     f"{int(r.wins)}/{int(r.ties)}/{int(r.losses)} & \\textit{{{r.verdict}}}\\\\")
+    lines += [r"\bottomrule", r"\end{tabular}"]
+    (TAB / "e10_hypotheses_compact.tex").write_text("\n".join(lines) + "\n")
+    d = pd.read_parquet(base / "per_task.parquet")
+    test = d[(d.split == "test") & (d.source == "live2") & d.attack.str.startswith("llm:")]
+    m = pct(test.groupby(["benchmark", "f", "method"]).accuracy.mean().unstack("method"))
+    write_table(m[["self", "majority", "aip_gated", "ds_onecoin", "iwmv", "mace", "glad", "race_onecoin", "race",
+                   "oracle_channel"]].rename(columns=viz.LABEL).round(1), "e10_accuracy")
+    pm = pd.read_csv(base / "h3_per_model.csv")
+    write_table(pct(pm.set_index(["benchmark", "model"])).round(1), "e10_informed_per_model")
+    h3 = pd.read_csv(base / "h3_individual.csv").set_index(["scope", "subset"])
+
+    fig, axes = plt.subplots(2, 2, figsize=(11, 8.2))
+    for ax, b, keys, title in ((axes[0, 0], "boolq", ("race", "race_onecoin", "majority", "self", "oracle_channel"),
+                                "(a) H1 · BoolQ (unseen items 120–199), LLM saboteurs"),
+                               (axes[0, 1], "arc", ("race", "majority", "aip_gated", "self", "oracle_channel"),
+                                "(b) H2 · ARC (new benchmark), LLM saboteurs")):
+        mb = m.loc[b]
+        for k in keys:
+            viz.line(ax, mb.index, mb[k], k)
+        ax.set_xticks(mb.index, [f"{f:g}" for f in mb.index])
+        ax.set_xlabel("f: fraction of the 10 agents that lie")
+        ax.set_ylabel("honest-agent accuracy (%)")
+        ax.set_title(title, loc="left", fontsize=10)
+        ax.legend(fontsize=7.2, loc="lower left")
+    for ax, b, title in ((axes[1, 0], "arc", "(c) H3 · ARC"), (axes[1, 1], "boolq", "(d) H3 · BoolQ")):
+        g = pm[pm.benchmark == b].sort_values("honest")
+        ys = np.arange(len(g))
+        for col, color, marker, lab in (("honest", viz.MUTED, "|", "round 1 (independent)"),
+                                        ("debate", viz.ORANGE, "s", "after plain debate"),
+                                        ("informed", viz.BLUE, "o", "after RACE-informed debate")):
+            ax.scatter(pct(g[col]), ys, color=color, marker=marker, s=60 if marker != "|" else 140, zorder=3,
+                       lw=2 if marker == "|" else 0.6, edgecolor=viz.SURFACE if marker != "|" else None, label=lab)
+        for y, (_, r) in zip(ys, g.iterrows(), strict=True):
+            ax.plot([pct(r.debate), pct(r.informed)], [y, y], color=viz.GRID, lw=2.5, zorder=1)
+        ax.set_yticks(ys, [mm.replace("_", "-") for mm in g.model])
+        ax.set_xlabel("individual accuracy of the honest model (%)")
+        r = h3.loc[(b, "all")]
+        ax.set_title(f"{title}: informed − plain = {pct(r.delta):+.1f} points "
+                     f"[{pct(r.ci_low):+.1f}, {pct(r.ci_high):+.1f}]", loc="left", fontsize=10)
+        ax.grid(axis="y", visible=False)
+        ax.legend(fontsize=7.2, loc="lower right")
+    fig.suptitle("E10 (pre-registered). Fresh live answers: RACE v3.1, and debate with RACE's reliability notes",
+                 x=0.01, ha="left", fontsize=11.5, fontweight="bold")
+    fig.tight_layout(rect=(0, 0, 1, 0.96))
+    viz.save(fig, FIG / "fig15_live_confirmation")
+
+
 def per_agent_table() -> None:
     """How much each honest agent gains by pooling, per model (E7 receiver-gain worlds, f >= 0.5)."""
     p = RES / "extra" / "receiver_gain.parquet"
@@ -889,6 +952,7 @@ def main() -> None:
     per_agent_table()
     fig_online()
     fig_live()
+    fig_live2()
     comparisons(main_df, zoo, llm)
     fig_overview()
     print(json.dumps(sorted(p.name for p in FIG.glob("*.png")), indent=1))

@@ -444,30 +444,31 @@ RACE **levels the swarm**: the spread between the weakest and strongest honest a
 | | Majority / Byzantine filtering | Dawid–Skene / crowd EM | AIP (prior work) | **RACE (this work)** |
 |---|:-:|:-:|:-:|:-:|
 | Needs labels | no | no | no | **no** |
-| Survives a liar majority (f ≥ ½) | ✗ breaks at ½ | ✗ label switching → 0% | partly: fails at f = 0.9 and on binary questions | **✓ no breakdown up to f = 0.9** |
+| Survives a liar majority (f ≥ ½) | ✗ breaks at ½ | ✗ label switching → 0% (E11: IWMV, MACE, GLAD, KOS ≤ 25.3% at f = 0.7) | partly: fails at f = 0.9 and on binary questions | **✓ no breakdown up to f = 0.9** |
 | Uses what liars say | ✗ discards | only with an honest majority | ✓ when liars are *coherent* | **✓ whenever lies depend on the truth** |
 | Attacker that adapts to the defence | — | — | ✗ gate-aware: 48.5% | **✓ 94.9%** |
 | Binary (yes/no) questions | ✓ | ✓ | ✗ 0% | **✓ with class-conditional channels** |
 | Open-answer maths | ✓ | ✓ | below the receiver alone | **✓** |
 | Replicated agents (same model ×10) | counted 10× | counted 10× | — | **✓ error-conditioned clone tempering** |
 | Can exceed an oracle that removes every liar | ✗ (sees only honest answers at best) | ✗ | ✗ | **✓ 94.8% vs 89.7%** |
-| Theory | honest-majority bounds | identifiable up to relabelling | coherence impossibility | **no breakdown below f = 1; anchor identifiability; information budget** |
+| Theory | honest-majority bounds | identifiable up to relabelling | coherence impossibility | **no breakdown below f = 1; anchor identifiability; consistency (Thm 2); information budget** |
 
 **How this relates to prior work.**
 - *Byzantine fault tolerance and robust aggregation* (Lamport et al., 1982; Krum, Blanchard et al., 2017; trimmed mean, Yin et al., 2018) discard outliers and need an honest majority. RACE keeps the liars and reads them.
-- *Crowdsourcing* (Dawid and Skene, 1979; Raykar et al., 2010; Karger, Oh and Shah, 2014; spectral methods, Zhang et al., 2016) estimates annotator reliability without labels, but assumes a benign majority and is identified only up to relabelling. RACE supplies the missing anchor from the receiver's self-knowledge, adds clone tempering, and targets adversarial majorities.
-- *Multi-agent LLM debate and voting* (self-consistency, Wang et al., 2023; debate, Du et al., 2024) improve reasoning when every agent is honest. Our live study measures what debate does to the information available for pooling.
+- *Crowdsourcing* (Dawid and Skene, 1979; GLAD, Whitehill et al., 2009; Raykar et al., 2010; MACE, Hovy et al., 2013; IWMV, Li and Yu, 2014; Karger, Oh and Shah, 2014; spectral methods, Zhang et al., 2016) estimates annotator reliability without labels, but assumes a benign majority and is identified only up to relabelling. RACE supplies the missing anchor from the receiver's self-knowledge, adds clone tempering, and targets adversarial majorities. E11 runs four of these estimators under RACE's protocol and shows that each collapses at f ≥ ½. *Semi-supervised* crowdsourcing seeds EM with gold questions or a trusted annotator; RACE needs no gold, and every honest agent trusts only itself.
+- *Multi-agent LLM debate and voting* (self-consistency, Wang et al., 2023; debate, Du et al., 2024) improve reasoning when every agent is honest. Our live studies measure what debate does to the information available for pooling (E8). E10 tests a new protocol, *RACE-informed debate*, which feeds each agent's label-free reliability estimates back into the conversation.
 - *Liars Are Information / AIP* (Das, 2026) introduced reading liars backwards via coherence. RACE replaces coherence with truth-dependence, which removes AIP's impossibility result and its binary-question failure.
 
 **Contributions.**
-1. **Receiver anchoring.** The honest agent's knowledge that it is honest is the asymmetry that breaks label switching. We prove when it restores identifiability and when a near-chance anchor cannot.
+1. **Receiver anchoring.** The honest agent's knowledge that it is honest is the asymmetry that breaks label switching. We prove when it restores identifiability, that the anchored estimator is then consistent (Theorem 2), and that a near-chance anchor cannot help.
 2. **A signed, continuous weight replaces the gate.** Truth-dependence cannot be tuned by an attacker without telling the truth, so the coherence impossibility of the prior work does not bind RACE.
 3. **Error-conditioned clone detection** separates "both accurate" from "one copies the other".
 4. **Class-conditional channels on binary questions**, motivated by the option bias of small LLMs.
 5. **The information budget:** a new way to measure what an attack is worth, and a certificate of model violation.
-6. **Evaluation at scale:** 9 studies, including LLM-written deception, online sleepers, a best-response attacker and a live swarm with debate.
-7. **`TrustLayer`**, a few-line integration for any multi-agent framework.
-8. **An audit of the prior artifact.** It finds an incomplete post-repair recompute, four code defects and a replica-cloning defect ([`docs/AUDIT.md`](docs/AUDIT.md)).
+6. **Evaluation at scale:** 11 studies, including LLM-written deception, online sleepers, a best-response attacker, four classical crowdsourcing baselines and two live swarms with debate. One of the swarms is pre-registered.
+7. **RACE-informed debate** (E10): a debate protocol in which each agent's own label-free reliability estimates are written into the debate prompt. No answer key is used.
+8. **`TrustLayer`**, a few-line integration for any multi-agent framework.
+9. **An audit of the prior artifact.** It finds an incomplete post-repair recompute, four code defects and a replica-cloning defect ([`docs/AUDIT.md`](docs/AUDIT.md)).
 
 ---
 

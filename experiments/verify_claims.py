@@ -225,6 +225,28 @@ if reg.exists():
               " before any E10 answer was generated. The run's start time and code commit are recorded in"
               " `data/live_cache_v2/RUN_INFO.txt`."]
 (ROOT / "docs" / "EVIDENCE.md").write_text("\n".join(lines) + "\n")
+
+
+def tex(text: str) -> str:
+    """Claim text -> LaTeX (the claims use ASCII comparison operators and a few symbols)."""
+    out = text.replace("&", r"\&").replace("%", r"\%").replace("_", r"\_").replace("#", r"\#")
+    for a, b in (("<=", "@LE@"), (">=", "@GE@"), ("≤", "@LE@"), ("≥", "@GE@"), ("<", "@LT@"), (">", "@GT@"),
+                 ("|", "@BAR@"), ("–", "--"), ("→", "@TO@")):
+        out = out.replace(a, b)
+    for a, b in (("@LE@", r"$\le$"), ("@GE@", r"$\ge$"), ("@LT@", "$<$"), ("@GT@", "$>$"), ("@BAR@", "$|$"),
+                 ("@TO@", r"$\to$")):
+        out = out.replace(a, b)
+    return out
+
+
+rows = [r"\begin{longtable}{@{}r p{0.78\linewidth} c@{}}",
+        r"\caption{Qualitative claims of the paper and README, re-derived from the per-task results on every run.}"
+        r"\label{tab:claims}\\", r"\toprule", r"\# & Claim (as worded in the paper or README) & Holds\\",
+        r"\midrule", r"\endhead"]
+for i, (claim, ok, _detail) in enumerate(results, 1):
+    rows.append(f"{i} & {tex(claim)} & {'yes' if ok else 'NO'}\\\\")
+rows += [r"\bottomrule", r"\end{longtable}"]
+(RES / "tables" / "claims_ledger.tex").write_text("\n".join(rows) + "\n")
 (RES / "tables" / "claims.json").write_text(json.dumps({"claimsHold": str(len(results) - len(fails)),
                                                        "claimsTotal": str(len(results))}, indent=1))
 sys.exit(1 if fails else 0)

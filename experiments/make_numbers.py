@@ -471,6 +471,84 @@ def live_numbers() -> None:
     put("nLiveTestTasks", int(test[test.source == "live"].groupby("world_id").task.nunique().median()), "{:d}")
 
 
+HYP_NAMES = {"H1a": "HOneA", "H1b": "HOneB", "H2a": "HTwoA", "H2b": "HTwoB", "H3": "HThree"}
+
+
+def live2_numbers() -> None:
+    """E10: the pre-registered fresh live run (results/live2, written by experiments/eval_live2.py)."""
+    base = RES / "live2"
+    if not (base / "hypotheses.csv").exists():
+        return
+    hyp = pd.read_csv(base / "hypotheses.csv")
+    for _, r in hyp.iterrows():
+        tag = HYP_NAMES[r.hypothesis]
+        put(f"hyp{tag}Verdict", str(r.verdict))
+        put(f"hyp{tag}Target", r.target_acc)
+        put(f"hyp{tag}Base", r.baseline_acc)
+        put(f"hyp{tag}Delta", r.delta, "{:+.1f}")
+        put(f"hyp{tag}Cells", int(r.cells), "{:d}")
+        put(f"hyp{tag}Wins", int(r.wins), "{:d}")
+        put(f"hyp{tag}Losses", int(r.losses), "{:d}")
+    put("hypSupported", int((hyp.verdict == "supported").sum()), "{:d}")
+    put("hypTotal", len(hyp), "{:d}")
+    h3 = pd.read_csv(base / "h3_individual.csv").set_index(["scope", "subset"])
+    for scope, st in (("pooled", ""), ("arc", "Arc"), ("boolq", "Boolq")):
+        for sub, sb in (("all", ""), ("after_warmup", "Late")):
+            r = h3.loc[(scope, sub)]
+            put(f"informed{st}{sb}Plain", pct(r.acc_plain))
+            put(f"informed{st}{sb}Informed", pct(r.acc_informed))
+            put(f"informed{st}{sb}Delta", pct(r.delta), "{:+.1f}")
+            put(f"informed{st}{sb}CiLow", pct(r.ci_low), "{:+.1f}")
+            put(f"informed{st}{sb}CiHigh", pct(r.ci_high), "{:+.1f}")
+            put(f"informed{st}{sb}P", "<0.001" if r.p < 0.001 else f"{r.p:.3f}")
+            put(f"informed{st}{sb}Pairs", int(r.n_pairs), "{:d}")
+    rs = pd.read_csv(base / "role_stats.csv")
+    for b, bt in (("arc", "Arc"), ("boolq", "Boolq")):
+        g = rs[rs.benchmark == b]
+        for role, rt in (("honest", "Honest"), ("solo", "Solo"), ("rushing", "Rushing"), ("debate", "Debate"),
+                         ("informed", "Informed")):
+            put(f"liveTwo{bt}{rt}", pct(g[g.role == role].accuracy.mean()))
+        h = g[g.role == "honest"].accuracy
+        put(f"liveTwo{bt}HonestMin", pct(h.min()))
+        put(f"liveTwo{bt}HonestMax", pct(h.max()))
+        liars = g[g.role.isin(["solo", "rushing"])]
+        put(f"liveTwo{bt}BelowChance", pct((liars.truth_dependence < 0).mean()), "{:.0f}")
+    ct = pd.read_csv(base / "contagion.csv")
+    for cond, ctag in (("debate", "Debate"), ("informed", "Informed")):
+        c = ct[ct.condition == cond]
+        put(f"liveTwoSwitch{ctag}", pct(c.switch_rate.mean()))
+        put(f"liveTwoRightToWrong{ctag}", pct(c.right_to_wrong.mean()))
+        put(f"liveTwoWrongToRight{ctag}", pct(c.wrong_to_right.mean()))
+    d = pd.read_parquet(base / "per_task.parquet")
+    test = d[d.split == "test"]
+    ind = test[(test.source == "live2") & test.attack.str.startswith("llm:")]
+    t = ind.groupby(["benchmark", "f", "method"]).accuracy.mean()
+    methods = (("race", "Race"), ("race_onecoin", "Vthree"), ("majority", "Maj"), ("self", "Self"), ("aip_gated", "Aip"),
+               ("ds_onecoin", "Ds"), ("oracle_channel", "Oracle"), ("iwmv", "Iwmv"), ("mace", "Mace"), ("glad", "Glad"),
+               ("kos", "Kos"))
+    for b, bt in (("arc", "Arc"), ("boolq", "Boolq")):
+        for f, ft in ((0.1, "One"), (0.3, "Three"), (0.5, "Five"), (0.7, "Seven")):
+            for m, mt in methods:
+                if (b, f, m) in t.index:
+                    put(f"liveTwo{bt}Llm{mt}{ft}", pct(t[(b, f, m)]))
+    matched = test[(test.f == 0.5) & test.attack.isin(["llm:solo", "llm:collude"])]
+    md = matched.groupby(["source", "benchmark", "method"]).accuracy.mean()
+    for b, bt in (("arc", "Arc"), ("boolq", "Boolq")):
+        for src, st in (("live2", "Ind"), ("live2_debate", "Deb"), ("live2_informed", "Inf")):
+            for m, mt in (("race", "Race"), ("majority", "Maj"), ("self", "Self")):
+                if (src, b, m) in md.index:
+                    put(f"liveTwo{st}{bt}{mt}", pct(md[(src, b, m)]))
+    rec = pd.read_csv(base / "receivers.csv").set_index(["benchmark", "model"])
+    for b, bt in (("arc", "Arc"), ("boolq", "Boolq")):
+        r = rec.loc[b]
+        put(f"liveTwo{bt}GainMin", pct((r.race - r.self).min()))
+        put(f"liveTwo{bt}GainMax", pct((r.race - r.self).max()))
+        put(f"liveTwo{bt}GainersCount", int(((r.race - r.self) > 0).sum()), "{:d}")
+    put("nLiveTwoTestTasks", int(test[test.source == "live2"].groupby(["benchmark", "world_id"]).task.nunique()
+                                 .groupby("benchmark").median().min()), "{:d}")
+    put("nWorldsLiveTwo", json.loads((base / "run_manifest.json").read_text())["worlds"], "{:d}")
+
+
 def compute_numbers() -> None:
     """Wall-clock compute from the run manifests and the live-run metadata (CPU only)."""
     total = 0.0
@@ -522,6 +600,7 @@ def main() -> None:
     agent_numbers()
     online_numbers()
     live_numbers()
+    live2_numbers()
     # Every result macro the manuscript uses must exist: undefined ones become a
     # visible "??" (and a warning), never a silent LaTeX error or a stale value.
     import re
@@ -529,7 +608,7 @@ def main() -> None:
     prefixes = ("main", "llm", "zoo", "br", "chan", "hist", "risk", "live", "on", "swarm", "size", "breakdown",
                 "gain", "worse", "nWorlds", "nLive", "budget", "overRemoval", "raceD", "removal", "recovery",
                 "pooledRemoval", "extLlm", "binary", "agent", "extRace", "extRemoval", "extSelf", "extMaj", "extAip",
-                "compute", "crowd", "liveTwo", "informed")
+                "compute", "crowd", "liveTwo", "informed", "hyp")
     used = set()
     for tex in (ROOT / "paper").rglob("*.tex"):
         if tex.name == "numbers.tex":

@@ -52,6 +52,8 @@
   <p class="note">Ten agents on MMLU, five of them real LLMs prompted to mislead after seeing the honest answers. (1) Every agent answers, broadcasts, and each honest agent decides with its own learned trust links. (2) The swarm's trust matrix learning over 90 unlabeled questions. (3) One question in slow motion: counting votes vs. weighing evidence. (4) Results.</p>
 
   <div class="grid">
+    <figure><video src="media/label_switching.mp4" controls muted playsinline preload="metadata" poster="media/gif/label_switching.gif"></video>
+      <figcaption>Label switching, animated: the same EM with and without the anchor. With 7 of 10 agents in a liar bloc, Dawid–Skene trusts the bloc ({{switchDs}}% on test); RACE reads it backwards ({{switchRace}}%; {{switchSelf}}% alone).</figcaption></figure>
     <figure><video src="media/swarm_mmlu_gateaware_f07.mp4" controls muted playsinline preload="metadata"></video>
       <figcaption>One honest receiver among seven liars (MMLU, the gate-aware attack that defeats AIP). Blue: TRUST. Red: INVERT.</figcaption></figure>
     <figure><video src="media/swarm_boolq_coherent_f05.mp4" controls muted playsinline preload="metadata"></video>
@@ -72,17 +74,22 @@
     <thead><tr><th>Honest-receiver accuracy (%)</th><th>Receiver alone</th><th>Majority vote</th><th>AIP (prior work)</th><th>RACE</th></tr></thead>
     <tbody>
       <tr><td>Coherent liars, f = 0.9</td><td>{{mainSelfNine}}</td><td>{{mainMajNine}}</td><td>{{mainAipNine}}</td><td class="race">{{mainRaceNine}}</td></tr>
-      <tr><td>Gate-aware liars, f = 0.7</td><td>{{zooCamoSelfSeven}}</td><td>{{zooGateMajSeven}}</td><td>{{zooGateAipSeven}}</td><td class="race">{{zooGateRaceSeven}}</td></tr>
+      <tr><td>Gate-aware liars, f = 0.7</td><td>{{zooGateSelfSeven}}</td><td>{{zooGateMajSeven}}</td><td>{{zooGateAipSeven}}</td><td class="race">{{zooGateRaceSeven}}</td></tr>
       <tr><td>Real LLM deceivers, f = 0.5</td><td>{{llmSelfFive}}</td><td>{{llmMajFive}}</td><td>{{llmAipFive}}</td><td class="race">{{llmRaceFive}}</td></tr>
       <tr><td>Real LLM deceivers, f = 0.7</td><td>{{llmSelfSeven}}</td><td>{{llmMajSeven}}</td><td>{{llmAipSeven}}</td><td class="race">{{llmRaceSeven}}</td></tr>
       <tr><td>Independent liars, f = 0.7 (vs. an oracle that removes every liar: {{extRemovalIndepSeven}})</td><td>{{extSelfIndepSeven}}</td><td>{{extMajIndepSeven}}</td><td>{{extAipIndepSeven}}</td><td class="race">{{extRaceIndepSeven}}</td></tr>
+      <tr><td>E11 attack mix, f = 0.7 (best classical crowdsourcing estimator: {{crowdBestClassicalSeven}})</td><td>{{crowdSelfSeven}}</td><td>{{crowdMajSeven}}</td><td>{{crowdAipSeven}}</td><td class="race">{{crowdRaceSeven}}</td></tr>
     </tbody>
   </table>
   </div>
   <p class="note">Mean over six benchmarks. The LLM-deceiver rows are a confirmation set evaluated after the method was frozen (RACE v3.1: {{llmWins}} significant wins, {{llmLosses}} losses in {{llmCells}} paired tests). Failure modes (camouflage attackers, sleepers, near-chance receivers) are reported as prominently in the paper and README.</p>
 
+  <h2>Every study at a glance</h2>
+  <figure><img src="figures/fig0_overview.png" alt="Every study at a glance: RACE against every baseline, the receiver alone and the oracles" loading="lazy"><figcaption>RACE (blue) against every deployable baseline, the agent alone (grey) and the oracles (violet). Red numbers are losses, reported as prominently as wins.</figcaption></figure>
+
   <h2>Figures</h2>
   <div class="grid">
+    <figure><img src="figures/fig14_crowd_baselines.png" alt="Classical crowdsourcing estimators against RACE" loading="lazy"><figcaption>E11: IWMV, MACE, GLAD, KOS and Dawid–Skene collapse once liars are the majority; the anchor does not.</figcaption></figure>
     <figure><img src="figures/fig1_main_sweep.png" alt="Accuracy versus Byzantine fraction on six benchmarks" loading="lazy"><figcaption>No breakdown point against a coherent bloc.</figcaption></figure>
     <figure><img src="figures/fig2_attack_zoo.png" alt="Attack zoo heatmap" loading="lazy"><figcaption>Attack zoo: where pooling helps and where it hurts.</figcaption></figure>
     <figure><img src="figures/fig4_llm_liars.png" alt="Real LLM deceivers" loading="lazy"><figcaption>Real LLM deceivers (confirmation set).</figcaption></figure>

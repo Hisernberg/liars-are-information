@@ -105,3 +105,22 @@ Consequences we state openly:
 - A fresh confirmation set is needed before the rule is claimed as validated.
 - The known-channel oracle now uses the same channel family (class-conditional
   on binary questions), so it stays a fair ceiling for v3.1.
+
+## E11: classical crowdsourcing baselines (no change to RACE)
+
+Added IWMV (Li and Yu, 2014), MACE (Hovy et al., 2013), GLAD (Whitehill et al.,
+2009) and KOS (Karger, Oh and Shah, 2014; binary only) in `src/lai/crowd.py`.
+They run under exactly RACE's protocol: per honest receiver, fitted on its own
+HISTORY window, and ties go to the receiver's own answer. One bug was found in
+our MACE M-step (the spam responsibility was mis-normalised) and fixed before
+the study ran; `tests/test_crowd.py` covers each estimator on toy swarms with a
+known answer. RACE itself is unchanged (v3.1). Result: the classical estimators
+match RACE with a liar minority and collapse with a liar majority, which is
+Proposition 2 in action; RACE loses no paired comparison to them.
+
+## E10: pre-registered fresh live run (no change to RACE)
+
+Registered in `docs/PREREGISTRATION_E10.md` (commit 494aa28) before any answer
+existed. The evaluation code (`experiments/eval_live2.py`) implements the
+registered decision rule and was written while the run was in progress, before
+any E10 answer was inspected. RACE v3.1 is evaluated exactly as frozen.

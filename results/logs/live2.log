@@ -14,3 +14,6 @@ stage1 smollm2_1p7b
   smollm2_1p7b arc 25/120 506s
   smollm2_1p7b arc 50/120 956s
   smollm2_1p7b arc 75/120 1105s
+  smollm2_1p7b arc 100/120 1212s
+  smollm2_1p7b boolq 25/80 1419s
+  smollm2_1p7b boolq 50/80 1612s

@@ -32,6 +32,11 @@ configs:
     data_files:
       - split: train
         path: "data/live_cache/raw/*/*/*.parquet"
+  - config_name: live_swarm_v2
+    description: "E10, the pre-registered fresh live run: ARC items 0-119 and unseen BoolQ items 120-199; honest, saboteur, plain-debate and RACE-informed-debate roles."
+    data_files:
+      - split: train
+        path: "data/live_cache_v2/raw/*/*/*.parquet"
   - config_name: results_main
     description: "E1 per-task results (world x method x split x task)."
     data_files:
@@ -47,6 +52,11 @@ configs:
     data_files:
       - split: train
         path: "results/ext/per_task.parquet"
+  - config_name: results_crowd
+    description: "E11 classical crowdsourcing baselines (IWMV, MACE, GLAD, KOS, Dawid-Skene) vs RACE, per task."
+    data_files:
+      - split: train
+        path: "results/crowd/per_task.parquet"
   - config_name: channel_estimates
     description: "E7 label-free channel estimates vs evaluator-side truth, per receiver-peer channel."
     data_files:
@@ -65,22 +75,27 @@ Code, figures, videos and manuscript: see `README.md` in this release and the Gi
 | Accuracy (%) | Receiver alone | Majority | AIP | **RACE** |
 |---|---:|---:|---:|---:|
 | Coherent liars, f = 0.9 | {{mainSelfNine}} | {{mainMajNine}} | {{mainAipNine}} | **{{mainRaceNine}}** |
-| Gate-aware liars, f = 0.7 | {{zooCamoSelfSeven}} | {{zooGateMajSeven}} | {{zooGateAipSeven}} | **{{zooGateRaceSeven}}** |
+| Gate-aware liars, f = 0.7 | {{zooGateSelfSeven}} | {{zooGateMajSeven}} | {{zooGateAipSeven}} | **{{zooGateRaceSeven}}** |
 | Real LLM deceivers, f = 0.7 | {{llmSelfSeven}} | {{llmMajSeven}} | {{llmAipSeven}} | **{{llmRaceSeven}}** |
 | Independent liars, f = 0.7 | {{extSelfIndepSeven}} | {{extMajIndepSeven}} | {{extAipIndepSeven}} | **{{extRaceIndepSeven}}** |
+| E11 attack mix, f = 0.7 | {{crowdSelfSeven}} | {{crowdMajSeven}} | {{crowdAipSeven}} | **{{crowdRaceSeven}}** |
 
 Against independent liars at f = 0.7, RACE ({{extRaceIndepSeven}}%) also beats an oracle that knows who lies and removes them ({{extRemovalIndepSeven}}%). The liars carry information, and RACE reads it without labels (study E9).
+
+**Classical crowdsourcing baselines (E11).** IWMV, MACE, GLAD, KOS and Dawid–Skene, run under RACE's protocol on {{nWorldsCrowd}} worlds, match RACE when liars are a minority but reach at most {{crowdClassicalMaxSeven}}% at f = 0.7, where RACE scores {{crowdRaceSeven}}%. RACE loses none of {{crowdClassicalCells}} paired comparisons against them.
+
+**Evidence.** Every number is generated from `results/`; {{claimsHold}} of {{claimsTotal}} prose claims are re-derived on every run (`docs/EVIDENCE.md`); every study ships a manifest with input and code hashes.
 
 **Live swarm (E8).** Six small open models answered 240 MMLU and BoolQ questions live on a CPU, as honest agents, covert saboteurs and debaters (2,880 answers, `data/live_cache/`). On MMLU, RACE lifts every honest agent by {{liveMmluGainMin}}–{{liveMmluGainMax}} points. On binary BoolQ the frozen v3.0 fell below the receiver alone ({{liveBoolqLlmVthreeFive}}% vs {{liveBoolqLlmSelfFive}}% at f = 0.5), because small models answer yes/no questions with an option bias that a symmetric channel cannot represent. RACE v3.1 uses class-conditional channels on binary questions and scores {{liveBoolqLlmRaceFive}}%. It was adopted after this observation, and both versions are reported.
 
 <p align="center"><img src="media/gif/film_1_protocol.gif" width="760" alt="Agents broadcast answers; each honest agent decides with learned trust links"></p>
 
-**Videos.** `media/film_liars_are_information.mp4` is the explainer film. It shows agents broadcasting answers, each honest agent's trust links, the swarm's trust matrix learning over 90 unlabeled questions, and one decision in slow motion. `media/swarm_*.mp4` follow a single receiver in three attack scenarios.
+**Videos.** `media/film_liars_are_information.mp4` is the explainer film. It shows agents broadcasting answers, each honest agent's trust links, the swarm's trust matrix learning over 90 unlabeled questions, and one decision in slow motion. `media/swarm_*.mp4` follow a single receiver in three attack scenarios. `media/label_switching.mp4` shows EM with and without the anchor on the same history.
 
 ## Provenance
 
 * Honest and adversarial caches: Dhruv Jyoti Das, [`Dhruv1000/Liars_Are_Information`](https://huggingface.co/datasets/Dhruv1000/Liars_Are_Information), post-X3 repair.
 * Fixed AIP code: the Sep-12 release in [`Nabidnur/Liars_Are_Information-bucket`](https://huggingface.co/buckets/Nabidnur/Liars_Are_Information-bucket).
-* v3 additions: RACE, the theory, the audit (`docs/AUDIT.md`), studies E1–E9 including the live swarm and the information budget, the TrustLayer API, figures, the explainer film, videos and the manuscript.
+* v3 additions: RACE, the theory, the audit (`docs/AUDIT.md`), studies E1–E11 including two live swarms (one pre-registered), the information budget and classical crowdsourcing baselines, the TrustLayer API, figures, the explainer film, videos and the manuscript.
 
 Benchmark items and model outputs remain under their upstream licenses; ARC and BoolQ are CC BY-SA.

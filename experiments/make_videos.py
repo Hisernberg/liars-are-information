@@ -347,6 +347,9 @@ def main() -> None:
     if not args.only or "live" in args.only:
         for b in ("mmlu", "boolq"):
             print(render_live_debate(MEDIA, b))
+    if not args.only or "informed" in args.only:
+        for b in ("arc", "boolq"):
+            print(render_live_informed(MEDIA, b))
 
 
 
@@ -480,6 +483,138 @@ def render_live_debate(out_dir: Path, benchmark: str = "mmlu", n_steps: int = 12
     anim = animation.FuncAnimation(fig, draw, frames=len(frames) + int(4 * fps), interval=1000 / fps)
     out = out_dir / f"live_debate_{benchmark}.mp4"
     anim.save(out, writer=animation.FFMpegWriter(fps=fps, bitrate=1800, codec="libx264", extra_args=["-pix_fmt", "yuv420p", "-movflags", "+faststart"]))
+    plt.close(fig)
+    return out
+
+
+RELIABILITY = {"trust": ("reliable", viz.BLUE), "discard": ("chance", "#8a8985"), "invert": ("usually wrong", viz.RED)}
+
+
+def render_live_informed(out_dir: Path, benchmark: str = "arc", fps: float = 4.0, warmup: int = 8) -> Path | None:
+    """E10: the same half-liar panel shown to honest agents plainly, or annotated by their own RACE fit."""
+    from aip.types import Broadcast
+
+    from lai.data import LIVE_MODELS
+
+    raw_dir = ROOT / "data" / "live_cache_v2" / "raw"
+    paths = list((raw_dir / "stage1" / benchmark).glob("*.parquet")) + list((raw_dir / "stage2" / benchmark).glob("*.parquet"))
+    if not paths:
+        return None
+    raw = pd.concat([pd.read_parquet(p) for p in paths])
+    if "informed" not in set(raw.role):
+        return None
+    piv = raw.pivot_table(index="task_id", columns=["role", "model"], values="extracted_answer", aggfunc="first")
+    gold = raw.drop_duplicates("task_id").set_index("task_id").gold_answer
+    items = _questions(benchmark)
+    order = [t for t in pd.unique(raw[raw.role == "informed"].task_id)]  # presentation order
+    names = [("honest", m) for m in LIVE_MODELS] + [("solo", m) for m in LIVE_MODELS]
+    ind_acc = {m: np.mean(piv[("honest", m)].loc[order] == gold.loc[order]) for m in LIVE_MODELS}
+    receiver = sorted(ind_acc, key=ind_acc.get)[len(ind_acc) // 2]  # median honest model (documented rule)
+    me = names.index(("honest", receiver))
+    rows, frames = [], []
+    tally = {k: [] for k in ("honest", "debate", "informed")}
+    for i, t in enumerate(order):
+        votes = [piv[(role, m)].get(t) for role, m in names]
+        labels = [chr(ord("A") + k) for k in range(len(items[t]["choices"]))] if t in items else sorted(
+            {v for v in votes if isinstance(v, str)})
+        rel, favoured = {}, None
+        if i >= warmup:
+            race = RACEAggregator(labels)
+            race.fit_receiver(me, rows)
+            ch = race.diagnostics.channels[me]
+            rel = {j: ch[j].decision for j in range(len(names)) if j in ch}
+            post = race.posterior(tuple(Broadcast(j, "q", v, 0.5, 0.5, False) for j, v in enumerate(votes)), me)
+            favoured = max(post, key=post.get) if post else None
+        rows.append({j: v for j, v in enumerate(votes)})
+        for k in tally:
+            tally[k].append(float(np.mean([piv[(k, m)].get(t) == gold[t] for m in LIVE_MODELS])))
+        frames.append(dict(task=t, gold=gold[t], votes=votes, rel=rel, favoured=favoured,
+                           honest={m: piv[("honest", m)].get(t) for m in LIVE_MODELS},
+                           debate={m: piv[("debate", m)].get(t) for m in LIVE_MODELS},
+                           informed={m: piv[("informed", m)].get(t) for m in LIVE_MODELS},
+                           curve={k: np.cumsum(v) / np.arange(1, len(v) + 1) for k, v in tally.items()}))
+    viz.setup()
+    fig = plt.figure(figsize=(16, 9), dpi=100)
+    curves = {"honest": ("Round 1: independent answers", viz.MUTED),
+              "debate": ("After a plain debate (panel is half liars)", viz.ORANGE),
+              "informed": ("After a RACE-informed debate", viz.BLUE)}
+
+    def chip(ax, x, y, ans, ok, edge, note, note_color, w=0.075, h=0.12):
+        ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.006", fc="white", ec=edge, lw=1.8))
+        ax.text(x + w / 2, y + h * 0.5, ans or "–", ha="center", va="center", fontsize=17, fontweight="bold",
+                color=viz.INK)
+        ax.text(x + w - 0.012, y + h - 0.03, "✓" if ok else "✗", color=viz.GREEN if ok else viz.RED, fontsize=9,
+                fontweight="bold", ha="center")
+        if note:
+            ax.text(x + w / 2, y - 0.028, note, ha="center", fontsize=7, color=note_color)
+
+    def draw(i):
+        fr = frames[min(i, len(frames) - 1)]
+        n = min(i, len(frames) - 1)
+        fig.clear()
+        fig.text(0.02, 0.955, "RACE-informed debate: tell honest agents who has been reliable, then let them talk",
+                 fontsize=17, fontweight="bold")
+        fig.text(0.02, 0.925, f"E10 (pre-registered) · {benchmark.upper()} · six live models · question {n + 1} of "
+                              f"{len(frames)} · annotations come from each agent's own RACE fit on earlier questions, "
+                              "never from an answer key", fontsize=10.5, color=viz.INK_2)
+        ax = fig.add_axes([0.02, 0.05, 0.63, 0.85])
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.axis("off")
+        item = items.get(fr["task"])
+        q = textwrap.shorten(item["question"], 170) if item else fr["task"]
+        if benchmark == "boolq" and item:
+            q = q[0].upper() + q[1:] + "?"
+        ax.text(0.0, 0.985, q, fontsize=11, va="top", wrap=True)
+        ax.text(0.0, 0.915, f"truth (hidden from agents): {fr['gold']}", fontsize=10, color=viz.GREEN, fontweight="bold")
+        ax.text(0.0, 0.855, f"Round-1 panel as {receiver.replace('_', '-')} sees it (the agents see it anonymised "
+                            "and shuffled; roles are shown for you)", fontsize=10.5, fontweight="bold")
+        for j, v in enumerate(fr["votes"]):
+            role = names[j][0]
+            x = 0.005 + (j % 6) * 0.165
+            y = 0.68 if role == "honest" else 0.49
+            dec = fr["rel"].get(j)
+            note, col = (RELIABILITY[dec] if dec else ("no track record yet", viz.MUTED))
+            if j == me:
+                note, col = "(its own vote)", viz.INK_2
+            chip(ax, x, y, v, v == fr["gold"], viz.RED if role == "solo" else viz.INK_2, note, col)
+        ax.text(0.0, 0.815, "honest agents", fontsize=8.5, color=viz.INK_2)
+        ax.text(0.0, 0.625, "covert saboteurs (same models, deceptive prompt)", fontsize=8.5, color=viz.RED)
+        fav = fr["favoured"]
+        ax.text(0.0, 0.42, ("Reliability-weighted evidence favours " + f"{fav} " + ("✓" if fav == fr["gold"] else "✗"))
+                if fav else "No summary during the first 8 questions (no track record yet)", fontsize=10,
+                color=(viz.GREEN if fav == fr["gold"] else viz.RED) if fav else viz.MUTED, fontweight="bold")
+        for title, key, y in (("Round 2, plain debate: the six honest agents' final answers", "debate", 0.215),
+                              ("Round 2, RACE-informed debate: the same agents, the same panel, with reliability notes",
+                               "informed", 0.015)):
+            ax.text(0.0, y + 0.165, title, fontsize=10.5, fontweight="bold")
+            for k, m in enumerate(LIVE_MODELS):
+                a, b = fr["honest"][m], fr[key][m]
+                note = f"{a} → {b}" if a != b else m.replace("_", "-")
+                chip(ax, 0.005 + k * 0.165, y + 0.02, b, b == fr["gold"],
+                     viz.ORANGE if key == "debate" else viz.BLUE, note, viz.INK_2)
+        ax2 = fig.add_axes([0.70, 0.47, 0.28, 0.38])
+        for k, (lab, col) in curves.items():
+            c = fr["curve"][k]
+            ax2.plot(np.arange(1, len(c) + 1), 100 * c, color=col, lw=2.4 if k == "informed" else 1.8, label=lab)
+        ax2.axvspan(0.5, warmup + 0.5, color=viz.GRID, alpha=0.6, lw=0)
+        ax2.set_xlim(1, len(frames))
+        ax2.set_ylim(0, 100)
+        ax2.set_xlabel("question")
+        ax2.set_title("individual accuracy, mean of the six honest agents", loc="left", fontsize=10)
+        ax2.legend(fontsize=8, loc="lower right")
+        ax3 = fig.add_axes([0.70, 0.07, 0.28, 0.3])
+        ax3.axis("off")
+        ax3.text(0, 1.0, "So far (running mean)", fontsize=11, fontweight="bold", va="top")
+        for r, (k, (lab, col)) in enumerate(curves.items()):
+            ax3.text(0, 0.8 - 0.2 * r, lab, fontsize=9.5, color=viz.INK_2, va="top")
+            ax3.text(1.0, 0.8 - 0.2 * r, f"{100 * fr['curve'][k][-1]:.1f}%", fontsize=13, color=col, fontweight="bold",
+                     va="top", ha="right")
+
+    anim = animation.FuncAnimation(fig, draw, frames=len(frames) + int(4 * fps), interval=1000 / fps)
+    out = out_dir / f"live_informed_{benchmark}.mp4"
+    anim.save(out, writer=animation.FFMpegWriter(fps=fps, bitrate=1800, codec="libx264",
+                                                 extra_args=["-pix_fmt", "yuv420p", "-movflags", "+faststart"]))
     plt.close(fig)
     return out
 

@@ -61,6 +61,12 @@ Online forgetting (E6) & $\gamma=0.97$, refit every 8 tasks\\
 All code, data, results, figures, videos and this manuscript are in the accompanying repository and Hugging Face release. One command, \texttt{experiments/\allowbreak reproduce\_all.sh}, regenerates everything on a 4-core CPU without a GPU in about an hour: E1--E7 and E9 from the cached answers, the E8 evaluation from the live-swarm cache, every figure, table and number, the videos, the repository README and this PDF. It finishes by re-checking every qualitative claim in the text against the results (\texttt{experiments/\allowbreak verify\_claims.py}). \texttt{experiments/\allowbreak live\_swarm.py} regenerates the live answers themselves. The numbers in this paper are macros written by \texttt{experiments/\allowbreak make\_numbers.py}. Each study directory holds a \texttt{run\_manifest.json} with the input and code hashes, wall time and peak memory. The repository's test suite covers \race's identification, invariance, clone-grouping, class-conditional and causality properties.
 \end{sloppypar}
 
+\section{Claim verification ledger}\label{app:claims}
+The numbers in this paper are macros generated from the saved results. The qualitative sentences are not, so \texttt{experiments/\allowbreak verify\_claims.py} re-derives each of them from the per-task results on every run, and the reproduction script stops if one fails. \Cref{tab:claims} lists them as the script words them; \texttt{docs/EVIDENCE.md} in the repository adds each study's run manifest (input and code hashes, wall time).
+{\small
+\input{tables/claims_ledger.tex}
+}
+
 \section{Compute resources}\label{app:compute}
 Everything ran on one 4-core x86-64 CPU with 15\,GB of memory and no GPU. The replayed studies (E1--E7, E9, E11 and the E6 streams) took \computeReplayMinutes\ minutes of wall-clock time in total, as recorded in each study's run manifest. The live swarm E8 took \computeLiveHours\ CPU hours of inference for six models in float32. The per-study times, code hashes and input hashes are listed in the repository's evidence ledger (\texttt{docs/EVIDENCE.md}).
 
