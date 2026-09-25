@@ -204,13 +204,16 @@ LIVE_ROLES = ("solo", "rushing", "collude")
 
 
 @lru_cache(maxsize=16)
-def load_live(benchmark: str, honest_dir: str = "cache") -> BenchmarkData:
+def load_live(benchmark: str, honest_dir: str = "cache", cache_root: str = "live_cache") -> BenchmarkData:
     """Live-swarm caches written by ``experiments/live_swarm.py``.
 
-    ``honest_dir`` is ``cache`` (independent round-1 answers) or ``cache_debate``
-    (answers given after seeing a panel in which half the votes were lies).
+    ``honest_dir`` is ``cache`` (independent round-1 answers), ``cache_debate``
+    (answers given after seeing a panel in which half the votes were lies) or
+    ``cache_informed`` (the same panel, each vote annotated with the panelist's
+    RACE-estimated reliability). ``cache_root`` is ``live_cache`` (E8) or
+    ``live_cache_v2`` (E10, the pre-registered confirmation run).
     """
-    root = DATA / "live_cache"
+    root = DATA / cache_root
     frames = {m: _read(root / honest_dir / benchmark / f"{m}.parquet") for m in LIVE_MODELS}
     task_ids = sorted(set.intersection(*(set(f.index) for f in frames.values())))
     gold = frames[LIVE_MODELS[0]].loc[task_ids, "gold_answer"].astype(str).tolist()

@@ -73,12 +73,56 @@ DEBATE = (
     "Before you answer, here are the votes cast by the other panelists in the first round: {votes}. "
     "Some panelists may be unreliable. Give your own final answer."
 )
+INFORMED = (
+    "Before you answer, here are the first-round votes of the other panelists. Next to each vote is how "
+    "reliable that panelist has been on earlier questions, estimated from agreement patterns without any "
+    "answer key:\n{lines}\n{summary}Some panelists may be unreliable. Give your own final answer."
+)
 FORMAT = "Respond with only the letter of your answer."
+SPEC: dict[str, tuple[int, int]] = {}  # benchmark -> (first item, number of items); empty = first --n-tasks
+INFORMED_ON = False
 
 
 def load_tasks(benchmark: str, n: int) -> list[dict]:
     items = json.loads((ROOT / "data" / "benchmarks" / f"{benchmark}_cached_items.json").read_text())
-    return items[:n]
+    start, count = SPEC.get(benchmark, (0, n))
+    return items[start:start + count]
+
+
+def informed_suffixes(bench: str, items: list[dict], receiver: str, panel: dict[str, list[list[str]]],
+                      warmup: int = 8) -> list[str]:
+    """RACE-informed debate prompt for every question, causally: question i is annotated with the
+    receiver's RACE fit on the panel's round-1 answers to questions 0..i-1 (never on gold)."""
+    import sys
+
+    sys.path.insert(0, str(ROOT / "src"))
+    from lai.race import RACEAggregator
+
+    names = [("honest", m) for m in MODELS] + [("solo", m) for m in MODELS]
+    me = names.index(("honest", receiver))
+    out, rows = [], []
+    for i, item in enumerate(items):
+        labels = [chr(ord("A") + k) for k in range(len(item["choices"]))]
+        votes = [panel[role][i][list(MODELS).index(m)] for role, m in names]
+        order = np.random.default_rng(i).permutation(len(names))  # anonymous, shuffled per question
+        if i < warmup:
+            lines = [f"- Panelist {k + 1}: {votes[j]} (no track record yet)" for k, j in enumerate(order)]
+            summary = ""
+        else:
+            race = RACEAggregator(labels)
+            race.fit_receiver(me, rows)
+            ch = race.diagnostics.channels[me]
+            words = {"trust": "reliable", "discard": "no better than chance",
+                     "invert": "usually wrong: its answer is probably incorrect"}
+            lines = [f"- Panelist {k + 1}: {votes[j]} ({words[ch[j].decision]})" for k, j in enumerate(order)]
+            from aip.types import Broadcast
+
+            post = race.posterior(tuple(Broadcast(j, "q", v, 0.5, 0.5, False) for j, v in enumerate(votes)), me)
+            best = max(post, key=post.get) if post else None
+            summary = f"Weighing each vote by its panelist's reliability favours option {best}.\n" if best else ""
+        out.append(INFORMED.format(lines="\n".join(lines), summary=summary))
+        rows.append({j: v for j, v in enumerate(votes)})
+    return out
 
 
 def question_block(item: dict) -> str:
@@ -159,6 +203,7 @@ def run_model(name: str, benchmarks: list[str], n_tasks: int, threads: int, keep
         stage_name = "stage2" if honest_panel is not None else "stage1"
         if (LIVE / "raw" / stage_name / bench / f"{name}.parquet").exists():
             continue  # resume: this model x benchmark x stage is already done
+        informed = informed_suffixes(bench, items, name, honest_panel) if (honest_panel is not None and INFORMED_ON) else None
         rows = []
         for i, item in enumerate(items):
             labels = [chr(ord("A") + k) for k in range(len(item["choices"]))]
@@ -171,6 +216,8 @@ def run_model(name: str, benchmarks: list[str], n_tasks: int, threads: int, keep
                     "debate": DEBATE.format(
                         votes=vote_string(honest_panel["honest"][i] + honest_panel["solo"][i], labels)),
                 }
+                if informed is not None:
+                    suffixes["informed"] = informed[i]
             scores = scorer.score(q, suffixes, labels)
             for role, s in scores.items():
                 p = np.exp(s - s.max())
@@ -225,8 +272,8 @@ def export_cache(benchmarks: list[str]) -> None:
         for (role, model), g in both.groupby(["role", "model"]):
             g = g.drop_duplicates("task_id").sort_values("task_id").drop(columns=["role"])
             g = g.assign(raw_completion="", self_reported_confidence=g.logprob_confidence, sample_index=0)
-            if role in ("honest", "debate"):
-                path = LIVE / ("cache" if role == "honest" else "cache_debate") / bench / f"{model}.parquet"
+            if role in ("honest", "debate", "informed"):
+                path = LIVE / {"honest": "cache", "debate": "cache_debate", "informed": "cache_informed"}[role] / bench / f"{model}.parquet"
             else:
                 path = LIVE / "cache_adversarial" / role / bench / f"{model}.parquet"
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -249,6 +296,7 @@ def export_cache(benchmarks: list[str]) -> None:
 
 
 def main() -> None:
+    global LIVE, INFORMED_ON
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--models", nargs="*", default=list(MODELS))
     parser.add_argument("--benchmarks", nargs="*", default=["mmlu", "boolq"])
@@ -257,7 +305,16 @@ def main() -> None:
     parser.add_argument("--stage", choices=["1", "2", "export", "all"], default="all")
     parser.add_argument("--keep-weights", action="store_true")
     parser.add_argument("--probe", action="store_true", help="time 3 tasks on the first model and exit")
+    parser.add_argument("--out", default=str(LIVE), help="output root (E10 uses data/live_cache_v2)")
+    parser.add_argument("--spec", nargs="*", default=[],
+                        help="per-benchmark item ranges, e.g. arc:0:120 boolq:120:80 (first item, count)")
+    parser.add_argument("--informed", action="store_true", help="also run the RACE-informed debate role")
     args = parser.parse_args()
+    LIVE = Path(args.out) if Path(args.out).is_absolute() else ROOT / args.out
+    INFORMED_ON = args.informed
+    for entry in args.spec:
+        b, start, count = entry.split(":")
+        SPEC[b] = (int(start), int(count))
     if args.probe:
         name = args.models[0]
         t0 = time.monotonic()

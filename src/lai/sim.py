@@ -109,12 +109,22 @@ def roster(composition: str) -> list[str]:
     raise ValueError(composition)
 
 
+LIVE_SOURCES = {  # World.source -> (cache root under data/, honest-answer directory)
+    "live": ("live_cache", "cache"),
+    "live_debate": ("live_cache", "cache_debate"),
+    "live2": ("live_cache_v2", "cache"),
+    "live2_debate": ("live_cache_v2", "cache_debate"),
+    "live2_informed": ("live_cache_v2", "cache_informed"),
+}
+
+
 def _data_for(world: World) -> BenchmarkData:
     if world.source == "artifact":
         return load_benchmark(world.benchmark)
     from lai.data import load_live
 
-    return load_live(world.benchmark, "cache" if world.source == "live" else "cache_debate")
+    root, honest_dir = LIVE_SOURCES[world.source]
+    return load_live(world.benchmark, honest_dir, root)
 
 
 def build_world(world: World) -> BuiltWorld:
